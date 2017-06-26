@@ -4,7 +4,7 @@
 <dict>
 	<key>com.apple.security.application-groups</key>
 	<array>
-		<string>group.ascp.ios.safari</string>
+		<string>group.ascp.bbc</string>
 	</array>
 </dict>
 </plist>

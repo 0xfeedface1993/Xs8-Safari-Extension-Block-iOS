@@ -22,6 +22,7 @@
 		243847671F008ABE00027E27 /* ActionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243847661F008ABE00027E27 /* ActionViewController.swift */; };
 		2438476A1F008ABE00027E27 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 243847681F008ABE00027E27 /* MainInterface.storyboard */; };
 		2438476E1F008ABE00027E27 /* Torrilste.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 243847641F008ABE00027E27 /* Torrilste.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		2468BB3A1F00D61400AAB573 /* S8Blocker.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2438471D1F00891400027E27 /* S8Blocker.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -96,6 +97,7 @@
 		2438476B1F008ABE00027E27 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		243847721F008BA500027E27 /* S8Blocker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = S8Blocker.entitlements; sourceTree = "<group>"; };
 		243847731F008C3000027E27 /* Torrilste.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Torrilste.entitlements; sourceTree = "<group>"; };
+		2468BB381F00D5BA00AAB573 /* S8Blocker 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "S8Blocker 2.xcdatamodel"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -321,6 +323,7 @@
 				TargetAttributes = {
 					243847171F00891400027E27 = {
 						CreatedOnToolsVersion = 9.0;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -337,9 +340,11 @@
 					};
 					243847511F00897A00027E27 = {
 						CreatedOnToolsVersion = 9.0;
+						ProvisioningStyle = Automatic;
 					};
 					243847631F008ABE00027E27 = {
 						CreatedOnToolsVersion = 9.0;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -454,6 +459,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				243847671F008ABE00027E27 /* ActionViewController.swift in Sources */,
+				2468BB3A1F00D61400AAB573 /* S8Blocker.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -556,7 +562,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -605,7 +611,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -619,11 +625,14 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = S8Blocker/S8Blocker.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = A272626J38;
 				INFOPLIST_FILE = S8Blocker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ascp.S8Blocker;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ascp.S8Blocker1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -635,11 +644,14 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = S8Blocker/S8Blocker.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = A272626J38;
 				INFOPLIST_FILE = S8Blocker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ascp.S8Blocker;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ascp.S8Blocker1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -711,11 +723,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = A272626J38;
 				INFOPLIST_FILE = "ADBlock-iOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ascp.S8Blocker.ADBlock-iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ascp.S8Blocker1.ADBlock-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -726,11 +741,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = A272626J38;
 				INFOPLIST_FILE = "ADBlock-iOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ascp.S8Blocker.ADBlock-iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ascp.S8Blocker1.ADBlock-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -741,11 +759,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Torrilste/Torrilste.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = A272626J38;
 				INFOPLIST_FILE = Torrilste/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ascp.S8Blocker.Torrilste;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ascp.S8Blocker1.Torrilste;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -756,11 +777,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Torrilste/Torrilste.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = A272626J38;
 				INFOPLIST_FILE = Torrilste/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ascp.S8Blocker.Torrilste;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ascp.S8Blocker1.Torrilste;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -786,6 +810,7 @@
 				243847471F00891400027E27 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		243847481F00891400027E27 /* Build configuration list for PBXNativeTarget "S8BlockerTests" */ = {
 			isa = XCConfigurationList;
@@ -794,6 +819,7 @@
 				2438474A1F00891400027E27 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2438474B1F00891400027E27 /* Build configuration list for PBXNativeTarget "S8BlockerUITests" */ = {
 			isa = XCConfigurationList;
@@ -802,6 +828,7 @@
 				2438474D1F00891400027E27 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2438475C1F00897A00027E27 /* Build configuration list for PBXNativeTarget "ADBlock-iOS" */ = {
 			isa = XCConfigurationList;
@@ -810,6 +837,7 @@
 				2438475E1F00897A00027E27 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2438476F1F008ABE00027E27 /* Build configuration list for PBXNativeTarget "Torrilste" */ = {
 			isa = XCConfigurationList;
@@ -818,6 +846,7 @@
 				243847711F008ABE00027E27 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
@@ -825,9 +854,10 @@
 		2438471D1F00891400027E27 /* S8Blocker.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				2468BB381F00D5BA00AAB573 /* S8Blocker 2.xcdatamodel */,
 				2438471E1F00891400027E27 /* S8Blocker.xcdatamodel */,
 			);
-			currentVersion = 2438471E1F00891400027E27 /* S8Blocker.xcdatamodel */;
+			currentVersion = 2468BB381F00D5BA00AAB573 /* S8Blocker 2.xcdatamodel */;
 			path = S8Blocker.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

@@ -81,7 +81,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         
         let psc = NSPersistentStoreCoordinator(managedObjectModel: mom)
         let options = [NSMigratePersistentStoresAutomaticallyOption:true, NSInferMappingModelAutomaticallyOption:true]
-        let dirURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.ascp.ios.safari"), fileURL = URL(string: "S8Blocker.sql", relativeTo: dirURL)
+        let dirURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.ascp.bbc"), fileURL = URL(string: "S8Blocker.sql", relativeTo: dirURL)
         do {
             try psc.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: fileURL, options: options)
             let moc = NSManagedObjectContext(concurrencyType:.privateQueueConcurrencyType)
