@@ -19,6 +19,9 @@
 		243847551F00897A00027E27 /* blockerList.json in Resources */ = {isa = PBXBuildFile; fileRef = 243847541F00897A00027E27 /* blockerList.json */; };
 		243847571F00897A00027E27 /* ContentBlockerRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243847561F00897A00027E27 /* ContentBlockerRequestHandler.swift */; };
 		2438475B1F00897A00027E27 /* ADBlock-iOS.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 243847521F00897A00027E27 /* ADBlock-iOS.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		243847671F008ABE00027E27 /* ActionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243847661F008ABE00027E27 /* ActionViewController.swift */; };
+		2438476A1F008ABE00027E27 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 243847681F008ABE00027E27 /* MainInterface.storyboard */; };
+		2438476E1F008ABE00027E27 /* Torrilste.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 243847641F008ABE00027E27 /* Torrilste.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +46,13 @@
 			remoteGlobalIDString = 243847511F00897A00027E27;
 			remoteInfo = "ADBlock-iOS";
 		};
+		2438476C1F008ABE00027E27 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 243847101F00891400027E27 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 243847631F008ABE00027E27;
+			remoteInfo = Torrilste;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -53,6 +63,7 @@
 			dstSubfolderSpec = 13;
 			files = (
 				2438475B1F00897A00027E27 /* ADBlock-iOS.appex in Embed App Extensions */,
+				2438476E1F008ABE00027E27 /* Torrilste.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -79,6 +90,12 @@
 		243847541F00897A00027E27 /* blockerList.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = blockerList.json; sourceTree = "<group>"; };
 		243847561F00897A00027E27 /* ContentBlockerRequestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentBlockerRequestHandler.swift; sourceTree = "<group>"; };
 		243847581F00897A00027E27 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		243847641F008ABE00027E27 /* Torrilste.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Torrilste.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		243847661F008ABE00027E27 /* ActionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionViewController.swift; sourceTree = "<group>"; };
+		243847691F008ABE00027E27 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		2438476B1F008ABE00027E27 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		243847721F008BA500027E27 /* S8Blocker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = S8Blocker.entitlements; sourceTree = "<group>"; };
+		243847731F008C3000027E27 /* Torrilste.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Torrilste.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +127,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		243847611F008ABE00027E27 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -120,6 +144,7 @@
 				243847341F00891400027E27 /* S8BlockerTests */,
 				2438473F1F00891400027E27 /* S8BlockerUITests */,
 				243847531F00897A00027E27 /* ADBlock-iOS */,
+				243847651F008ABE00027E27 /* Torrilste */,
 				243847191F00891400027E27 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -131,6 +156,7 @@
 				243847311F00891400027E27 /* S8BlockerTests.xctest */,
 				2438473C1F00891400027E27 /* S8BlockerUITests.xctest */,
 				243847521F00897A00027E27 /* ADBlock-iOS.appex */,
+				243847641F008ABE00027E27 /* Torrilste.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -138,6 +164,7 @@
 		2438471A1F00891400027E27 /* S8Blocker */ = {
 			isa = PBXGroup;
 			children = (
+				243847721F008BA500027E27 /* S8Blocker.entitlements */,
 				2438471B1F00891400027E27 /* AppDelegate.swift */,
 				243847201F00891400027E27 /* MasterViewController.swift */,
 				243847221F00891400027E27 /* DetailViewController.swift */,
@@ -178,6 +205,17 @@
 			path = "ADBlock-iOS";
 			sourceTree = "<group>";
 		};
+		243847651F008ABE00027E27 /* Torrilste */ = {
+			isa = PBXGroup;
+			children = (
+				243847731F008C3000027E27 /* Torrilste.entitlements */,
+				243847661F008ABE00027E27 /* ActionViewController.swift */,
+				243847681F008ABE00027E27 /* MainInterface.storyboard */,
+				2438476B1F008ABE00027E27 /* Info.plist */,
+			);
+			path = Torrilste;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -194,6 +232,7 @@
 			);
 			dependencies = (
 				2438475A1F00897A00027E27 /* PBXTargetDependency */,
+				2438476D1F008ABE00027E27 /* PBXTargetDependency */,
 			);
 			name = S8Blocker;
 			productName = S8Blocker;
@@ -253,6 +292,23 @@
 			productReference = 243847521F00897A00027E27 /* ADBlock-iOS.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
+		243847631F008ABE00027E27 /* Torrilste */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2438476F1F008ABE00027E27 /* Build configuration list for PBXNativeTarget "Torrilste" */;
+			buildPhases = (
+				243847601F008ABE00027E27 /* Sources */,
+				243847611F008ABE00027E27 /* Frameworks */,
+				243847621F008ABE00027E27 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Torrilste;
+			productName = Torrilste;
+			productReference = 243847641F008ABE00027E27 /* Torrilste.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -265,6 +321,11 @@
 				TargetAttributes = {
 					243847171F00891400027E27 = {
 						CreatedOnToolsVersion = 9.0;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					243847301F00891400027E27 = {
 						CreatedOnToolsVersion = 9.0;
@@ -276,6 +337,14 @@
 					};
 					243847511F00897A00027E27 = {
 						CreatedOnToolsVersion = 9.0;
+					};
+					243847631F008ABE00027E27 = {
+						CreatedOnToolsVersion = 9.0;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -296,6 +365,7 @@
 				243847301F00891400027E27 /* S8BlockerTests */,
 				2438473B1F00891400027E27 /* S8BlockerUITests */,
 				243847511F00897A00027E27 /* ADBlock-iOS */,
+				243847631F008ABE00027E27 /* Torrilste */,
 			);
 		};
 /* End PBXProject section */
@@ -330,6 +400,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				243847551F00897A00027E27 /* blockerList.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		243847621F008ABE00027E27 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2438476A1F008ABE00027E27 /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -371,6 +449,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		243847601F008ABE00027E27 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				243847671F008ABE00027E27 /* ActionViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -389,6 +475,11 @@
 			target = 243847511F00897A00027E27 /* ADBlock-iOS */;
 			targetProxy = 243847591F00897A00027E27 /* PBXContainerItemProxy */;
 		};
+		2438476D1F008ABE00027E27 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 243847631F008ABE00027E27 /* Torrilste */;
+			targetProxy = 2438476C1F008ABE00027E27 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -406,6 +497,14 @@
 				2438472A1F00891400027E27 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		243847681F008ABE00027E27 /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				243847691F008ABE00027E27 /* Base */,
+			);
+			name = MainInterface.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -519,6 +618,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = S8Blocker/S8Blocker.entitlements;
 				DEVELOPMENT_TEAM = A272626J38;
 				INFOPLIST_FILE = S8Blocker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -534,6 +634,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = S8Blocker/S8Blocker.entitlements;
 				DEVELOPMENT_TEAM = A272626J38;
 				INFOPLIST_FILE = S8Blocker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -636,6 +737,36 @@
 			};
 			name = Release;
 		};
+		243847701F008ABE00027E27 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Torrilste/Torrilste.entitlements;
+				DEVELOPMENT_TEAM = A272626J38;
+				INFOPLIST_FILE = Torrilste/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ascp.S8Blocker.Torrilste;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		243847711F008ABE00027E27 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Torrilste/Torrilste.entitlements;
+				DEVELOPMENT_TEAM = A272626J38;
+				INFOPLIST_FILE = Torrilste/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ascp.S8Blocker.Torrilste;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -677,6 +808,14 @@
 			buildConfigurations = (
 				2438475D1F00897A00027E27 /* Debug */,
 				2438475E1F00897A00027E27 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		2438476F1F008ABE00027E27 /* Build configuration list for PBXNativeTarget "Torrilste" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				243847701F008ABE00027E27 /* Debug */,
+				243847711F008ABE00027E27 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};
