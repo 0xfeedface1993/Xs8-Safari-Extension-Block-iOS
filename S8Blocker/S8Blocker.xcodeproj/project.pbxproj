@@ -23,6 +23,15 @@
 		2438476A1F008ABE00027E27 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 243847681F008ABE00027E27 /* MainInterface.storyboard */; };
 		2438476E1F008ABE00027E27 /* Torrilste.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 243847641F008ABE00027E27 /* Torrilste.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		2468BB3A1F00D61400AAB573 /* S8Blocker.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2438471D1F00891400027E27 /* S8Blocker.xcdatamodeld */; };
+		24D7BBA11F45C8C30094DE28 /* Sex8.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 24D7BBA01F45C8C30094DE28 /* Sex8.storyboard */; };
+		24F3467D1F45CA5B001930ED /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F3467C1F45CA5B001930ED /* ViewController.swift */; };
+		24F346801F45CD0B001930ED /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24F3467F1F45CCE9001930ED /* Kingfisher.framework */; };
+		24F346811F45CD0B001930ED /* Kingfisher.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 24F3467F1F45CCE9001930ED /* Kingfisher.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		24F4C26F1F45D122008412AF /* NetDiskListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243537B61F45C71400D6C1DF /* NetDiskListViewController.swift */; };
+		24F4C2701F45D122008412AF /* NetDiskModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243537B41F45C71400D6C1DF /* NetDiskModal.swift */; };
+		24F4C2711F45D122008412AF /* NetDiskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243537B71F45C71400D6C1DF /* NetDiskTableViewCell.swift */; };
+		24F4C2721F45D122008412AF /* NetDiskTableViewCell.xib in Sources */ = {isa = PBXBuildFile; fileRef = 243537B31F45C71400D6C1DF /* NetDiskTableViewCell.xib */; };
+		24F4C2731F45D122008412AF /* NetDiskTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243537B51F45C71400D6C1DF /* NetDiskTask.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,9 +78,25 @@
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		24F346821F45CD0B001930ED /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				24F346811F45CD0B001930ED /* Kingfisher.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		243537B31F45C71400D6C1DF /* NetDiskTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NetDiskTableViewCell.xib; sourceTree = "<group>"; };
+		243537B41F45C71400D6C1DF /* NetDiskModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetDiskModal.swift; sourceTree = "<group>"; };
+		243537B51F45C71400D6C1DF /* NetDiskTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetDiskTask.swift; sourceTree = "<group>"; };
+		243537B61F45C71400D6C1DF /* NetDiskListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetDiskListViewController.swift; sourceTree = "<group>"; };
+		243537B71F45C71400D6C1DF /* NetDiskTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetDiskTableViewCell.swift; sourceTree = "<group>"; };
 		243847181F00891400027E27 /* S8Blocker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = S8Blocker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2438471B1F00891400027E27 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2438471E1F00891400027E27 /* S8Blocker.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = S8Blocker.xcdatamodel; sourceTree = "<group>"; };
@@ -98,6 +123,9 @@
 		243847721F008BA500027E27 /* S8Blocker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = S8Blocker.entitlements; sourceTree = "<group>"; };
 		243847731F008C3000027E27 /* Torrilste.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Torrilste.entitlements; sourceTree = "<group>"; };
 		2468BB381F00D5BA00AAB573 /* S8Blocker 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "S8Blocker 2.xcdatamodel"; sourceTree = "<group>"; };
+		24D7BBA01F45C8C30094DE28 /* Sex8.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Sex8.storyboard; sourceTree = "<group>"; };
+		24F3467C1F45CA5B001930ED /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		24F3467F1F45CCE9001930ED /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Kingfisher.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +133,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				24F346801F45CD0B001930ED /* Kingfisher.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -139,9 +168,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		243537B21F45C6E000D6C1DF /* NetDisk */ = {
+			isa = PBXGroup;
+			children = (
+				243537B61F45C71400D6C1DF /* NetDiskListViewController.swift */,
+				243537B41F45C71400D6C1DF /* NetDiskModal.swift */,
+				243537B71F45C71400D6C1DF /* NetDiskTableViewCell.swift */,
+				243537B31F45C71400D6C1DF /* NetDiskTableViewCell.xib */,
+				243537B51F45C71400D6C1DF /* NetDiskTask.swift */,
+			);
+			path = NetDisk;
+			sourceTree = "<group>";
+		};
 		2438470F1F00891400027E27 = {
 			isa = PBXGroup;
 			children = (
+				24F3467E1F45CCD8001930ED /* Framework */,
 				2438471A1F00891400027E27 /* S8Blocker */,
 				243847341F00891400027E27 /* S8BlockerTests */,
 				2438473F1F00891400027E27 /* S8BlockerUITests */,
@@ -166,10 +208,13 @@
 		2438471A1F00891400027E27 /* S8Blocker */ = {
 			isa = PBXGroup;
 			children = (
+				243537B21F45C6E000D6C1DF /* NetDisk */,
 				243847721F008BA500027E27 /* S8Blocker.entitlements */,
 				2438471B1F00891400027E27 /* AppDelegate.swift */,
 				243847201F00891400027E27 /* MasterViewController.swift */,
 				243847221F00891400027E27 /* DetailViewController.swift */,
+				24D7BBA01F45C8C30094DE28 /* Sex8.storyboard */,
+				24F3467C1F45CA5B001930ED /* ViewController.swift */,
 				243847241F00891400027E27 /* Main.storyboard */,
 				243847271F00891400027E27 /* Assets.xcassets */,
 				243847291F00891400027E27 /* LaunchScreen.storyboard */,
@@ -218,6 +263,14 @@
 			path = Torrilste;
 			sourceTree = "<group>";
 		};
+		24F3467E1F45CCD8001930ED /* Framework */ = {
+			isa = PBXGroup;
+			children = (
+				24F3467F1F45CCE9001930ED /* Kingfisher.framework */,
+			);
+			path = Framework;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -229,6 +282,7 @@
 				243847151F00891400027E27 /* Frameworks */,
 				243847161F00891400027E27 /* Resources */,
 				2438475F1F00897A00027E27 /* Embed App Extensions */,
+				24F346821F45CD0B001930ED /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -381,6 +435,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2438472B1F00891400027E27 /* LaunchScreen.storyboard in Resources */,
+				24D7BBA11F45C8C30094DE28 /* Sex8.storyboard in Resources */,
 				243847281F00891400027E27 /* Assets.xcassets in Resources */,
 				243847261F00891400027E27 /* Main.storyboard in Resources */,
 			);
@@ -423,6 +478,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				24F4C26F1F45D122008412AF /* NetDiskListViewController.swift in Sources */,
+				24F4C2701F45D122008412AF /* NetDiskModal.swift in Sources */,
+				24F4C2711F45D122008412AF /* NetDiskTableViewCell.swift in Sources */,
+				24F4C2721F45D122008412AF /* NetDiskTableViewCell.xib in Sources */,
+				24F4C2731F45D122008412AF /* NetDiskTask.swift in Sources */,
+				24F3467D1F45CA5B001930ED /* ViewController.swift in Sources */,
 				2438471C1F00891400027E27 /* AppDelegate.swift in Sources */,
 				2438471F1F00891400027E27 /* S8Blocker.xcdatamodeld in Sources */,
 				243847211F00891400027E27 /* MasterViewController.swift in Sources */,
@@ -536,6 +597,8 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
@@ -591,6 +654,8 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
@@ -628,6 +693,10 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = A272626J38;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Framework",
+				);
 				INFOPLIST_FILE = S8Blocker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ascp.S8Blocker1;
@@ -647,6 +716,10 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = A272626J38;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Framework",
+				);
 				INFOPLIST_FILE = S8Blocker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ascp.S8Blocker1;
@@ -722,7 +795,6 @@
 		2438475D1F00897A00027E27 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = A272626J38;
@@ -740,7 +812,6 @@
 		2438475E1F00897A00027E27 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = A272626J38;
