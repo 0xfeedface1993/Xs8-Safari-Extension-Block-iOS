@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2431DAE71F45F24C0082E928 /* netDetail.js in Resources */ = {isa = PBXBuildFile; fileRef = 24E480D01F45ED75009B6998 /* netDetail.js */; };
+		2431DAEA1F45F3320082E928 /* NetDiskTitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2431DAE81F45F3320082E928 /* NetDiskTitleTableViewCell.swift */; };
+		2431DAEB1F45F3320082E928 /* NetDiskTitleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2431DAE91F45F3320082E928 /* NetDiskTitleTableViewCell.xib */; };
+		2431DAEE1F45F6810082E928 /* NetDiskImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2431DAEC1F45F6810082E928 /* NetDiskImageTableViewCell.swift */; };
+		2431DAEF1F45F6810082E928 /* NetDiskImageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2431DAED1F45F6810082E928 /* NetDiskImageTableViewCell.xib */; };
 		2438471C1F00891400027E27 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2438471B1F00891400027E27 /* AppDelegate.swift */; };
 		2438471F1F00891400027E27 /* S8Blocker.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2438471D1F00891400027E27 /* S8Blocker.xcdatamodeld */; };
 		243847211F00891400027E27 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243847201F00891400027E27 /* MasterViewController.swift */; };
@@ -24,6 +29,9 @@
 		2438476E1F008ABE00027E27 /* Torrilste.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 243847641F008ABE00027E27 /* Torrilste.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		2468BB3A1F00D61400AAB573 /* S8Blocker.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2438471D1F00891400027E27 /* S8Blocker.xcdatamodeld */; };
 		24D7BBA11F45C8C30094DE28 /* Sex8.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 24D7BBA01F45C8C30094DE28 /* Sex8.storyboard */; };
+		24E480CC1F45E6B3009B6998 /* NetDiskDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E480CB1F45E6B3009B6998 /* NetDiskDetailViewController.swift */; };
+		24E480CF1F45E969009B6998 /* NetDiskDetalModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E480CE1F45E969009B6998 /* NetDiskDetalModal.swift */; };
+		24E480D11F45ED75009B6998 /* netDetail.js in Sources */ = {isa = PBXBuildFile; fileRef = 24E480D01F45ED75009B6998 /* netDetail.js */; };
 		24F3467D1F45CA5B001930ED /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F3467C1F45CA5B001930ED /* ViewController.swift */; };
 		24F346801F45CD0B001930ED /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24F3467F1F45CCE9001930ED /* Kingfisher.framework */; };
 		24F346811F45CD0B001930ED /* Kingfisher.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 24F3467F1F45CCE9001930ED /* Kingfisher.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -31,7 +39,6 @@
 		24F4C2701F45D122008412AF /* NetDiskModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243537B41F45C71400D6C1DF /* NetDiskModal.swift */; };
 		24F4C2711F45D122008412AF /* NetDiskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243537B71F45C71400D6C1DF /* NetDiskTableViewCell.swift */; };
 		24F4C2721F45D122008412AF /* NetDiskTableViewCell.xib in Sources */ = {isa = PBXBuildFile; fileRef = 243537B31F45C71400D6C1DF /* NetDiskTableViewCell.xib */; };
-		24F4C2731F45D122008412AF /* NetDiskTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243537B51F45C71400D6C1DF /* NetDiskTask.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,9 +99,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2431DAE81F45F3320082E928 /* NetDiskTitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetDiskTitleTableViewCell.swift; sourceTree = "<group>"; };
+		2431DAE91F45F3320082E928 /* NetDiskTitleTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NetDiskTitleTableViewCell.xib; sourceTree = "<group>"; };
+		2431DAEC1F45F6810082E928 /* NetDiskImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetDiskImageTableViewCell.swift; sourceTree = "<group>"; };
+		2431DAED1F45F6810082E928 /* NetDiskImageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NetDiskImageTableViewCell.xib; sourceTree = "<group>"; };
 		243537B31F45C71400D6C1DF /* NetDiskTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NetDiskTableViewCell.xib; sourceTree = "<group>"; };
 		243537B41F45C71400D6C1DF /* NetDiskModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetDiskModal.swift; sourceTree = "<group>"; };
-		243537B51F45C71400D6C1DF /* NetDiskTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetDiskTask.swift; sourceTree = "<group>"; };
 		243537B61F45C71400D6C1DF /* NetDiskListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetDiskListViewController.swift; sourceTree = "<group>"; };
 		243537B71F45C71400D6C1DF /* NetDiskTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetDiskTableViewCell.swift; sourceTree = "<group>"; };
 		243847181F00891400027E27 /* S8Blocker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = S8Blocker.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -124,6 +134,9 @@
 		243847731F008C3000027E27 /* Torrilste.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Torrilste.entitlements; sourceTree = "<group>"; };
 		2468BB381F00D5BA00AAB573 /* S8Blocker 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "S8Blocker 2.xcdatamodel"; sourceTree = "<group>"; };
 		24D7BBA01F45C8C30094DE28 /* Sex8.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Sex8.storyboard; sourceTree = "<group>"; };
+		24E480CB1F45E6B3009B6998 /* NetDiskDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetDiskDetailViewController.swift; sourceTree = "<group>"; };
+		24E480CE1F45E969009B6998 /* NetDiskDetalModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetDiskDetalModal.swift; sourceTree = "<group>"; };
+		24E480D01F45ED75009B6998 /* netDetail.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = netDetail.js; sourceTree = "<group>"; };
 		24F3467C1F45CA5B001930ED /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		24F3467F1F45CCE9001930ED /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Kingfisher.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -171,11 +184,8 @@
 		243537B21F45C6E000D6C1DF /* NetDisk */ = {
 			isa = PBXGroup;
 			children = (
-				243537B61F45C71400D6C1DF /* NetDiskListViewController.swift */,
-				243537B41F45C71400D6C1DF /* NetDiskModal.swift */,
-				243537B71F45C71400D6C1DF /* NetDiskTableViewCell.swift */,
-				243537B31F45C71400D6C1DF /* NetDiskTableViewCell.xib */,
-				243537B51F45C71400D6C1DF /* NetDiskTask.swift */,
+				24E480CA1F45E666009B6998 /* Detail */,
+				24E480C81F45E627009B6998 /* List */,
 			);
 			path = NetDisk;
 			sourceTree = "<group>";
@@ -261,6 +271,31 @@
 				2438476B1F008ABE00027E27 /* Info.plist */,
 			);
 			path = Torrilste;
+			sourceTree = "<group>";
+		};
+		24E480C81F45E627009B6998 /* List */ = {
+			isa = PBXGroup;
+			children = (
+				243537B61F45C71400D6C1DF /* NetDiskListViewController.swift */,
+				243537B41F45C71400D6C1DF /* NetDiskModal.swift */,
+				243537B71F45C71400D6C1DF /* NetDiskTableViewCell.swift */,
+				243537B31F45C71400D6C1DF /* NetDiskTableViewCell.xib */,
+			);
+			name = List;
+			sourceTree = "<group>";
+		};
+		24E480CA1F45E666009B6998 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				24E480D01F45ED75009B6998 /* netDetail.js */,
+				24E480CB1F45E6B3009B6998 /* NetDiskDetailViewController.swift */,
+				2431DAE81F45F3320082E928 /* NetDiskTitleTableViewCell.swift */,
+				2431DAE91F45F3320082E928 /* NetDiskTitleTableViewCell.xib */,
+				24E480CE1F45E969009B6998 /* NetDiskDetalModal.swift */,
+				2431DAEC1F45F6810082E928 /* NetDiskImageTableViewCell.swift */,
+				2431DAED1F45F6810082E928 /* NetDiskImageTableViewCell.xib */,
+			);
+			path = Detail;
 			sourceTree = "<group>";
 		};
 		24F3467E1F45CCD8001930ED /* Framework */ = {
@@ -434,10 +469,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2431DAE71F45F24C0082E928 /* netDetail.js in Resources */,
 				2438472B1F00891400027E27 /* LaunchScreen.storyboard in Resources */,
 				24D7BBA11F45C8C30094DE28 /* Sex8.storyboard in Resources */,
 				243847281F00891400027E27 /* Assets.xcassets in Resources */,
 				243847261F00891400027E27 /* Main.storyboard in Resources */,
+				2431DAEF1F45F6810082E928 /* NetDiskImageTableViewCell.xib in Resources */,
+				2431DAEB1F45F3320082E928 /* NetDiskTitleTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -478,15 +516,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2431DAEE1F45F6810082E928 /* NetDiskImageTableViewCell.swift in Sources */,
 				24F4C26F1F45D122008412AF /* NetDiskListViewController.swift in Sources */,
+				24E480D11F45ED75009B6998 /* netDetail.js in Sources */,
 				24F4C2701F45D122008412AF /* NetDiskModal.swift in Sources */,
 				24F4C2711F45D122008412AF /* NetDiskTableViewCell.swift in Sources */,
 				24F4C2721F45D122008412AF /* NetDiskTableViewCell.xib in Sources */,
-				24F4C2731F45D122008412AF /* NetDiskTask.swift in Sources */,
 				24F3467D1F45CA5B001930ED /* ViewController.swift in Sources */,
 				2438471C1F00891400027E27 /* AppDelegate.swift in Sources */,
 				2438471F1F00891400027E27 /* S8Blocker.xcdatamodeld in Sources */,
+				24E480CF1F45E969009B6998 /* NetDiskDetalModal.swift in Sources */,
+				2431DAEA1F45F3320082E928 /* NetDiskTitleTableViewCell.swift in Sources */,
 				243847211F00891400027E27 /* MasterViewController.swift in Sources */,
+				24E480CC1F45E6B3009B6998 /* NetDiskDetailViewController.swift in Sources */,
 				243847231F00891400027E27 /* DetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -9,6 +9,13 @@
 import UIKit
 import WebKit
 
+enum SitePlace {
+    case login
+    case main
+    case netdisk
+    case page
+}
+
 class NetDiskListViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     fileprivate var data = [NetDiskModal]()
@@ -26,7 +33,7 @@ class NetDiskListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        title = "网盘下载"
         // Do any additional setup after loading the view.
         tableviewLoad()
         view.insertSubview(webview, at: 0)
@@ -75,6 +82,13 @@ extension NetDiskListViewController : UITableViewDataSource, UITableViewDelegate
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return 400
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let storyboard = UIStoryboard(name: "Sex8", bundle: nil)
+        let v = storyboard.instantiateViewController(withIdentifier: "NetDiskDetail") as! NetDiskDetailViewController
+        v.netdisk = data[indexPath.row]
+        navigationController?.pushViewController(v, animated: true)
     }
 }
 
