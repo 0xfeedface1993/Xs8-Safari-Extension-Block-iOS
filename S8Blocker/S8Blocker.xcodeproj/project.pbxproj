@@ -39,6 +39,14 @@
 		24F4C2701F45D122008412AF /* NetDiskModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243537B41F45C71400D6C1DF /* NetDiskModal.swift */; };
 		24F4C2711F45D122008412AF /* NetDiskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243537B71F45C71400D6C1DF /* NetDiskTableViewCell.swift */; };
 		24F4C2721F45D122008412AF /* NetDiskTableViewCell.xib in Sources */ = {isa = PBXBuildFile; fileRef = 243537B31F45C71400D6C1DF /* NetDiskTableViewCell.xib */; };
+		273B41281F8B7A8D001A6CA9 /* Dytt.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 273B41271F8B7A8D001A6CA9 /* Dytt.storyboard */; };
+		273B412B1F8B7B38001A6CA9 /* NewMovieTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273B412A1F8B7B38001A6CA9 /* NewMovieTableViewController.swift */; };
+		273B412E1F8B7B53001A6CA9 /* NewMovieTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273B412C1F8B7B53001A6CA9 /* NewMovieTableViewCell.swift */; };
+		273B412F1F8B7B53001A6CA9 /* NewMovieTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 273B412D1F8B7B53001A6CA9 /* NewMovieTableViewCell.xib */; };
+		276BC26C1F8F68F1006B9B92 /* Webservice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276BC26B1F8F68F1006B9B92 /* Webservice.swift */; };
+		276BC26E1F8F6987006B9B92 /* ErrorStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276BC26D1F8F6987006B9B92 /* ErrorStruct.swift */; };
+		276BC2701F8F69CE006B9B92 /* DictionaryExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276BC26F1F8F69CE006B9B92 /* DictionaryExtension.swift */; };
+		276BC2721F8F6A0F006B9B92 /* JsonModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276BC2711F8F6A0F006B9B92 /* JsonModal.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -139,6 +147,15 @@
 		24E480D01F45ED75009B6998 /* netDetail.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = netDetail.js; sourceTree = "<group>"; };
 		24F3467C1F45CA5B001930ED /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		24F3467F1F45CCE9001930ED /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Kingfisher.framework; sourceTree = "<group>"; };
+		273B41271F8B7A8D001A6CA9 /* Dytt.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Dytt.storyboard; sourceTree = "<group>"; };
+		273B412A1F8B7B38001A6CA9 /* NewMovieTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMovieTableViewController.swift; sourceTree = "<group>"; };
+		273B412C1F8B7B53001A6CA9 /* NewMovieTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMovieTableViewCell.swift; sourceTree = "<group>"; };
+		273B412D1F8B7B53001A6CA9 /* NewMovieTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewMovieTableViewCell.xib; sourceTree = "<group>"; };
+		273B41301F8B7F66001A6CA9 /* S8Blocker 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "S8Blocker 3.xcdatamodel"; sourceTree = "<group>"; };
+		276BC26B1F8F68F1006B9B92 /* Webservice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Webservice.swift; sourceTree = "<group>"; };
+		276BC26D1F8F6987006B9B92 /* ErrorStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorStruct.swift; sourceTree = "<group>"; };
+		276BC26F1F8F69CE006B9B92 /* DictionaryExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryExtension.swift; sourceTree = "<group>"; };
+		276BC2711F8F6A0F006B9B92 /* JsonModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonModal.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -184,6 +201,7 @@
 		243537B21F45C6E000D6C1DF /* NetDisk */ = {
 			isa = PBXGroup;
 			children = (
+				243847241F00891400027E27 /* Main.storyboard */,
 				24E480CA1F45E666009B6998 /* Detail */,
 				24E480C81F45E627009B6998 /* List */,
 			);
@@ -218,6 +236,8 @@
 		2438471A1F00891400027E27 /* S8Blocker */ = {
 			isa = PBXGroup;
 			children = (
+				276BC26A1F8F688D006B9B92 /* Webservice */,
+				273B41291F8B7AC8001A6CA9 /* Dytt */,
 				243537B21F45C6E000D6C1DF /* NetDisk */,
 				243847721F008BA500027E27 /* S8Blocker.entitlements */,
 				2438471B1F00891400027E27 /* AppDelegate.swift */,
@@ -225,7 +245,6 @@
 				243847221F00891400027E27 /* DetailViewController.swift */,
 				24D7BBA01F45C8C30094DE28 /* Sex8.storyboard */,
 				24F3467C1F45CA5B001930ED /* ViewController.swift */,
-				243847241F00891400027E27 /* Main.storyboard */,
 				243847271F00891400027E27 /* Assets.xcassets */,
 				243847291F00891400027E27 /* LaunchScreen.storyboard */,
 				2438472C1F00891400027E27 /* Info.plist */,
@@ -304,6 +323,28 @@
 				24F3467F1F45CCE9001930ED /* Kingfisher.framework */,
 			);
 			path = Framework;
+			sourceTree = "<group>";
+		};
+		273B41291F8B7AC8001A6CA9 /* Dytt */ = {
+			isa = PBXGroup;
+			children = (
+				273B41271F8B7A8D001A6CA9 /* Dytt.storyboard */,
+				273B412A1F8B7B38001A6CA9 /* NewMovieTableViewController.swift */,
+				273B412C1F8B7B53001A6CA9 /* NewMovieTableViewCell.swift */,
+				273B412D1F8B7B53001A6CA9 /* NewMovieTableViewCell.xib */,
+			);
+			path = Dytt;
+			sourceTree = "<group>";
+		};
+		276BC26A1F8F688D006B9B92 /* Webservice */ = {
+			isa = PBXGroup;
+			children = (
+				276BC26B1F8F68F1006B9B92 /* Webservice.swift */,
+				276BC26D1F8F6987006B9B92 /* ErrorStruct.swift */,
+				276BC26F1F8F69CE006B9B92 /* DictionaryExtension.swift */,
+				276BC2711F8F6A0F006B9B92 /* JsonModal.swift */,
+			);
+			path = Webservice;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -472,6 +513,8 @@
 				2431DAE71F45F24C0082E928 /* netDetail.js in Resources */,
 				2438472B1F00891400027E27 /* LaunchScreen.storyboard in Resources */,
 				24D7BBA11F45C8C30094DE28 /* Sex8.storyboard in Resources */,
+				273B412F1F8B7B53001A6CA9 /* NewMovieTableViewCell.xib in Resources */,
+				273B41281F8B7A8D001A6CA9 /* Dytt.storyboard in Resources */,
 				243847281F00891400027E27 /* Assets.xcassets in Resources */,
 				243847261F00891400027E27 /* Main.storyboard in Resources */,
 				2431DAEF1F45F6810082E928 /* NetDiskImageTableViewCell.xib in Resources */,
@@ -519,17 +562,23 @@
 				2431DAEE1F45F6810082E928 /* NetDiskImageTableViewCell.swift in Sources */,
 				24F4C26F1F45D122008412AF /* NetDiskListViewController.swift in Sources */,
 				24E480D11F45ED75009B6998 /* netDetail.js in Sources */,
+				276BC26E1F8F6987006B9B92 /* ErrorStruct.swift in Sources */,
+				273B412E1F8B7B53001A6CA9 /* NewMovieTableViewCell.swift in Sources */,
 				24F4C2701F45D122008412AF /* NetDiskModal.swift in Sources */,
+				273B412B1F8B7B38001A6CA9 /* NewMovieTableViewController.swift in Sources */,
 				24F4C2711F45D122008412AF /* NetDiskTableViewCell.swift in Sources */,
 				24F4C2721F45D122008412AF /* NetDiskTableViewCell.xib in Sources */,
 				24F3467D1F45CA5B001930ED /* ViewController.swift in Sources */,
 				2438471C1F00891400027E27 /* AppDelegate.swift in Sources */,
 				2438471F1F00891400027E27 /* S8Blocker.xcdatamodeld in Sources */,
 				24E480CF1F45E969009B6998 /* NetDiskDetalModal.swift in Sources */,
+				276BC2721F8F6A0F006B9B92 /* JsonModal.swift in Sources */,
 				2431DAEA1F45F3320082E928 /* NetDiskTitleTableViewCell.swift in Sources */,
 				243847211F00891400027E27 /* MasterViewController.swift in Sources */,
+				276BC2701F8F69CE006B9B92 /* DictionaryExtension.swift in Sources */,
 				24E480CC1F45E6B3009B6998 /* NetDiskDetailViewController.swift in Sources */,
 				243847231F00891400027E27 /* DetailViewController.swift in Sources */,
+				276BC26C1F8F68F1006B9B92 /* Webservice.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -734,14 +783,14 @@
 				CODE_SIGN_ENTITLEMENTS = S8Blocker/S8Blocker.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = A272626J38;
+				DEVELOPMENT_TEAM = PBH6Q9M35H;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Framework",
 				);
 				INFOPLIST_FILE = S8Blocker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ascp.S8Blocker1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ascp.S8Blocker2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
@@ -757,14 +806,14 @@
 				CODE_SIGN_ENTITLEMENTS = S8Blocker/S8Blocker.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = A272626J38;
+				DEVELOPMENT_TEAM = PBH6Q9M35H;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Framework",
 				);
 				INFOPLIST_FILE = S8Blocker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ascp.S8Blocker1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ascp.S8Blocker2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
@@ -839,10 +888,10 @@
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = A272626J38;
+				DEVELOPMENT_TEAM = PBH6Q9M35H;
 				INFOPLIST_FILE = "ADBlock-iOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ascp.S8Blocker1.ADBlock-iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ascp.S8Blocker2.ADBlockiOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
@@ -856,10 +905,10 @@
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = A272626J38;
+				DEVELOPMENT_TEAM = PBH6Q9M35H;
 				INFOPLIST_FILE = "ADBlock-iOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ascp.S8Blocker1.ADBlock-iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ascp.S8Blocker2.ADBlockiOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
@@ -874,10 +923,10 @@
 				CODE_SIGN_ENTITLEMENTS = Torrilste/Torrilste.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = A272626J38;
+				DEVELOPMENT_TEAM = PBH6Q9M35H;
 				INFOPLIST_FILE = Torrilste/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ascp.S8Blocker1.Torrilste;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ascp.S8Blocker2.Torrilste;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
@@ -892,10 +941,10 @@
 				CODE_SIGN_ENTITLEMENTS = Torrilste/Torrilste.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = A272626J38;
+				DEVELOPMENT_TEAM = PBH6Q9M35H;
 				INFOPLIST_FILE = Torrilste/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ascp.S8Blocker1.Torrilste;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ascp.S8Blocker2.Torrilste;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
@@ -967,10 +1016,11 @@
 		2438471D1F00891400027E27 /* S8Blocker.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				273B41301F8B7F66001A6CA9 /* S8Blocker 3.xcdatamodel */,
 				2468BB381F00D5BA00AAB573 /* S8Blocker 2.xcdatamodel */,
 				2438471E1F00891400027E27 /* S8Blocker.xcdatamodel */,
 			);
-			currentVersion = 2468BB381F00D5BA00AAB573 /* S8Blocker 2.xcdatamodel */;
+			currentVersion = 273B41301F8B7F66001A6CA9 /* S8Blocker 3.xcdatamodel */;
 			path = S8Blocker.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

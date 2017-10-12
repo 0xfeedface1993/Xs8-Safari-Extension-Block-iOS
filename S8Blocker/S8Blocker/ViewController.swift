@@ -15,6 +15,27 @@ class ViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         self.title = "杏吧有你"
+        let web = Webservice.share
+        let caller = WebserviceCaller<LoginResopnse>(baseURL: .aliyun, way: .post, method: "login", paras: ["account":"admin", "password":"71B4655FA0CB2753BF533D478CBAF5F20A91BEE127132AFD45668FA9B38383F4"], rawData: nil) { (data, err, serverErr) in
+            if let e = err {
+                print(e)
+                return
+            }
+            
+            if let e = serverErr {
+                print(e)
+                return
+            }
+            
+            if let user = data {
+                print("id: \(user.id), name: \(user.name)")
+            }
+        }
+        do {
+            try web.read(caller: caller)
+        } catch {
+            print("login failed: \(error)")
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -28,6 +49,11 @@ class ViewController: UIViewController {
         navigationController?.pushViewController(v, animated: true)
     }
     
+    @IBAction func jumpMovieList(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Dytt", bundle: Bundle.main)
+        let v = storyboard.instantiateViewController(withIdentifier: "dytt")
+        navigationController?.pushViewController(v, animated: true)
+    }
 
     /*
     // MARK: - Navigation

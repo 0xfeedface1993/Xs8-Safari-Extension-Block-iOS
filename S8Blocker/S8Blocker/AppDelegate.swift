@@ -76,11 +76,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
             fatalError("failed to find data model")
         }
         
-        let mom = NSManagedObjectModel(contentsOf: modelURL)
-        
+        guard let mom = NSManagedObjectModel(contentsOf: modelURL) else {
+            fatalError("failed to load model")
+        }
         let psc = NSPersistentStoreCoordinator(managedObjectModel: mom)
         let options = [NSMigratePersistentStoresAutomaticallyOption:true, NSInferMappingModelAutomaticallyOption:true]
-        let dirURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.ascp.bbc"), fileURL = URL(string: "S8Blocker.sql", relativeTo: dirURL)
+        let dirURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.ascp.s8sex"), fileURL = URL(string: "S8Blocker.sql", relativeTo: dirURL)
         do {
             try psc.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: fileURL, options: options)
             let moc = NSManagedObjectContext(concurrencyType:.privateQueueConcurrencyType)

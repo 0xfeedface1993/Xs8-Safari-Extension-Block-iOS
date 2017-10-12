@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13178.6" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="iFF-2x-KH1">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="iFF-2x-KH1">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13156.2"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -35,18 +35,42 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" image="NetDisk" translatesAutoresizingMaskIntoConstraints="NO" id="Vqb-63-GWc">
-                                <rect key="frame" x="157.5" y="335.5" width="60" height="60"/>
+                                <rect key="frame" x="73" y="127" width="60" height="60"/>
                                 <gestureRecognizers/>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="JQi-1A-DKA" appends="YES" id="a5W-tR-9Jq"/>
                                 </connections>
                             </imageView>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" image="Movie" translatesAutoresizingMaskIntoConstraints="NO" id="4ac-n3-cSk">
+                                <rect key="frame" x="242" y="127" width="60" height="60"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="3WW-ag-sHo" appends="YES" id="bfA-ne-knf"/>
+                                </connections>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="网盘下载" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZaI-fg-4ox">
+                                <rect key="frame" x="72.5" y="201" width="61.5" height="18"/>
+                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="15"/>
+                                <color key="textColor" red="0.44877123832702637" green="0.66955506801605225" blue="0.85886973142623901" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="电影天堂" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="040-xo-e5t">
+                                <rect key="frame" x="241.5" y="201" width="61.5" height="18"/>
+                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="15"/>
+                                <color key="textColor" red="0.90894061326980591" green="0.47097045183181763" blue="0.45483297109603882" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Vqb-63-GWc" firstAttribute="centerX" secondItem="vJ8-1S-FIe" secondAttribute="centerX" id="CIV-F5-Gwf"/>
-                            <constraint firstItem="Vqb-63-GWc" firstAttribute="centerX" secondItem="vJ8-1S-FIe" secondAttribute="centerX" id="QHL-bL-vuL"/>
-                            <constraint firstItem="Vqb-63-GWc" firstAttribute="centerY" secondItem="vJ8-1S-FIe" secondAttribute="centerY" id="ZQG-9D-PTN"/>
+                            <constraint firstItem="ZaI-fg-4ox" firstAttribute="top" secondItem="Vqb-63-GWc" secondAttribute="bottom" constant="14" id="4Vb-WQ-sCN"/>
+                            <constraint firstItem="Vqb-63-GWc" firstAttribute="centerX" secondItem="vJ8-1S-FIe" secondAttribute="centerX" constant="-84.5" id="CIV-F5-Gwf"/>
+                            <constraint firstItem="Vqb-63-GWc" firstAttribute="top" secondItem="vJ8-1S-FIe" secondAttribute="top" constant="63" id="J0k-QI-v2f"/>
+                            <constraint firstItem="4ac-n3-cSk" firstAttribute="centerX" secondItem="vJ8-1S-FIe" secondAttribute="centerX" constant="84.5" id="L0o-Vk-7n9"/>
+                            <constraint firstItem="4ac-n3-cSk" firstAttribute="top" secondItem="Vqb-63-GWc" secondAttribute="top" id="RzC-lh-jbf"/>
+                            <constraint firstItem="ZaI-fg-4ox" firstAttribute="centerX" secondItem="Vqb-63-GWc" secondAttribute="centerX" id="TnH-rT-VVe"/>
+                            <constraint firstItem="040-xo-e5t" firstAttribute="centerX" secondItem="4ac-n3-cSk" secondAttribute="centerX" id="WNX-ob-HNk"/>
+                            <constraint firstItem="040-xo-e5t" firstAttribute="top" secondItem="4ac-n3-cSk" secondAttribute="bottom" constant="14" id="rFa-D9-twM"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="vJ8-1S-FIe"/>
                     </view>
@@ -56,6 +80,11 @@
                 <tapGestureRecognizer id="JQi-1A-DKA">
                     <connections>
                         <action selector="jump:" destination="xLi-CD-oHL" id="p9u-ps-zfo"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="3WW-ag-sHo">
+                    <connections>
+                        <action selector="jumpMovieList:" destination="xLi-CD-oHL" id="Ya8-FY-Wps"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
@@ -116,6 +145,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Movie" width="60" height="60"/>
         <image name="NetDisk" width="60" height="60"/>
     </resources>
 </document>
