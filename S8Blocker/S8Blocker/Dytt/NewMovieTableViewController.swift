@@ -25,13 +25,13 @@ class NewMovieTableViewController: UITableViewController, UISearchControllerDele
         searchController.dimsBackgroundDuringPresentation = false
         searchController.hidesNavigationBarDuringPresentation = false
         
-        tableView.estimatedRowHeight = 100
+        tableView.estimatedRowHeight = 160
         tableView.tableHeaderView = searchController.searchBar
         tableView.register(UINib(nibName: "NewMovieTableViewCell", bundle: nil), forCellReuseIdentifier: "com.ascp.moviecell")
         
         let web = Webservice.share
-        let raw = try! JSONEncoder().encode(["site":"2004"])
-        let caller = WebserviceCaller<[MovieItem]>(baseURL: .aliyun, way: .post, method: "getMovies", paras: nil, rawData: raw) { (data, err, serverErr) in
+        let raw = try! JSONEncoder().encode(["site":"2004", "startPage":"0", "rows":"20"])
+        let caller = WebserviceCaller<MovieResponse>(baseURL: .main, way: .post, method: "getMovies", paras: nil, rawData: raw) { (data, err, serverErr) in
             if let e = err {
                 print(e)
                 return
@@ -43,7 +43,7 @@ class NewMovieTableViewController: UITableViewController, UISearchControllerDele
             }
             
             if let mvs = data {
-                self.movies = mvs
+                self.movies = mvs.movies
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
@@ -78,7 +78,8 @@ class NewMovieTableViewController: UITableViewController, UISearchControllerDele
 
         // Configure the cell...
         let movie = movies![indexPath.row]
-        cell.loadData(image: movie.page, title: movie.title, dsc: movie.page)
+        cell.loadData(image: movie.pics.first?.image_url ?? "", title: movie.title, dsc: movie.description)
+        cell.contentView.layoutIfNeeded()
         
         return cell
     }

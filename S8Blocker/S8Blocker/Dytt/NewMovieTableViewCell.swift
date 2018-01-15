@@ -28,9 +28,10 @@ class NewMovieTableViewCell: UITableViewCell {
     }
     
     func loadData(image: String, title: String, dsc: String) {
-//        cover.kf.setImage(with: URL.init(string: image), placeholder: UIImage(named: "Movie"), options: nil, progressBlock: nil, completionHandler: nil)
-        cover.image = UIImage(named: "Movie")
+        cover.kf.setImage(with: URL(string: image), placeholder: UIImage(named: "Movie"), options: nil, progressBlock: nil, completionHandler: nil)
+//        cover.image = UIImage(named: "Movie")
         bigTitle.text = title
         discription.text = dsc
+        
     }
 }

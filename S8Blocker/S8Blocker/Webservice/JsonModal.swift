@@ -8,6 +8,12 @@
 
 import Foundation
 
+struct MovieResponse : Codable {
+    var page_number : String
+    var all_pages : String
+    var movies : [MovieItem]
+}
+
 struct MovieItem : Codable {
     var size : String
     var movie_time : String
@@ -17,11 +23,21 @@ struct MovieItem : Codable {
     var page : String
     var msk : String
     var site_id : String
-    static func movieItems(data: Data) -> [MovieItem] {
-        let decoder = JSONDecoder()
-        let item = try? decoder.decode([MovieItem].self, from: data)
-        return item ?? []
-    }
+    var description : String
+    var pics : [Picture]
+    var links : [DownloadLink]
+}
+
+struct Picture : Codable {
+    var image_url : String
+    var create_time : String
+    var id : String
+}
+
+struct DownloadLink : Codable {
+    var url : String
+    var create_time : String
+    var id : String
 }
 
 struct LoginResopnse : Codable {

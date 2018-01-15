@@ -16,7 +16,7 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
         self.title = "杏吧有你"
         let web = Webservice.share
-        let caller = WebserviceCaller<LoginResopnse>(baseURL: .aliyun, way: .post, method: "login", paras: ["account":"admin", "password":"71B4655FA0CB2753BF533D478CBAF5F20A91BEE127132AFD45668FA9B38383F4"], rawData: nil) { (data, err, serverErr) in
+        let caller = WebserviceCaller<LoginResopnse>(baseURL: .main, way: .post, method: "login", paras: ["account":"admin", "password":"71B4655FA0CB2753BF533D478CBAF5F20A91BEE127132AFD45668FA9B38383F4"], rawData: nil) { (data, err, serverErr) in
             if let e = err {
                 print(e)
                 return
