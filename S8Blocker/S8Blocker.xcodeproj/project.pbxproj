@@ -37,7 +37,6 @@
 		24F4C2701F45D122008412AF /* NetDiskModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243537B41F45C71400D6C1DF /* NetDiskModal.swift */; };
 		24F4C2711F45D122008412AF /* NetDiskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243537B71F45C71400D6C1DF /* NetDiskTableViewCell.swift */; };
 		24F4C2721F45D122008412AF /* NetDiskTableViewCell.xib in Sources */ = {isa = PBXBuildFile; fileRef = 243537B31F45C71400D6C1DF /* NetDiskTableViewCell.xib */; };
-		273B41281F8B7A8D001A6CA9 /* Dytt.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 273B41271F8B7A8D001A6CA9 /* Dytt.storyboard */; };
 		273B412B1F8B7B38001A6CA9 /* NewMovieTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273B412A1F8B7B38001A6CA9 /* NewMovieTableViewController.swift */; };
 		273B412E1F8B7B53001A6CA9 /* NewMovieTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273B412C1F8B7B53001A6CA9 /* NewMovieTableViewCell.swift */; };
 		273B412F1F8B7B53001A6CA9 /* NewMovieTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 273B412D1F8B7B53001A6CA9 /* NewMovieTableViewCell.xib */; };
@@ -47,6 +46,12 @@
 		276BC2721F8F6A0F006B9B92 /* JsonModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276BC2711F8F6A0F006B9B92 /* JsonModal.swift */; };
 		276BC2761F90583D006B9B92 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 276BC2741F9057EC006B9B92 /* Kingfisher.framework */; };
 		276BC2771F90584B006B9B92 /* Kingfisher.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 276BC2741F9057EC006B9B92 /* Kingfisher.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		278B1EE2200CA1E5004F9760 /* Categrory-Modal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278B1EE1200CA1E5004F9760 /* Categrory-Modal.swift */; };
+		278B1EE6200CA341004F9760 /* categrory.plist in Resources */ = {isa = PBXBuildFile; fileRef = 278B1EE5200CA341004F9760 /* categrory.plist */; };
+		278B1EE8200CA530004F9760 /* CategroryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278B1EE7200CA530004F9760 /* CategroryCollectionViewCell.swift */; };
+		278B1EEA200CB1C7004F9760 /* Movie-Modal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278B1EE9200CB1C7004F9760 /* Movie-Modal.swift */; };
+		278B1EED200CB284004F9760 /* FetchBot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278B1EEC200CB284004F9760 /* FetchBot.swift */; };
+		278B1EEF200D9485004F9760 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278B1EEE200D9485004F9760 /* Parser.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -146,7 +151,6 @@
 		24E480CE1F45E969009B6998 /* NetDiskDetalModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetDiskDetalModal.swift; sourceTree = "<group>"; };
 		24E480D01F45ED75009B6998 /* netDetail.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = netDetail.js; sourceTree = "<group>"; };
 		24F3467C1F45CA5B001930ED /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		273B41271F8B7A8D001A6CA9 /* Dytt.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Dytt.storyboard; sourceTree = "<group>"; };
 		273B412A1F8B7B38001A6CA9 /* NewMovieTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMovieTableViewController.swift; sourceTree = "<group>"; };
 		273B412C1F8B7B53001A6CA9 /* NewMovieTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMovieTableViewCell.swift; sourceTree = "<group>"; };
 		273B412D1F8B7B53001A6CA9 /* NewMovieTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewMovieTableViewCell.xib; sourceTree = "<group>"; };
@@ -156,6 +160,12 @@
 		276BC26F1F8F69CE006B9B92 /* DictionaryExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryExtension.swift; sourceTree = "<group>"; };
 		276BC2711F8F6A0F006B9B92 /* JsonModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonModal.swift; sourceTree = "<group>"; };
 		276BC2741F9057EC006B9B92 /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = SOURCE_ROOT; };
+		278B1EE1200CA1E5004F9760 /* Categrory-Modal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Categrory-Modal.swift"; sourceTree = "<group>"; };
+		278B1EE5200CA341004F9760 /* categrory.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = categrory.plist; sourceTree = "<group>"; };
+		278B1EE7200CA530004F9760 /* CategroryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategroryCollectionViewCell.swift; sourceTree = "<group>"; };
+		278B1EE9200CB1C7004F9760 /* Movie-Modal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Movie-Modal.swift"; sourceTree = "<group>"; };
+		278B1EEC200CB284004F9760 /* FetchBot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchBot.swift; sourceTree = "<group>"; };
+		278B1EEE200D9485004F9760 /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -237,6 +247,8 @@
 		2438471A1F00891400027E27 /* S8Blocker */ = {
 			isa = PBXGroup;
 			children = (
+				278B1EEB200CB26B004F9760 /* FetchBot */,
+				278B1EE0200CA198004F9760 /* Categrory */,
 				276BC26A1F8F688D006B9B92 /* Webservice */,
 				273B41291F8B7AC8001A6CA9 /* Dytt */,
 				243537B21F45C6E000D6C1DF /* NetDisk */,
@@ -329,10 +341,10 @@
 		273B41291F8B7AC8001A6CA9 /* Dytt */ = {
 			isa = PBXGroup;
 			children = (
-				273B41271F8B7A8D001A6CA9 /* Dytt.storyboard */,
 				273B412A1F8B7B38001A6CA9 /* NewMovieTableViewController.swift */,
 				273B412C1F8B7B53001A6CA9 /* NewMovieTableViewCell.swift */,
 				273B412D1F8B7B53001A6CA9 /* NewMovieTableViewCell.xib */,
+				278B1EE9200CB1C7004F9760 /* Movie-Modal.swift */,
 			);
 			path = Dytt;
 			sourceTree = "<group>";
@@ -353,6 +365,25 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		278B1EE0200CA198004F9760 /* Categrory */ = {
+			isa = PBXGroup;
+			children = (
+				278B1EE1200CA1E5004F9760 /* Categrory-Modal.swift */,
+				278B1EE5200CA341004F9760 /* categrory.plist */,
+				278B1EE7200CA530004F9760 /* CategroryCollectionViewCell.swift */,
+			);
+			path = Categrory;
+			sourceTree = "<group>";
+		};
+		278B1EEB200CB26B004F9760 /* FetchBot */ = {
+			isa = PBXGroup;
+			children = (
+				278B1EEC200CB284004F9760 /* FetchBot.swift */,
+				278B1EEE200D9485004F9760 /* Parser.swift */,
+			);
+			path = FetchBot;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -523,9 +554,9 @@
 				2438472B1F00891400027E27 /* LaunchScreen.storyboard in Resources */,
 				24D7BBA11F45C8C30094DE28 /* Sex8.storyboard in Resources */,
 				273B412F1F8B7B53001A6CA9 /* NewMovieTableViewCell.xib in Resources */,
-				273B41281F8B7A8D001A6CA9 /* Dytt.storyboard in Resources */,
 				243847281F00891400027E27 /* Assets.xcassets in Resources */,
 				243847261F00891400027E27 /* Main.storyboard in Resources */,
+				278B1EE6200CA341004F9760 /* categrory.plist in Resources */,
 				2431DAEF1F45F6810082E928 /* NetDiskImageTableViewCell.xib in Resources */,
 				2431DAEB1F45F3320082E928 /* NetDiskTitleTableViewCell.xib in Resources */,
 			);
@@ -588,6 +619,7 @@
 				2431DAEE1F45F6810082E928 /* NetDiskImageTableViewCell.swift in Sources */,
 				24F4C26F1F45D122008412AF /* NetDiskListViewController.swift in Sources */,
 				24E480D11F45ED75009B6998 /* netDetail.js in Sources */,
+				278B1EEA200CB1C7004F9760 /* Movie-Modal.swift in Sources */,
 				276BC26E1F8F6987006B9B92 /* ErrorStruct.swift in Sources */,
 				273B412E1F8B7B53001A6CA9 /* NewMovieTableViewCell.swift in Sources */,
 				24F4C2701F45D122008412AF /* NetDiskModal.swift in Sources */,
@@ -595,9 +627,13 @@
 				24F4C2711F45D122008412AF /* NetDiskTableViewCell.swift in Sources */,
 				24F4C2721F45D122008412AF /* NetDiskTableViewCell.xib in Sources */,
 				24F3467D1F45CA5B001930ED /* ViewController.swift in Sources */,
+				278B1EE2200CA1E5004F9760 /* Categrory-Modal.swift in Sources */,
 				2438471C1F00891400027E27 /* AppDelegate.swift in Sources */,
 				2438471F1F00891400027E27 /* S8Blocker.xcdatamodeld in Sources */,
+				278B1EE8200CA530004F9760 /* CategroryCollectionViewCell.swift in Sources */,
 				24E480CF1F45E969009B6998 /* NetDiskDetalModal.swift in Sources */,
+				278B1EED200CB284004F9760 /* FetchBot.swift in Sources */,
+				278B1EEF200D9485004F9760 /* Parser.swift in Sources */,
 				276BC2721F8F6A0F006B9B92 /* JsonModal.swift in Sources */,
 				2431DAEA1F45F3320082E928 /* NetDiskTitleTableViewCell.swift in Sources */,
 				243847211F00891400027E27 /* MasterViewController.swift in Sources */,

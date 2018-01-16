@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="iFF-2x-KH1">
-    <device id="retina4_7" orientation="portrait">
+    <device id="ipad12_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -15,7 +15,7 @@
             <objects>
                 <navigationController id="iFF-2x-KH1" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="SpU-c0-rGx">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="1024" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -24,82 +24,92 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b6D-og-6wQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-368" y="154"/>
+            <point key="canvasLocation" x="-394" y="119"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="F6y-Wv-rF6">
             <objects>
                 <viewController id="xLi-CD-oHL" customClass="ViewController" customModule="S8Blocker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cgn-yv-Vpx">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" image="NetDisk" translatesAutoresizingMaskIntoConstraints="NO" id="Vqb-63-GWc">
-                                <rect key="frame" x="73" y="127" width="60" height="60"/>
-                                <gestureRecognizers/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="7tI-Da-Erf">
+                                <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ScX-ME-fCU">
+                                    <size key="itemSize" width="204" height="277"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="com.ascp.main.cell" id="Eth-sI-3Sn" customClass="CategroryCollectionViewCell" customModule="S8Blocker" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="204" height="277"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="204" height="277"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="AvM-zA-0Fn">
+                                                    <rect key="frame" x="43" y="79" width="118" height="118"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="118" id="BFR-aI-ywV"/>
+                                                        <constraint firstAttribute="height" constant="118" id="p2l-Z0-1jl"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="非常好" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ijB-Zj-Kpu">
+                                                    <rect key="frame" x="43" y="219" width="118" height="21.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="ijB-Zj-Kpu" firstAttribute="width" secondItem="AvM-zA-0Fn" secondAttribute="width" id="76c-dH-ekk"/>
+                                            <constraint firstItem="AvM-zA-0Fn" firstAttribute="centerX" secondItem="Eth-sI-3Sn" secondAttribute="centerX" id="bSJ-Tw-tgQ"/>
+                                            <constraint firstItem="ijB-Zj-Kpu" firstAttribute="top" secondItem="AvM-zA-0Fn" secondAttribute="bottom" constant="22" id="pl2-Zg-yrA"/>
+                                            <constraint firstItem="ijB-Zj-Kpu" firstAttribute="centerX" secondItem="AvM-zA-0Fn" secondAttribute="centerX" id="tHo-Xw-oOE"/>
+                                            <constraint firstItem="AvM-zA-0Fn" firstAttribute="centerY" secondItem="Eth-sI-3Sn" secondAttribute="centerY" id="vol-dY-9ar"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="image" destination="AvM-zA-0Fn" id="PbB-mZ-sfe"/>
+                                            <outlet property="title" destination="ijB-Zj-Kpu" id="f8f-3d-HTg"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
                                 <connections>
-                                    <outletCollection property="gestureRecognizers" destination="JQi-1A-DKA" appends="YES" id="a5W-tR-9Jq"/>
+                                    <outlet property="dataSource" destination="xLi-CD-oHL" id="WHL-Gp-WmW"/>
+                                    <outlet property="delegate" destination="xLi-CD-oHL" id="LO8-1g-6Sh"/>
                                 </connections>
-                            </imageView>
-                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" image="Movie" translatesAutoresizingMaskIntoConstraints="NO" id="4ac-n3-cSk">
-                                <rect key="frame" x="242" y="127" width="60" height="60"/>
-                                <gestureRecognizers/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="3WW-ag-sHo" appends="YES" id="bfA-ne-knf"/>
-                                </connections>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="网盘下载" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZaI-fg-4ox">
-                                <rect key="frame" x="72.5" y="201" width="61.5" height="18"/>
-                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="15"/>
-                                <color key="textColor" red="0.44877123832702637" green="0.66955506801605225" blue="0.85886973142623901" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="电影天堂" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="040-xo-e5t">
-                                <rect key="frame" x="241.5" y="201" width="61.5" height="18"/>
-                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="15"/>
-                                <color key="textColor" red="0.90894061326980591" green="0.47097045183181763" blue="0.45483297109603882" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="ZaI-fg-4ox" firstAttribute="top" secondItem="Vqb-63-GWc" secondAttribute="bottom" constant="14" id="4Vb-WQ-sCN"/>
-                            <constraint firstItem="Vqb-63-GWc" firstAttribute="centerX" secondItem="vJ8-1S-FIe" secondAttribute="centerX" constant="-84.5" id="CIV-F5-Gwf"/>
-                            <constraint firstItem="Vqb-63-GWc" firstAttribute="top" secondItem="vJ8-1S-FIe" secondAttribute="top" constant="63" id="J0k-QI-v2f"/>
-                            <constraint firstItem="4ac-n3-cSk" firstAttribute="centerX" secondItem="vJ8-1S-FIe" secondAttribute="centerX" constant="84.5" id="L0o-Vk-7n9"/>
-                            <constraint firstItem="4ac-n3-cSk" firstAttribute="top" secondItem="Vqb-63-GWc" secondAttribute="top" id="RzC-lh-jbf"/>
-                            <constraint firstItem="ZaI-fg-4ox" firstAttribute="centerX" secondItem="Vqb-63-GWc" secondAttribute="centerX" id="TnH-rT-VVe"/>
-                            <constraint firstItem="040-xo-e5t" firstAttribute="centerX" secondItem="4ac-n3-cSk" secondAttribute="centerX" id="WNX-ob-HNk"/>
-                            <constraint firstItem="040-xo-e5t" firstAttribute="top" secondItem="4ac-n3-cSk" secondAttribute="bottom" constant="14" id="rFa-D9-twM"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="vJ8-1S-FIe"/>
                     </view>
                     <navigationItem key="navigationItem" id="nmL-sK-GD4"/>
+                    <connections>
+                        <outlet property="collectionView" destination="7tI-Da-Erf" id="Thd-sN-dnK"/>
+                        <segue destination="lso-ZA-FRp" kind="show" identifier="com.ascp.netdisk.list" id="vFU-7l-ugc"/>
+                        <segue destination="8Tq-sI-Q7b" kind="show" identifier="com.ascp.movie.list" id="doA-sc-b0t"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ib2-Fk-bgs" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="JQi-1A-DKA">
-                    <connections>
-                        <action selector="jump:" destination="xLi-CD-oHL" id="p9u-ps-zfo"/>
-                    </connections>
-                </tapGestureRecognizer>
-                <tapGestureRecognizer id="3WW-ag-sHo">
-                    <connections>
-                        <action selector="jumpMovieList:" destination="xLi-CD-oHL" id="Ya8-FY-Wps"/>
-                    </connections>
-                </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="442" y="120"/>
+            <point key="canvasLocation" x="440.80000000000001" y="119.1904047976012"/>
         </scene>
         <!--Net Disk List View Controller-->
         <scene sceneID="TZi-RI-L8z">
             <objects>
                 <viewController restorationIdentifier="NetDiskList" storyboardIdentifier="NetDiskList" id="lso-ZA-FRp" customClass="NetDiskListViewController" customModule="S8Blocker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VoD-Mj-tbq">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zc3-9e-EAM">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
@@ -109,26 +119,27 @@
                     </view>
                     <connections>
                         <outlet property="tableView" destination="zc3-9e-EAM" id="RWb-gR-2SP"/>
+                        <segue destination="TQ4-Fq-xQ7" kind="show" identifier="com.ascp.netdisk.list.detail" id="fEU-pE-lvp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nQA-bg-wSj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1320.8" y="115.59220389805098"/>
+            <point key="canvasLocation" x="441" y="1117"/>
         </scene>
         <!--Net Disk Detail View Controller-->
         <scene sceneID="sD9-vn-Gau">
             <objects>
                 <tableViewController storyboardIdentifier="NetDiskDetail" id="TQ4-Fq-xQ7" customClass="NetDiskDetailViewController" customModule="S8Blocker" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="uWI-dE-pXl">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="procell" id="tuL-nc-9jF">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="28" width="1024" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="tuL-nc-9jF" id="llv-as-OiD">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="1024" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -141,11 +152,36 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FWV-lv-Ako" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2286" y="119"/>
+            <point key="canvasLocation" x="1359" y="1117"/>
+        </scene>
+        <!--电影天堂-->
+        <scene sceneID="byX-Aw-fDa">
+            <objects>
+                <tableViewController storyboardIdentifier="dytt" title="电影天堂" useStoryboardIdentifierAsRestorationIdentifier="YES" id="8Tq-sI-Q7b" customClass="NewMovieTableViewController" customModule="S8Blocker" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="DXQ-v2-6fa">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="nmtvci" selectionStyle="default" indentationWidth="10" reuseIdentifier="nmtvci" id="h5x-RZ-QVw" customClass="NewMovieTableViewCell" customModule="S8Blocker" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="1024" height="52"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="h5x-RZ-QVw" id="dcd-In-46z">
+                                    <rect key="frame" x="0.0" y="0.0" width="1024" height="51.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="8Tq-sI-Q7b" id="wnj-is-0IU"/>
+                            <outlet property="delegate" destination="8Tq-sI-Q7b" id="HQ7-06-ycp"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="最新电影" id="Dhs-1Y-WHJ"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gM7-q8-mmA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1555" y="119"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="Movie" width="60" height="60"/>
-        <image name="NetDisk" width="60" height="60"/>
-    </resources>
 </document>

@@ -9,8 +9,10 @@
 import UIKit
 
 class NewMovieTableViewController: UITableViewController, UISearchControllerDelegate {
-    var movies : [MovieItem]?
+    var movies = [ContentInfo]()
     let searchController = UISearchController(searchResultsController: nil)
+    let bot = FetchBot.shareBot
+    private var snapCount = 10
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,32 +30,11 @@ class NewMovieTableViewController: UITableViewController, UISearchControllerDele
         tableView.estimatedRowHeight = 160
         tableView.tableHeaderView = searchController.searchBar
         tableView.register(UINib(nibName: "NewMovieTableViewCell", bundle: nil), forCellReuseIdentifier: "com.ascp.moviecell")
-        
-        let web = Webservice.share
-        let raw = try! JSONEncoder().encode(["site":"2004", "startPage":"0", "rows":"20"])
-        let caller = WebserviceCaller<MovieResponse>(baseURL: .main, way: .post, method: "getMovies", paras: nil, rawData: raw) { (data, err, serverErr) in
-            if let e = err {
-                print(e)
-                return
-            }
-            
-            if let e = serverErr {
-                print(e)
-                return
-            }
-            
-            if let mvs = data {
-                self.movies = mvs.movies
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
-            }
-        }
-        do {
-            try web.read(caller: caller)
-        } catch {
-            print("login failed: \(error)")
-        }
+
+        bot.startPage = 1
+        bot.pageOffset = 2
+        bot.delegate = self
+        bot.start(withSite: Site.dytt)
     }
 
     override func didReceiveMemoryWarning() {
@@ -70,15 +51,15 @@ class NewMovieTableViewController: UITableViewController, UISearchControllerDele
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return movies?.count ?? 0
+        return movies.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "com.ascp.moviecell", for: indexPath) as! NewMovieTableViewCell
 
         // Configure the cell...
-        let movie = movies![indexPath.row]
-        cell.loadData(image: movie.pics.first?.image_url ?? "", title: movie.title, dsc: movie.description)
+        let movie = movies[indexPath.row]
+        cell.loadData(image: movie.imageLink.first ?? "", title: movie.title, dsc: movie.note)
         cell.contentView.layoutIfNeeded()
         
         return cell
@@ -132,4 +113,28 @@ class NewMovieTableViewController: UITableViewController, UISearchControllerDele
     //MARK: - UISearchControllerDelegate
     
 
+}
+
+extension NewMovieTableViewController : FetchBotDelegate {
+    func bot(didStartBot bot: FetchBot) {
+        
+    }
+    
+    func bot(_ bot: FetchBot, didLoardContent content: ContentInfo, atIndexPath index: Int) {
+        snapCount -= 1
+        movies.append(content)
+        if snapCount <= 0 {
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+            snapCount = 10
+        }
+    }
+    
+    func bot(_ bot: FetchBot, didFinishedContents contents: [ContentInfo], failedLink: [FetchURL]) {
+        snapCount = 10
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
 }

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -35,21 +35,22 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hFI-r9-7I3">
-                        <rect key="frame" x="177" y="52" width="283" height="152.5"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3IS-Gd-LLe">
+                        <rect key="frame" x="177" y="60" width="283" height="145"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    </textView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="hFI-r9-7I3" firstAttribute="bottom" secondItem="KHo-mJ-0Da" secondAttribute="bottom" id="9dT-s3-J2Z"/>
-                    <constraint firstItem="hFI-r9-7I3" firstAttribute="trailing" secondItem="4JA-l2-Fsd" secondAttribute="trailing" id="FIW-WS-P01"/>
-                    <constraint firstItem="hFI-r9-7I3" firstAttribute="top" secondItem="4JA-l2-Fsd" secondAttribute="bottom" id="Fsj-vF-Pd8"/>
+                    <constraint firstItem="3IS-Gd-LLe" firstAttribute="trailing" secondItem="4JA-l2-Fsd" secondAttribute="trailing" id="7H4-nz-96P"/>
+                    <constraint firstItem="3IS-Gd-LLe" firstAttribute="leading" secondItem="4JA-l2-Fsd" secondAttribute="leading" id="DcJ-NR-PTw"/>
+                    <constraint firstItem="3IS-Gd-LLe" firstAttribute="bottom" secondItem="KHo-mJ-0Da" secondAttribute="bottom" id="G7v-YX-743"/>
                     <constraint firstItem="KHo-mJ-0Da" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="YDp-CW-ubK"/>
                     <constraint firstAttribute="trailing" secondItem="4JA-l2-Fsd" secondAttribute="trailing" constant="8" id="aP3-lW-u83"/>
-                    <constraint firstItem="hFI-r9-7I3" firstAttribute="leading" secondItem="4JA-l2-Fsd" secondAttribute="leading" id="c3E-Rp-a8H"/>
                     <constraint firstItem="4JA-l2-Fsd" firstAttribute="top" secondItem="KHo-mJ-0Da" secondAttribute="top" id="fz2-1x-hkD"/>
+                    <constraint firstItem="3IS-Gd-LLe" firstAttribute="top" secondItem="4JA-l2-Fsd" secondAttribute="bottom" constant="8" id="hDq-3P-E3A"/>
                     <constraint firstItem="KHo-mJ-0Da" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="23" id="iKr-RD-Fv3"/>
                     <constraint firstAttribute="bottom" secondItem="KHo-mJ-0Da" secondAttribute="bottom" constant="12" id="ijF-PD-Bmy"/>
                     <constraint firstItem="4JA-l2-Fsd" firstAttribute="leading" secondItem="KHo-mJ-0Da" secondAttribute="trailing" constant="14" id="p9k-lW-gYz"/>
@@ -59,7 +60,7 @@
             <connections>
                 <outlet property="bigTitle" destination="4JA-l2-Fsd" id="xB4-f9-QNt"/>
                 <outlet property="cover" destination="KHo-mJ-0Da" id="HVI-bQ-t1q"/>
-                <outlet property="discription" destination="hFI-r9-7I3" id="Tuy-ib-31I"/>
+                <outlet property="discription" destination="3IS-Gd-LLe" id="7ox-7V-QiT"/>
             </connections>
             <point key="canvasLocation" x="108" y="140.5"/>
         </tableViewCell>

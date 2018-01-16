@@ -9,50 +9,34 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    lazy var menus : [Categrory] = {
+        guard let fileURL = Bundle.main.url(forResource: "categrory", withExtension: "plist") else {
+            return [Categrory]()
+        }
+        
+        do {
+            let file = try Data(contentsOf: fileURL)
+            let decoder = PropertyListDecoder()
+            let plist = try decoder.decode([Categrory].self, from: file)
+            return plist
+        }   catch {
+            print(error)
+            return [Categrory]()
+        }
+    }()
+    @IBOutlet weak var collectionView: UICollectionView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         self.title = "杏吧有你"
-        let web = Webservice.share
-        let caller = WebserviceCaller<LoginResopnse>(baseURL: .main, way: .post, method: "login", paras: ["account":"admin", "password":"71B4655FA0CB2753BF533D478CBAF5F20A91BEE127132AFD45668FA9B38383F4"], rawData: nil) { (data, err, serverErr) in
-            if let e = err {
-                print(e)
-                return
-            }
-            
-            if let e = serverErr {
-                print(e)
-                return
-            }
-            
-            if let user = data {
-                print("id: \(user.id), name: \(user.name)")
-            }
-        }
-        do {
-            try web.read(caller: caller)
-        } catch {
-            print("login failed: \(error)")
-        }
+        
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    @IBAction func jump(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "Sex8", bundle: Bundle.main)
-        let v = storyboard.instantiateViewController(withIdentifier: "NetDiskList")
-        navigationController?.pushViewController(v, animated: true)
-    }
-    
-    @IBAction func jumpMovieList(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "Dytt", bundle: Bundle.main)
-        let v = storyboard.instantiateViewController(withIdentifier: "dytt")
-        navigationController?.pushViewController(v, animated: true)
     }
 
     /*
@@ -64,5 +48,57 @@ class ViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+}
 
+
+// MARK: - Collection View Delegate
+extension ViewController : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return menus.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "com.ascp.main.cell", for: indexPath) as! CategroryCollectionViewCell
+        let item = menus[indexPath.row]
+        cell.load(image:UIImage.init(named: item.image), title: item.name)
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let item = menus[indexPath.row]
+        performSegue(withIdentifier: item.segue, sender: nil)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: view.frame.size.width / 2, height: 277)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+}
+
+extension ViewController {
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        return identifier != ""
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        coordinator.animate(alongsideTransition: { (context) in
+            
+        }) { (context) in
+            let layout = self.collectionView.collectionViewLayout as! UICollectionViewFlowLayout
+            layout.itemSize = CGSize(width: size.width / 2, height: 227)
+            self.collectionView.collectionViewLayout = layout
+        }
+        super.viewWillTransition(to: size, with: coordinator)
+    }
 }
