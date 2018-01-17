@@ -83,6 +83,11 @@ struct InfoRuleOption {
     // <img \w+="\w*" src="http:[\/\w\.]+" \w+="\w*"> [^>]+>
     static let mainMovieImage = ParserTagRule(tag: "img", isTagPaser: false, attrubutes: [ParserAttrubuteRule(key: "src")], inTagRegexString: "<img ", hasSuffix: ">", innerRegex: "[^>]+")
 //    static let singleMovieImage = ParserTagRule(tag: "img", isTagPaser: false, attrubutes: [], inTagRegexString: "<img \\w+=\"\\w*\" src=\"", hasSuffix: "\"", innerRegex: "[^\"]+")
+    
+    /// 下载地址
+    //  <a( \\w+=\"[#_\\w]*\")+ \\w+=\"\\w+:\\/\\/\\w+:\\w+@\\w+\\.\\w+\\.\\w+:\\w+\\/[^\"]+\"( \\w+=\"[\\w\\s_\\(,\\);=:\\/]+\")+>\\w+:\\/\\/\\w+:\\w+@\\w+\\.\\w+\\.\\w+:\\w+\\/[^<]+<\\/a>
+    // <a \\w+=\\"\\w+:\\/\\/\\w+:\\w+@\\w+.\\w+.\\w+:\\w+\\/[^\\"]+\\">\\w+:\\/\\/\\w+:\\w+@\\w+.\\w+.\\w+:\\w+\\/[^<]+</a>
+    static let movieDowloadLink = ParserTagRule(tag: "a", isTagPaser: true, attrubutes: [ParserAttrubuteRule(key: "thunderrestitle"), ParserAttrubuteRule(key: "src"), ParserAttrubuteRule(key: "aexuztdb"), ParserAttrubuteRule(key: "href")], inTagRegexString: " \\w+=\"\\w+:\\/\\/\\w+:\\w+@\\w+.\\w+.\\w+:\\w+\\/[^\"]+\"", hasSuffix: nil, innerRegex: "\\w+:\\/\\/\\w+:\\w+@\\w+.\\w+.\\w+:\\w+\\/[^<]+")
 }
 
 /// 列表页面正则规则选项
@@ -344,14 +349,10 @@ class FetchBot {
             }
         }
         
-        let dowloadLinkRule = InfoRuleOption.downloadLink
-        let downloadLinkLiRule = InfoRuleOption.downloadLinkLi
-        let linkRules = [dowloadLinkRule, downloadLinkLiRule]
-        for rule in linkRules {
-            for linkResult in parse(string:mainContent, rule: rule) ?? [] {
-                info.downloafLink.append(linkResult.innerHTML)
-                print("*********** doenload link: \(linkResult.innerHTML)")
-            }
+        let dowloadLinkRule = InfoRuleOption.movieDowloadLink
+        for linkResult in parse(string:mainContent, rule: dowloadLinkRule) ?? [] {
+            info.downloafLink.append(linkResult.innerHTML)
+            print("*********** doenload link: \(linkResult.innerHTML)")
         }
         
         return info
