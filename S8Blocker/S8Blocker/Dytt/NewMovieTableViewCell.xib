@@ -35,11 +35,17 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3IS-Gd-LLe">
-                        <rect key="frame" x="177" y="60" width="283" height="145"/>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3IS-Gd-LLe">
+                        <rect key="frame" x="177" y="52" width="283" height="153"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <attributedString key="attributedText">
+                            <fragment>
+                                <string key="content">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <attributes>
+                                    <font key="NSFont" size="14" name="STHeitiSC-Light"/>
+                                </attributes>
+                            </fragment>
+                        </attributedString>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     </textView>
                 </subviews>
@@ -50,7 +56,7 @@
                     <constraint firstItem="KHo-mJ-0Da" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="YDp-CW-ubK"/>
                     <constraint firstAttribute="trailing" secondItem="4JA-l2-Fsd" secondAttribute="trailing" constant="8" id="aP3-lW-u83"/>
                     <constraint firstItem="4JA-l2-Fsd" firstAttribute="top" secondItem="KHo-mJ-0Da" secondAttribute="top" id="fz2-1x-hkD"/>
-                    <constraint firstItem="3IS-Gd-LLe" firstAttribute="top" secondItem="4JA-l2-Fsd" secondAttribute="bottom" constant="8" id="hDq-3P-E3A"/>
+                    <constraint firstItem="3IS-Gd-LLe" firstAttribute="top" secondItem="4JA-l2-Fsd" secondAttribute="bottom" id="hDq-3P-E3A"/>
                     <constraint firstItem="KHo-mJ-0Da" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="23" id="iKr-RD-Fv3"/>
                     <constraint firstAttribute="bottom" secondItem="KHo-mJ-0Da" secondAttribute="bottom" constant="12" id="ijF-PD-Bmy"/>
                     <constraint firstItem="4JA-l2-Fsd" firstAttribute="leading" secondItem="KHo-mJ-0Da" secondAttribute="trailing" constant="14" id="p9k-lW-gYz"/>

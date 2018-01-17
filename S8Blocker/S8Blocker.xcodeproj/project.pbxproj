@@ -55,6 +55,7 @@
 		278B1EFD200EECD8004F9760 /* MovieBrowerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278B1EFC200EECD8004F9760 /* MovieBrowerTableViewController.swift */; };
 		278B1F01200EEE10004F9760 /* MovieBrowerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278B1F00200EEE10004F9760 /* MovieBrowerTableViewCell.swift */; };
 		278B1F03200EF0B6004F9760 /* MovieBrowerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 278B1F02200EF0B6004F9760 /* MovieBrowerTableViewCell.xib */; };
+		278B1F07200F431F004F9760 /* HTMLString.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 278B1F06200F431F004F9760 /* HTMLString.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -172,6 +173,7 @@
 		278B1EFC200EECD8004F9760 /* MovieBrowerTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieBrowerTableViewController.swift; sourceTree = "<group>"; };
 		278B1F00200EEE10004F9760 /* MovieBrowerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieBrowerTableViewCell.swift; sourceTree = "<group>"; };
 		278B1F02200EF0B6004F9760 /* MovieBrowerTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MovieBrowerTableViewCell.xib; sourceTree = "<group>"; };
+		278B1F06200F431F004F9760 /* HTMLString.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HTMLString.framework; path = Carthage/Build/iOS/HTMLString.framework; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,6 +181,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				278B1F07200F431F004F9760 /* HTMLString.framework in Frameworks */,
 				276BC2761F90583D006B9B92 /* Kingfisher.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -339,6 +342,7 @@
 		24F3467E1F45CCD8001930ED /* Framework */ = {
 			isa = PBXGroup;
 			children = (
+				278B1F06200F431F004F9760 /* HTMLString.framework */,
 				276BC2741F9057EC006B9B92 /* Kingfisher.framework */,
 			);
 			path = Framework;
@@ -612,6 +616,7 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/Kingfisher.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/HTMLString.framework",
 			);
 			outputPaths = (
 			);

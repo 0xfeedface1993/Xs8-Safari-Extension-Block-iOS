@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import HTMLString
 
 //struct ListItem {
 //    var title : String
@@ -97,18 +98,16 @@ struct ContentInfo : Equatable {
 //    ◎导　　演　迈克尔·斯派瑞 Michael Spierig / 彼得·斯派瑞 Peter Spierig
     var actors : [Creator]
 //    ◎主　　演　马特·帕斯摩尔 Matt Passmore
-//    　　　　　　　　　　　　托宾·贝尔 Tobin Bell
-//    　　　　　　　　　　　　考乐姆·吉斯·雷尼 Callum Keith Rennie
-//    　　　　　　　　　　　　汉娜·艾米莉·安德森 Hannah Emily Anderson
-//    　　　　　　　　　　　　科勒·班尼特 Clé Bennett
-//    　　　　　　　　　　　　劳拉·范德沃特 Laura Vandervoort
-//    　　　　　　　　　　　　保罗·布朗斯坦 Paul Braunstein
-//    　　　　　　　　　　　　曼德拉·范·皮布尔斯 Mandela Van Peebles
-//    　　　　　　　　　　　　布列塔尼·艾伦 Brittany Allen
-//    　　　　　　　　　　　　乔赛亚·布莱克 Josiah Black
-//    　　　　　　　　　　　　爱德华·拉特尔 Edward Ruttle
-//    　　　　　　　　　　　　迈克·布瓦韦尔 Michael Boisvert
-    var note : String
+    var _note : String
+    var note : String {
+        set {
+            _note = newValue.replacingOccurrences(of: "</p>", with: "").replacingOccurrences(of: "<p>", with: "").replacingOccurrences(of: "<br /><br />", with: "\n").replacingOccurrences(of: "<br />", with: "\n").replacingOccurrences(of: "<br", with: "").removingHTMLEntities
+        }
+        get {
+            return _note
+        }
+    }
+    
     init() {
         page = ""
         title = ""
@@ -133,7 +132,7 @@ struct ContentInfo : Equatable {
         movieTime = ""
         directes = [Creator]()
         actors = [Creator]()
-        note = ""
+        _note = ""
     }
     
     static func ==(lhs: ContentInfo, rhs: ContentInfo) -> Bool {

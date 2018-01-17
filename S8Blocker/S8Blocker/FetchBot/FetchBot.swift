@@ -71,22 +71,18 @@ struct InfoRuleOption {
     static let videoSize = ParserTagRule(tag: "", isTagPaser: false, attrubutes: [], inTagRegexString: "◎视频尺寸[\\s]+", hasSuffix: "<", innerRegex: "[^<]+")
     static let movieTime = ParserTagRule(tag: "", isTagPaser: false, attrubutes: [], inTagRegexString: "◎片[\\s]+长[\\s]+", hasSuffix: "<", innerRegex: "[^<]+")
     
-//    static let note = ParserTagRule(tag: "", isTagPaser: false, attrubutes: [], inTagRegexString: "◎简[\\s]+介\\s+[<br \\/>]+", hasSuffix: "<img ", innerRegex: "[\\s\\S]+")
-    static let note = ParserTagRule(tag: "", isTagPaser: false, attrubutes: [], inTagRegexString: "◎简[\\s]+介[\\s<>br\\/]+", hasSuffix: "<br />", innerRegex: "[^<]+")
+//    static let note = ParserTagRule(tag: "", isTagPaser: false, attrubutes: [], inTagRegexString: "◎简[\\s]+介\\s+[<br \\/>]+", hasSuffix: "<img ", innerRegex: "[\\s\\S]+")◎简\s+介[^◎]+(◎|(<img))
+    static let note = ParserTagRule(tag: "", isTagPaser: false, attrubutes: [], inTagRegexString: "◎简\\s+介\\s*[(<br />)|(</{0,1}p>)]+", hasSuffix: "(◎|(<img)|(<p><strong>))", innerRegex: "[^◎]+")
+//  ◎简\\s+介\\s*[(<br />)|(</{0,1}p>)]+[^◎]+(◎|(<img)|(<p><strong>))
     /// 标题列表
     static let mainTitle = ParserTagRule(tag: "", isTagPaser: false, attrubutes: [], inTagRegexString: "<div \\w+=\"\\w+\"><h1><font \\w+=#\\w+>", hasSuffix: "</font></h1></div>", innerRegex: "[\\s\\S]*")
     /// 标题名称
     static let singleTitle = ParserTagRule(tag: "font", isTagPaser: true, attrubutes: [], inTagRegexString: " \\w+=\"#\\w+\"", hasSuffix: nil, innerRegex: "[^<]+")
     
     /// 图片列表
-    // <img border="0" src="http://www.imageto.org/images/5GKJ0.jpg" alt="">
-    // <img \w+="\w*" src="http:[\/\w\.]+" \w+="\w*"> [^>]+>
     static let mainMovieImage = ParserTagRule(tag: "img", isTagPaser: false, attrubutes: [ParserAttrubuteRule(key: "src")], inTagRegexString: "<img ", hasSuffix: ">", innerRegex: "[^>]+")
-//    static let singleMovieImage = ParserTagRule(tag: "img", isTagPaser: false, attrubutes: [], inTagRegexString: "<img \\w+=\"\\w*\" src=\"", hasSuffix: "\"", innerRegex: "[^\"]+")
     
     /// 下载地址
-    //  <a( \\w+=\"[#_\\w]*\")+ \\w+=\"\\w+:\\/\\/\\w+:\\w+@\\w+\\.\\w+\\.\\w+:\\w+\\/[^\"]+\"( \\w+=\"[\\w\\s_\\(,\\);=:\\/]+\")+>\\w+:\\/\\/\\w+:\\w+@\\w+\\.\\w+\\.\\w+:\\w+\\/[^<]+<\\/a>
-    // <a \\w+=\\"\\w+:\\/\\/\\w+:\\w+@\\w+.\\w+.\\w+:\\w+\\/[^\\"]+\\">\\w+:\\/\\/\\w+:\\w+@\\w+.\\w+.\\w+:\\w+\\/[^<]+</a>
     static let movieDowloadLink = ParserTagRule(tag: "a", isTagPaser: true, attrubutes: [ParserAttrubuteRule(key: "thunderrestitle"), ParserAttrubuteRule(key: "src"), ParserAttrubuteRule(key: "aexuztdb"), ParserAttrubuteRule(key: "href")], inTagRegexString: " \\w+=\"\\w+:\\/\\/\\w+:\\w+@\\w+.\\w+.\\w+:\\w+\\/[^\"]+\"", hasSuffix: nil, innerRegex: "\\w+:\\/\\/\\w+:\\w+@\\w+.\\w+.\\w+:\\w+\\/[^<]+")
 }
 
