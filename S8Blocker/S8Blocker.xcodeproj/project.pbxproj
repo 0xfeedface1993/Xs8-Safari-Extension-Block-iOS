@@ -52,6 +52,9 @@
 		278B1EEA200CB1C7004F9760 /* Movie-Modal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278B1EE9200CB1C7004F9760 /* Movie-Modal.swift */; };
 		278B1EED200CB284004F9760 /* FetchBot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278B1EEC200CB284004F9760 /* FetchBot.swift */; };
 		278B1EEF200D9485004F9760 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278B1EEE200D9485004F9760 /* Parser.swift */; };
+		278B1EFD200EECD8004F9760 /* MovieBrowerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278B1EFC200EECD8004F9760 /* MovieBrowerTableViewController.swift */; };
+		278B1F01200EEE10004F9760 /* MovieBrowerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278B1F00200EEE10004F9760 /* MovieBrowerTableViewCell.swift */; };
+		278B1F03200EF0B6004F9760 /* MovieBrowerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 278B1F02200EF0B6004F9760 /* MovieBrowerTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -166,6 +169,9 @@
 		278B1EE9200CB1C7004F9760 /* Movie-Modal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Movie-Modal.swift"; sourceTree = "<group>"; };
 		278B1EEC200CB284004F9760 /* FetchBot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchBot.swift; sourceTree = "<group>"; };
 		278B1EEE200D9485004F9760 /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
+		278B1EFC200EECD8004F9760 /* MovieBrowerTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieBrowerTableViewController.swift; sourceTree = "<group>"; };
+		278B1F00200EEE10004F9760 /* MovieBrowerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieBrowerTableViewCell.swift; sourceTree = "<group>"; };
+		278B1F02200EF0B6004F9760 /* MovieBrowerTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MovieBrowerTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -345,6 +351,9 @@
 				273B412C1F8B7B53001A6CA9 /* NewMovieTableViewCell.swift */,
 				273B412D1F8B7B53001A6CA9 /* NewMovieTableViewCell.xib */,
 				278B1EE9200CB1C7004F9760 /* Movie-Modal.swift */,
+				278B1EFC200EECD8004F9760 /* MovieBrowerTableViewController.swift */,
+				278B1F00200EEE10004F9760 /* MovieBrowerTableViewCell.swift */,
+				278B1F02200EF0B6004F9760 /* MovieBrowerTableViewCell.xib */,
 			);
 			path = Dytt;
 			sourceTree = "<group>";
@@ -559,6 +568,7 @@
 				278B1EE6200CA341004F9760 /* categrory.plist in Resources */,
 				2431DAEF1F45F6810082E928 /* NetDiskImageTableViewCell.xib in Resources */,
 				2431DAEB1F45F3320082E928 /* NetDiskTitleTableViewCell.xib in Resources */,
+				278B1F03200EF0B6004F9760 /* MovieBrowerTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -627,6 +637,7 @@
 				24F4C2711F45D122008412AF /* NetDiskTableViewCell.swift in Sources */,
 				24F4C2721F45D122008412AF /* NetDiskTableViewCell.xib in Sources */,
 				24F3467D1F45CA5B001930ED /* ViewController.swift in Sources */,
+				278B1EFD200EECD8004F9760 /* MovieBrowerTableViewController.swift in Sources */,
 				278B1EE2200CA1E5004F9760 /* Categrory-Modal.swift in Sources */,
 				2438471C1F00891400027E27 /* AppDelegate.swift in Sources */,
 				2438471F1F00891400027E27 /* S8Blocker.xcdatamodeld in Sources */,
@@ -640,6 +651,7 @@
 				276BC2701F8F69CE006B9B92 /* DictionaryExtension.swift in Sources */,
 				24E480CC1F45E6B3009B6998 /* NetDiskDetailViewController.swift in Sources */,
 				243847231F00891400027E27 /* DetailViewController.swift in Sources */,
+				278B1F01200EEE10004F9760 /* MovieBrowerTableViewCell.swift in Sources */,
 				276BC26C1F8F68F1006B9B92 /* Webservice.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -31,6 +31,5 @@ class NewMovieTableViewCell: UITableViewCell {
         cover.kf.setImage(with: URL(string: image), placeholder: #imageLiteral(resourceName: "Movie"), options: nil, progressBlock: nil, completionHandler: nil)
         bigTitle.text = title
         discription.text = dsc
-        
     }
 }

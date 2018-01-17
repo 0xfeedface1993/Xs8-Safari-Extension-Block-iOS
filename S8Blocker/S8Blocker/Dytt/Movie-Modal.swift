@@ -60,7 +60,7 @@ struct FetchURL : Equatable {
 }
 
 /// 抓取内容页面信息模型
-struct ContentInfo {
+struct ContentInfo : Equatable {
     var title : String
     var page : String
     var msk : String
@@ -134,5 +134,9 @@ struct ContentInfo {
         directes = [Creator]()
         actors = [Creator]()
         note = ""
+    }
+    
+    static func ==(lhs: ContentInfo, rhs: ContentInfo) -> Bool {
+        return lhs.title == rhs.title && lhs.page == rhs.page
     }
 }

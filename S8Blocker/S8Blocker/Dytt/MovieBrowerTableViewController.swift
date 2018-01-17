@@ -1,28 +1,17 @@
 //
-//  NewMovieTableViewController.swift
+//  MovieBrowerTableViewController.swift
 //  S8Blocker
 //
-//  Created by virus1993 on 2017/10/9.
-//  Copyright © 2017年 ascp. All rights reserved.
+//  Created by virus1993 on 2018/1/17.
+//  Copyright © 2018年 ascp. All rights reserved.
 //
 
 import UIKit
+import Kingfisher
 
-class NewMovieTableViewController: UITableViewController, UISearchControllerDelegate {
-    static var movieContents = [ContentInfo]()
-    
-    var movies : [ContentInfo] {
-        get {
-            return NewMovieTableViewController.movieContents
-        }
-        set {
-            NewMovieTableViewController.movieContents = newValue
-        }
-    }
-    let searchController = UISearchController(searchResultsController: nil)
-    let bot = FetchBot.shareBot
-    private var snapCount = 10
-    
+class MovieBrowerTableViewController: UITableViewController {
+    let ImageCellIdentifier = "com.ascp.movie.image"
+    var content : ContentInfo?
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -31,19 +20,8 @@ class NewMovieTableViewController: UITableViewController, UISearchControllerDele
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
-        searchController.delegate = self
-        searchController.searchBar.placeholder = "电影名称、导演、演员"
-        searchController.dimsBackgroundDuringPresentation = false
-        searchController.hidesNavigationBarDuringPresentation = false
-        
-        tableView.estimatedRowHeight = 160
-        tableView.tableHeaderView = searchController.searchBar
-        tableView.register(UINib(nibName: "NewMovieTableViewCell", bundle: nil), forCellReuseIdentifier: "com.ascp.moviecell")
-
-        bot.startPage = 1
-        bot.pageOffset = 2
-        bot.delegate = self
-        bot.start(withSite: Site.dytt)
+        title = content?.title
+        tableView.register(UINib(nibName: "MovieBrowerTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: ImageCellIdentifier)
     }
 
     override func didReceiveMemoryWarning() {
@@ -60,26 +38,36 @@ class NewMovieTableViewController: UITableViewController, UISearchControllerDele
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return movies.count
+        return content?.imageLink.count ?? 0
     }
+
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "com.ascp.moviecell", for: indexPath) as! NewMovieTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: ImageCellIdentifier, for: indexPath) as! MovieBrowerTableViewCell
 
         // Configure the cell...
-        let movie = movies[indexPath.row]
-        cell.loadData(image: movie.imageLink.first ?? "", title: movie.title, dsc: movie.note)
-        cell.contentView.layoutIfNeeded()
         
+        if let url = URL(string: content?.imageLink[indexPath.row] ?? "") {
+            cell.movieImage?.kf.setImage(with: url, placeholder: #imageLiteral(resourceName: "Movie"), options: nil, progressBlock: nil, completionHandler: {
+                (_, _, _, _) in
+                self.tableView.reloadRows(at: [indexPath], with: .automatic)
+            })
+        }
+ 
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let movie = movies[indexPath.row]
-        let detail = MovieBrowerTableViewController()
-        detail.content = movie
-        self.navigationController?.pushViewController(detail, animated: true)
+    override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 200
     }
+    
+//    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        if let cell = tableView.dequeueReusableCell(withIdentifier: ImageCellIdentifier, for: indexPath) as? MovieBrowerTableViewCell, let img = cell.movieImage.image {
+//             return self.view.frame.size.width * (img.size.height / img.size.width)
+//        }
+//        return 100
+//    }
+ 
 
     /*
     // Override to support conditional editing of the table view.
@@ -125,36 +113,10 @@ class NewMovieTableViewController: UITableViewController, UISearchControllerDele
         // Pass the selected object to the new view controller.
     }
     */
-    
-    //MARK: - UISearchControllerDelegate
-    
-    func appendContent(_ element: ContentInfo) {
-        if movies.filter({ $0 == element }).count <= 0 {
-            movies.append(element)
-        }
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        tableView.reloadData()
+        print("xxxx ooooo")
     }
 }
 
-extension NewMovieTableViewController : FetchBotDelegate {
-    func bot(didStartBot bot: FetchBot) {
-        
-    }
-    
-    func bot(_ bot: FetchBot, didLoardContent content: ContentInfo, atIndexPath index: Int) {
-        snapCount -= 1
-        appendContent(content)
-        if snapCount <= 0 {
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-            snapCount = 10
-        }
-    }
-    
-    func bot(_ bot: FetchBot, didFinishedContents contents: [ContentInfo], failedLink: [FetchURL]) {
-        snapCount = 10
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-        }
-    }
-}

@@ -352,7 +352,7 @@ class FetchBot {
         let dowloadLinkRule = InfoRuleOption.movieDowloadLink
         for linkResult in parse(string:mainContent, rule: dowloadLinkRule) ?? [] {
             info.downloafLink.append(linkResult.innerHTML)
-            print("*********** doenload link: \(linkResult.innerHTML)")
+            print("*********** download link: \(linkResult.innerHTML)")
         }
         
         return info

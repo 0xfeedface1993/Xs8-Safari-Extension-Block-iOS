@@ -64,6 +64,7 @@ extension ViewController : UICollectionViewDelegate, UICollectionViewDataSource,
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "com.ascp.main.cell", for: indexPath) as! CategroryCollectionViewCell
         let item = menus[indexPath.row]
+//        cell.backgroundColor = .red
         cell.load(image:UIImage.init(named: item.image), title: item.name)
         return cell
     }
@@ -92,13 +93,22 @@ extension ViewController {
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        coordinator.animate(alongsideTransition: { (context) in
-            
-        }) { (context) in
-            let layout = self.collectionView.collectionViewLayout as! UICollectionViewFlowLayout
-            layout.itemSize = CGSize(width: size.width / 2, height: 227)
-            self.collectionView.collectionViewLayout = layout
-        }
+//        coordinator.animate(alongsideTransition: { (context) in
+////            let layout = self.collectionView.collectionViewLayout as! UICollectionViewFlowLayout
+////            layout.itemSize = CGSize(width: size.width / 2, height: 227)
+////            self.collectionView.collectionViewLayout = layout
+//            
+////            self.collectionView.visibleCells.forEach({ cell in
+////                cell.frame.size = CGSize(width: size.width / 2, height: 227)
+//            })
+//        }) { (context) in
+////            let layout = self.collectionView.collectionViewLayout as! UICollectionViewFlowLayout
+////            layout.itemSize = CGSize(width: size.width / 2, height: 227)
+////            self.collectionView.collectionViewLayout = layout
+////            self.collectionView.reloadData()
+//        }
         super.viewWillTransition(to: size, with: coordinator)
+        self.collectionView.reloadData()
+        print("opps!")
     }
 }
