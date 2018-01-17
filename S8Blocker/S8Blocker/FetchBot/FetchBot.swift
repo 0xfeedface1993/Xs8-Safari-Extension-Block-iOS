@@ -8,6 +8,8 @@
 
 import Foundation
 
+typealias ParserMaker = (String) -> ContentInfo
+
 struct Site {
     var hostName : String
     var parentUrl : URL
@@ -17,6 +19,206 @@ struct Site {
     }
     static let dytt = Site(hostName: "www.ygdy8.net", parentUrl: URL(string: "http://www.ygdy8.net/html/gndy/dyzz")!, name: "电影天堂")
     static let netdisk = Site(hostName: "www.ygdy8.net", parentUrl: URL(string: "http://www.ygdy8.net/html/gndy/dyzz")!, name: "网盘下载")
+    var parserMaker: ParserMaker? {
+        get {
+            switch self.hostName {
+            case Site.dytt.hostName:
+                return { mainContent in
+                    var info = ContentInfo()
+                    
+                    let titlesRule = InfoRuleOption.mainTitle
+                    for result in parse(string:mainContent, rule: titlesRule) ?? [] {
+                        info.title = result.innerHTML
+                        print("**** title: \(result.innerHTML)")
+                    }
+                    
+                    let actorsRule = InfoRuleOption.mainActor
+                    for result in parse(string:mainContent, rule: actorsRule) ?? [] {
+                        for resultx in parse(string:result.innerHTML, rule: InfoRuleOption.singleActor) ?? [] {
+                            info.actors.append(Creator(name: resultx.innerHTML, english: ""))
+                            print("*********** actor link: \(resultx.innerHTML)")
+                        }
+                    }
+                    
+                    let directorsRule = InfoRuleOption.mainDirector
+                    for result in parse(string:mainContent, rule: directorsRule) ?? [] {
+                        for resultx in parse(string:result.innerHTML, rule: InfoRuleOption.singleDirector) ?? [] {
+                            info.directes.append(Creator(name: resultx.innerHTML, english: ""))
+                            print("*********** director link: \(resultx.innerHTML)")
+                        }
+                    }
+                    
+                    let translateNameRule = InfoRuleOption.translateName
+                    for result in parse(string:mainContent, rule: translateNameRule) ?? [] {
+                        info.translateName = result.innerHTML
+                        print("***** translateName: \(result.innerHTML)")
+                    }
+                    
+                    let movieRawNameRule = InfoRuleOption.movieRawName
+                    for result in parse(string:mainContent, rule: movieRawNameRule) ?? [] {
+                        info.movieRawName = result.innerHTML
+                        print("***** movieRawName: \(result.innerHTML)")
+                    }
+                    
+                    let releaseYearRule = InfoRuleOption.releaseYear
+                    for result in parse(string:mainContent, rule: releaseYearRule) ?? [] {
+                        info.releaseYear = result.innerHTML
+                        print("***** releaseYear: \(result.innerHTML)")
+                    }
+                    
+                    let produceLocationRule = InfoRuleOption.produceLocation
+                    for result in parse(string:mainContent, rule: produceLocationRule) ?? [] {
+                        info.produceLocation = result.innerHTML
+                        print("***** produceLocation: \(result.innerHTML)")
+                    }
+                    
+                    let subtitleRule = InfoRuleOption.subtitle
+                    for result in parse(string:mainContent, rule: subtitleRule) ?? [] {
+                        info.subtitle = result.innerHTML
+                        print("***** subtitle: \(result.innerHTML)")
+                    }
+                    
+                    let showTimeInfoRule = InfoRuleOption.showTimeInfo
+                    for result in parse(string:mainContent, rule: showTimeInfoRule) ?? [] {
+                        info.showTimeInfo = result.innerHTML
+                        print("***** showTimeInfo: \(result.innerHTML)")
+                    }
+                    
+                    let fileFormartRule = InfoRuleOption.fileFormart
+                    for result in parse(string:mainContent, rule: fileFormartRule) ?? [] {
+                        info.fileFormart = result.innerHTML
+                        print("***** fileFormart: \(result.innerHTML)")
+                    }
+                    
+                    let movieTimeRule = InfoRuleOption.movieTime
+                    for result in parse(string:mainContent, rule: movieTimeRule) ?? [] {
+                        info.movieTime = result.innerHTML
+                        print("***** movieTime: \(result.innerHTML)")
+                    }
+                    
+                    let noteRule = InfoRuleOption.note
+                    for result in parse(string:mainContent, rule: noteRule) ?? [] {
+                        info.note = result.innerHTML
+                        print("***** note: \(result.innerHTML)")
+                    }
+                    
+                    let imageRule = InfoRuleOption.mainMovieImage
+                    for result in parse(string:mainContent, rule: imageRule) ?? [] {
+                        if let src = result.attributes["src"] {
+                            info.imageLink.append(src)
+                            print("*********** image: \(src)")
+                        }
+                    }
+                    
+                    let dowloadLinkRule = InfoRuleOption.movieDowloadLink
+                    for linkResult in parse(string:mainContent, rule: dowloadLinkRule) ?? [] {
+                        info.downloafLink.append(linkResult.innerHTML)
+                        print("*********** download link: \(linkResult.innerHTML)")
+                    }
+                    
+                    return info
+                }
+            case Site.netdisk.hostName:
+                return { mainContent in
+                    var info = ContentInfo()
+                    
+                    let titlesRule = InfoRuleOption.mainTitle
+                    for result in parse(string:mainContent, rule: titlesRule) ?? [] {
+                        info.title = result.innerHTML
+                        print("**** title: \(result.innerHTML)")
+                    }
+                    
+                    let actorsRule = InfoRuleOption.mainActor
+                    for result in parse(string:mainContent, rule: actorsRule) ?? [] {
+                        for resultx in parse(string:result.innerHTML, rule: InfoRuleOption.singleActor) ?? [] {
+                            info.actors.append(Creator(name: resultx.innerHTML, english: ""))
+                            print("*********** actor link: \(resultx.innerHTML)")
+                        }
+                    }
+                    
+                    let directorsRule = InfoRuleOption.mainDirector
+                    for result in parse(string:mainContent, rule: directorsRule) ?? [] {
+                        for resultx in parse(string:result.innerHTML, rule: InfoRuleOption.singleDirector) ?? [] {
+                            info.directes.append(Creator(name: resultx.innerHTML, english: ""))
+                            print("*********** director link: \(resultx.innerHTML)")
+                        }
+                    }
+                    
+                    let translateNameRule = InfoRuleOption.translateName
+                    for result in parse(string:mainContent, rule: translateNameRule) ?? [] {
+                        info.translateName = result.innerHTML
+                        print("***** translateName: \(result.innerHTML)")
+                    }
+                    
+                    let movieRawNameRule = InfoRuleOption.movieRawName
+                    for result in parse(string:mainContent, rule: movieRawNameRule) ?? [] {
+                        info.movieRawName = result.innerHTML
+                        print("***** movieRawName: \(result.innerHTML)")
+                    }
+                    
+                    let releaseYearRule = InfoRuleOption.releaseYear
+                    for result in parse(string:mainContent, rule: releaseYearRule) ?? [] {
+                        info.releaseYear = result.innerHTML
+                        print("***** releaseYear: \(result.innerHTML)")
+                    }
+                    
+                    let produceLocationRule = InfoRuleOption.produceLocation
+                    for result in parse(string:mainContent, rule: produceLocationRule) ?? [] {
+                        info.produceLocation = result.innerHTML
+                        print("***** produceLocation: \(result.innerHTML)")
+                    }
+                    
+                    let subtitleRule = InfoRuleOption.subtitle
+                    for result in parse(string:mainContent, rule: subtitleRule) ?? [] {
+                        info.subtitle = result.innerHTML
+                        print("***** subtitle: \(result.innerHTML)")
+                    }
+                    
+                    let showTimeInfoRule = InfoRuleOption.showTimeInfo
+                    for result in parse(string:mainContent, rule: showTimeInfoRule) ?? [] {
+                        info.showTimeInfo = result.innerHTML
+                        print("***** showTimeInfo: \(result.innerHTML)")
+                    }
+                    
+                    let fileFormartRule = InfoRuleOption.fileFormart
+                    for result in parse(string:mainContent, rule: fileFormartRule) ?? [] {
+                        info.fileFormart = result.innerHTML
+                        print("***** fileFormart: \(result.innerHTML)")
+                    }
+                    
+                    let movieTimeRule = InfoRuleOption.movieTime
+                    for result in parse(string:mainContent, rule: movieTimeRule) ?? [] {
+                        info.movieTime = result.innerHTML
+                        print("***** movieTime: \(result.innerHTML)")
+                    }
+                    
+                    let noteRule = InfoRuleOption.note
+                    for result in parse(string:mainContent, rule: noteRule) ?? [] {
+                        info.note = result.innerHTML
+                        print("***** note: \(result.innerHTML)")
+                    }
+                    
+                    let imageRule = InfoRuleOption.mainMovieImage
+                    for result in parse(string:mainContent, rule: imageRule) ?? [] {
+                        if let src = result.attributes["src"] {
+                            info.imageLink.append(src)
+                            print("*********** image: \(src)")
+                        }
+                    }
+                    
+                    let dowloadLinkRule = InfoRuleOption.movieDowloadLink
+                    for linkResult in parse(string:mainContent, rule: dowloadLinkRule) ?? [] {
+                        info.downloafLink.append(linkResult.innerHTML)
+                        print("*********** download link: \(linkResult.innerHTML)")
+                    }
+                    
+                    return info
+                }
+            default:
+                return nil
+            }
+        }
+    }
 }
 
 /// 内容信息正则规则选项
@@ -165,7 +367,7 @@ class FetchBot {
                         if let e = err {
                             print(e)
                         }
-                        print("---------- bad decoder, \(response!.description) ----------")
+                        print("---------- bad decoder, \(response?.description ?? "") ----------")
                         self.badTasks.append(fetchURL)
                         topSem.signal()
                         return
@@ -244,8 +446,8 @@ class FetchBot {
             
             let rule = PageRuleOption.mContent
             print("++++ \(page)页\(index)项 parser: \(link)")
-            if let mainContent = parse(string:html, rule: rule)?.first?.innerHTML {
-                var info = self.parser(withHtml: mainContent)
+            if let mainContent = parse(string:html, rule: rule)?.first?.innerHTML, let xinfo = site.parserMaker?(mainContent) {
+                var info = xinfo
                 info.page = linkURL.url.absoluteString
                 self.contentDatas.append(info)
                 self.delegate?.bot(self, didLoardContent: info, atIndexPath: self.contentDatas.count)
@@ -256,102 +458,6 @@ class FetchBot {
         task.resume()
         
         sem.wait()
-    }
-    
-    func parser(withHtml mainContent: String) -> ContentInfo {
-        var info = ContentInfo()
-        
-        let titlesRule = InfoRuleOption.mainTitle
-        for result in parse(string:mainContent, rule: titlesRule) ?? [] {
-            info.title = result.innerHTML
-            print("**** title: \(result.innerHTML)")
-        }
-        
-        let actorsRule = InfoRuleOption.mainActor
-        for result in parse(string:mainContent, rule: actorsRule) ?? [] {
-            for resultx in parse(string:result.innerHTML, rule: InfoRuleOption.singleActor) ?? [] {
-                info.actors.append(Creator(name: resultx.innerHTML, english: ""))
-                print("*********** actor link: \(resultx.innerHTML)")
-            }
-        }
-        
-        let directorsRule = InfoRuleOption.mainDirector
-        for result in parse(string:mainContent, rule: directorsRule) ?? [] {
-            for resultx in parse(string:result.innerHTML, rule: InfoRuleOption.singleDirector) ?? [] {
-                info.directes.append(Creator(name: resultx.innerHTML, english: ""))
-                print("*********** director link: \(resultx.innerHTML)")
-            }
-        }
-        
-        let translateNameRule = InfoRuleOption.translateName
-        for result in parse(string:mainContent, rule: translateNameRule) ?? [] {
-            info.translateName = result.innerHTML
-            print("***** translateName: \(result.innerHTML)")
-        }
-        
-        let movieRawNameRule = InfoRuleOption.movieRawName
-        for result in parse(string:mainContent, rule: movieRawNameRule) ?? [] {
-            info.movieRawName = result.innerHTML
-            print("***** movieRawName: \(result.innerHTML)")
-        }
-        
-        let releaseYearRule = InfoRuleOption.releaseYear
-        for result in parse(string:mainContent, rule: releaseYearRule) ?? [] {
-            info.releaseYear = result.innerHTML
-            print("***** releaseYear: \(result.innerHTML)")
-        }
-        
-        let produceLocationRule = InfoRuleOption.produceLocation
-        for result in parse(string:mainContent, rule: produceLocationRule) ?? [] {
-            info.produceLocation = result.innerHTML
-            print("***** produceLocation: \(result.innerHTML)")
-        }
-        
-        let subtitleRule = InfoRuleOption.subtitle
-        for result in parse(string:mainContent, rule: subtitleRule) ?? [] {
-            info.subtitle = result.innerHTML
-            print("***** subtitle: \(result.innerHTML)")
-        }
-        
-        let showTimeInfoRule = InfoRuleOption.showTimeInfo
-        for result in parse(string:mainContent, rule: showTimeInfoRule) ?? [] {
-            info.showTimeInfo = result.innerHTML
-            print("***** showTimeInfo: \(result.innerHTML)")
-        }
-        
-        let fileFormartRule = InfoRuleOption.fileFormart
-        for result in parse(string:mainContent, rule: fileFormartRule) ?? [] {
-            info.fileFormart = result.innerHTML
-            print("***** fileFormart: \(result.innerHTML)")
-        }
-        
-        let movieTimeRule = InfoRuleOption.movieTime
-        for result in parse(string:mainContent, rule: movieTimeRule) ?? [] {
-            info.movieTime = result.innerHTML
-            print("***** movieTime: \(result.innerHTML)")
-        }
-        
-        let noteRule = InfoRuleOption.note
-        for result in parse(string:mainContent, rule: noteRule) ?? [] {
-            info.note = result.innerHTML
-            print("***** note: \(result.innerHTML)")
-        }
-        
-        let imageRule = InfoRuleOption.mainMovieImage
-        for result in parse(string:mainContent, rule: imageRule) ?? [] {
-            if let src = result.attributes["src"] {
-                info.imageLink.append(src)
-                print("*********** image: \(src)")
-            }
-        }
-        
-        let dowloadLinkRule = InfoRuleOption.movieDowloadLink
-        for linkResult in parse(string:mainContent, rule: dowloadLinkRule) ?? [] {
-            info.downloafLink.append(linkResult.innerHTML)
-            print("*********** download link: \(linkResult.innerHTML)")
-        }
-        
-        return info
     }
 }
 

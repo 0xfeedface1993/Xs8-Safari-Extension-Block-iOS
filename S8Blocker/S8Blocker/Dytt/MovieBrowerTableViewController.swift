@@ -22,6 +22,9 @@ class MovieBrowerTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         title = content?.title
         tableView.register(UINib(nibName: "MovieBrowerTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: ImageCellIdentifier)
+        
+        let rightBarItem = UIBarButtonItem(title: "下载地址", style: .plain, target: self, action: #selector(showDownloadsOption))
+        navigationItem.rightBarButtonItem = rightBarItem
     }
 
     override func didReceiveMemoryWarning() {
@@ -115,6 +118,10 @@ class MovieBrowerTableViewController: UITableViewController {
     */
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
+    }
+    
+    @objc func showDownloadsOption() {
+//        let popver = UIPopoverPresentationController(presentedViewController: <#T##UIViewController#>, presenting: <#T##UIViewController?#>)
     }
 }
 
