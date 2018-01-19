@@ -15,10 +15,32 @@ struct Site {
     var parentUrl : URL
     var name : String
     func page(bySuffix suffix: Int) -> URL {
-        return parentUrl.appendingPathComponent("list_23_\(suffix).html")
+        switch self.hostName {
+            case Site.dytt.hostName:
+                return parentUrl.appendingPathComponent("list_23_\(suffix).html")
+            case Site.netdisk.hostName:
+                return parentUrl.appendingPathComponent("forum-103-\(suffix).html")
+            default:
+                return parentUrl
+        }
     }
-    static let dytt = Site(hostName: "www.ygdy8.net", parentUrl: URL(string: "http://www.ygdy8.net/html/gndy/dyzz")!, name: "电影天堂")
-    static let netdisk = Site(hostName: "www.ygdy8.net", parentUrl: URL(string: "http://www.ygdy8.net/html/gndy/dyzz")!, name: "网盘下载")
+    
+    static let dytt = Site(hostName: "www.ygdy8.net",
+                           parentUrl: URL(string: "http://www.ygdy8.net/html/gndy/dyzz")!,
+                           name: "电影天堂",
+                           listRule: PageRuleOption.mLink,
+                           contentRule: PageRuleOption.mContent,
+                           listEncode: String.Encoding(rawValue: CFStringConvertEncodingToNSStringEncoding(UInt32(CFStringEncodings.HZ_GB_2312.rawValue))),
+                           contentEncode: String.Encoding(rawValue: CFStringConvertEncodingToNSStringEncoding(UInt32(CFStringEncodings.GB_18030_2000.rawValue))))
+    
+    static let netdisk = Site(hostName: "xbluntan.net",
+                              parentUrl: URL(string: "http://xbluntan.net")!,
+                              name: "网盘下载",
+                              listRule: PageRuleOption.link,
+                              contentRule: PageRuleOption.content,
+                              listEncode: .utf8,
+                              contentEncode: .utf8)
+    
     var parserMaker: ParserMaker? {
         get {
             switch self.hostName {
@@ -122,94 +144,16 @@ struct Site {
                 return { mainContent in
                     var info = ContentInfo()
                     
-                    let titlesRule = InfoRuleOption.mainTitle
-                    for result in parse(string:mainContent, rule: titlesRule) ?? [] {
+                    for result in parse(string:mainContent, rule: PageRuleOption.link) ?? [] {
                         info.title = result.innerHTML
                         print("**** title: \(result.innerHTML)")
                     }
                     
-                    let actorsRule = InfoRuleOption.mainActor
-                    for result in parse(string:mainContent, rule: actorsRule) ?? [] {
-                        for resultx in parse(string:result.innerHTML, rule: InfoRuleOption.singleActor) ?? [] {
-                            info.actors.append(Creator(name: resultx.innerHTML, english: ""))
-                            print("*********** actor link: \(resultx.innerHTML)")
+                    for rule in [InfoRuleOption.downloadLink, InfoRuleOption.downloadLinkLi] {
+                        for linkResult in parse(string:mainContent, rule: rule) ?? [] {
+                            info.downloafLink.append(linkResult.innerHTML)
+                            print("*********** download link: \(linkResult.innerHTML)")
                         }
-                    }
-                    
-                    let directorsRule = InfoRuleOption.mainDirector
-                    for result in parse(string:mainContent, rule: directorsRule) ?? [] {
-                        for resultx in parse(string:result.innerHTML, rule: InfoRuleOption.singleDirector) ?? [] {
-                            info.directes.append(Creator(name: resultx.innerHTML, english: ""))
-                            print("*********** director link: \(resultx.innerHTML)")
-                        }
-                    }
-                    
-                    let translateNameRule = InfoRuleOption.translateName
-                    for result in parse(string:mainContent, rule: translateNameRule) ?? [] {
-                        info.translateName = result.innerHTML
-                        print("***** translateName: \(result.innerHTML)")
-                    }
-                    
-                    let movieRawNameRule = InfoRuleOption.movieRawName
-                    for result in parse(string:mainContent, rule: movieRawNameRule) ?? [] {
-                        info.movieRawName = result.innerHTML
-                        print("***** movieRawName: \(result.innerHTML)")
-                    }
-                    
-                    let releaseYearRule = InfoRuleOption.releaseYear
-                    for result in parse(string:mainContent, rule: releaseYearRule) ?? [] {
-                        info.releaseYear = result.innerHTML
-                        print("***** releaseYear: \(result.innerHTML)")
-                    }
-                    
-                    let produceLocationRule = InfoRuleOption.produceLocation
-                    for result in parse(string:mainContent, rule: produceLocationRule) ?? [] {
-                        info.produceLocation = result.innerHTML
-                        print("***** produceLocation: \(result.innerHTML)")
-                    }
-                    
-                    let subtitleRule = InfoRuleOption.subtitle
-                    for result in parse(string:mainContent, rule: subtitleRule) ?? [] {
-                        info.subtitle = result.innerHTML
-                        print("***** subtitle: \(result.innerHTML)")
-                    }
-                    
-                    let showTimeInfoRule = InfoRuleOption.showTimeInfo
-                    for result in parse(string:mainContent, rule: showTimeInfoRule) ?? [] {
-                        info.showTimeInfo = result.innerHTML
-                        print("***** showTimeInfo: \(result.innerHTML)")
-                    }
-                    
-                    let fileFormartRule = InfoRuleOption.fileFormart
-                    for result in parse(string:mainContent, rule: fileFormartRule) ?? [] {
-                        info.fileFormart = result.innerHTML
-                        print("***** fileFormart: \(result.innerHTML)")
-                    }
-                    
-                    let movieTimeRule = InfoRuleOption.movieTime
-                    for result in parse(string:mainContent, rule: movieTimeRule) ?? [] {
-                        info.movieTime = result.innerHTML
-                        print("***** movieTime: \(result.innerHTML)")
-                    }
-                    
-                    let noteRule = InfoRuleOption.note
-                    for result in parse(string:mainContent, rule: noteRule) ?? [] {
-                        info.note = result.innerHTML
-                        print("***** note: \(result.innerHTML)")
-                    }
-                    
-                    let imageRule = InfoRuleOption.mainMovieImage
-                    for result in parse(string:mainContent, rule: imageRule) ?? [] {
-                        if let src = result.attributes["src"] {
-                            info.imageLink.append(src)
-                            print("*********** image: \(src)")
-                        }
-                    }
-                    
-                    let dowloadLinkRule = InfoRuleOption.movieDowloadLink
-                    for linkResult in parse(string:mainContent, rule: dowloadLinkRule) ?? [] {
-                        info.downloafLink.append(linkResult.innerHTML)
-                        print("*********** download link: \(linkResult.innerHTML)")
                     }
                     
                     return info
@@ -219,6 +163,11 @@ struct Site {
             }
         }
     }
+    
+    var listRule : ParserTagRule
+    var contentRule : ParserTagRule
+    var listEncode : String.Encoding
+    var contentEncode : String.Encoding
 }
 
 /// 内容信息正则规则选项
@@ -234,9 +183,11 @@ struct InfoRuleOption {
     /// 解压密码
     static let password = ParserTagRule(tag: "", isTagPaser: false, attrubutes: [], inTagRegexString: "((【解壓密碼】)|(【解压密码】)|(解壓密碼)){1}[：:]{0,1}((&nbsp;)|(\\s))*", hasSuffix: nil, innerRegex: "([^<：:])+")
     /// 下载链接
-    static let downloadLink = ParserTagRule(tag: "a", isTagPaser: true, attrubutes: [], inTagRegexString: " \\w+=\"\\w+:\\/\\/[\\w+\\.]+[\\/\\-\\w\\.]+\" \\w+=\"\\w+\"", hasSuffix: nil, innerRegex: "\\w+:\\/\\/[\\w+\\.]+[\\/\\-\\w\\.]+")
+    /// 下载地址[\\s\\S]+<a( \\w+=\"[^\"]+\")+>[^<]+</a>
+    static let downloadLink = ParserTagRule(tag: "a", isTagPaser: false, attrubutes: [], inTagRegexString: "下载地址[\\s\\S]+<a( \\w+=\"[^\"]+\")+>", hasSuffix: "</a>", innerRegex: "[^<]+")
     /// 下载地址2
-    static let downloadLinkLi = ParserTagRule(tag: "li", isTagPaser: true, attrubutes: [], inTagRegexString: "", hasSuffix: nil, innerRegex: "\\w+:\\/\\/[\\w+\\.]+[\\/\\-\\w\\.]+")
+    /// 下载地址[\\s\\S]+<div \\w+=\"blockcode\">[\\s\\S]+<li>[^<]+</li>
+    static let downloadLinkLi = ParserTagRule(tag: "li", isTagPaser: false, attrubutes: [], inTagRegexString: "下载地址[\\s\\S]+<div \\w+=\"blockcode\">[\\s\\S]+<li>", hasSuffix: "</li>", innerRegex: "[^<]+")
     /// 图片链接
     static let imageLink = ParserTagRule(tag: "img", isTagPaser: true, attrubutes: [ParserAttrubuteRule(key: "file"), ParserAttrubuteRule(key: "href"), ParserAttrubuteRule(key: "src")], inTagRegexString: "( \\w+=[\"']{1}[^<>]*[\"']{1})+ class=\"zoom\"( \\w+=[\"']{1}[^<>]*[\"']{1})+ \\/", hasSuffix: nil, innerRegex: nil)
     /// 主内容标签
@@ -275,7 +226,6 @@ struct InfoRuleOption {
     
 //    static let note = ParserTagRule(tag: "", isTagPaser: false, attrubutes: [], inTagRegexString: "◎简[\\s]+介\\s+[<br \\/>]+", hasSuffix: "<img ", innerRegex: "[\\s\\S]+")◎简\s+介[^◎]+(◎|(<img))
     static let note = ParserTagRule(tag: "", isTagPaser: false, attrubutes: [], inTagRegexString: "◎简\\s+介\\s*[(<br />)|(</{0,1}p>)]+", hasSuffix: "(◎|(<img)|(<p><strong>))", innerRegex: "[^◎]+")
-//  ◎简\\s+介\\s*[(<br />)|(</{0,1}p>)]+[^◎]+(◎|(<img)|(<p><strong>))
     /// 标题列表
     static let mainTitle = ParserTagRule(tag: "", isTagPaser: false, attrubutes: [], inTagRegexString: "<div \\w+=\"\\w+\"><h1><font \\w+=#\\w+>", hasSuffix: "</font></h1></div>", innerRegex: "[\\s\\S]*")
     /// 标题名称
@@ -291,7 +241,7 @@ struct InfoRuleOption {
 /// 列表页面正则规则选项
 struct PageRuleOption {
     /// 内容页面链接
-    static let link = ParserTagRule(tag: "a", isTagPaser: true, attrubutes: [ParserAttrubuteRule(key: "href")], inTagRegexString: " href=\"\\w+(\\-[\\d]+)+.\\w+\" \\w+=\"\\w+\\(\\w+\\)\" class=\"s xst\"", hasSuffix: nil, innerRegex: nil)
+    static let link = ParserTagRule(tag: "a", isTagPaser: false, attrubutes: [ParserAttrubuteRule(key: "href")], inTagRegexString: "<a \\w+=\"[^\"]+\" \\w+=\"\\w+\\(\\w+\\)\" \\w+=\"s xst\">", hasSuffix: "</a>", innerRegex: "[^<]+")
     static let content = ParserTagRule(tag: "", isTagPaser: false, attrubutes: [], inTagRegexString: "<tbody id=\"separatorline\">", hasSuffix: nil, innerRegex: "[\\s\\S]*")
     
     /// ---- 电影天堂 ---
@@ -356,14 +306,13 @@ class FetchBot {
         
         for i in start...(start + offset) {
             let fetchURL = FetchURL(site: site.hostName, board: .listMovie, page: Int(i), maker: maker)
-            let request = browserRequest(url: fetchURL.url)
+            let request = browserRequest(url: fetchURL.url, refer: site.hostName)
             
             topQueue.async(group: group, execute: DispatchWorkItem(block: {
                 let topSem = DispatchSemaphore(value: 0)
                 
                 let task = URLSession.shared.dataTask(with: request, completionHandler: { (data, response, err) in
-                    let enc = CFStringConvertEncodingToNSStringEncoding(UInt32(CFStringEncodings.HZ_GB_2312.rawValue))
-                    guard let result = data, let html = String(data: result, encoding: String.Encoding(rawValue: enc)) else {
+                    guard let result = data, let html = String(data: result, encoding: site.listEncode) else {
                         if let e = err {
                             print(e)
                         }
@@ -380,7 +329,7 @@ class FetchBot {
                         return
                     }
                     
-                    let rule = PageRuleOption.mLink
+                    let rule = site.listRule
                     self.runTasks.append(fetchURL)
                     
                     print("---------- 开始解析 \(i) 页面 ----------")
@@ -422,15 +371,14 @@ class FetchBot {
     
     private func fetchMainContent(title: String, link: String, page: Int, index: Int, site : Site) {
         let linkMaker : (FetchURL) -> String = { (s) -> String in
-            "http://\(s.site)\(link)"
+            URL(string: "http://\(s.site)")!.appendingPathComponent(link).absoluteString
         }
         let linkURL = FetchURL(site: site.hostName, board: .listMovie, page: page, maker: linkMaker)
-        let request = browserRequest(url: linkURL.url)
+        let request = browserRequest(url: linkURL.url, refer: site.hostName)
         let sem = DispatchSemaphore(value: 0)
         
         let task = URLSession.shared.dataTask(with: request) { (data, response, err) in
-            let enc = CFStringConvertEncodingToNSStringEncoding(UInt32(CFStringEncodings.GB_18030_2000.rawValue))
-            guard let result = data, let html = String(data: result, encoding: String.Encoding(rawValue: enc)) else {
+            guard let result = data, let html = String(data: result, encoding: site.contentEncode) else {
                 if let e = err {
                     print(e)
                 }
@@ -444,7 +392,7 @@ class FetchBot {
                 return
             }
             
-            let rule = PageRuleOption.mContent
+            let rule = site.contentRule
             print("++++ \(page)页\(index)项 parser: \(link)")
             if let mainContent = parse(string:html, rule: rule)?.first?.innerHTML, let xinfo = site.parserMaker?(mainContent) {
                 var info = xinfo
@@ -472,11 +420,11 @@ protocol FetchBotDelegate {
 ///
 /// - Parameter url: URL对象
 /// - Returns: URLRequest请求对象
-func browserRequest(url : URL) -> URLRequest {
+func browserRequest(url : URL, refer: String) -> URLRequest {
     var request = URLRequest(url: url)
     request.httpMethod = "GET"
     request.addValue("zh-CN,zh;q=0.8,en;q=0.6", forHTTPHeaderField: "Accept-Language")
-    request.addValue("Refer", forHTTPHeaderField: Site.dytt.hostName)
+    request.addValue("Refer", forHTTPHeaderField: refer)
     request.addValue("1", forHTTPHeaderField: "Upgrade-Insecure-Requests")
     request.addValue("max-age=0", forHTTPHeaderField: "Cache-Control")
     request.addValue("gzip, deflate", forHTTPHeaderField: "Accept-Encoding")

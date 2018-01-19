@@ -28,6 +28,8 @@
 		2438476A1F008ABE00027E27 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 243847681F008ABE00027E27 /* MainInterface.storyboard */; };
 		2438476E1F008ABE00027E27 /* Torrilste.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 243847641F008ABE00027E27 /* Torrilste.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		2468BB3A1F00D61400AAB573 /* S8Blocker.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2438471D1F00891400027E27 /* S8Blocker.xcdatamodeld */; };
+		248434E0200FA38B00CAD097 /* HTMLString.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 248434DD200FA37100CAD097 /* HTMLString.framework */; };
+		248434E1200FA38B00CAD097 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 248434DC200FA37100CAD097 /* Kingfisher.framework */; };
 		24D7BBA11F45C8C30094DE28 /* Sex8.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 24D7BBA01F45C8C30094DE28 /* Sex8.storyboard */; };
 		24E480CC1F45E6B3009B6998 /* NetDiskDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E480CB1F45E6B3009B6998 /* NetDiskDetailViewController.swift */; };
 		24E480CF1F45E969009B6998 /* NetDiskDetalModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E480CE1F45E969009B6998 /* NetDiskDetalModal.swift */; };
@@ -44,8 +46,6 @@
 		276BC26E1F8F6987006B9B92 /* ErrorStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276BC26D1F8F6987006B9B92 /* ErrorStruct.swift */; };
 		276BC2701F8F69CE006B9B92 /* DictionaryExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276BC26F1F8F69CE006B9B92 /* DictionaryExtension.swift */; };
 		276BC2721F8F6A0F006B9B92 /* JsonModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276BC2711F8F6A0F006B9B92 /* JsonModal.swift */; };
-		276BC2761F90583D006B9B92 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 276BC2741F9057EC006B9B92 /* Kingfisher.framework */; };
-		276BC2771F90584B006B9B92 /* Kingfisher.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 276BC2741F9057EC006B9B92 /* Kingfisher.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		278B1EE2200CA1E5004F9760 /* Categrory-Modal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278B1EE1200CA1E5004F9760 /* Categrory-Modal.swift */; };
 		278B1EE6200CA341004F9760 /* categrory.plist in Resources */ = {isa = PBXBuildFile; fileRef = 278B1EE5200CA341004F9760 /* categrory.plist */; };
 		278B1EE8200CA530004F9760 /* CategroryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278B1EE7200CA530004F9760 /* CategroryCollectionViewCell.swift */; };
@@ -55,7 +55,6 @@
 		278B1EFD200EECD8004F9760 /* MovieBrowerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278B1EFC200EECD8004F9760 /* MovieBrowerTableViewController.swift */; };
 		278B1F01200EEE10004F9760 /* MovieBrowerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278B1F00200EEE10004F9760 /* MovieBrowerTableViewCell.swift */; };
 		278B1F03200EF0B6004F9760 /* MovieBrowerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 278B1F02200EF0B6004F9760 /* MovieBrowerTableViewCell.xib */; };
-		278B1F07200F431F004F9760 /* HTMLString.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 278B1F06200F431F004F9760 /* HTMLString.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,7 +107,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				276BC2771F90584B006B9B92 /* Kingfisher.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -150,6 +148,8 @@
 		243847721F008BA500027E27 /* S8Blocker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = S8Blocker.entitlements; sourceTree = "<group>"; };
 		243847731F008C3000027E27 /* Torrilste.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Torrilste.entitlements; sourceTree = "<group>"; };
 		2468BB381F00D5BA00AAB573 /* S8Blocker 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "S8Blocker 2.xcdatamodel"; sourceTree = "<group>"; };
+		248434DC200FA37100CAD097 /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = "<group>"; };
+		248434DD200FA37100CAD097 /* HTMLString.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HTMLString.framework; path = Carthage/Build/iOS/HTMLString.framework; sourceTree = "<group>"; };
 		24D7BBA01F45C8C30094DE28 /* Sex8.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Sex8.storyboard; sourceTree = "<group>"; };
 		24E480CB1F45E6B3009B6998 /* NetDiskDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetDiskDetailViewController.swift; sourceTree = "<group>"; };
 		24E480CE1F45E969009B6998 /* NetDiskDetalModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetDiskDetalModal.swift; sourceTree = "<group>"; };
@@ -163,7 +163,6 @@
 		276BC26D1F8F6987006B9B92 /* ErrorStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorStruct.swift; sourceTree = "<group>"; };
 		276BC26F1F8F69CE006B9B92 /* DictionaryExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryExtension.swift; sourceTree = "<group>"; };
 		276BC2711F8F6A0F006B9B92 /* JsonModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonModal.swift; sourceTree = "<group>"; };
-		276BC2741F9057EC006B9B92 /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = SOURCE_ROOT; };
 		278B1EE1200CA1E5004F9760 /* Categrory-Modal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Categrory-Modal.swift"; sourceTree = "<group>"; };
 		278B1EE5200CA341004F9760 /* categrory.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = categrory.plist; sourceTree = "<group>"; };
 		278B1EE7200CA530004F9760 /* CategroryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategroryCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -173,7 +172,6 @@
 		278B1EFC200EECD8004F9760 /* MovieBrowerTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieBrowerTableViewController.swift; sourceTree = "<group>"; };
 		278B1F00200EEE10004F9760 /* MovieBrowerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieBrowerTableViewCell.swift; sourceTree = "<group>"; };
 		278B1F02200EF0B6004F9760 /* MovieBrowerTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MovieBrowerTableViewCell.xib; sourceTree = "<group>"; };
-		278B1F06200F431F004F9760 /* HTMLString.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HTMLString.framework; path = Carthage/Build/iOS/HTMLString.framework; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,8 +179,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				278B1F07200F431F004F9760 /* HTMLString.framework in Frameworks */,
-				276BC2761F90583D006B9B92 /* Kingfisher.framework in Frameworks */,
+				248434E1200FA38B00CAD097 /* Kingfisher.framework in Frameworks */,
+				248434E0200FA38B00CAD097 /* HTMLString.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -230,7 +228,7 @@
 		2438470F1F00891400027E27 = {
 			isa = PBXGroup;
 			children = (
-				24F3467E1F45CCD8001930ED /* Framework */,
+				248434DB200FA15300CAD097 /* GithubFramework */,
 				2438471A1F00891400027E27 /* S8Blocker */,
 				243847341F00891400027E27 /* S8BlockerTests */,
 				2438473F1F00891400027E27 /* S8BlockerUITests */,
@@ -314,6 +312,15 @@
 			path = Torrilste;
 			sourceTree = "<group>";
 		};
+		248434DB200FA15300CAD097 /* GithubFramework */ = {
+			isa = PBXGroup;
+			children = (
+				248434DD200FA37100CAD097 /* HTMLString.framework */,
+				248434DC200FA37100CAD097 /* Kingfisher.framework */,
+			);
+			name = GithubFramework;
+			sourceTree = "<group>";
+		};
 		24E480C81F45E627009B6998 /* List */ = {
 			isa = PBXGroup;
 			children = (
@@ -337,15 +344,6 @@
 				2431DAED1F45F6810082E928 /* NetDiskImageTableViewCell.xib */,
 			);
 			path = Detail;
-			sourceTree = "<group>";
-		};
-		24F3467E1F45CCD8001930ED /* Framework */ = {
-			isa = PBXGroup;
-			children = (
-				278B1F06200F431F004F9760 /* HTMLString.framework */,
-				276BC2741F9057EC006B9B92 /* Kingfisher.framework */,
-			);
-			path = Framework;
 			sourceTree = "<group>";
 		};
 		273B41291F8B7AC8001A6CA9 /* Dytt */ = {
