@@ -138,4 +138,12 @@ struct ContentInfo : Equatable {
     static func ==(lhs: ContentInfo, rhs: ContentInfo) -> Bool {
         return lhs.title == rhs.title && lhs.page == rhs.page
     }
+    
+    func contain(keyword: String) -> Bool {
+        return title.contains(keyword) ||
+        translateName.contains(keyword) ||
+        movieRawName.contains(keyword) ||
+        actors.filter({ $0.name.contains(keyword) || $0.english.contains(keyword) }).count > 0 ||
+        directes.filter({ $0.name.contains(keyword) || $0.english.contains(keyword) }).count > 0
+    }
 }
