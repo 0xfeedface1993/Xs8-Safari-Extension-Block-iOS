@@ -8,20 +8,30 @@
 
 import UIKit
 
-class NewMovieTableViewController: UITableViewController, UISearchControllerDelegate {
+class NewMovieTableViewController: UITableViewController {
     static var movieContents = [ContentInfo]()
+    static var mainMovieContents = [ContentInfo]()
     
     var movies : [ContentInfo] {
         get {
-            return NewMovieTableViewController.movieContents
+            if searchController.isActive {
+                return NewMovieTableViewController.movieContents
+            }
+            return NewMovieTableViewController.mainMovieContents
         }
         set {
-            NewMovieTableViewController.movieContents = newValue
+            if searchController.isActive {
+                NewMovieTableViewController.movieContents = newValue
+            }
+            NewMovieTableViewController.mainMovieContents = newValue
         }
     }
+    
     let searchController = UISearchController(searchResultsController: nil)
     let bot = FetchBot.shareBot
     private var snapCount = 10
+    
+    private var shapshotIndexPath : IndexPath?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,12 +42,18 @@ class NewMovieTableViewController: UITableViewController, UISearchControllerDele
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         searchController.delegate = self
+        searchController.searchResultsUpdater = self
         searchController.searchBar.placeholder = "电影名称、导演、演员"
         searchController.dimsBackgroundDuringPresentation = false
         searchController.hidesNavigationBarDuringPresentation = false
         
+        view.addSubview(searchController.searchBar)
+        let views = ["bar":searchController.searchBar] as [String:Any]
+        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[bar]|", options: [], metrics: nil, views: views))
+        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[bar]", options: [], metrics: nil, views: views))
+        
         tableView.estimatedRowHeight = 160
-        tableView.tableHeaderView = searchController.searchBar
+//        tableView.tableHeaderView = searchController.searchBar
         tableView.register(UINib(nibName: "NewMovieTableViewCell", bundle: nil), forCellReuseIdentifier: "com.ascp.moviecell")
 
         bot.startPage = 1
@@ -129,8 +145,8 @@ class NewMovieTableViewController: UITableViewController, UISearchControllerDele
     //MARK: - UISearchControllerDelegate
     
     func appendContent(_ element: ContentInfo) {
-        if movies.filter({ $0 == element }).count <= 0 {
-            movies.append(element)
+        if NewMovieTableViewController.mainMovieContents.filter({ $0 == element }).count <= 0 {
+            NewMovieTableViewController.mainMovieContents.append(element)
         }
     }
 }
@@ -156,5 +172,29 @@ extension NewMovieTableViewController : FetchBotDelegate {
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
+    }
+}
+
+extension NewMovieTableViewController : UISearchControllerDelegate, UISearchResultsUpdating {
+    func willPresentSearchController(_ searchController: UISearchController) {
+        shapshotIndexPath = tableView.indexPathsForVisibleRows?.first
+    }
+    
+    func willDismissSearchController(_ searchController: UISearchController) {
+        tableView.reloadData()
+        if let paths = shapshotIndexPath {
+            tableView.scrollToRow(at: paths, at: .top, animated: true)
+        }
+    }
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        print("update search!")
+        NewMovieTableViewController.movieContents = NewMovieTableViewController.mainMovieContents.filter({
+            guard let keyword = searchController.searchBar.text else {
+                return false
+            }
+            return $0.contain(keyword: keyword)
+        })
+        tableView.reloadData()
     }
 }

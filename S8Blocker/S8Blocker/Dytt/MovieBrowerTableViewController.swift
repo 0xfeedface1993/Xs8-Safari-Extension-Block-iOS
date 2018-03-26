@@ -121,7 +121,22 @@ class MovieBrowerTableViewController: UITableViewController {
     }
     
     @objc func showDownloadsOption() {
-//        let popver = UIPopoverPresentationController(presentedViewController: <#T##UIViewController#>, presenting: <#T##UIViewController?#>)
+        let alert = UIAlertController(title: "下载地址", message: "请选择你的下载地址, 点击后会复制", preferredStyle: .actionSheet)
+        for link in content?.downloafLink ?? [] {
+            let action = UIAlertAction(title: link, style: .default, handler: { (act) in
+                alert.dismiss(animated: true, completion: nil)
+                let sharePasteboard = UIPasteboard.general
+                sharePasteboard.string = link
+            })
+            alert.addAction(action)
+        }
+        let cancel = UIAlertAction(title: "取消", style: .cancel, handler: { (_) in
+            alert.dismiss(animated: true, completion: nil)
+        })
+        alert.addAction(cancel)
+        
+        alert.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
+        present(alert, animated: true, completion: nil)
     }
 }
 
