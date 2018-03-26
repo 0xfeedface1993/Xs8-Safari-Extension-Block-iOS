@@ -860,7 +860,7 @@
 				CODE_SIGN_ENTITLEMENTS = S8Blocker/S8Blocker.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = PBH6Q9M35H;
+				DEVELOPMENT_TEAM = E6NP67H473;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Framework",
@@ -868,7 +868,7 @@
 				);
 				INFOPLIST_FILE = S8Blocker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ascp.S8Blocker2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ascp.S8Blocker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
@@ -884,7 +884,7 @@
 				CODE_SIGN_ENTITLEMENTS = S8Blocker/S8Blocker.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = PBH6Q9M35H;
+				DEVELOPMENT_TEAM = E6NP67H473;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Framework",
@@ -892,7 +892,7 @@
 				);
 				INFOPLIST_FILE = S8Blocker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ascp.S8Blocker2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ascp.S8Blocker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
@@ -967,10 +967,10 @@
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = PBH6Q9M35H;
+				DEVELOPMENT_TEAM = E6NP67H473;
 				INFOPLIST_FILE = "ADBlock-iOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ascp.S8Blocker2.ADBlockiOS;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ascp.S8Blocker.ADBlockiOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
@@ -984,10 +984,10 @@
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = PBH6Q9M35H;
+				DEVELOPMENT_TEAM = E6NP67H473;
 				INFOPLIST_FILE = "ADBlock-iOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ascp.S8Blocker2.ADBlockiOS;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ascp.S8Blocker.ADBlockiOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
@@ -1002,10 +1002,10 @@
 				CODE_SIGN_ENTITLEMENTS = Torrilste/Torrilste.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = PBH6Q9M35H;
+				DEVELOPMENT_TEAM = E6NP67H473;
 				INFOPLIST_FILE = Torrilste/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ascp.S8Blocker2.Torrilste;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ascp.S8Blocker.Torrilste;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
@@ -1020,10 +1020,10 @@
 				CODE_SIGN_ENTITLEMENTS = Torrilste/Torrilste.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = PBH6Q9M35H;
+				DEVELOPMENT_TEAM = E6NP67H473;
 				INFOPLIST_FILE = Torrilste/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ascp.S8Blocker2.Torrilste;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ascp.S8Blocker.Torrilste;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
