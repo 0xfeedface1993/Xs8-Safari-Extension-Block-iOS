@@ -19,27 +19,31 @@ enum SitePlace {
 class NetDiskListViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     fileprivate var data = [NetDiskModal]()
-    let webview = WKWebView()
     var isRefreshing = false
-    var place : SitePlace = .netdisk
-    var page = 1
-    var netUrl : URL {
-        get {
-            let str = "http://xbluntan.net/forum-103-\(page).html"//xbluntan.net
-            page += 1
-            return URL(string: str)!
+    var page = 1 {
+        didSet {
+            let bot = FetchBot.shareBot
+            bot.startPage = UInt(page)
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "网盘下载"
+        let bot = FetchBot.shareBot
+        bot.startPage = 1
+        bot.pageOffset = 1
+        bot.delegate = self
+        DispatchQueue.global().async {
+            bot.start(withSite: .netdisk)
+        }
         // Do any additional setup after loading the view.
         tableviewLoad()
-        view.insertSubview(webview, at: 0)
-        webview.frame = view.frame
-        webview.navigationDelegate = self
-        webview.load(URLRequest(url: netUrl))
+    }
+    
+    deinit {
+        let bot = FetchBot.shareBot
+        bot.delegate = nil
     }
 
     override func didReceiveMemoryWarning() {
@@ -50,9 +54,8 @@ class NetDiskListViewController: UIViewController {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         if scrollView.contentOffset.y > 0 &&  isRefreshing == false {
             print("load next page tableview!")
-            place = .netdisk
             isRefreshing = true
-            webview.load(URLRequest(url: netUrl))
+            
         }
     }
 }
@@ -92,66 +95,24 @@ extension NetDiskListViewController : UITableViewDataSource, UITableViewDelegate
     }
 }
 
-// MARK: - WKNavigationDelegate
-extension NetDiskListViewController : WKNavigationDelegate {
-    func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
-        
-    }
-    
-    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        switch place {
-        case .login:
-            place = .main
-            print("login now!")
-            webview.evaluateJavaScript("document.getElementById('ls_username').value = '318715498';document.getElementById('ls_password').value = 'xts@19931022';document.getElementsByClassName('mem_login')[0].click();", completionHandler: { (result, err) in
-                if let e = err {
-                    print(e.localizedDescription)
-                }
-            })
-            break
-        case .main:
-            place = .netdisk
-            print("main page now!")
-            webview.evaluateJavaScript("window.location.href = 'http://xbluntan.net/forum-103-1.html';", completionHandler: { (result, err) in
-                if let e = err {
-                    print(e.localizedDescription)
-                }
-            })
-            break
-        case .netdisk:
-            place = .page
-            print("netdisk list now!")
-            webview.evaluateJavaScript("function readList() {var table = document.getElementById('threadlisttableid');var chillds = table.children;var list = [];for (var i = chillds.length - 1; i >= 0; i--) {var item = chillds[i];var id = item.id;if (id.indexOf('normalthread') >= 0) {var titlex = item.getElementsByClassName('s xst');var title = '';var hf = '';if (titlex != null && titlex.length > 0) {title = titlex[0].innerText;hf = titlex[0].href;}var images = item.getElementsByClassName('thread-img');var imgSrcs = [];if (images != null && images.length > 0) {for (var j = images.length - 1; j >= 0; j--) {var img = images[j];var src = img.src;imgSrcs.push(src);};}list.push({'title':title, 'images':imgSrcs, 'href':hf});}};return list;}readList();", completionHandler: { (result, err) in
-                if let e = err {
-                    print(e)
-                    return
-                }
-//                print(result as? [[String:Any]] ?? "抓取数据失败！")
-                if let array = result as? [[String:Any]] {
-                    self.data += array.map({
-                        return NetDiskModal(data: $0)
-                    })
-                    DispatchQueue.main.async {
-                        self.tableView.reloadData()
-                    }
-                }   else    {
-                    DispatchQueue.main.async {
-                        self.page -= 1
-                    }
-                }
-                self.isRefreshing = false
-            })
-            break
-        default:
-            break
+// MARK: - FetchBot Delegate
+extension NetDiskListViewController: FetchBotDelegate {
+    func bot(_ bot: FetchBot, didLoardContent content: ContentInfo, atIndexPath index: Int) {
+        let netDisk = NetDiskModal(content: content)
+        data.append(netDisk)
+        DispatchQueue.main.async {
+            [unowned self] in
+            self.tableView.reloadData()
         }
     }
     
-    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        decisionHandler(.allow)
+    func bot(didStartBot bot: FetchBot) {
+        
     }
     
-    func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
-        decisionHandler(.allow)
+    func bot(_ bot: FetchBot, didFinishedContents contents: [ContentInfo], failedLink: [FetchURL]) {
+        
     }
+    
+    
 }

@@ -29,7 +29,7 @@
 		2438476E1F008ABE00027E27 /* Torrilste.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 243847641F008ABE00027E27 /* Torrilste.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		2468BB3A1F00D61400AAB573 /* S8Blocker.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2438471D1F00891400027E27 /* S8Blocker.xcdatamodeld */; };
 		248434E0200FA38B00CAD097 /* HTMLString.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 248434DD200FA37100CAD097 /* HTMLString.framework */; };
-		248434E1200FA38B00CAD097 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 248434DC200FA37100CAD097 /* Kingfisher.framework */; };
+		249602E320A189E800C9613D /* WebShell_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 249602E220A189E800C9613D /* WebShell_iOS.framework */; };
 		24D7BBA11F45C8C30094DE28 /* Sex8.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 24D7BBA01F45C8C30094DE28 /* Sex8.storyboard */; };
 		24E480CC1F45E6B3009B6998 /* NetDiskDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E480CB1F45E6B3009B6998 /* NetDiskDetailViewController.swift */; };
 		24E480CF1F45E969009B6998 /* NetDiskDetalModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E480CE1F45E969009B6998 /* NetDiskDetalModal.swift */; };
@@ -148,12 +148,12 @@
 		243847721F008BA500027E27 /* S8Blocker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = S8Blocker.entitlements; sourceTree = "<group>"; };
 		243847731F008C3000027E27 /* Torrilste.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Torrilste.entitlements; sourceTree = "<group>"; };
 		2468BB381F00D5BA00AAB573 /* S8Blocker 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "S8Blocker 2.xcdatamodel"; sourceTree = "<group>"; };
-		248434DC200FA37100CAD097 /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = "<group>"; };
 		248434DD200FA37100CAD097 /* HTMLString.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HTMLString.framework; path = Carthage/Build/iOS/HTMLString.framework; sourceTree = "<group>"; };
+		249602E220A189E800C9613D /* WebShell_iOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebShell_iOS.framework; path = Carthage/Build/iOS/WebShell_iOS.framework; sourceTree = "<group>"; };
 		24D7BBA01F45C8C30094DE28 /* Sex8.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Sex8.storyboard; sourceTree = "<group>"; };
 		24E480CB1F45E6B3009B6998 /* NetDiskDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetDiskDetailViewController.swift; sourceTree = "<group>"; };
 		24E480CE1F45E969009B6998 /* NetDiskDetalModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetDiskDetalModal.swift; sourceTree = "<group>"; };
-		24E480D01F45ED75009B6998 /* netDetail.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = netDetail.js; sourceTree = "<group>"; };
+		24E480D01F45ED75009B6998 /* netDetail.js */ = {isa = PBXFileReference; explicitFileType = text; path = netDetail.js; sourceTree = "<group>"; };
 		24F3467C1F45CA5B001930ED /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		273B412A1F8B7B38001A6CA9 /* NewMovieTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMovieTableViewController.swift; sourceTree = "<group>"; };
 		273B412C1F8B7B53001A6CA9 /* NewMovieTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMovieTableViewCell.swift; sourceTree = "<group>"; };
@@ -179,7 +179,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				248434E1200FA38B00CAD097 /* Kingfisher.framework in Frameworks */,
+				249602E320A189E800C9613D /* WebShell_iOS.framework in Frameworks */,
 				248434E0200FA38B00CAD097 /* HTMLString.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -315,8 +315,8 @@
 		248434DB200FA15300CAD097 /* GithubFramework */ = {
 			isa = PBXGroup;
 			children = (
+				249602E220A189E800C9613D /* WebShell_iOS.framework */,
 				248434DD200FA37100CAD097 /* HTMLString.framework */,
-				248434DC200FA37100CAD097 /* Kingfisher.framework */,
 			);
 			name = GithubFramework;
 			sourceTree = "<group>";
@@ -615,7 +615,7 @@
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/Kingfisher.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/HTMLString.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/WebShell,framework",
+				"$(SRCROOT)/Carthage/Build/iOS/WebShell_iOS.framework",
 			);
 			outputPaths = (
 			);
@@ -868,8 +868,8 @@
 				DEVELOPMENT_TEAM = E6NP67H473;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Framework",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
 				);
 				INFOPLIST_FILE = S8Blocker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -892,8 +892,8 @@
 				DEVELOPMENT_TEAM = E6NP67H473;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Framework",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
 				);
 				INFOPLIST_FILE = S8Blocker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

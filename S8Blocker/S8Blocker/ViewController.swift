@@ -31,7 +31,6 @@ class ViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         self.title = "杏吧有你"
-        
     }
 
     override func didReceiveMemoryWarning() {

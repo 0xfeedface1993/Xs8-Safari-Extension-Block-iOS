@@ -10,7 +10,7 @@ import Foundation
 
 struct NetDiskModal {
     var title : String
-    var images : [String]
+    var images = [String]()
     var href : String
     init() {
         title = ""
@@ -29,6 +29,18 @@ struct NetDiskModal {
         
         imgs.enumerated().forEach { (offset, element) in
             images.append(element)
+        }
+    }
+    
+    init(content: ContentInfo) {
+        title = content.title
+        href = content.page
+        for i in 0...2 {
+            if i >= content.imageLink.count {
+                images.append("NetDisk")
+                continue
+            }
+            images.append(content.imageLink[i])
         }
     }
 }
