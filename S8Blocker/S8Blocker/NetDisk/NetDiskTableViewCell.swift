@@ -30,9 +30,10 @@ class NetDiskTableViewCell: UITableViewCell {
         customTitle.text = data.title
         for (index, item) in previewImages.enumerated() {
             guard data.images.count > index, let url = URL(string: data.images[index]) else {
+                item.kf.setImage(with: nil, placeholder: #imageLiteral(resourceName: "NetDisk"), options: nil, progressBlock: nil, completionHandler: nil)
                 continue
             }
-            item.kf.setImage(with: url)
+            item.kf.setImage(with: url, placeholder: #imageLiteral(resourceName: "NetDisk"), options: nil, progressBlock: nil, completionHandler: nil)
         }
     }
 }

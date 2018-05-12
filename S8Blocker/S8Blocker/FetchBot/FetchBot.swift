@@ -275,7 +275,7 @@ struct InfoRuleOption {
     static let singleTitle = ParserTagRule(tag: "font", isTagPaser: true, attrubutes: [], inTagRegexString: " \\w+=\"#\\w+\"", hasSuffix: nil, innerRegex: "[^<]+")
     
     /// 图片列表
-    static let mainMovieImage = ParserTagRule(tag: "img", isTagPaser: false, attrubutes: [ParserAttrubuteRule(key: "src")], inTagRegexString: "<img ", hasSuffix: ">", innerRegex: "[^>]+")
+    static let mainMovieImage = ParserTagRule(tag: "img", isTagPaser: false, attrubutes: [ParserAttrubuteRule(key: "src")], inTagRegexString: "<img[^>]+\\w+=\"\\w+:[^>]+", hasSuffix: ">", innerRegex: "[^>]+")
     
     /// 下载地址
     static let movieDowloadLink = ParserTagRule(tag: "a", isTagPaser: true, attrubutes: [ParserAttrubuteRule(key: "thunderrestitle"), ParserAttrubuteRule(key: "src"), ParserAttrubuteRule(key: "aexuztdb"), ParserAttrubuteRule(key: "href")], inTagRegexString: " \\w+=\"\\w+:\\/\\/\\w+:\\w+@\\w+.\\w+.\\w+:\\w+\\/[^\"]+\"", hasSuffix: nil, innerRegex: "\\w+:\\/\\/\\w+:\\w+@\\w+.\\w+.\\w+:\\w+\\/[^<]+")

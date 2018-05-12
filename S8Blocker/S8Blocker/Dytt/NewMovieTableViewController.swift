@@ -47,19 +47,21 @@ class NewMovieTableViewController: UITableViewController {
         searchController.dimsBackgroundDuringPresentation = false
         searchController.hidesNavigationBarDuringPresentation = false
         
-        view.addSubview(searchController.searchBar)
-        let views = ["bar":searchController.searchBar] as [String:Any]
-        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[bar]|", options: [], metrics: nil, views: views))
-        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[bar]", options: [], metrics: nil, views: views))
-        
+//        view.addSubview(searchController.searchBar)
+//        let views = ["bar":searchController.searchBar] as [String:Any]
+//        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[bar]|", options: [], metrics: nil, views: views))
+//        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[bar]", options: [], metrics: nil, views: views))
+//        
         tableView.estimatedRowHeight = 160
-//        tableView.tableHeaderView = searchController.searchBar
+        tableView.tableHeaderView = searchController.searchBar
         tableView.register(UINib(nibName: "NewMovieTableViewCell", bundle: nil), forCellReuseIdentifier: "com.ascp.moviecell")
 
         bot.startPage = 1
-        bot.pageOffset = 2
+        bot.pageOffset = 1
         bot.delegate = self
-        bot.start(withSite: Site.dytt)
+        DispatchQueue.global().async {
+            self.bot.start(withSite: Site.dytt)
+        }
     }
 
     override func didReceiveMemoryWarning() {

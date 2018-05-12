@@ -65,15 +65,18 @@ func parse(string: String, rule: ParserTagRule) -> [ParserResult]? {
             for checkingRes in result {
                 var range = checkingRes.range
                 range.length -= (rule.suffix as NSString).length
+                if range.length <= 0 {
+                    continue
+                }
                 let str = (string as NSString).substring(with: range)
-                var result = ParserResult(innerHTML: "", attributes: [:])
+                var resultX = ParserResult(innerHTML: "", attributes: [:])
                 
                 let titleRegex = try NSRegularExpression(pattern: rule.prefix, options: .caseInsensitive)
                 if let first = titleRegex.firstMatch(in: str, options: NSRegularExpression.MatchingOptions.init(rawValue: 0), range: NSMakeRange(0, (str as NSString).length)) {
                     var subRange = range
                     subRange.location = first.range.length
                     subRange.length = (str as NSString).length - subRange.location
-                    result.innerHTML = (str as NSString).substring(with: subRange)
+                    resultX.innerHTML = (str as NSString).substring(with: subRange)
                 }
                 
                 var attrs = [String:String]()
@@ -86,9 +89,9 @@ func parse(string: String, rule: ParserTagRule) -> [ParserResult]? {
                         attrs[attr.key] = (str as NSString).substring(with: subRange)
                     }
                 }
-                result.attributes = attrs
+                resultX.attributes = attrs
                 
-                results.append(result)
+                results.append(resultX)
             }
         }   else    {
             //            print("未查找到内容模块: \(rule.regex)")

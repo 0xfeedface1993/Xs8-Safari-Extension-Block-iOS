@@ -53,23 +53,23 @@ class MovieBrowerTableViewController: UITableViewController {
         if let url = URL(string: content?.imageLink[indexPath.row] ?? "") {
             cell.movieImage?.kf.setImage(with: url, placeholder: #imageLiteral(resourceName: "Movie"), options: nil, progressBlock: nil, completionHandler: {
                 (_, _, _, _) in
-                self.tableView.reloadRows(at: [indexPath], with: .automatic)
+                self.tableView.reloadRows(at: [indexPath], with: .fade)
             })
         }
  
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+//    override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return 200
+//    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if let cell = tableView.cellForRow(at: indexPath) as? MovieBrowerTableViewCell, let img = cell.movieImage.image {
+             return self.view.frame.size.width * (img.size.height / img.size.width)
+        }
         return 200
     }
-    
-//    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        if let cell = tableView.dequeueReusableCell(withIdentifier: ImageCellIdentifier, for: indexPath) as? MovieBrowerTableViewCell, let img = cell.movieImage.image {
-//             return self.view.frame.size.width * (img.size.height / img.size.width)
-//        }
-//        return 100
-//    }
  
 
     /*

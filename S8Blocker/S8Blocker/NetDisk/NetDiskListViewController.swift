@@ -42,8 +42,7 @@ class NetDiskListViewController: UIViewController {
     }
     
     deinit {
-        let bot = FetchBot.shareBot
-        bot.delegate = nil
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -55,7 +54,11 @@ class NetDiskListViewController: UIViewController {
         if scrollView.contentOffset.y > 0 &&  isRefreshing == false {
             print("load next page tableview!")
             isRefreshing = true
-            
+            page += 1
+            DispatchQueue.global().async {
+                FetchBot.shareBot.start(withSite: .netdisk)
+                self.isRefreshing = false
+            }
         }
     }
 }

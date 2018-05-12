@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="ipad12_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -13,46 +13,46 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="432" id="KGk-i7-Jjw" customClass="NetDiskTableViewCell" customModule="Sex8BlockExtension_iOS" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="729" height="432"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="395" id="KGk-i7-Jjw" customClass="NetDiskTableViewCell" customModule="S8Blocker" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="670" height="395"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="729" height="431.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="670" height="394.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oVd-qd-OcC">
-                        <rect key="frame" x="25" y="28" width="678" height="115"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                        <rect key="frame" x="20" y="43" width="630" height="20.5"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                         <color key="textColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="0.79299550513698636" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="s65-Wu-I6N">
-                        <rect key="frame" x="258" y="178" width="215" height="215"/>
+                        <rect key="frame" x="232.5" y="75.5" width="205" height="296.5"/>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="z81-iz-J1c">
-                        <rect key="frame" x="488" y="178" width="215" height="215"/>
+                        <rect key="frame" x="445.5" y="75.5" width="204.5" height="296.5"/>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Wfi-Il-QIJ">
-                        <rect key="frame" x="25" y="178" width="215" height="215"/>
+                        <rect key="frame" x="20" y="75.5" width="204.5" height="296.5"/>
                         <constraints>
-                            <constraint firstAttribute="width" secondItem="Wfi-Il-QIJ" secondAttribute="height" multiplier="1:1" id="Wkz-ft-R2B"/>
+                            <constraint firstAttribute="width" secondItem="Wfi-Il-QIJ" secondAttribute="height" multiplier="1:1" priority="999" id="Wkz-ft-R2B"/>
                         </constraints>
                     </imageView>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailingMargin" secondItem="z81-iz-J1c" secondAttribute="trailing" constant="18" id="0oi-qR-Gsh"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="z81-iz-J1c" secondAttribute="trailing" id="0oi-qR-Gsh"/>
                     <constraint firstItem="z81-iz-J1c" firstAttribute="bottom" secondItem="s65-Wu-I6N" secondAttribute="bottom" id="2EQ-9w-bO2"/>
-                    <constraint firstItem="oVd-qd-OcC" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="20" id="5hA-ne-oHd"/>
-                    <constraint firstItem="oVd-qd-OcC" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="17" id="KzT-zn-CET"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="Wfi-Il-QIJ" secondAttribute="bottom" constant="30.5" id="Svq-xF-MC9"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="oVd-qd-OcC" secondAttribute="trailing" constant="18" id="Vcz-3a-8Cu"/>
-                    <constraint firstItem="Wfi-Il-QIJ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="17" id="bJH-HE-ldY"/>
-                    <constraint firstItem="Wfi-Il-QIJ" firstAttribute="top" secondItem="oVd-qd-OcC" secondAttribute="bottom" constant="35" id="du4-RC-Y1w"/>
+                    <constraint firstItem="oVd-qd-OcC" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="12" id="5hA-ne-oHd"/>
+                    <constraint firstItem="oVd-qd-OcC" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="KzT-zn-CET"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="Wfi-Il-QIJ" secondAttribute="bottom" constant="12" id="Svq-xF-MC9"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="oVd-qd-OcC" secondAttribute="trailing" id="Vcz-3a-8Cu"/>
+                    <constraint firstItem="Wfi-Il-QIJ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="bJH-HE-ldY"/>
+                    <constraint firstItem="Wfi-Il-QIJ" firstAttribute="top" secondItem="oVd-qd-OcC" secondAttribute="bottom" constant="12" id="du4-RC-Y1w"/>
                     <constraint firstItem="Wfi-Il-QIJ" firstAttribute="width" secondItem="s65-Wu-I6N" secondAttribute="width" id="g9q-cr-im7"/>
                     <constraint firstItem="s65-Wu-I6N" firstAttribute="top" secondItem="Wfi-Il-QIJ" secondAttribute="top" id="k0F-74-ElF"/>
                     <constraint firstItem="z81-iz-J1c" firstAttribute="top" secondItem="s65-Wu-I6N" secondAttribute="top" id="kGP-rY-hD2"/>
-                    <constraint firstItem="z81-iz-J1c" firstAttribute="leading" secondItem="s65-Wu-I6N" secondAttribute="trailing" constant="15" id="nvs-vk-goX"/>
-                    <constraint firstItem="s65-Wu-I6N" firstAttribute="leading" secondItem="Wfi-Il-QIJ" secondAttribute="trailing" constant="18" id="rOQ-s9-cVi"/>
+                    <constraint firstItem="z81-iz-J1c" firstAttribute="leading" secondItem="s65-Wu-I6N" secondAttribute="trailing" constant="8" id="nvs-vk-goX"/>
+                    <constraint firstItem="s65-Wu-I6N" firstAttribute="leading" secondItem="Wfi-Il-QIJ" secondAttribute="trailing" constant="8" id="rOQ-s9-cVi"/>
                     <constraint firstItem="s65-Wu-I6N" firstAttribute="bottom" secondItem="Wfi-Il-QIJ" secondAttribute="bottom" id="vqg-dZ-URX"/>
                     <constraint firstItem="s65-Wu-I6N" firstAttribute="width" secondItem="z81-iz-J1c" secondAttribute="width" id="wmM-xl-X6S"/>
                 </constraints>
@@ -63,7 +63,7 @@
                 <outletCollection property="previewImages" destination="s65-Wu-I6N" collectionClass="NSMutableArray" id="2NJ-xw-2Ns"/>
                 <outletCollection property="previewImages" destination="z81-iz-J1c" collectionClass="NSMutableArray" id="a1V-X1-H4E"/>
             </connections>
-            <point key="canvasLocation" x="238.5" y="248"/>
+            <point key="canvasLocation" x="209" y="229.5"/>
         </tableViewCell>
     </objects>
 </document>

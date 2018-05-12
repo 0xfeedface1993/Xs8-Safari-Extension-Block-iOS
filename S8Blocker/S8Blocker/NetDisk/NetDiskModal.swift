@@ -11,7 +11,10 @@ import Foundation
 struct NetDiskModal {
     var title : String
     var images = [String]()
+    var downloads = [String]()
     var href : String
+    var password = ""
+    
     init() {
         title = ""
         href = ""
@@ -35,12 +38,8 @@ struct NetDiskModal {
     init(content: ContentInfo) {
         title = content.title
         href = content.page
-        for i in 0...2 {
-            if i >= content.imageLink.count {
-                images.append("NetDisk")
-                continue
-            }
-            images.append(content.imageLink[i])
-        }
+        images = content.imageLink
+        password = content.passwod
+        downloads = content.downloafLink
     }
 }

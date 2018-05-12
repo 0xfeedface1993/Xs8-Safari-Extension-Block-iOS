@@ -8,36 +8,66 @@
 
 import UIKit
 import WebKit
+import Kingfisher
+
+struct ImageItem {
+    var image: Image
+    var height: CGFloat
+}
 
 class NetDiskDetailViewController: UITableViewController {
     var netdisk : NetDiskModal?
-    var detail : NetDiskDetalModal?
-    let webview = WKWebView()
+    var images = [ImageItem]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "详情"
         // Do any additional setup after loading the view.
-        view.insertSubview(webview, belowSubview: tableView)
-        webview.isHidden = true
-        webview.frame = view.frame
-        webview.navigationDelegate = self
-        if let url = netdisk?.href, let netUrl = URL(string: url) {
-            webview.load(URLRequest(url: netUrl))
-        }
         tableView.register(UINib.init(nibName: "NetDiskTitleTableViewCell", bundle: nil), forCellReuseIdentifier: NetDiskTitleTableViewCellIdentitfier)
         tableView.register(UINib.init(nibName: "NetDiskImageTableViewCell", bundle: nil), forCellReuseIdentifier: NetDiskImageTableViewCellIdentitfier)
+        
+        downloadImages()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    func downloadImages() {
+        guard let imageLinks = netdisk?.images else {
+            return
+        }
+        
+        let downloader = ImageDownloader.default
+        for img in imageLinks {
+            guard let url = URL(string: img) else {
+                continue
+            }
+            downloader.downloadImage(with: url, retrieveImageTask: nil, options: nil, progressBlock: nil) { (image, err, url, data) in
+                if let e = err {
+                    print(e)
+                    return
+                }
+                self.images.append(ImageItem(image: image!, height: self.view.frame.size.width * (image!.size.height / image!.size.width)))
+                
+                let index = IndexPath(row: self.images.count + 3, section: 0)
+                
+                if Thread.isMainThread {
+                    self.tableView.reloadData()
+                }   else    {
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                    }
+                }
+            }
+        }
+    }
 }
 
 extension NetDiskDetailViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return detail?.count ?? 0
+        return 3 + images.count
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -48,77 +78,43 @@ extension NetDiskDetailViewController {
         switch indexPath.row {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: NetDiskTitleTableViewCellIdentitfier, for: indexPath) as! NetDiskTitleTableViewCell
-            cell.title.text = detail?.title
+            cell.title.text = netdisk?.title
             cell.title.textColor = .black
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: NetDiskTitleTableViewCellIdentitfier, for: indexPath) as! NetDiskTitleTableViewCell
-            cell.title.text = detail?.pageurl
+            cell.title.text = netdisk?.href
             cell.title.textColor = .lightGray
             return cell
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: NetDiskTitleTableViewCellIdentitfier, for: indexPath) as! NetDiskTitleTableViewCell
-            cell.title.text = detail?.passwod
+            cell.title.text = netdisk?.password
             cell.title.textColor = .lightGray
             return cell
         default:
-            guard let detailx = detail else {
-                break
-            }
-            guard detailx.links.count > 0, indexPath.row < 3 + detailx.links.count  else {
-                guard detailx.images.count > 0 else {
-                    break
-                }
-                let cell = tableView.dequeueReusableCell(withIdentifier: NetDiskImageTableViewCellIdentitfier, for: indexPath) as! NetDiskImageTableViewCell
-                cell.loadData(detailx.links[indexPath.row - 3 - detailx.links.count])
-                return cell
-            }
-            let cell = tableView.dequeueReusableCell(withIdentifier: NetDiskTitleTableViewCellIdentitfier, for: indexPath) as! NetDiskTitleTableViewCell
-            cell.title.text = detail?.links[indexPath.row - 3]
-            cell.title.textColor = .lightGray
+            let cell = tableView.dequeueReusableCell(withIdentifier: NetDiskImageTableViewCellIdentitfier, for: indexPath) as! NetDiskImageTableViewCell
+            cell.img.image = images[indexPath.row - 3].image
+            let constraint = NSLayoutConstraint(item: cell.img, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: images[indexPath.row - 3].height)
+            constraint.priority = UILayoutPriority(rawValue: 999)
+            NSLayoutConstraint.activate([constraint])
+            cell.layoutIfNeeded()
             return cell
         }
-        return UITableViewCell()
     }
     
     override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return 400
     }
     
+//    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        if let cell = tableView.cellForRow(at: indexPath) as? NetDiskImageTableViewCell, let img = cell.img.image {
+//            return self.view.frame.size.width * (img.size.height / img.size.width)
+//        }
+//        return 300
+//    }
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-    }
-}
-
-// MARK: - WKNavigationDelegate
-extension NetDiskDetailViewController : WKNavigationDelegate {
-    func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
-        
-    }
-    
-    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        guard let url = Bundle.main.path(forResource: "netDetail", ofType: "js") else {
-            return
-        }
-        do {
-            let js = try String(contentsOfFile: url)
-            webview.evaluateJavaScript(js, completionHandler: { (result, err) in
-                if let e = err {
-                    print(e)
-                    return
-                }
-                guard let array = result as? [String:Any] else {
-                    return
-                }
-                self.detail = NetDiskDetalModal(data: array)
-                print(self.detail ?? "bad")
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
-            })
-        } catch {
-            print(error.localizedDescription)
-        }
     }
 }
 

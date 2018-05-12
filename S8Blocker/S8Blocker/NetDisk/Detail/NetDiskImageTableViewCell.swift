@@ -24,10 +24,4 @@ class NetDiskImageTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
-    func loadData(_ str: String) {
-        if let url = URL(string: str) {
-            img.kf.setImage(with: url)
-        }
-    }
 }
