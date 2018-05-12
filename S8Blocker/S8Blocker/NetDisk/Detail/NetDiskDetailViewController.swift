@@ -49,9 +49,7 @@ class NetDiskDetailViewController: UITableViewController {
                     print(e)
                     return
                 }
-                self.images.append(ImageItem(image: image!, height: self.view.frame.size.width * (image!.size.height / image!.size.width)))
-                
-                let index = IndexPath(row: self.images.count + 3, section: 0)
+                self.images.append(ImageItem(image: image!, height: image!.size.height / image!.size.width))
                 
                 if Thread.isMainThread {
                     self.tableView.reloadData()
@@ -94,7 +92,7 @@ extension NetDiskDetailViewController {
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: NetDiskImageTableViewCellIdentitfier, for: indexPath) as! NetDiskImageTableViewCell
             cell.img.image = images[indexPath.row - 3].image
-            let constraint = NSLayoutConstraint(item: cell.img, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: images[indexPath.row - 3].height)
+            let constraint = NSLayoutConstraint(item: cell.img, attribute: .height, relatedBy: .equal, toItem: cell.img, attribute: .width, multiplier: images[indexPath.row - 3].height, constant: 0)
             constraint.priority = UILayoutPriority(rawValue: 999)
             NSLayoutConstraint.activate([constraint])
             cell.layoutIfNeeded()

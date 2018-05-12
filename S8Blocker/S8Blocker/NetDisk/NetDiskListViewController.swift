@@ -57,7 +57,6 @@ class NetDiskListViewController: UIViewController {
             page += 1
             DispatchQueue.global().async {
                 FetchBot.shareBot.start(withSite: .netdisk)
-                self.isRefreshing = false
             }
         }
     }
@@ -114,7 +113,7 @@ extension NetDiskListViewController: FetchBotDelegate {
     }
     
     func bot(_ bot: FetchBot, didFinishedContents contents: [ContentInfo], failedLink: [FetchURL]) {
-        
+        self.isRefreshing = false
     }
     
     
