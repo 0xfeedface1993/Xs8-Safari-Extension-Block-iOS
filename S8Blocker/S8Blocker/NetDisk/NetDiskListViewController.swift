@@ -50,14 +50,18 @@ class NetDiskListViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        if scrollView.contentOffset.y > 0 &&  isRefreshing == false {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let height = scrollView.frame.size.height
+        let contentOffset = scrollView.contentOffset.y
+        let distance = scrollView.contentSize.height - contentOffset
+        if distance < height, contentOffset > 0, isRefreshing == false {
             print("load next page tableview!")
             isRefreshing = true
             page += 1
             DispatchQueue.global().async {
                 FetchBot.shareBot.start(withSite: .netdisk)
             }
+            print("++++++ end of bottom ********")
         }
     }
 }
