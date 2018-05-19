@@ -8,8 +8,9 @@
 
 import Foundation
 
-struct Categrory : Codable {
+struct ListCategrory : Codable {
     var name : String
     var segue : String
     var image : String
+    var site : String
 }

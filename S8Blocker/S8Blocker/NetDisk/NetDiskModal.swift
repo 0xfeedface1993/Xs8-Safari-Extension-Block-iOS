@@ -14,6 +14,7 @@ struct NetDiskModal {
     var downloads = [String]()
     var href : String
     var password = ""
+    var fileSize = "-M"
     
     init() {
         title = ""
@@ -41,5 +42,6 @@ struct NetDiskModal {
         images = content.imageLink
         password = content.passwod
         downloads = content.downloafLink
+        fileSize = content.size
     }
 }

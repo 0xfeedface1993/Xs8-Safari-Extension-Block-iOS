@@ -23,8 +23,9 @@ class NetDiskDetailViewController: UITableViewController {
         super.viewDidLoad()
         title = "详情"
         // Do any additional setup after loading the view.
-        tableView.register(UINib.init(nibName: "NetDiskTitleTableViewCell", bundle: nil), forCellReuseIdentifier: NetDiskTitleTableViewCellIdentitfier)
-        tableView.register(UINib.init(nibName: "NetDiskImageTableViewCell", bundle: nil), forCellReuseIdentifier: NetDiskImageTableViewCellIdentitfier)
+        tableView.register(UINib(nibName: "NetDiskTitleTableViewCell", bundle: nil), forCellReuseIdentifier: NetDiskTitleTableViewCellIdentitfier)
+        tableView.register(UINib(nibName: "NetDiskImageTableViewCell", bundle: nil), forCellReuseIdentifier: NetDiskImageTableViewCellIdentitfier)
+        tableView.separatorStyle = .none
         
         downloadImages()
     }
@@ -81,7 +82,7 @@ extension NetDiskDetailViewController {
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: NetDiskTitleTableViewCellIdentitfier, for: indexPath) as! NetDiskTitleTableViewCell
-            cell.title.text = netdisk?.href
+            cell.title.text = netdisk?.fileSize
             cell.title.textColor = .lightGray
             return cell
         case 2:
