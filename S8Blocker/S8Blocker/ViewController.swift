@@ -9,19 +9,19 @@
 import UIKit
 
 class ViewController: UIViewController {
-    lazy var menus : [Categrory] = {
+    lazy var menus : [ListCategrory] = {
         guard let fileURL = Bundle.main.url(forResource: "categrory", withExtension: "plist") else {
-            return [Categrory]()
+            return [ListCategrory]()
         }
         
         do {
             let file = try Data(contentsOf: fileURL)
             let decoder = PropertyListDecoder()
-            let plist = try decoder.decode([Categrory].self, from: file)
+            let plist = try decoder.decode([ListCategrory].self, from: file)
             return plist
         }   catch {
             print(error)
-            return [Categrory]()
+            return [ListCategrory]()
         }
     }()
     @IBOutlet weak var collectionView: UICollectionView!
@@ -37,16 +37,21 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        guard let item = sender as? ListCategrory else { return }
+        
+        if let destination = segue.destination as? NetDiskListViewController {
+            var site = Site.netdisk
+            site.categrory = item
+            destination.site = site
+        }
     }
-    */
 }
 
 
@@ -64,13 +69,13 @@ extension ViewController : UICollectionViewDelegate, UICollectionViewDataSource,
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "com.ascp.main.cell", for: indexPath) as! CategroryCollectionViewCell
         let item = menus[indexPath.row]
 //        cell.backgroundColor = .red
-        cell.load(image:UIImage.init(named: item.image), title: item.name)
+        cell.load(image:UIImage(named: item.image), title: item.name)
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let item = menus[indexPath.row]
-        performSegue(withIdentifier: item.segue, sender: nil)
+        performSegue(withIdentifier: item.segue, sender: item)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

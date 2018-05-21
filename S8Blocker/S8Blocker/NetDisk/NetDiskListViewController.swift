@@ -27,6 +27,8 @@ class NetDiskListViewController: UIViewController {
         }
     }
     
+    var site = Site.netdisk
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "网盘下载"

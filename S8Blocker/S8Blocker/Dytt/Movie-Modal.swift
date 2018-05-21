@@ -9,12 +9,6 @@
 import Foundation
 import HTMLString
 
-//struct ListItem {
-//    var title : String
-//    var description : String
-//    var image : String
-//}
-
 struct ListItem : Equatable {
     var title : String
     var href : String
@@ -30,12 +24,6 @@ struct ListItem : Equatable {
     }
 }
 
-/// struct
-enum FetchBoard : Int {
-    case netDisk = 103
-    case listMovie = 23
-}
-
 
 /// 演员导演信息
 struct Creator {
@@ -46,7 +34,6 @@ struct Creator {
 /// 列表页面链接信息
 struct FetchURL : Equatable {
     var site : String
-    var board : FetchBoard
     var page : Int
     var maker : (FetchURL) -> String
     var url : URL {

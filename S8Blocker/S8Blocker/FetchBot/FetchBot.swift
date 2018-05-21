@@ -9,42 +9,63 @@
 import Foundation
 
 typealias ParserMaker = (String) -> ContentInfo
+typealias AsyncFinish = () -> Void
+
+enum Host: String {
+    case dytt = "www.ygdy8.net"
+    case sex8 = "xbluntan.net"
+}
 
 struct Site {
-    var hostName : String
+    var host : Host
     var parentUrl : URL
-    var name : String
+    var categrory : ListCategrory? = nil
+    var listRule : ParserTagRule
+    var contentRule : ParserTagRule
+    var listEncode : String.Encoding
+    var contentEncode : String.Encoding
+    
+    init(parentUrl: URL,
+         listRule: ParserTagRule,
+         contentRule: ParserTagRule,
+         listEncode: String.Encoding,
+         contentEncode: String.Encoding,
+         hostName: Host) {
+        self.host = hostName
+        self.listRule = listRule
+        self.contentRule = contentRule
+        self.listEncode = listEncode
+        self.contentEncode = contentEncode
+        self.parentUrl = parentUrl
+    }
+    
     func page(bySuffix suffix: Int) -> URL {
-        switch self.hostName {
-            case Site.dytt.hostName:
+        switch self.host {
+            case .dytt:
                 return parentUrl.appendingPathComponent("list_23_\(suffix).html")
-            case Site.netdisk.hostName:
-                return parentUrl.appendingPathComponent("forum-103-\(suffix).html")
-            default:
-                return parentUrl
+            case .sex8:
+                return parentUrl.appendingPathComponent("forum-\(categrory?.site ?? "103")-\(suffix).html")
         }
     }
     
-    static let dytt = Site(hostName: "www.ygdy8.net",
-                           parentUrl: URL(string: "http://www.ygdy8.net/html/gndy/dyzz")!,
-                           name: "电影天堂",
+    static let dytt = Site(parentUrl: URL(string: "http://www.ygdy8.net/html/gndy/dyzz")!,
                            listRule: PageRuleOption.mLink,
                            contentRule: PageRuleOption.mContent,
                            listEncode: String.Encoding(rawValue: CFStringConvertEncodingToNSStringEncoding(UInt32(CFStringEncodings.HZ_GB_2312.rawValue))),
-                           contentEncode: String.Encoding(rawValue: CFStringConvertEncodingToNSStringEncoding(UInt32(CFStringEncodings.GB_18030_2000.rawValue))))
+                           contentEncode: String.Encoding(rawValue: CFStringConvertEncodingToNSStringEncoding(UInt32(CFStringEncodings.GB_18030_2000.rawValue))),
+                           hostName: .dytt)
     
-    static let netdisk = Site(hostName: "xbluntan.net",
-                              parentUrl: URL(string: "http://xbluntan.net")!,
-                              name: "网盘下载",
+    static let netdisk = Site(parentUrl: URL(string: "http://xbluntan.net")!,
                               listRule: PageRuleOption.link,
                               contentRule: PageRuleOption.content,
                               listEncode: .utf8,
-                              contentEncode: .utf8)
+                              contentEncode: .utf8,
+                              hostName: .sex8)
     
     var parserMaker: ParserMaker? {
         get {
-            switch self.hostName {
-            case Site.dytt.hostName:
+            switch self.host {
+            case .dytt:
                 return { mainContent in
                     var info = ContentInfo()
                     
@@ -140,7 +161,7 @@ struct Site {
                     
                     return info
                 }
-            case Site.netdisk.hostName:
+            case .sex8:
                 return { mainContent in
                     var info = ContentInfo()
                     
@@ -200,16 +221,9 @@ struct Site {
                     
                     return info
                 }
-            default:
-                return nil
             }
         }
     }
-    
-    var listRule : ParserTagRule
-    var contentRule : ParserTagRule
-    var listEncode : String.Encoding
-    var contentEncode : String.Encoding
 }
 
 /// 内容信息正则规则选项
@@ -308,8 +322,10 @@ class FetchBot {
         }
     }
     
-    let backgroundQueue = DispatchQueue.global()
-    let backgroundGroup = DispatchGroup()
+    var listGroup : DispatchGroup!
+    var centenGroup : DispatchGroup!
+    var finishingSem : DispatchSemaphore!
+    
     var delegate : FetchBotDelegate?
     var contentDatas = [ContentInfo]()
     var runTasks = [FetchURL]()
@@ -318,6 +334,8 @@ class FetchBot {
     var pageOffset: UInt = 0
     var count : Int = 0
     var startTime : Date?
+    
+    private var isStop = false
     
     /// 初始化方法
     ///
@@ -341,10 +359,8 @@ class FetchBot {
         fetchGroup(start: startPage, offset: pageOffset, site: site)
     }
     
-    func stop() {
-        runTasks.removeAll()
-        badTasks.removeAll()
-        count = 0
+    func stop(compliention: AsyncFinish) {
+        isStop = true
     }
     
     private func fetchGroup(start: UInt, offset: UInt, site : Site) {
@@ -368,22 +384,20 @@ class FetchBot {
         let splitGroupCount = Int(offset) / radio + 1
         
         var pages = [PageItem]()
-        var group : DispatchGroup!
         for x in 0..<splitGroupCount {
-            group = DispatchGroup()
+            listGroup = DispatchGroup()
             for y in 0..<radio {
                 let index = x * radio + y + startIndex
                 if index >= Int(offset) + startIndex {
                     break
                 }
-                let fetchURL = FetchURL(site: site.hostName, board: .listMovie, page: Int(index), maker: maker)
-                let request = browserRequest(url: fetchURL.url, refer: site.hostName)
-                
-                group.enter()
+                let fetchURL = FetchURL(site: site.host.rawValue, page: Int(index), maker: maker)
+                let request = browserRequest(url: fetchURL.url, refer: site.host.rawValue)
+                listGroup.enter()
                 print(">>> enter \(index)")
                 let task = session.dataTask(with: request, completionHandler: { [unowned self] (data, response, err) in
                     defer {
-                        group.leave()
+                        self.listGroup.leave()
                     }
                     
                     guard let result = data, let html = String(data: result, encoding: site.listEncode) else {
@@ -416,13 +430,13 @@ class FetchBot {
                 })
                 task.resume()
             }
-            group.wait()
+            listGroup.wait()
         }
         
         for page in pages {
             let pageSplitCount = page.links.count / radio + 1
             for x in 0..<pageSplitCount {
-                group = DispatchGroup()
+                centenGroup = DispatchGroup()
                 for y in 0..<radio {
                     let index = x * radio + y
                     if index >= Int(page.links.count) {
@@ -436,14 +450,14 @@ class FetchBot {
                     let linkMaker : (FetchURL) -> String = { (s) -> String in
                         URL(string: "http://\(s.site)")!.appendingPathComponent(href).absoluteString
                     }
-                    let linkURL = FetchURL(site: site.hostName, board: .listMovie, page: page.url.page, maker: linkMaker)
-                    let request = browserRequest(url: linkURL.url, refer: site.hostName)
+                    let linkURL = FetchURL(site: site.host.rawValue, page: page.url.page, maker: linkMaker)
+                    let request = browserRequest(url: linkURL.url, refer: site.host.rawValue)
                     
-                    group.enter()
+                    centenGroup.enter()
                     print("<<< enter \(index)")
                     let subTask = session.dataTask(with: request) { [unowned self] (data, response, err) in
                         defer {
-                            group.leave()
+                            self.centenGroup.leave()
                         }
                         guard let result = data, let html = String(data: result, encoding: site.contentEncode) else {
                             if let e = err {
@@ -470,7 +484,7 @@ class FetchBot {
                     }
                     subTask.resume()
                 }
-                group.wait()
+                centenGroup.wait()
             }
         }
         
