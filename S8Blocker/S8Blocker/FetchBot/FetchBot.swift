@@ -19,7 +19,7 @@ enum Host: String {
 struct Site {
     var host : Host
     var parentUrl : URL
-    var categrory : ListCategrory? = nil
+    var categrory : ListCategrory?
     var listRule : ParserTagRule
     var contentRule : ParserTagRule
     var listEncode : String.Encoding
@@ -322,10 +322,6 @@ class FetchBot {
         }
     }
     
-    var listGroup : DispatchGroup!
-    var centenGroup : DispatchGroup!
-    var finishingSem : DispatchSemaphore!
-    
     var delegate : FetchBotDelegate?
     var contentDatas = [ContentInfo]()
     var runTasks = [FetchURL]()
@@ -335,7 +331,8 @@ class FetchBot {
     var count : Int = 0
     var startTime : Date?
     
-    private var isStop = false
+    var sem : DispatchSemaphore?
+    private var isRunning = false
     
     /// 初始化方法
     ///
@@ -360,10 +357,19 @@ class FetchBot {
     }
     
     func stop(compliention: AsyncFinish) {
-        isStop = true
+        if isRunning {
+            sem = DispatchSemaphore(value: 0)
+            sem?.wait()
+            compliention()
+            sem = nil
+        }   else {
+            compliention()
+        }
     }
     
     private func fetchGroup(start: UInt, offset: UInt, site : Site) {
+        isRunning = true
+        
         let maker : (FetchURL) -> String = { (s) -> String in
             site.page(bySuffix: s.page).absoluteString
         }
@@ -385,8 +391,16 @@ class FetchBot {
         
         var pages = [PageItem]()
         for x in 0..<splitGroupCount {
-            listGroup = DispatchGroup()
+            if let _ = self.sem {
+                print("************ Recive Stop Signal ************")
+                break
+            }
+            let listGroup = DispatchGroup()
             for y in 0..<radio {
+                if let _ = self.sem {
+                    print("************ Recive Stop Signal ************")
+                    break
+                }
                 let index = x * radio + y + startIndex
                 if index >= Int(offset) + startIndex {
                     break
@@ -397,7 +411,12 @@ class FetchBot {
                 print(">>> enter \(index)")
                 let task = session.dataTask(with: request, completionHandler: { [unowned self] (data, response, err) in
                     defer {
-                        self.listGroup.leave()
+                        listGroup.leave()
+                    }
+                    
+                    if let _ = self.sem {
+                        print("************ Recive Stop Signal ************")
+                        return
                     }
                     
                     guard let result = data, let html = String(data: result, encoding: site.listEncode) else {
@@ -434,10 +453,22 @@ class FetchBot {
         }
         
         for page in pages {
+            if let _ = self.sem {
+                print("************ Recive Stop Signal ************")
+                break
+            }
             let pageSplitCount = page.links.count / radio + 1
             for x in 0..<pageSplitCount {
-                centenGroup = DispatchGroup()
+                if let _ = self.sem {
+                    print("************ Recive Stop Signal ************")
+                    break
+                }
+                var centenGroup = DispatchGroup()
                 for y in 0..<radio {
+                    if let _ = self.sem {
+                        print("************ Recive Stop Signal ************")
+                        break
+                    }
                     let index = x * radio + y
                     if index >= Int(page.links.count) {
                         break
@@ -457,8 +488,14 @@ class FetchBot {
                     print("<<< enter \(index)")
                     let subTask = session.dataTask(with: request) { [unowned self] (data, response, err) in
                         defer {
-                            self.centenGroup.leave()
+                            centenGroup.leave()
                         }
+                        
+                        if let _ = self.sem {
+                            print("************ Recive Stop Signal ************")
+                            return
+                        }
+                        
                         guard let result = data, let html = String(data: result, encoding: site.contentEncode) else {
                             if let e = err {
                                 print(e)
@@ -489,6 +526,11 @@ class FetchBot {
         }
         
         self.delegate?.bot(self, didFinishedContents: self.contentDatas, failedLink: self.badTasks)
+        
+        isRunning = false
+        if let s = sem {
+            s.signal()
+        }
     }
 }
 

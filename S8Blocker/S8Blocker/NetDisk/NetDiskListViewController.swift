@@ -31,16 +31,26 @@ class NetDiskListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "网盘下载"
+        title = site.categrory?.name
         let bot = FetchBot.shareBot
         bot.startPage = 1
         bot.pageOffset = 1
         bot.delegate = self
         DispatchQueue.global().async {
-            bot.start(withSite: .netdisk)
+            bot.start(withSite: self.site)
         }
         // Do any additional setup after loading the view.
         tableviewLoad()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        if isMovingFromParentViewController {
+            FetchBot.shareBot.stop {
+                print("------------ Stop All Download Task -----------")
+            }
+        }
     }
     
     deinit {
