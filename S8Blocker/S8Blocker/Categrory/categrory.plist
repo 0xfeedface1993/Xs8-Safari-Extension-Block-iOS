@@ -4,7 +4,7 @@
 <array>
 	<dict>
 		<key>image</key>
-		<string>NetDisk</string>
+		<string>Model</string>
 		<key>segue</key>
 		<string>com.ascp.netdisk.list</string>
 		<key>name</key>
@@ -14,7 +14,7 @@
 	</dict>
 	<dict>
 		<key>image</key>
-		<string>NetDisk</string>
+		<string>Love</string>
 		<key>segue</key>
 		<string>com.ascp.netdisk.list</string>
 		<key>name</key>
@@ -24,7 +24,7 @@
 	</dict>
 	<dict>
 		<key>image</key>
-		<string>NetDisk</string>
+		<string>SelfShot</string>
 		<key>segue</key>
 		<string>com.ascp.netdisk.list</string>
 		<key>name</key>
@@ -34,7 +34,7 @@
 	</dict>
 	<dict>
 		<key>image</key>
-		<string>NetDisk</string>
+		<string>StreetShot</string>
 		<key>segue</key>
 		<string>com.ascp.netdisk.list</string>
 		<key>name</key>
