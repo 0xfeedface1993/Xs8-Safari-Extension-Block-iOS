@@ -71,7 +71,7 @@ class NetDiskListViewController: UIViewController {
             isRefreshing = true
             page += 1
             DispatchQueue.global().async {
-                FetchBot.shareBot.start(withSite: .netdisk)
+                FetchBot.shareBot.start(withSite: self.site)
             }
             print("++++++ end of bottom ********")
         }
