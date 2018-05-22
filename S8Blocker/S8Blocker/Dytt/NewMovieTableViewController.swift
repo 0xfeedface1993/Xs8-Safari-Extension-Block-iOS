@@ -28,7 +28,6 @@ class NewMovieTableViewController: UITableViewController {
     }
     
     let searchController = UISearchController(searchResultsController: nil)
-    let bot = FetchBot.shareBot
     private var snapCount = 10
     
     private var shapshotIndexPath : IndexPath?
@@ -56,11 +55,12 @@ class NewMovieTableViewController: UITableViewController {
         tableView.tableHeaderView = searchController.searchBar
         tableView.register(UINib(nibName: "NewMovieTableViewCell", bundle: nil), forCellReuseIdentifier: "com.ascp.moviecell")
 
+        let bot = FetchBot.shareBot
         bot.startPage = 1
         bot.pageOffset = 1
         bot.delegate = self
         DispatchQueue.global().async {
-            self.bot.start(withSite: Site.dytt)
+            bot.start(withSite: Site.dytt)
         }
     }
 
