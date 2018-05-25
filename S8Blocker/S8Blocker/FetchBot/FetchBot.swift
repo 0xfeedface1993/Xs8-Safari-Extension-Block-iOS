@@ -246,7 +246,7 @@ struct InfoRuleOption {
     /// 下载地址[\\s\\S]+<div \\w+=\"blockcode\">[\\s\\S]+<li>[^<]+</li>
     static let downloadLinkLi = ParserTagRule(tag: "li", isTagPaser: true, attrubutes: [], inTagRegexString: "", hasSuffix: nil, innerRegex: "\\w+:\\/\\/[\\w+\\.]+[\\/\\-\\w\\.]+")
     /// 图片链接
-    static let imageLink = ParserTagRule(tag: "", isTagPaser: false, attrubutes: [ParserAttrubuteRule(key: "file"), ParserAttrubuteRule(key: "href"), ParserAttrubuteRule(key: "src")], inTagRegexString: "<img[^>]+class=\"zoom\"[^>]+((file)|(src)|(href))=\"[^\"]+\"[^>]+>{1}", hasSuffix: nil, innerRegex: nil)
+    static let imageLink = ParserTagRule(tag: "", isTagPaser: false, attrubutes: [ParserAttrubuteRule(key: "file"), ParserAttrubuteRule(key: "href"), ParserAttrubuteRule(key: "src")], inTagRegexString: "<img([^>]+class=\"zoom\"[^>]+)|(((\\ssrc=\"\\w+:[^\"]+\")|(\\salt=\"\\w+\\.\\w+\")|(\\stitle=\"\\w+\\.\\w+\")){3})", hasSuffix: nil, innerRegex: nil)
     /// 主内容标签
     static let main = ParserTagRule(tag: "td", isTagPaser: true, attrubutes: [], inTagRegexString: " \\w+=\"t_f\" \\w+=\"postmessage_\\d+\"", hasSuffix: nil, innerRegex: nil)
     
