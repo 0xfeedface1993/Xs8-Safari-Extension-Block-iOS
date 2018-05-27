@@ -10,9 +10,23 @@ import UIKit
 import WebKit
 import Kingfisher
 
+enum DownloadState {
+    case wait
+    case downloading
+    case downloaded
+    case error
+}
+
 struct ImageItem {
-    var image: Image
-    var height: CGFloat
+    var url: URL?
+    var state: DownloadState
+    var size: CGSize
+    var radio: CGFloat {
+        return size.height / size.width
+    }
+    func realHeight(fitWidth: CGFloat) -> CGFloat {
+        return radio * fitWidth
+    }
 }
 
 class NetDiskDetailViewController: UITableViewController {
@@ -27,40 +41,16 @@ class NetDiskDetailViewController: UITableViewController {
         tableView.register(UINib(nibName: "NetDiskImageTableViewCell", bundle: nil), forCellReuseIdentifier: NetDiskImageTableViewCellIdentitfier)
         tableView.separatorStyle = .none
         
-        downloadImages()
+        guard let imageLinks = netdisk?.images else {
+            return
+        }
+        
+        images = imageLinks.map({ ImageItem(url: URL(string: $0), state: .wait, size: #imageLiteral(resourceName: "NetDisk").size) })
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    func downloadImages() {
-        guard let imageLinks = netdisk?.images else {
-            return
-        }
-        
-        let downloader = ImageDownloader.default
-        for img in imageLinks {
-            guard let url = URL(string: img) else {
-                continue
-            }
-            downloader.downloadImage(with: url, retrieveImageTask: nil, options: nil, progressBlock: nil) { (image, err, url, data) in
-                if let e = err {
-                    print(e)
-                    return
-                }
-                self.images.append(ImageItem(image: image!, height: image!.size.height / image!.size.width))
-                
-                if Thread.isMainThread {
-                    self.tableView.reloadData()
-                }   else    {
-                    DispatchQueue.main.async {
-                        self.tableView.reloadData()
-                    }
-                }
-            }
-        }
     }
 }
 
@@ -92,11 +82,50 @@ extension NetDiskDetailViewController {
             return cell
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: NetDiskImageTableViewCellIdentitfier, for: indexPath) as! NetDiskImageTableViewCell
-            cell.img.image = images[indexPath.row - 3].image
-            let constraint = NSLayoutConstraint(item: cell.img, attribute: .height, relatedBy: .equal, toItem: cell.img, attribute: .width, multiplier: images[indexPath.row - 3].height, constant: 0)
-            constraint.priority = UILayoutPriority(rawValue: 999)
-            NSLayoutConstraint.activate([constraint])
-            cell.layoutIfNeeded()
+            
+            func layoutMaker(radio: CGFloat) {
+                let constraint = NSLayoutConstraint(item: cell.img, attribute: .height, relatedBy: .equal, toItem: cell.img, attribute: .width, multiplier: radio, constant: 0)
+                constraint.priority = UILayoutPriority(rawValue: 999)
+                NSLayoutConstraint.activate([constraint])
+            }
+            
+            let linkIndex = indexPath.row - 3
+            let item = self.images[linkIndex]
+            let url = item.url
+            
+            switch item.state {
+            case .wait:
+                self.images[linkIndex].state = .downloading
+                cell.img.kf.setImage(with: url, placeholder: #imageLiteral(resourceName: "NetDisk"), options: nil, progressBlock: nil, completionHandler: { [unowned self] (img, err, cache, urlx) in
+                    if let _ = err {
+                        DispatchQueue.main.async {
+                            self.images[linkIndex].state = .error
+                            self.images[linkIndex].size = #imageLiteral(resourceName: "Failed").size
+                            layoutMaker(radio: self.images[linkIndex].radio)
+                            tableView.reloadData()
+                        }
+                        return
+                    }
+                    
+                    if let img = img {
+                        DispatchQueue.main.async {
+                            self.images[linkIndex].state = .downloaded
+                            self.images[linkIndex].size = img.size
+                            layoutMaker(radio: self.images[linkIndex].radio)
+                            tableView.reloadData()
+                        }
+                    }
+                })
+            case .downloading:
+                cell.img.image = #imageLiteral(resourceName: "NetDisk")
+            case .downloaded:
+                cell.img.kf.setImage(with: url)
+            case .error:
+                cell.img.image = #imageLiteral(resourceName: "Failed")
+            }
+            
+            layoutMaker(radio: self.images[linkIndex].radio)
+            
             return cell
         }
     }
