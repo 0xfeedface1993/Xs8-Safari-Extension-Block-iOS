@@ -20,6 +20,8 @@ struct NetDiskDetalModal {
             return 4 + images.count
         }
     }
+    var boradType : String
+    
     init(data : [String:Any]?) {
         fileName = data?["fileName"] as? String ?? ""
         title = data?["title"] as? String ?? ""
@@ -27,5 +29,6 @@ struct NetDiskDetalModal {
         pageurl = data?["url"] as? String ?? ""
         links = data?["links"] as? [String] ?? []
         images = data?["pics"] as? [String] ?? []
+        boradType = data?["boradType"] as? String ?? ""
     }
 }

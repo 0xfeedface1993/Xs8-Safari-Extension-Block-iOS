@@ -46,6 +46,9 @@ class NetDiskDetailViewController: UITableViewController {
         }
         
         images = imageLinks.map({ ImageItem(url: URL(string: $0), state: .wait, size: #imageLiteral(resourceName: "NetDisk").size) })
+        
+        let saveItem = UIBarButtonItem(title: "收藏", style: .plain, target: self, action: #selector(saver))
+        navigationItem.rightBarButtonItem = saveItem
     }
 
     override func didReceiveMemoryWarning() {
@@ -96,7 +99,7 @@ extension NetDiskDetailViewController {
             switch item.state {
             case .wait:
                 self.images[linkIndex].state = .downloading
-                cell.img.kf.setImage(with: url, placeholder: #imageLiteral(resourceName: "NetDisk"), options: nil, progressBlock: nil, completionHandler: { [unowned self] (img, err, cache, urlx) in
+                cell.img.kf.setImage(with: url, placeholder: #imageLiteral(resourceName: "NetDisk"), options: nil, progressBlock: nil, completionHandler: { (img, err, cache, urlx) in
                     if let _ = err {
                         DispatchQueue.main.async {
                             self.images[linkIndex].state = .error
@@ -143,6 +146,31 @@ extension NetDiskDetailViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+}
+
+// MARK: - Favorite
+extension NetDiskDetailViewController: CloudSaver {
+    @objc func saver() {
+        save(netDisk: netdisk!) { (rec, err) in
+            if let e = err {
+                DispatchQueue.main.async {
+                    let alert = UIAlertController(title: "保存失败", message: e.localizedDescription, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                }
+                return
+            }
+            
+            if let record = rec {
+                print("Save to cloud Ok: \(record.recordID)")
+                DispatchQueue.main.async {
+                    let alert = UIAlertController(title: "保存成功", message: "请在收藏夹里面查看", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                }
+            }
+        }
     }
 }
 

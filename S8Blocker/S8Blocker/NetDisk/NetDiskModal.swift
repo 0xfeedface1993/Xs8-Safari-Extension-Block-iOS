@@ -15,33 +15,27 @@ struct NetDiskModal {
     var href : String
     var password = ""
     var fileSize = "-M"
+    var boradType : String
     
     init() {
         title = ""
         href = ""
-        images = ["NetDisk", "NetDisk", "NetDisk"]
+        boradType = ""
     }
     
     init(data: [String:Any]?) {
         title = data?["title"] as? String ?? ""
         href = data?["href"] as? String ?? ""
-        images = [String]()
-        guard let imgs = data?["images"] as? [String] else {
-            images = ["NetDisk", "NetDisk", "NetDisk"]
-            return
-        }
-        
-        imgs.enumerated().forEach { (offset, element) in
-            images.append(element)
-        }
+        boradType = data?["boradType"] as? String ?? ""
     }
     
-    init(content: ContentInfo) {
+    init(content: ContentInfo, boradType: String) {
         title = content.title
         href = content.page
         images = content.imageLink
         password = content.passwod
         downloads = content.downloafLink
         fileSize = content.size
+        self.boradType = boradType
     }
 }
