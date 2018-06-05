@@ -205,6 +205,4 @@ extension CKRecord {
         modal.boradType = self["boradType"] as! String
         return modal
     }
-    
-    
 }

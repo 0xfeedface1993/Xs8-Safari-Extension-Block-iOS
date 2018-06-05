@@ -31,6 +31,10 @@
 		248434E0200FA38B00CAD097 /* HTMLString.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 248434DD200FA37100CAD097 /* HTMLString.framework */; };
 		249602E320A189E800C9613D /* WebShell_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 249602E220A189E800C9613D /* WebShell_iOS.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		249AE74A20A6E3B40001EFC5 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 249AE74920A6E3B40001EFC5 /* Kingfisher.framework */; };
+		249D208C20B9A748005F7E7F /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 249D208B20B9A748005F7E7F /* ImageIO.framework */; };
+		249D208E20B9A77E005F7E7F /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 249D208D20B9A77E005F7E7F /* MobileCoreServices.framework */; };
+		249D209720BAFF0D005F7E7F /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249D209620BAFF0D005F7E7F /* Storage.swift */; };
+		249D209920BAFFC0005F7E7F /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 249D209820BAFFC0005F7E7F /* CloudKit.framework */; };
 		24D7BBA11F45C8C30094DE28 /* Sex8.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 24D7BBA01F45C8C30094DE28 /* Sex8.storyboard */; };
 		24E480CC1F45E6B3009B6998 /* NetDiskDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E480CB1F45E6B3009B6998 /* NetDiskDetailViewController.swift */; };
 		24E480CF1F45E969009B6998 /* NetDiskDetalModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E480CE1F45E969009B6998 /* NetDiskDetalModal.swift */; };
@@ -152,6 +156,10 @@
 		248434DD200FA37100CAD097 /* HTMLString.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HTMLString.framework; path = Carthage/Build/iOS/HTMLString.framework; sourceTree = "<group>"; };
 		249602E220A189E800C9613D /* WebShell_iOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebShell_iOS.framework; path = Carthage/Build/iOS/WebShell_iOS.framework; sourceTree = "<group>"; };
 		249AE74920A6E3B40001EFC5 /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = "<group>"; };
+		249D208B20B9A748005F7E7F /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		249D208D20B9A77E005F7E7F /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		249D209620BAFF0D005F7E7F /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
+		249D209820BAFFC0005F7E7F /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		24D7BBA01F45C8C30094DE28 /* Sex8.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Sex8.storyboard; sourceTree = "<group>"; };
 		24E480CB1F45E6B3009B6998 /* NetDiskDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetDiskDetailViewController.swift; sourceTree = "<group>"; };
 		24E480CE1F45E969009B6998 /* NetDiskDetalModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetDiskDetalModal.swift; sourceTree = "<group>"; };
@@ -181,7 +189,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				249D208E20B9A77E005F7E7F /* MobileCoreServices.framework in Frameworks */,
+				249D208C20B9A748005F7E7F /* ImageIO.framework in Frameworks */,
 				249602E320A189E800C9613D /* WebShell_iOS.framework in Frameworks */,
+				249D209920BAFFC0005F7E7F /* CloudKit.framework in Frameworks */,
 				249AE74A20A6E3B40001EFC5 /* Kingfisher.framework in Frameworks */,
 				248434E0200FA38B00CAD097 /* HTMLString.framework in Frameworks */,
 			);
@@ -231,6 +242,7 @@
 		2438470F1F00891400027E27 = {
 			isa = PBXGroup;
 			children = (
+				249D202620B9A6B7005F7E7F /* AXPhotoViewer */,
 				248434DB200FA15300CAD097 /* GithubFramework */,
 				2438471A1F00891400027E27 /* S8Blocker */,
 				243847341F00891400027E27 /* S8BlockerTests */,
@@ -257,6 +269,7 @@
 		2438471A1F00891400027E27 /* S8Blocker */ = {
 			isa = PBXGroup;
 			children = (
+				249D209520BAFEF6005F7E7F /* iCloudStorage */,
 				278B1EEB200CB26B004F9760 /* FetchBot */,
 				278B1EE0200CA198004F9760 /* Categrory */,
 				276BC26A1F8F688D006B9B92 /* Webservice */,
@@ -325,6 +338,21 @@
 			name = GithubFramework;
 			sourceTree = "<group>";
 		};
+		249D202620B9A6B7005F7E7F /* AXPhotoViewer */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = AXPhotoViewer;
+			sourceTree = "<group>";
+		};
+		249D209520BAFEF6005F7E7F /* iCloudStorage */ = {
+			isa = PBXGroup;
+			children = (
+				249D209620BAFF0D005F7E7F /* Storage.swift */,
+			);
+			path = iCloudStorage;
+			sourceTree = "<group>";
+		};
 		24E480C81F45E627009B6998 /* List */ = {
 			isa = PBXGroup;
 			children = (
@@ -378,6 +406,9 @@
 		276BC2751F90583D006B9B92 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				249D209820BAFFC0005F7E7F /* CloudKit.framework */,
+				249D208D20B9A77E005F7E7F /* MobileCoreServices.framework */,
+				249D208B20B9A748005F7E7F /* ImageIO.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -513,6 +544,12 @@
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
 							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
+								enabled = 1;
+							};
 						};
 					};
 					243847301F00891400027E27 = {
@@ -635,6 +672,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2431DAEE1F45F6810082E928 /* NetDiskImageTableViewCell.swift in Sources */,
+				249D209720BAFF0D005F7E7F /* Storage.swift in Sources */,
 				24F4C26F1F45D122008412AF /* NetDiskListViewController.swift in Sources */,
 				24E480D11F45ED75009B6998 /* netDetail.js in Sources */,
 				278B1EEA200CB1C7004F9760 /* Movie-Modal.swift in Sources */,
