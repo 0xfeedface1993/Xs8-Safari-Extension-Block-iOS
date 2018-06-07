@@ -78,8 +78,9 @@ extension CloudSaver {
         let publicDatabase = container.publicCloudDatabase
         let predicate = NSPredicate(format: "boradType = %@", site)
         let query = CKQuery(recordType: RecordType.ndMovie.rawValue, predicate: predicate)
-        query.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+        query.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: true)]
         let operation = CKQueryOperation(query: query)
+        operation.resultsLimit = 20
         operation.recordFetchedBlock = { rd in
             fetchBlock(rd.convertModal())
         }
