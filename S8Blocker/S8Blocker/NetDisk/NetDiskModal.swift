@@ -16,6 +16,7 @@ struct NetDiskModal {
     var password = ""
     var fileSize = "-M"
     var boradType : String
+    var favorite = 0
     
     init() {
         title = ""

@@ -33,6 +33,10 @@ class NetDiskDetailViewController: UITableViewController {
     var netdisk : NetDiskModal?
     var images = [ImageItem]()
     
+    let image = UIImageView()
+    let centerImageView = UIImageView()
+    let cover = UIView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "详情"
@@ -49,6 +53,23 @@ class NetDiskDetailViewController: UITableViewController {
         
         let saveItem = UIBarButtonItem(title: "收藏", style: .plain, target: self, action: #selector(saver))
         navigationItem.rightBarButtonItem = saveItem
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        loadMemoView()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        image.removeFromSuperview()
+        centerImageView.removeFromSuperview()
+        cover.removeFromSuperview()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -152,25 +173,172 @@ extension NetDiskDetailViewController {
 // MARK: - Favorite
 extension NetDiskDetailViewController: CloudSaver {
     @objc func saver() {
-        save(netDisk: netdisk!) { (rec, err) in
-            if let e = err {
-                DispatchQueue.main.async {
-                    let alert = UIAlertController(title: "保存失败", message: e.localizedDescription, preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-                    self.present(alert, animated: true, completion: nil)
-                }
-                return
+//        save(netDisk: netdisk!) { (rec, err) in
+//            if let e = err {
+//                DispatchQueue.main.async {
+//                    let alert = UIAlertController(title: "保存失败", message: e.localizedDescription, preferredStyle: .alert)
+//                    alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+//                    self.present(alert, animated: true, completion: nil)
+//                }
+//                return
+//            }
+//
+//            if let record = rec {
+//                print("Save to cloud Ok: \(record.recordID)")
+//                DispatchQueue.main.async {
+//                    let alert = UIAlertController(title: "保存成功", message: "请在收藏夹里面查看", preferredStyle: .alert)
+//                    alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+//                    self.present(alert, animated: true, completion: nil)
+//                }
+//            }
+//        }
+    }
+}
+
+struct LikeImage {
+    var image : UIImage
+    static let like = LikeImage(image: #imageLiteral(resourceName: "Like"))
+    static let unlike = LikeImage(image: #imageLiteral(resourceName: "Unlike"))
+}
+
+extension NetDiskDetailViewController: CAAnimationDelegate {
+    func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
+        if flag {
+            print(anim)
+            if anim.isKind(of: CAAnimationGroup.self) {
+                self.centerImageView.alpha = 0.0
+                self.centerImageView.layer.removeAllAnimations()
+                self.image.image = self.image === LikeImage.like.image ? LikeImage.unlike.image:LikeImage.like.image
+                coverFade()
+            }   else {
+                self.cover.alpha = 0.0
+                self.cover.layer.removeAllAnimations()
             }
             
-            if let record = rec {
-                print("Save to cloud Ok: \(record.recordID)")
-                DispatchQueue.main.async {
-                    let alert = UIAlertController(title: "保存成功", message: "请在收藏夹里面查看", preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-                    self.present(alert, animated: true, completion: nil)
-                }
-            }
         }
     }
 }
 
+extension NetDiskDetailViewController {
+    func loadMemoView() {
+        let v = self.view.window!
+        
+        image.image = LikeImage.unlike.image
+        image.translatesAutoresizingMaskIntoConstraints = false
+        
+        centerImageView.image = LikeImage.like.image
+        centerImageView.translatesAutoresizingMaskIntoConstraints = false
+        centerImageView.alpha = 0
+        
+        cover.translatesAutoresizingMaskIntoConstraints = false
+        cover.backgroundColor = .black
+        cover.alpha = 0.0
+        
+        v.addSubview(cover)
+        v.addSubview(image)
+        v.addSubview(centerImageView)
+        
+        var views : [String : Any] = ["img":image]
+        v.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[img(40)]-|", options: [], metrics: nil, views: views))
+        v.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:[img(40)]-|", options: [], metrics: nil, views: views))
+        
+        views = ["img":centerImageView]
+        v.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:[img(40)]", options: [], metrics: nil, views: views))
+        v.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[img(40)]", options: [], metrics: nil, views: views))
+        v.addConstraint(NSLayoutConstraint(item: centerImageView, attribute: .centerX, relatedBy: .equal, toItem: v, attribute: .centerX, multiplier: 1, constant: 0))
+        v.addConstraint(NSLayoutConstraint(item: centerImageView, attribute: .centerY, relatedBy: .equal, toItem: v, attribute: .centerY, multiplier: 1, constant: 0))
+        
+        views = ["img":cover]
+        v.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[img]|", options: [], metrics: nil, views: views))
+        v.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[img]|", options: [], metrics: nil, views: views))
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(favoriteAction(tap:)))
+        tap.numberOfTapsRequired = 2
+        tap.numberOfTouchesRequired = 1
+        v.isUserInteractionEnabled = true
+        v.addGestureRecognizer(tap)
+    }
+    
+    @objc func favoriteAction(tap: UITapGestureRecognizer) {
+        let destinationImage : UIImage!
+        if image.image! === LikeImage.like.image {
+            print("unlike it!")
+            destinationImage = LikeImage.unlike.image
+            UIView.animate(withDuration: 0.35, animations: {
+                self.image.alpha = 0.5
+                self.image.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+            }) { (finished) in
+                if finished {
+                    self.image.image = destinationImage
+                    UIView.animate(withDuration: 0.20, animations: {
+                        self.image.alpha = 1.0
+                        self.image.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+                    }) { (finished) in
+                        if finished {
+                            
+                        }
+                    }
+                }
+            }
+        }   else    {
+            print("like it!")
+            destinationImage = LikeImage.like.image
+            self.centerImageView.alpha = 0.0
+            self.cover.alpha = 0.0
+            self.centerImageView.transform = CGAffineTransform(scaleX: 0.0, y: 0.0)
+            UIView.animate(withDuration: 0.35, animations: {
+                self.centerImageView.alpha = 1.0
+                self.cover.alpha = 0.2
+                self.centerImageView.transform = CGAffineTransform(scaleX: 3.0, y: 3.0)
+            }) { (finished) in
+                if finished {
+                    self.animationGroup()
+                }
+            }
+        }
+    }
+    
+    func animationGroup() {
+        let animation = CAKeyframeAnimation(keyPath: "position")
+        let startCenterPoint = centerImageView.layer.position
+        let endCenterPoint = image.layer.position
+        let controlPoint = CGPoint(x: endCenterPoint.x, y: startCenterPoint.y)
+        
+        print("start: \(startCenterPoint),end: \(endCenterPoint), control: \(controlPoint)")
+        
+        let path = CGMutablePath()
+        path.move(to: startCenterPoint)
+        path.addQuadCurve(to: endCenterPoint, control: controlPoint)
+        
+        animation.path = path
+        animation.rotationMode = kCAAnimationLinear
+        
+        let scale = CABasicAnimation(keyPath: "transform.scale")
+        scale.toValue = 1.0
+        
+        let alpha = CABasicAnimation(keyPath: "transform.alpha")
+        alpha.toValue = 0.0
+        
+        let group = CAAnimationGroup()
+        
+        group.animations = [animation, scale, alpha]
+        group.duration = 0.35
+        group.delegate = self
+        group.isRemovedOnCompletion = false
+        group.fillMode = kCAFillModeForwards
+        group.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
+        self.centerImageView.layer.add(group, forKey: "popAnimate")
+    }
+    
+    func coverFade() {
+        let coverAlpha = CABasicAnimation(keyPath: "opacity")
+        coverAlpha.fromValue = 0.2
+        coverAlpha.toValue = 0.0
+        coverAlpha.duration = 0.35
+        coverAlpha.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
+        coverAlpha.fillMode = kCAFillModeForwards
+        coverAlpha.delegate = self
+        coverAlpha.isRemovedOnCompletion = false
+        self.cover.layer.add(coverAlpha, forKey: "fadeCover")
+    }
+}

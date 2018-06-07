@@ -73,14 +73,29 @@ extension CloudSaver {
     ///   - fetchBlock: 获取到一条记录回调
     ///   - completion: 获取请求完成回调
     ///   - site: 指定的版块
-    func queryAllMovies(fetchBlock: @escaping FetchRecordCompletion, completion: @escaping QueryCompletion, site: String) {
+    func queryAllMovies(fetchBlock: @escaping FetchRecordCompletion, completion: @escaping QueryCompletion, site: String, keyword: String) {
         let container = CKContainer.default()
         let publicDatabase = container.publicCloudDatabase
-        let predicate = NSPredicate(format: "boradType = %@", site)
+        var predicate: NSPredicate!
+        if !keyword.isEmpty {
+            var string = ""
+            for i in keyword.unicodeScalars {
+                string += "AND self contains '\(i)' "
+            }
+            predicate = NSPredicate(format: "boradType == %@ \(string)", site)
+        }   else    {
+            predicate = NSPredicate(format: "boradType == %@", site)
+        }
         let query = CKQuery(recordType: RecordType.ndMovie.rawValue, predicate: predicate)
-        query.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: true)]
+        if keyword.isEmpty {
+            query.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: true)]
+        }
+        
         let operation = CKQueryOperation(query: query)
-        operation.resultsLimit = 20
+        if keyword.isEmpty {
+            operation.resultsLimit = 50
+        }
+        
         operation.recordFetchedBlock = { rd in
             fetchBlock(rd.convertModal())
         }
@@ -161,6 +176,28 @@ extension CloudSaver {
         }
         database.add(operation)
     }
+    
+    /// 收藏喜欢的帖子
+    ///
+    /// - Parameter favoriteModal: 网盘数据模型
+    func flep(favoriteModal: NetDiskModal) {
+        let container = CKContainer.default()
+        let database = container.privateCloudDatabase
+        let predict = NSPredicate(format: "title == %@", favoriteModal.title)
+        let query = CKQuery(recordType: RecordType.ndMovie.rawValue, predicate: predict)
+        let operation = CKQueryOperation(query: query)
+        operation.recordFetchedBlock = { rd in
+            rd["favorite"] = NSNumber(value: (rd["favorite"] as? Int ?? 0) > 0 ? 0:1)
+            database.save(rd, completionHandler: { (rec, err) in
+                if let e = err {
+                    print(e)
+                    return
+                }
+                print("Flep \(rec?.recordID) OK!")
+            })
+        }
+        database.add(operation)
+    }
 }
 
 
@@ -177,6 +214,7 @@ extension CKRecord {
         self["downloads"]  = netDisk.downloads.map({ $0 as NSString }) as CKRecordValue
         self["images"]  = netDisk.images.map({ $0 as NSString }) as CKRecordValue
         self["boradType"] = netDisk.boradType as NSString
+        self["favorite"] = NSNumber(value: netDisk.favorite)
     }
     
     /// 复制记录实例到自身
@@ -190,6 +228,7 @@ extension CKRecord {
         self["downloads"] = record["downloads"]
         self["images"] = record["images"]
         self["boradType"] = record["boradType"]
+        self["favorite"] = record["favorite"]
     }
     
     /// 记录失恋转换成网盘数据模型
@@ -204,6 +243,7 @@ extension CKRecord {
         modal.downloads = self["downloads"] as! [String]
         modal.images = self["images"] as! [String]
         modal.boradType = self["boradType"] as! String
+        modal.favorite = self["favorite"] as? Int ?? 0
         return modal
     }
 }

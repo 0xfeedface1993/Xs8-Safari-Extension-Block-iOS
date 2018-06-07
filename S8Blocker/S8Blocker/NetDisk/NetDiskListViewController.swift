@@ -20,6 +20,7 @@ enum SitePlace {
 class NetDiskListViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     fileprivate var data = [NetDiskModal]()
+    fileprivate var backupData = [NetDiskModal]()
     var isRefreshing = false
     var page = 1 {
         didSet {
@@ -32,15 +33,25 @@ class NetDiskListViewController: UIViewController {
     var isCloudDataSource = true
     var cursor : CKQueryCursor?
     
+    let searchController = UISearchController(searchResultsController: nil)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = site.categrory?.name
         // Do any additional setup after loading the view.
         
+        searchController.delegate = self
+        searchController.searchResultsUpdater = self
+        searchController.searchBar.placeholder = "帖子名称"
+        searchController.dimsBackgroundDuringPresentation = false
+        searchController.hidesNavigationBarDuringPresentation = false
+        
         tableviewLoad()
+        
+        tableView.tableHeaderView = searchController.searchBar
 //        copyPrivateToPublic(cursor: nil)
 //        add(boardType: site.categrory!.site, cursor: nil)
-//        empty(database: CKContainer.default().publicCloudDatabase)
+//        empty(database: CKContainer.default().privateCloudDatabase)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -50,6 +61,20 @@ class NetDiskListViewController: UIViewController {
             FetchBot.shareBot.stop {
                 print("------------ Stop All Download Task -----------")
             }
+        }   else    {
+            if searchController.isActive {
+                searchController.searchBar.isHidden = true
+            }
+            if searchController.searchBar.isFirstResponder {
+                searchController.searchBar.resignFirstResponder()
+            }
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if searchController.searchBar.isHidden {
+            searchController.searchBar.isHidden = false
         }
     }
     
@@ -108,7 +133,7 @@ extension NetDiskListViewController : UITableViewDataSource, UITableViewDelegate
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UINib.init(nibName: "NetDiskTableViewCell", bundle: nil), forCellReuseIdentifier: NetDiskTableViewCellIdentifier)
-        fetch()
+        fetch(keyword: "")
 //        let bot = FetchBot.shareBot
 //        bot.startPage = 1
 //        bot.pageOffset = 100
@@ -178,20 +203,31 @@ extension NetDiskListViewController: FetchBotDelegate {
 
 // MARK: - Cloud Datebase
 extension NetDiskListViewController: CloudSaver {
-    func fetch() {
+    func fetch(keyword: String) {
         CKContainer.default().accountStatus { (status, err) in
             if let e = err {
-                self.isCloudDataSource = false
-                let bot = FetchBot.shareBot
-                bot.startPage = 1
-                bot.pageOffset = 1
-                bot.delegate = self
-                DispatchQueue.global().async {
-                    bot.start(withSite: self.site)
-                }
+//                self.isCloudDataSource = false
+//                let bot = FetchBot.shareBot
+//                bot.startPage = 1
+//                bot.pageOffset = 1
+//                bot.delegate = self
+//                DispatchQueue.global().async {
+//                    bot.start(withSite: self.site)
+//                }
                 print("iCloud not working: \(e.localizedDescription)")
-                print("------------ Using AutoFetch now!")
+//                print("------------ Using AutoFetch now!")
+                self.data.removeAll()
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
                 return
+            }
+            
+            if !keyword.isEmpty {
+                self.data.removeAll()
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
             }
             
             self.isCloudDataSource = true
@@ -203,6 +239,7 @@ extension NetDiskListViewController: CloudSaver {
             }, completion: { (results, err) in
                 self.cursor = results
                 if let e = err {
+                    print(e)
                     DispatchQueue.main.async {
                         let alert = UIAlertController(title: "读取失败", message: e.localizedDescription, preferredStyle: .alert)
                         alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
@@ -210,8 +247,27 @@ extension NetDiskListViewController: CloudSaver {
                     }
                     return
                 }
-            }, site: self.site.categrory?.site ?? "")
+            }, site: self.site.categrory?.site ?? "", keyword: keyword)
         }
         
+    }
+}
+
+extension NetDiskListViewController : UISearchControllerDelegate, UISearchResultsUpdating {
+    func willPresentSearchController(_ searchController: UISearchController) {
+        backupData = data
+    }
+    
+    func willDismissSearchController(_ searchController: UISearchController) {
+        data = backupData
+        tableView.reloadData()
+    }
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        print("update search!")
+        guard let keyword = self.searchController.searchBar.text, !keyword.isEmpty else {
+            return
+        }
+        fetch(keyword: keyword)
     }
 }
