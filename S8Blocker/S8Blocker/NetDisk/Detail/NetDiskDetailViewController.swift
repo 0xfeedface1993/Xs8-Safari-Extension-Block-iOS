@@ -213,6 +213,7 @@ extension NetDiskDetailViewController: CAAnimationDelegate {
             }   else {
                 self.cover.alpha = 0.0
                 self.cover.layer.removeAllAnimations()
+                self.view.window?.isUserInteractionEnabled = true
             }
             
         }
@@ -224,7 +225,10 @@ extension NetDiskDetailViewController {
         let v = self.view.window!
         
         image.image = LikeImage.unlike.image
+        self.image.isHidden = true
         image.translatesAutoresizingMaskIntoConstraints = false
+        
+        loadFavoriteFlag()
         
         centerImageView.image = LikeImage.like.image
         centerImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -259,8 +263,29 @@ extension NetDiskDetailViewController {
         v.addGestureRecognizer(tap)
     }
     
+    func loadFavoriteFlag() {
+        guard let nd = netdisk else {
+            return
+        }
+        
+        check(favoriteModal: nd, fetchBlock: { (modal) in
+            DispatchQueue.main.async {            
+                self.image.image = modal.favorite > 0 ? LikeImage.like.image:LikeImage.unlike.image
+            }
+        }, completion: {
+            DispatchQueue.main.async {            
+                self.image.isHidden = false
+            }
+        })
+    }
+    
     @objc func favoriteAction(tap: UITapGestureRecognizer) {
         let destinationImage : UIImage!
+        let flag = (self.netdisk?.favorite ?? 0) > 0 ? 0:1
+        self.netdisk?.favorite = flag
+        if let nd = self.netdisk {
+            flep(favoriteModal: nd)
+        }
         if image.image! === LikeImage.like.image {
             print("unlike it!")
             destinationImage = LikeImage.unlike.image
@@ -328,6 +353,7 @@ extension NetDiskDetailViewController {
         group.fillMode = kCAFillModeForwards
         group.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
         self.centerImageView.layer.add(group, forKey: "popAnimate")
+        self.view.window?.isUserInteractionEnabled = false
     }
     
     func coverFade() {

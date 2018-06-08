@@ -88,7 +88,7 @@ extension CloudSaver {
         }
         let query = CKQuery(recordType: RecordType.ndMovie.rawValue, predicate: predicate)
         if keyword.isEmpty {
-            query.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: true)]
+            query.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
         }
         
         let operation = CKQueryOperation(query: query)
@@ -183,20 +183,45 @@ extension CloudSaver {
     func flep(favoriteModal: NetDiskModal) {
         let container = CKContainer.default()
         let database = container.privateCloudDatabase
-        let predict = NSPredicate(format: "title == %@", favoriteModal.title)
-        let query = CKQuery(recordType: RecordType.ndMovie.rawValue, predicate: predict)
-        let operation = CKQueryOperation(query: query)
-        operation.recordFetchedBlock = { rd in
-            rd["favorite"] = NSNumber(value: (rd["favorite"] as? Int ?? 0) > 0 ? 0:1)
-            database.save(rd, completionHandler: { (rec, err) in
+        let queryID = CKRecordID(recordName: favoriteModal.title)
+        let record = CKRecord(recordType: RecordType.ndMovie.rawValue, recordID: queryID)
+        record.load(netDisk: favoriteModal)
+        database.fetch(withRecordID: queryID) { (rec, err) in
+            if let e = err {
+                print(e)
+                saveData(rec: record)
+                return
+            }
+            guard let rec = rec else {
+                saveData(rec: record)
+                return
+            }
+            rec["favorite"] = NSNumber(value: favoriteModal.favorite)
+            saveData(rec: rec)
+        }
+        
+        func saveData(rec: CKRecord) {
+            database.save(rec) { (recc, err) in
                 if let e = err {
                     print(e)
                     return
                 }
-                print("Flep \(rec?.recordID) OK!")
-            })
+                print("Save OK \(recc?.recordID)")
+            }
         }
-        database.add(operation)
+    }
+    
+    func check(favoriteModal: NetDiskModal, fetchBlock: @escaping FetchRecordCompletion, completion: @escaping ()->Void) {
+        let container = CKContainer.default()
+        let privateDatabase = container.privateCloudDatabase
+        let predict = NSPredicate(format: "title == %@", favoriteModal.title)
+        let query = CKQuery(recordType: RecordType.ndMovie.rawValue, predicate: predict)
+        let operation = CKQueryOperation(query: query)
+        operation.recordFetchedBlock = { rd in
+            fetchBlock(rd.convertModal())
+        }
+        operation.completionBlock = completion
+        privateDatabase.add(operation)
     }
 }
 
@@ -243,7 +268,7 @@ extension CKRecord {
         modal.downloads = self["downloads"] as! [String]
         modal.images = self["images"] as! [String]
         modal.boradType = self["boradType"] as! String
-        modal.favorite = self["favorite"] as? Int ?? 0
+        modal.favorite = (self["favorite"] as? NSNumber)?.intValue ?? 0
         return modal
     }
 }

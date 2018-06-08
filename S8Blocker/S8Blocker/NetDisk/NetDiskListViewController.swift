@@ -58,9 +58,9 @@ class NetDiskListViewController: UIViewController {
         super.viewWillDisappear(animated)
         
         if isMovingFromParentViewController {
-            FetchBot.shareBot.stop {
-                print("------------ Stop All Download Task -----------")
-            }
+//            FetchBot.shareBot.stop {
+//                print("------------ Stop All Download Task -----------")
+//            }
         }   else    {
             if searchController.isActive {
                 searchController.searchBar.isHidden = true
