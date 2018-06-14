@@ -78,11 +78,9 @@ extension CloudSaver {
         let publicDatabase = container.publicCloudDatabase
         var predicate: NSPredicate!
         if !keyword.isEmpty {
-            var string = ""
-            for i in keyword.unicodeScalars {
-                string += "AND self contains '\(i)' "
-            }
-            predicate = NSPredicate(format: "boradType == %@ \(string)", site)
+            let string = "boradType == %@ AND self contains %@"
+            let args = [site, keyword]
+            predicate = NSPredicate(format: string, argumentArray: args)
         }   else    {
             predicate = NSPredicate(format: "boradType == %@", site)
         }

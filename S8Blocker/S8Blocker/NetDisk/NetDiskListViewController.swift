@@ -43,12 +43,26 @@ class NetDiskListViewController: UIViewController {
         searchController.delegate = self
         searchController.searchResultsUpdater = self
         searchController.searchBar.placeholder = "帖子名称"
+        searchController.searchBar.showsCancelButton = true
         searchController.dimsBackgroundDuringPresentation = false
         searchController.hidesNavigationBarDuringPresentation = false
         
         tableviewLoad()
         
-        tableView.tableHeaderView = searchController.searchBar
+        if #available(iOS 11.0, *) {
+            navigationItem.searchController = searchController
+            navigationItem.hidesSearchBarWhenScrolling = true
+            navigationItem.searchController?.isActive = true
+            navigationItem.largeTitleDisplayMode = .automatic
+            navigationController?.navigationBar.prefersLargeTitles = true
+        } else {
+            // Fallback on earlier versions
+            tableView.tableHeaderView = searchController.searchBar
+        }
+        
+        let collect = UIBarButtonItem(image: #imageLiteral(resourceName: "Unlike"), style: .done, target: self, action: #selector(switchDataSource(sender:)))
+        navigationItem.rightBarButtonItem = collect
+        
 //        copyPrivateToPublic(cursor: nil)
 //        add(boardType: site.categrory!.site, cursor: nil)
 //        empty(database: CKContainer.default().privateCloudDatabase)
@@ -62,20 +76,12 @@ class NetDiskListViewController: UIViewController {
 //                print("------------ Stop All Download Task -----------")
 //            }
         }   else    {
-            if searchController.isActive {
-                searchController.searchBar.isHidden = true
-            }
-            if searchController.searchBar.isFirstResponder {
-                searchController.searchBar.resignFirstResponder()
-            }
+            
         }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if searchController.searchBar.isHidden {
-            searchController.searchBar.isHidden = false
-        }
     }
     
     deinit {
@@ -124,12 +130,24 @@ class NetDiskListViewController: UIViewController {
             print("++++++ end of bottom ********")
         }
     }
+    
+    @objc func switchDataSource(sender: UIBarButtonItem) {
+        let second = NetDiskFavoriteViewController()
+        let navi = UINavigationController(rootViewController: second)
+        let presentationController = CustomPresentViewController(presentedViewController: navi, presenting: self)
+        navi.transitioningDelegate = presentationController
+        present(navi, animated: true, completion: nil)
+    }
 }
 
 
 // MARK: - UITableViewDataSource, UITableViewDelegate
 extension NetDiskListViewController : UITableViewDataSource, UITableViewDelegate {
     func tableviewLoad() {
+        if  tableView == nil {
+            return
+        }
+//        tableView.isHidden = true
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UINib.init(nibName: "NetDiskTableViewCell", bundle: nil), forCellReuseIdentifier: NetDiskTableViewCellIdentifier)
@@ -256,10 +274,12 @@ extension NetDiskListViewController: CloudSaver {
 extension NetDiskListViewController : UISearchControllerDelegate, UISearchResultsUpdating {
     func willPresentSearchController(_ searchController: UISearchController) {
         backupData = data
+        
     }
     
     func willDismissSearchController(_ searchController: UISearchController) {
         data = backupData
+        
         tableView.reloadData()
     }
     
