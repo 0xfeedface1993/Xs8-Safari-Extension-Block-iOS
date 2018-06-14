@@ -17,10 +17,20 @@ enum SitePlace {
     case page
 }
 
+struct NetCell {
+    var modal : NetDiskModal
+    var previewImages : [ImageItem]
+    
+    init(modal: NetDiskModal) {
+        self.modal = modal
+        self.previewImages = modal.images.map({ ImageItem(url: URL(string: $0), state: .wait, size: #imageLiteral(resourceName: "NetDisk").size) })
+    }
+}
+
 class NetDiskListViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
-    fileprivate var data = [NetDiskModal]()
-    fileprivate var backupData = [NetDiskModal]()
+    fileprivate var data = [NetCell]()
+    fileprivate var backupData = [NetCell]()
     var isRefreshing = false
     var page = 1 {
         didSet {
@@ -60,8 +70,8 @@ class NetDiskListViewController: UIViewController {
             tableView.tableHeaderView = searchController.searchBar
         }
         
-        let collect = UIBarButtonItem(image: #imageLiteral(resourceName: "Unlike"), style: .done, target: self, action: #selector(switchDataSource(sender:)))
-        navigationItem.rightBarButtonItem = collect
+//        let collect = UIBarButtonItem(image: #imageLiteral(resourceName: "Unlike"), style: .done, target: self, action: #selector(switchDataSource(sender:)))
+//        navigationItem.rightBarButtonItem = collect
         
 //        copyPrivateToPublic(cursor: nil)
 //        add(boardType: site.categrory!.site, cursor: nil)
@@ -106,11 +116,11 @@ class NetDiskListViewController: UIViewController {
 //            }
             if let cursor = self.cursor {
                 self.queryNextPageMovies(cursor: cursor, fetchBlock: { modal in
-                    if let _ = self.data.index(where: { $0.href == modal.href }) {
+                    if let _ = self.data.index(where: { $0.modal.href == modal.href }) {
                         print("Last Page!")
                         return
                     }
-                    self.data.append(modal)
+                    self.data.append(NetCell(modal: modal))
                     DispatchQueue.main.async {
                         self.tableView.reloadData()
                     }
@@ -182,7 +192,7 @@ extension NetDiskListViewController : UITableViewDataSource, UITableViewDelegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let storyboard = UIStoryboard(name: "Sex8", bundle: nil)
         let v = storyboard.instantiateViewController(withIdentifier: "NetDiskDetail") as! NetDiskDetailViewController
-        v.netdisk = data[indexPath.row]
+        v.netdisk = data[indexPath.row].modal
         navigationController?.pushViewController(v, animated: true)
     }
 }
@@ -191,7 +201,7 @@ extension NetDiskListViewController : UITableViewDataSource, UITableViewDelegate
 extension NetDiskListViewController: FetchBotDelegate {
     func bot(_ bot: FetchBot, didLoardContent content: ContentInfo, atIndexPath index: Int) {
         let netDisk = NetDiskModal(content: content, boradType: site.categrory?.site ?? "")
-        data.append(netDisk)
+        data.append(NetCell(modal: netDisk))
         save(netDisk: netDisk) { (rec, err) in
             if let e = err {
                 print("************* Save \(netDisk.title) to cloud Failed: \(e.localizedDescription)")
@@ -250,7 +260,7 @@ extension NetDiskListViewController: CloudSaver {
             
             self.isCloudDataSource = true
             self.queryAllMovies(fetchBlock: { modal in
-                self.data.append(modal)
+                self.data.append(NetCell(modal: modal))
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }

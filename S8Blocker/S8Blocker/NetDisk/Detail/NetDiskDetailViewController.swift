@@ -50,9 +50,6 @@ class NetDiskDetailViewController: UITableViewController {
         }
         
         images = imageLinks.map({ ImageItem(url: URL(string: $0), state: .wait, size: #imageLiteral(resourceName: "NetDisk").size) })
-        
-        let saveItem = UIBarButtonItem(title: "收藏", style: .plain, target: self, action: #selector(saver))
-        navigationItem.rightBarButtonItem = saveItem
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -110,7 +107,16 @@ extension NetDiskDetailViewController {
             func layoutMaker(radio: CGFloat) {
                 let constraint = NSLayoutConstraint(item: cell.img, attribute: .height, relatedBy: .equal, toItem: cell.img, attribute: .width, multiplier: radio, constant: 0)
                 constraint.priority = UILayoutPriority(rawValue: 999)
-                NSLayoutConstraint.activate([constraint])
+                if let index = cell.img.constraints.index(where: { $0.firstAttribute == NSLayoutAttribute.height && $0.secondAttribute == NSLayoutAttribute.width }) {
+                    if cell.img.constraints[index] != constraint {
+                        cell.img.constraints[index].isActive = false
+                        constraint.isActive = true
+                    }
+                }   else    {
+                    constraint.isActive = true
+                }
+                
+                cell.layoutIfNeeded()
             }
             
             let linkIndex = indexPath.row - 3
@@ -125,8 +131,9 @@ extension NetDiskDetailViewController {
                         DispatchQueue.main.async {
                             self.images[linkIndex].state = .error
                             self.images[linkIndex].size = #imageLiteral(resourceName: "Failed").size
-                            layoutMaker(radio: self.images[linkIndex].radio)
-                            tableView.reloadData()
+                            if tableView.indexPathsForVisibleRows?.contains(indexPath) ?? false {
+                                tableView.reloadData()
+                            }
                         }
                         return
                     }
@@ -135,8 +142,9 @@ extension NetDiskDetailViewController {
                         DispatchQueue.main.async {
                             self.images[linkIndex].state = .downloaded
                             self.images[linkIndex].size = img.size
-                            layoutMaker(radio: self.images[linkIndex].radio)
-                            tableView.reloadData()
+                            if tableView.indexPathsForVisibleRows?.contains(indexPath) ?? false {
+                                tableView.reloadData()
+                            }
                         }
                     }
                 })
@@ -159,7 +167,7 @@ extension NetDiskDetailViewController {
     }
     
 //    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        if let cell = tableView.cellForRow(at: indexPath) as? NetDiskImageTableViewCell, let img = cell.img.image {
+//        if let cell = tableView.cellForRow(at: indexPath) as? NetDiskImageTableViewCell {
 //            return self.view.frame.size.width * (img.size.height / img.size.width)
 //        }
 //        return 300
@@ -171,29 +179,6 @@ extension NetDiskDetailViewController {
 }
 
 // MARK: - Favorite
-extension NetDiskDetailViewController: CloudSaver {
-    @objc func saver() {
-//        save(netDisk: netdisk!) { (rec, err) in
-//            if let e = err {
-//                DispatchQueue.main.async {
-//                    let alert = UIAlertController(title: "保存失败", message: e.localizedDescription, preferredStyle: .alert)
-//                    alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-//                    self.present(alert, animated: true, completion: nil)
-//                }
-//                return
-//            }
-//
-//            if let record = rec {
-//                print("Save to cloud Ok: \(record.recordID)")
-//                DispatchQueue.main.async {
-//                    let alert = UIAlertController(title: "保存成功", message: "请在收藏夹里面查看", preferredStyle: .alert)
-//                    alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-//                    self.present(alert, animated: true, completion: nil)
-//                }
-//            }
-//        }
-    }
-}
 
 struct LikeImage {
     var image : UIImage
@@ -201,7 +186,7 @@ struct LikeImage {
     static let unlike = LikeImage(image: #imageLiteral(resourceName: "Unlike"))
 }
 
-extension NetDiskDetailViewController: CAAnimationDelegate {
+extension NetDiskDetailViewController: CAAnimationDelegate, CloudSaver {
     func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
         if flag {
             print(anim)

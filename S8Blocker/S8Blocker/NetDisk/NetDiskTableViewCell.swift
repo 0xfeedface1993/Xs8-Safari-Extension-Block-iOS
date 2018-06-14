@@ -26,10 +26,24 @@ class NetDiskTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func loadData(_ data: NetDiskModal) {
-        customTitle.text = data.title
+    func loadData(_ data: NetCell) {
+        customTitle.text = data.modal.title
         for (index, item) in previewImages.enumerated() {
-            guard data.images.count > index, let url = URL(string: data.images[index]) else {
+            func layoutMaker(radio: CGFloat) {
+                let constraint = NSLayoutConstraint(item: item, attribute: .height, relatedBy: .equal, toItem: item, attribute: .width, multiplier: radio, constant: 0)
+                constraint.priority = UILayoutPriority(rawValue: 999)
+                if let index = item.constraints.index(where: { $0.firstAttribute == NSLayoutAttribute.height && $0.secondAttribute == NSLayoutAttribute.width }) {
+                    if item.constraints[index] != constraint {
+                        item.constraints[index].isActive = false
+                        constraint.isActive = true
+                    }
+                }   else    {
+                    constraint.isActive = true
+                }
+                
+                item.layoutIfNeeded()
+            }
+            guard data.modal.images.count > index, let url = URL(string: data.modal.images[index]) else {
                 item.kf.setImage(with: nil, placeholder: #imageLiteral(resourceName: "Failed"), options: nil, progressBlock: nil)
                 continue
             }
@@ -38,7 +52,15 @@ class NetDiskTableViewCell: UITableViewCell {
                     print(e)
                     item.image = #imageLiteral(resourceName: "Failed")
                 }
+                if let image = img, data.previewImages.count > index {
+                    var value = data.previewImages[index]
+                    value.size = image.size
+                    layoutMaker(radio: value.radio)
+                }
             }
+            var value = data.previewImages[index]
+            value.size = #imageLiteral(resourceName: "NetDisk").size
+            layoutMaker(radio: value.radio)
         }
     }
 }

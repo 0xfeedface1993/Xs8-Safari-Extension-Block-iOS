@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2431DAE71F45F24C0082E928 /* netDetail.js in Resources */ = {isa = PBXBuildFile; fileRef = 24E480D01F45ED75009B6998 /* netDetail.js */; };
 		2431DAEA1F45F3320082E928 /* NetDiskTitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2431DAE81F45F3320082E928 /* NetDiskTitleTableViewCell.swift */; };
 		2431DAEB1F45F3320082E928 /* NetDiskTitleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2431DAE91F45F3320082E928 /* NetDiskTitleTableViewCell.xib */; };
 		2431DAEE1F45F6810082E928 /* NetDiskImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2431DAEC1F45F6810082E928 /* NetDiskImageTableViewCell.swift */; };
@@ -38,7 +37,8 @@
 		24D7BBA11F45C8C30094DE28 /* Sex8.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 24D7BBA01F45C8C30094DE28 /* Sex8.storyboard */; };
 		24E480CC1F45E6B3009B6998 /* NetDiskDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E480CB1F45E6B3009B6998 /* NetDiskDetailViewController.swift */; };
 		24E480CF1F45E969009B6998 /* NetDiskDetalModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E480CE1F45E969009B6998 /* NetDiskDetalModal.swift */; };
-		24E480D11F45ED75009B6998 /* netDetail.js in Sources */ = {isa = PBXBuildFile; fileRef = 24E480D01F45ED75009B6998 /* netDetail.js */; };
+		24EEF2C620CCD578002DDA8C /* NetDiskFavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24EEF2C520CCD578002DDA8C /* NetDiskFavoriteViewController.swift */; };
+		24EEF2C820CD20E5002DDA8C /* CustomPresentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24EEF2C720CD20E5002DDA8C /* CustomPresentViewController.swift */; };
 		24F3467D1F45CA5B001930ED /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F3467C1F45CA5B001930ED /* ViewController.swift */; };
 		24F4C26F1F45D122008412AF /* NetDiskListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243537B61F45C71400D6C1DF /* NetDiskListViewController.swift */; };
 		24F4C2701F45D122008412AF /* NetDiskModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243537B41F45C71400D6C1DF /* NetDiskModal.swift */; };
@@ -163,7 +163,8 @@
 		24D7BBA01F45C8C30094DE28 /* Sex8.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Sex8.storyboard; sourceTree = "<group>"; };
 		24E480CB1F45E6B3009B6998 /* NetDiskDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetDiskDetailViewController.swift; sourceTree = "<group>"; };
 		24E480CE1F45E969009B6998 /* NetDiskDetalModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetDiskDetalModal.swift; sourceTree = "<group>"; };
-		24E480D01F45ED75009B6998 /* netDetail.js */ = {isa = PBXFileReference; explicitFileType = text; path = netDetail.js; sourceTree = "<group>"; };
+		24EEF2C520CCD578002DDA8C /* NetDiskFavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetDiskFavoriteViewController.swift; sourceTree = "<group>"; };
+		24EEF2C720CD20E5002DDA8C /* CustomPresentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPresentViewController.swift; sourceTree = "<group>"; };
 		24F3467C1F45CA5B001930ED /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		273B412A1F8B7B38001A6CA9 /* NewMovieTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMovieTableViewController.swift; sourceTree = "<group>"; };
 		273B412C1F8B7B53001A6CA9 /* NewMovieTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMovieTableViewCell.swift; sourceTree = "<group>"; };
@@ -232,6 +233,7 @@
 		243537B21F45C6E000D6C1DF /* NetDisk */ = {
 			isa = PBXGroup;
 			children = (
+				24EEF2C720CD20E5002DDA8C /* CustomPresentViewController.swift */,
 				243847241F00891400027E27 /* Main.storyboard */,
 				24E480CA1F45E666009B6998 /* Detail */,
 				24E480C81F45E627009B6998 /* List */,
@@ -356,6 +358,7 @@
 		24E480C81F45E627009B6998 /* List */ = {
 			isa = PBXGroup;
 			children = (
+				24EEF2C420CCD548002DDA8C /* FavoriteList */,
 				243537B61F45C71400D6C1DF /* NetDiskListViewController.swift */,
 				243537B41F45C71400D6C1DF /* NetDiskModal.swift */,
 				243537B71F45C71400D6C1DF /* NetDiskTableViewCell.swift */,
@@ -367,7 +370,6 @@
 		24E480CA1F45E666009B6998 /* Detail */ = {
 			isa = PBXGroup;
 			children = (
-				24E480D01F45ED75009B6998 /* netDetail.js */,
 				24E480CB1F45E6B3009B6998 /* NetDiskDetailViewController.swift */,
 				2431DAE81F45F3320082E928 /* NetDiskTitleTableViewCell.swift */,
 				2431DAE91F45F3320082E928 /* NetDiskTitleTableViewCell.xib */,
@@ -376,6 +378,14 @@
 				2431DAED1F45F6810082E928 /* NetDiskImageTableViewCell.xib */,
 			);
 			path = Detail;
+			sourceTree = "<group>";
+		};
+		24EEF2C420CCD548002DDA8C /* FavoriteList */ = {
+			isa = PBXGroup;
+			children = (
+				24EEF2C520CCD578002DDA8C /* NetDiskFavoriteViewController.swift */,
+			);
+			name = FavoriteList;
 			sourceTree = "<group>";
 		};
 		273B41291F8B7AC8001A6CA9 /* Dytt */ = {
@@ -602,7 +612,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2431DAE71F45F24C0082E928 /* netDetail.js in Resources */,
 				2438472B1F00891400027E27 /* LaunchScreen.storyboard in Resources */,
 				24D7BBA11F45C8C30094DE28 /* Sex8.storyboard in Resources */,
 				273B412F1F8B7B53001A6CA9 /* NewMovieTableViewCell.xib in Resources */,
@@ -674,10 +683,10 @@
 				2431DAEE1F45F6810082E928 /* NetDiskImageTableViewCell.swift in Sources */,
 				249D209720BAFF0D005F7E7F /* Storage.swift in Sources */,
 				24F4C26F1F45D122008412AF /* NetDiskListViewController.swift in Sources */,
-				24E480D11F45ED75009B6998 /* netDetail.js in Sources */,
 				278B1EEA200CB1C7004F9760 /* Movie-Modal.swift in Sources */,
 				276BC26E1F8F6987006B9B92 /* ErrorStruct.swift in Sources */,
 				273B412E1F8B7B53001A6CA9 /* NewMovieTableViewCell.swift in Sources */,
+				24EEF2C820CD20E5002DDA8C /* CustomPresentViewController.swift in Sources */,
 				24F4C2701F45D122008412AF /* NetDiskModal.swift in Sources */,
 				273B412B1F8B7B38001A6CA9 /* NewMovieTableViewController.swift in Sources */,
 				24F4C2711F45D122008412AF /* NetDiskTableViewCell.swift in Sources */,
@@ -691,6 +700,7 @@
 				24E480CF1F45E969009B6998 /* NetDiskDetalModal.swift in Sources */,
 				278B1EED200CB284004F9760 /* FetchBot.swift in Sources */,
 				278B1EEF200D9485004F9760 /* Parser.swift in Sources */,
+				24EEF2C620CCD578002DDA8C /* NetDiskFavoriteViewController.swift in Sources */,
 				276BC2721F8F6A0F006B9B92 /* JsonModal.swift in Sources */,
 				2431DAEA1F45F3320082E928 /* NetDiskTitleTableViewCell.swift in Sources */,
 				243847211F00891400027E27 /* MasterViewController.swift in Sources */,
