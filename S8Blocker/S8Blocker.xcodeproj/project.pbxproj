@@ -28,7 +28,6 @@
 		2438476E1F008ABE00027E27 /* Torrilste.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 243847641F008ABE00027E27 /* Torrilste.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		2468BB3A1F00D61400AAB573 /* S8Blocker.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2438471D1F00891400027E27 /* S8Blocker.xcdatamodeld */; };
 		248434E0200FA38B00CAD097 /* HTMLString.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 248434DD200FA37100CAD097 /* HTMLString.framework */; };
-		249602E320A189E800C9613D /* WebShell_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 249602E220A189E800C9613D /* WebShell_iOS.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		249AE74A20A6E3B40001EFC5 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 249AE74920A6E3B40001EFC5 /* Kingfisher.framework */; };
 		249D208C20B9A748005F7E7F /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 249D208B20B9A748005F7E7F /* ImageIO.framework */; };
 		249D208E20B9A77E005F7E7F /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 249D208D20B9A77E005F7E7F /* MobileCoreServices.framework */; };
@@ -192,7 +191,6 @@
 			files = (
 				249D208E20B9A77E005F7E7F /* MobileCoreServices.framework in Frameworks */,
 				249D208C20B9A748005F7E7F /* ImageIO.framework in Frameworks */,
-				249602E320A189E800C9613D /* WebShell_iOS.framework in Frameworks */,
 				249D209920BAFFC0005F7E7F /* CloudKit.framework in Frameworks */,
 				249AE74A20A6E3B40001EFC5 /* Kingfisher.framework in Frameworks */,
 				248434E0200FA38B00CAD097 /* HTMLString.framework in Frameworks */,
@@ -665,7 +663,6 @@
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/Kingfisher.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/HTMLString.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/WebShell_iOS.framework",
 			);
 			outputPaths = (
 			);

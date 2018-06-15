@@ -62,7 +62,6 @@ class NetDiskListViewController: UIViewController {
         if #available(iOS 11.0, *) {
             navigationItem.searchController = searchController
             navigationItem.hidesSearchBarWhenScrolling = true
-            navigationItem.searchController?.isActive = true
             navigationItem.largeTitleDisplayMode = .automatic
             navigationController?.navigationBar.prefersLargeTitles = true
         } else {
@@ -82,9 +81,9 @@ class NetDiskListViewController: UIViewController {
         super.viewWillDisappear(animated)
         
         if isMovingFromParentViewController {
-//            FetchBot.shareBot.stop {
-//                print("------------ Stop All Download Task -----------")
-//            }
+            FetchBot.shareBot.stop {
+                print("------------ Stop All Download Task -----------")
+            }
         }   else    {
             
         }
@@ -104,16 +103,22 @@ class NetDiskListViewController: UIViewController {
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if self.searchController.isActive {
+            return
+        }
         let height = scrollView.frame.size.height
         let contentOffset = scrollView.contentOffset.y
         let distance = scrollView.contentSize.height - contentOffset
         if distance < height, contentOffset > 0, isRefreshing == false {
             print("load next page tableview!")
             isRefreshing = true
-//            page += 1
-//            DispatchQueue.global().async {
-//                FetchBot.shareBot.start(withSite: self.site)
-//            }
+            if !isCloudDataSource {
+                page += 1
+                DispatchQueue.global().async {
+                    FetchBot.shareBot.start(withSite: self.site)
+                }
+                return
+            }
             if let cursor = self.cursor {
                 self.queryNextPageMovies(cursor: cursor, fetchBlock: { modal in
                     if let _ = self.data.index(where: { $0.modal.href == modal.href }) {
@@ -157,18 +162,10 @@ extension NetDiskListViewController : UITableViewDataSource, UITableViewDelegate
         if  tableView == nil {
             return
         }
-//        tableView.isHidden = true
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UINib.init(nibName: "NetDiskTableViewCell", bundle: nil), forCellReuseIdentifier: NetDiskTableViewCellIdentifier)
         fetch(keyword: "")
-//        let bot = FetchBot.shareBot
-//        bot.startPage = 1
-//        bot.pageOffset = 100
-//        bot.delegate = self
-//        DispatchQueue.global().async {
-//            bot.start(withSite: self.site)
-//        }
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -181,7 +178,7 @@ extension NetDiskListViewController : UITableViewDataSource, UITableViewDelegate
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: NetDiskTableViewCellIdentifier, for: indexPath) as! NetDiskTableViewCell
-        cell.loadData(data[indexPath.row])
+        cell.loadData(data[indexPath.row].modal)
         return cell
     }
     
@@ -201,21 +198,30 @@ extension NetDiskListViewController : UITableViewDataSource, UITableViewDelegate
 extension NetDiskListViewController: FetchBotDelegate {
     func bot(_ bot: FetchBot, didLoardContent content: ContentInfo, atIndexPath index: Int) {
         let netDisk = NetDiskModal(content: content, boradType: site.categrory?.site ?? "")
-        data.append(NetCell(modal: netDisk))
-        save(netDisk: netDisk) { (rec, err) in
-            if let e = err {
-                print("************* Save \(netDisk.title) to cloud Failed: \(e.localizedDescription)")
-                return
+        
+        if isCloudDataSource {
+            save(netDisk: netDisk) { (rec, err) in
+                if let e = err {
+                    print("************* Save \(netDisk.title) to cloud Failed: \(e.localizedDescription)")
+                    return
+                }
+                
+                if let record = rec {
+                    print("Save to cloud Ok: \(record.recordID)")
+                }
             }
-            
-            if let record = rec {
-                print("Save to cloud Ok: \(record.recordID)")
+        }   else    {
+            DispatchQueue.main.async {
+                [unowned self] in
+                if self.searchController.isActive {
+                    self.backupData.append(NetCell(modal: netDisk))
+                }   else    {
+                    self.data.append(NetCell(modal: netDisk))
+                }
+                self.tableView.reloadData()
             }
         }
-//        DispatchQueue.main.async {
-//            [unowned self] in
-//            self.tableView.reloadData()
-//        }
+        
     }
     
     func bot(didStartBot bot: FetchBot) {
@@ -225,8 +231,6 @@ extension NetDiskListViewController: FetchBotDelegate {
     func bot(_ bot: FetchBot, didFinishedContents contents: [ContentInfo], failedLink: [FetchURL]) {
         self.isRefreshing = false
     }
-    
-    
 }
 
 // MARK: - Cloud Datebase
@@ -234,30 +238,29 @@ extension NetDiskListViewController: CloudSaver {
     func fetch(keyword: String) {
         CKContainer.default().accountStatus { (status, err) in
             if let e = err {
-//                self.isCloudDataSource = false
-//                let bot = FetchBot.shareBot
-//                bot.startPage = 1
-//                bot.pageOffset = 1
-//                bot.delegate = self
-//                DispatchQueue.global().async {
-//                    bot.start(withSite: self.site)
-//                }
-                print("iCloud not working: \(e.localizedDescription)")
-//                print("------------ Using AutoFetch now!")
-                self.data.removeAll()
+                self.isCloudDataSource = false
+                let bot = FetchBot.shareBot
+                bot.delegate = self
+                bot.pageOffset = 1
+                DispatchQueue.global().async {
+                    bot.start(withSite: self.site)
+                }
+                
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
+                
+                print(e)
                 return
             }
-            
+
             if !keyword.isEmpty {
                 self.data.removeAll()
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
             }
-            
+
             self.isCloudDataSource = true
             self.queryAllMovies(fetchBlock: { modal in
                 self.data.append(NetCell(modal: modal))
@@ -294,10 +297,15 @@ extension NetDiskListViewController : UISearchControllerDelegate, UISearchResult
     }
     
     func updateSearchResults(for searchController: UISearchController) {
-        print("update search!")
         guard let keyword = self.searchController.searchBar.text, !keyword.isEmpty else {
             return
         }
-        fetch(keyword: keyword)
+        
+        if isCloudDataSource {
+            fetch(keyword: keyword)
+        }   else    {
+            data = backupData.filter({ $0.modal.title.contains(keyword) })
+            tableView.reloadData()
+        }
     }
 }
