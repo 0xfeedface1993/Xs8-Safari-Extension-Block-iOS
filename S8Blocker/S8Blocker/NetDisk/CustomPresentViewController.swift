@@ -111,15 +111,12 @@ class CustomPresentViewController: UIPresentationController {
     override var frameOfPresentedViewInContainerView: CGRect {
         var contanierViewBounds: CGRect!
         if #available(iOS 11.0, *) {
-            contanierViewBounds = CGRect(x: containerView!.safeAreaInsets.left, y: containerView!.safeAreaInsets.top, width: containerView!.bounds.width - (containerView!.safeAreaInsets.right + containerView!.safeAreaInsets.left), height: containerView!.bounds.height - (containerView!.safeAreaInsets.top + containerView!.safeAreaInsets.bottom))
+            contanierViewBounds = CGRect(x: containerView!.safeAreaInsets.left, y: 0, width: containerView!.bounds.width - (containerView!.safeAreaInsets.right + containerView!.safeAreaInsets.left), height: containerView!.bounds.height)
         } else {
             // Fallback on earlier versions
             contanierViewBounds = containerView!.bounds
         }
-        let prentedViewContentSize = size(forChildContentContainer: presentedViewController, withParentContainerSize: contanierViewBounds.size)
-        var presentedViewControllerFrame = contanierViewBounds
-        presentedViewControllerFrame!.size.height = prentedViewContentSize.height
-        presentedViewControllerFrame!.origin.y = contanierViewBounds.maxY - prentedViewContentSize.height
+        let presentedViewControllerFrame = contanierViewBounds
         return presentedViewControllerFrame!
     }
     

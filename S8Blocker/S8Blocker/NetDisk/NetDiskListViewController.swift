@@ -53,7 +53,6 @@ class NetDiskListViewController: UIViewController {
         searchController.delegate = self
         searchController.searchResultsUpdater = self
         searchController.searchBar.placeholder = "帖子名称"
-        searchController.searchBar.showsCancelButton = true
         searchController.dimsBackgroundDuringPresentation = false
         searchController.hidesNavigationBarDuringPresentation = false
         
@@ -69,8 +68,8 @@ class NetDiskListViewController: UIViewController {
             tableView.tableHeaderView = searchController.searchBar
         }
         
-//        let collect = UIBarButtonItem(image: #imageLiteral(resourceName: "Unlike"), style: .done, target: self, action: #selector(switchDataSource(sender:)))
-//        navigationItem.rightBarButtonItem = collect
+        let collect = UIBarButtonItem(image: #imageLiteral(resourceName: "Unlike"), style: .done, target: self, action: #selector(switchDataSource(sender:)))
+        navigationItem.rightBarButtonItem = collect
         
 //        copyPrivateToPublic(cursor: nil)
 //        add(boardType: site.categrory!.site, cursor: nil)
@@ -148,6 +147,7 @@ class NetDiskListViewController: UIViewController {
     
     @objc func switchDataSource(sender: UIBarButtonItem) {
         let second = NetDiskFavoriteViewController()
+        second.site = site
         let navi = UINavigationController(rootViewController: second)
         let presentationController = CustomPresentViewController(presentedViewController: navi, presenting: self)
         navi.transitioningDelegate = presentationController
@@ -287,12 +287,12 @@ extension NetDiskListViewController: CloudSaver {
 extension NetDiskListViewController : UISearchControllerDelegate, UISearchResultsUpdating {
     func willPresentSearchController(_ searchController: UISearchController) {
         backupData = data
-        
+        searchController.searchBar.showsCancelButton = true
     }
     
     func willDismissSearchController(_ searchController: UISearchController) {
         data = backupData
-        
+        searchController.searchBar.showsCancelButton = false
         tableView.reloadData()
     }
     

@@ -221,6 +221,50 @@ extension CloudSaver {
         operation.completionBlock = completion
         privateDatabase.add(operation)
     }
+    
+    // 查询收藏的页面
+    func query(favoriteSite: String, keyword: String, fetchBlock: @escaping FetchRecordCompletion, completion: @escaping QueryCompletion) {
+        let container = CKContainer.default()
+        let privateDatabase = container.privateCloudDatabase
+        var predicate: NSPredicate!
+        if !keyword.isEmpty {
+            let string = "boradType == %@ AND favorite > 0 AND self contains %@"
+            let args = [favoriteSite, keyword]
+            predicate = NSPredicate(format: string, argumentArray: args)
+        }   else    {
+            predicate = NSPredicate(format: "boradType == %@ AND favorite > 0", favoriteSite)
+        }
+        let query = CKQuery(recordType: RecordType.ndMovie.rawValue, predicate: predicate)
+        if keyword.isEmpty {
+            query.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+        }
+        
+        let operation = CKQueryOperation(query: query)
+        if keyword.isEmpty {
+            operation.resultsLimit = 50
+        }
+        
+        operation.recordFetchedBlock = { rd in
+            fetchBlock(rd.convertModal())
+        }
+        operation.queryCompletionBlock = { (cursor, err) in
+            completion(cursor, err)
+        }
+        privateDatabase.add(operation)
+    }
+    
+    func next(favoriteCursor: CKQueryCursor, fetchBlock: @escaping FetchRecordCompletion, completion: @escaping QueryCompletion) {
+        let container = CKContainer.default()
+        let privateDatabase = container.privateCloudDatabase
+        let operation = CKQueryOperation(cursor: favoriteCursor)
+        operation.recordFetchedBlock = { rd in
+            fetchBlock(rd.convertModal())
+        }
+        operation.queryCompletionBlock = { (csr, err) in
+            completion(csr, err)
+        }
+        privateDatabase.add(operation)
+    }
 }
 
 
