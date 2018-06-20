@@ -49,6 +49,9 @@ class NetDiskDetailViewController: UITableViewController {
             return
         }
         
+        let collect = UIBarButtonItem(title: "下载", style: .plain, target: self, action: #selector(download))
+        navigationItem.rightBarButtonItem = collect
+        
         images = imageLinks.map({ ImageItem(url: URL(string: $0), state: .wait, size: #imageLiteral(resourceName: "NetDisk").size) })
     }
     
@@ -72,6 +75,10 @@ class NetDiskDetailViewController: UITableViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    @objc func download() {
+        
     }
 }
 

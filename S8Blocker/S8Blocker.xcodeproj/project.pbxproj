@@ -33,6 +33,9 @@
 		249D208E20B9A77E005F7E7F /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 249D208D20B9A77E005F7E7F /* MobileCoreServices.framework */; };
 		249D209720BAFF0D005F7E7F /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249D209620BAFF0D005F7E7F /* Storage.swift */; };
 		249D209920BAFFC0005F7E7F /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 249D209820BAFFC0005F7E7F /* CloudKit.framework */; };
+		24A5FFF520D90725000ABDEA /* DownloaderTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24A5FFF420D90725000ABDEA /* DownloaderTableViewController.swift */; };
+		24A5FFF820D939FA000ABDEA /* DownloaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24A5FFF620D939FA000ABDEA /* DownloaderTableViewCell.swift */; };
+		24A5FFF920D939FA000ABDEA /* DownloaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24A5FFF720D939FA000ABDEA /* DownloaderTableViewCell.xib */; };
 		24D7BBA11F45C8C30094DE28 /* Sex8.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 24D7BBA01F45C8C30094DE28 /* Sex8.storyboard */; };
 		24E480CC1F45E6B3009B6998 /* NetDiskDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E480CB1F45E6B3009B6998 /* NetDiskDetailViewController.swift */; };
 		24E480CF1F45E969009B6998 /* NetDiskDetalModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E480CE1F45E969009B6998 /* NetDiskDetalModal.swift */; };
@@ -159,6 +162,9 @@
 		249D208D20B9A77E005F7E7F /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		249D209620BAFF0D005F7E7F /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		249D209820BAFFC0005F7E7F /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		24A5FFF420D90725000ABDEA /* DownloaderTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloaderTableViewController.swift; sourceTree = "<group>"; };
+		24A5FFF620D939FA000ABDEA /* DownloaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloaderTableViewCell.swift; sourceTree = "<group>"; };
+		24A5FFF720D939FA000ABDEA /* DownloaderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DownloaderTableViewCell.xib; sourceTree = "<group>"; };
 		24D7BBA01F45C8C30094DE28 /* Sex8.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Sex8.storyboard; sourceTree = "<group>"; };
 		24E480CB1F45E6B3009B6998 /* NetDiskDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetDiskDetailViewController.swift; sourceTree = "<group>"; };
 		24E480CE1F45E969009B6998 /* NetDiskDetalModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetDiskDetalModal.swift; sourceTree = "<group>"; };
@@ -269,6 +275,7 @@
 		2438471A1F00891400027E27 /* S8Blocker */ = {
 			isa = PBXGroup;
 			children = (
+				24A5FFF320D906DA000ABDEA /* Downloader */,
 				249D209520BAFEF6005F7E7F /* iCloudStorage */,
 				278B1EEB200CB26B004F9760 /* FetchBot */,
 				278B1EE0200CA198004F9760 /* Categrory */,
@@ -351,6 +358,16 @@
 				249D209620BAFF0D005F7E7F /* Storage.swift */,
 			);
 			path = iCloudStorage;
+			sourceTree = "<group>";
+		};
+		24A5FFF320D906DA000ABDEA /* Downloader */ = {
+			isa = PBXGroup;
+			children = (
+				24A5FFF420D90725000ABDEA /* DownloaderTableViewController.swift */,
+				24A5FFF620D939FA000ABDEA /* DownloaderTableViewCell.swift */,
+				24A5FFF720D939FA000ABDEA /* DownloaderTableViewCell.xib */,
+			);
+			path = Downloader;
 			sourceTree = "<group>";
 		};
 		24E480C81F45E627009B6998 /* List */ = {
@@ -616,6 +633,7 @@
 				243847281F00891400027E27 /* Assets.xcassets in Resources */,
 				243847261F00891400027E27 /* Main.storyboard in Resources */,
 				278B1EE6200CA341004F9760 /* categrory.plist in Resources */,
+				24A5FFF920D939FA000ABDEA /* DownloaderTableViewCell.xib in Resources */,
 				2431DAEF1F45F6810082E928 /* NetDiskImageTableViewCell.xib in Resources */,
 				2431DAEB1F45F3320082E928 /* NetDiskTitleTableViewCell.xib in Resources */,
 				278B1F03200EF0B6004F9760 /* MovieBrowerTableViewCell.xib in Resources */,
@@ -663,12 +681,13 @@
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/Kingfisher.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/HTMLString.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/WebShell_iOS.framework",
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks";
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -681,7 +700,9 @@
 				249D209720BAFF0D005F7E7F /* Storage.swift in Sources */,
 				24F4C26F1F45D122008412AF /* NetDiskListViewController.swift in Sources */,
 				278B1EEA200CB1C7004F9760 /* Movie-Modal.swift in Sources */,
+				24A5FFF520D90725000ABDEA /* DownloaderTableViewController.swift in Sources */,
 				276BC26E1F8F6987006B9B92 /* ErrorStruct.swift in Sources */,
+				24A5FFF820D939FA000ABDEA /* DownloaderTableViewCell.swift in Sources */,
 				273B412E1F8B7B53001A6CA9 /* NewMovieTableViewCell.swift in Sources */,
 				24EEF2C820CD20E5002DDA8C /* CustomPresentViewController.swift in Sources */,
 				24F4C2701F45D122008412AF /* NetDiskModal.swift in Sources */,
@@ -845,7 +866,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -899,7 +920,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
