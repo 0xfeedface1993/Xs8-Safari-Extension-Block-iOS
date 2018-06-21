@@ -9,6 +9,7 @@
 import UIKit
 import WebKit
 import Kingfisher
+import WebShell_iOS
 
 enum DownloadState {
     case wait
@@ -37,6 +38,8 @@ class NetDiskDetailViewController: UITableViewController {
     let centerImageView = UIImageView()
     let cover = UIView()
     
+    let downloadButton = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 44))
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "详情"
@@ -49,10 +52,16 @@ class NetDiskDetailViewController: UITableViewController {
             return
         }
         
-        let collect = UIBarButtonItem(title: "下载", style: .plain, target: self, action: #selector(download))
+        downloadButton.setTitle("下载", for: .normal)
+        downloadButton.setTitleColor(.gray, for: .highlighted)
+        downloadButton.setTitleColor(.blue, for: .normal)
+        downloadButton.autoresizingMask = UIViewAutoresizing.flexibleWidth.union(.flexibleHeight)
+        downloadButton.titleLabel?.textColor = .blue
+        downloadButton.addTarget(self, action: #selector(download), for: .touchUpInside)
+        let collect = UIBarButtonItem(customView: downloadButton)
         navigationItem.rightBarButtonItem = collect
         
-        images = imageLinks.map({ ImageItem(url: URL(string: $0), state: .wait, size: #imageLiteral(resourceName: "NetDisk").size) })
+//        images = imageLinks.map({ ImageItem(url: URL(string: $0), state: .wait, size: #imageLiteral(resourceName: "NetDisk").size) })
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -78,7 +87,28 @@ class NetDiskDetailViewController: UITableViewController {
     }
     
     @objc func download() {
-        
+        guard let urls = netdisk?.downloads.map({ URL(string: $0) }) else {
+            return
+        }
+        let popver = URLListTableViewController()
+        popver.urls = urls.filter({ $0 != nil }).map({ $0! })
+        popver.preferredContentSize = CGSize(width: 300, height: popver.urls.count > 6 ? 6 * 44:popver.urls.count * 44 )
+        popver.modalPresentationStyle = .popover
+        popver.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
+        popver.popoverPresentationController?.permittedArrowDirections = .up
+        let defaultDelegate = popver.popoverPresentationController?.delegate
+        popver.popoverPresentationController?.delegate = self
+        popver.downloadAction = { [unowned self] url in
+            if let riffle = PCPipeline.share.add(url: url.absoluteString, password: self.netdisk?.password ?? "") {
+                DownloaderController.share.add(riffle: riffle)
+            }
+            
+            popver.dismiss(animated: true, completion: {
+                popver.popoverPresentationController?.delegate = defaultDelegate
+                self.performSegue(withIdentifier: "com.ascp.downloader.push", sender: nil)
+            })
+        }
+        present(popver, animated: true, completion: nil)
     }
 }
 
@@ -358,5 +388,11 @@ extension NetDiskDetailViewController {
         coverAlpha.delegate = self
         coverAlpha.isRemovedOnCompletion = false
         self.cover.layer.add(coverAlpha, forKey: "fadeCover")
+    }
+}
+
+extension NetDiskDetailViewController : UIPopoverPresentationControllerDelegate {
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .none
     }
 }

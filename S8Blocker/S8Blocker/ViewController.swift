@@ -31,6 +31,13 @@ class ViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         self.title = "杏吧有你"
+        
+        let download = UIBarButtonItem(title: "下载器", style: .done, target: self, action: #selector(downloader))
+        navigationItem.rightBarButtonItem = download
+    }
+    
+    @objc func downloader() {
+        performSegue(withIdentifier: "com.ascp.downloader.main.push", sender: nil)
     }
 
     override func didReceiveMemoryWarning() {

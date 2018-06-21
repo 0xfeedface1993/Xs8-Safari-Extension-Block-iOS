@@ -162,6 +162,7 @@ extension NetDiskListViewController : UITableViewDataSource, UITableViewDelegate
         if  tableView == nil {
             return
         }
+//        tableView.isHidden = true
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UINib.init(nibName: "NetDiskTableViewCell", bundle: nil), forCellReuseIdentifier: NetDiskTableViewCellIdentifier)
@@ -188,9 +189,11 @@ extension NetDiskListViewController : UITableViewDataSource, UITableViewDelegate
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let storyboard = UIStoryboard(name: "Sex8", bundle: nil)
+        searchController.searchBar.resignFirstResponder()
         let v = storyboard.instantiateViewController(withIdentifier: "NetDiskDetail") as! NetDiskDetailViewController
         v.netdisk = data[indexPath.row].modal
         navigationController?.pushViewController(v, animated: true)
+//        searchController.isActive = false
     }
 }
 

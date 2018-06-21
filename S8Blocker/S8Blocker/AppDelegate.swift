@@ -80,7 +80,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         }
         let psc = NSPersistentStoreCoordinator(managedObjectModel: mom)
         let options = [NSMigratePersistentStoresAutomaticallyOption:true, NSInferMappingModelAutomaticallyOption:true]
-        let dirURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.ascp.s8sex"), fileURL = URL(string: "S8Blocker.sql", relativeTo: dirURL)
+        let dirURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.ascp.sex8block"), fileURL = URL(string: "S8Blocker.sql", relativeTo: dirURL)
         do {
             try psc.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: fileURL, options: options)
             let moc = NSManagedObjectContext(concurrencyType:.privateQueueConcurrencyType)
@@ -97,6 +97,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         let context = managedObjectContext
         if context.hasChanges {
             do {
+                let request = NSFetchRequest<DRecord>(entityName: "DRecord")
+                request.predicate = NSPredicate(value: true)
+                let records = try context.fetch(request)
+                records.forEach({
+                    let status = DownloadStatus(rawValue: $0.status)!
+                    if status == .downloading || status == .waitting {
+                        $0.status = DownloadStatus.errors.rawValue
+                    }
+                })
                 try context.save()
             } catch {
                 // Replace this implementation with code to handle the error appropriately.

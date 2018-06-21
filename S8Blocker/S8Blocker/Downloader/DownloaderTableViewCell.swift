@@ -19,7 +19,6 @@ enum DownloadStatus : String {
     static let statusColorPacks : [DownloadStatus:UIColor] = [.downloading:.green,
                                                               .downloaded:.blue,
                                                               .waitting:.lightGray,
-
                                                               .cancel:.darkGray,
                                                               .errors:.red,
                                                               .abonden:.brown]
@@ -38,7 +37,6 @@ class DownloaderTableViewCell: UITableViewCell {
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var progressBar: UIProgressView!
     @IBOutlet weak var restartBtn: UIButton!
-    @IBOutlet weak var cancelBtn: UIButton!
     @IBOutlet weak var percent: UILabel!
     @IBOutlet weak var status: UILabel!
     var info : DownloadStateInfo!
@@ -48,8 +46,8 @@ class DownloaderTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        restartBtn.isHidden = true
-        cancelBtn.isHidden = true
+        restartBtn.isEnabled = false
+        selectionStyle = .blue
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -60,13 +58,15 @@ class DownloaderTableViewCell: UITableViewCell {
     
     func load(newInfo: DownloadStateInfo) {
         info = newInfo
-        siteImage.image = info.siteIcon
-        title.text = info.name
-        progressBar.progress = info.progress
-        status.text = info.status.rawValue
-        let megeSize = info.totalBytes / 1024.0 / 1024.0
+        siteImage.image = info.record.siteIcon
+        title.text = info.record.name
+        progressBar.progress = info.record.progress
+        status.text = info.record.status
+        status.textColor = info.record.stateColor
+        restartBtn.isEnabled = info.record.isCanRestart
+        let megeSize = info.record.totalBytes
         newSize.text = String(format: "%.2fM", megeSize)
-        percent.text = String(format: "%.2f", info.progress * 100) + "%"
+        percent.text = String(format: "%.2f", info.record.progress * 100) + "%"
     }
     
     @IBAction func restart(_ sender: Any) {
@@ -82,77 +82,28 @@ class DownloaderTableViewCell: UITableViewCell {
 
 /// 下载状态数据模型，用于视图数据绑定
 struct DownloadStateInfo {
-    var uuid = UUID().uuidString
-    var status : DownloadStatus {
-        didSet {
-            update(newStatus: status)
-        }
-    }
-    var hostType : WebHostSite {
-        didSet {
-            update(newSite: hostType)
-        }
-    }
     var originTask: PCDownloadTask?
     weak var riffle: PCWebRiffle?
-    var name = ""
-    var progress : Float = 0.0
-    var totalBytes : Float = 1.0
-    var site = ""
-    var state = ""
-    var stateColor = UIColor.black
-    var isCanCancel : Bool = false
-    var isCanRestart : Bool = false
-    var isHiddenPrograss : Bool = false
-    var siteIcon : UIImage?
+    var record : DRecord!
     
-    init() {
-        status = .waitting
-        hostType = .unknowsite
+    init(record: DRecord) {
+        self.record = record
+        self.record.update(newSite: WebHostSite(rawValue: record.hostType)!)
+        self.record.update(newStatus: DownloadStatus(rawValue: record.status)!)
     }
     
     init(task: PCDownloadTask) {
-        status = .downloading
-        if let url = task.request.riffle?.mainURL {
-            hostType = siteType(url: url)
-        }   else    {
-            hostType = .unknowsite
-        }
-        
-        name = task.fileName
-        let pros = task.pack.progress * 100.0
-        let guts = Float(task.pack.totalBytes) / 1024.0 / 1024.0
-        progress = pros
-        totalBytes = guts
+        record.load(task: task)
         originTask = task
-        update(newSite: hostType)
-        update(newStatus: status)
     }
     
     init(riffle: PCWebRiffle) {
-        status = .waitting
-        hostType = riffle.host
-        name = riffle.mainURL?.absoluteString ?? "no url"
-        progress = 0.0
-        totalBytes = 1.0
+        record = DRecord.maker()
+        record.load(riffle: riffle)
         self.riffle = riffle
-        update(newSite: hostType)
-        update(newStatus: status)
-    }
-    
-    mutating func update(newStatus: DownloadStatus) {
-        state = newStatus.rawValue
-        stateColor = DownloadStatus.statusColorPacks[status]!
-        isCanCancel = status == .downloading || status == .waitting
-        isCanRestart = status != .abonden && status != .waitting && status != .downloading
-        isHiddenPrograss = status != .downloading
-    }
-    
-    mutating func update(newSite: WebHostSite) {
-        siteIcon = WebHostSite.hostImagePack[newSite]!
     }
     
     var description: String {
-        return "status: \(status)\n hostType: \(hostType)\n name: \(name)\n uuid: \(uuid)\n progress: \(progress)\n" + "site: \(site)\n state: \(state)\n stateColor: \(stateColor)\n isCanCancel: \(isCanCancel)\n isCanRestart: \(isCanRestart)\n" + "isHiddenPrograss: \(isHiddenPrograss)\n siteIcon: \(siteIcon)"
+        return "status: \(record.status)\n hostType: \(record.hostType)\n name: \(record.name ?? "---")\n uuid: \(record.uuid.uuidString)\n progress: \(record.progress)\n" + "state: \(record.state ?? "---")\n stateColor: \(String(describing: record.stateColor))\n isCanCancel: \(record.isCanCancel)\n isCanRestart: \(record.isCanRestart)\n" + "isHiddenPrograss: \(record.isHiddenPrograss)\n siteIcon: \(String(describing: record.siteIcon))"
     }
 }

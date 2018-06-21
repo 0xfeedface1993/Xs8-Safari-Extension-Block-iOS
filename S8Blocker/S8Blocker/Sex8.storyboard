@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14269.12" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="iFF-2x-KH1">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14269.14" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="iFF-2x-KH1">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -94,6 +94,7 @@
                         <outlet property="collectionView" destination="7tI-Da-Erf" id="Thd-sN-dnK"/>
                         <segue destination="lso-ZA-FRp" kind="show" identifier="com.ascp.netdisk.list" id="vFU-7l-ugc"/>
                         <segue destination="8Tq-sI-Q7b" kind="show" identifier="com.ascp.movie.list" id="doA-sc-b0t"/>
+                        <segue destination="3Dl-dF-dhG" kind="show" identifier="com.ascp.downloader.main.push" id="EgS-KF-zxz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ib2-Fk-bgs" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -159,10 +160,41 @@
                             <outlet property="delegate" destination="TQ4-Fq-xQ7" id="Mlv-7U-81z"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <segue destination="3Dl-dF-dhG" kind="show" identifier="com.ascp.downloader.push" id="HrB-cW-Xil"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FWV-lv-Ako" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1359" y="1117"/>
+        </scene>
+        <!--下载列表-->
+        <scene sceneID="G9F-lm-hOP">
+            <objects>
+                <tableViewController storyboardIdentifier="com.ascp.downloader" title="下载列表" useStoryboardIdentifierAsRestorationIdentifier="YES" id="3Dl-dF-dhG" customClass="DownloaderTableViewController" customModule="S8Blocker" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="juv-X1-BKr">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="com.ascp.st.downloader.cell" id="2rq-ff-TTM">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="2rq-ff-TTM" id="xfm-8o-GuF">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="3Dl-dF-dhG" id="hWc-jz-yRJ"/>
+                            <outlet property="delegate" destination="3Dl-dF-dhG" id="VLo-c3-M4o"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="b85-PN-3JC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2457" y="1117"/>
         </scene>
         <!--电影天堂-->
         <scene sceneID="byX-Aw-fDa">
@@ -194,4 +226,7 @@
             <point key="canvasLocation" x="1555" y="119"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="EgS-KF-zxz"/>
+    </inferredMetricsTieBreakers>
 </document>
