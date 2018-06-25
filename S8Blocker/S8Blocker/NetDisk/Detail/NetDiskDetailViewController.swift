@@ -52,16 +52,12 @@ class NetDiskDetailViewController: UITableViewController {
             return
         }
         
-        downloadButton.setTitle("下载", for: .normal)
-        downloadButton.setTitleColor(.gray, for: .highlighted)
-        downloadButton.setTitleColor(.blue, for: .normal)
-        downloadButton.autoresizingMask = UIViewAutoresizing.flexibleWidth.union(.flexibleHeight)
-        downloadButton.titleLabel?.textColor = .blue
-        downloadButton.addTarget(self, action: #selector(download), for: .touchUpInside)
-        let collect = UIBarButtonItem(customView: downloadButton)
-        navigationItem.rightBarButtonItem = collect
+        if netdisk?.downloads.count ?? 0 > 0 {
+            let collect = UIBarButtonItem(title: "下载", style: .plain, target: self, action: #selector(download))
+            navigationItem.rightBarButtonItem = collect
+        }
         
-//        images = imageLinks.map({ ImageItem(url: URL(string: $0), state: .wait, size: #imageLiteral(resourceName: "NetDisk").size) })
+        images = imageLinks.map({ ImageItem(url: URL(string: $0), state: .wait, size: #imageLiteral(resourceName: "NetDisk").size) })
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -90,6 +86,7 @@ class NetDiskDetailViewController: UITableViewController {
         guard let urls = netdisk?.downloads.map({ URL(string: $0) }) else {
             return
         }
+        
         let popver = URLListTableViewController()
         popver.urls = urls.filter({ $0 != nil }).map({ $0! })
         popver.preferredContentSize = CGSize(width: 300, height: popver.urls.count > 6 ? 6 * 44:popver.urls.count * 44 )

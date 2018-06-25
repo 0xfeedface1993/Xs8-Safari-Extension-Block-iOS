@@ -58,6 +58,7 @@ class NetDiskListViewController: UIViewController {
         
         tableviewLoad()
         
+        definesPresentationContext = true
         if #available(iOS 11.0, *) {
             navigationItem.searchController = searchController
             navigationItem.hidesSearchBarWhenScrolling = true
@@ -193,7 +194,6 @@ extension NetDiskListViewController : UITableViewDataSource, UITableViewDelegate
         let v = storyboard.instantiateViewController(withIdentifier: "NetDiskDetail") as! NetDiskDetailViewController
         v.netdisk = data[indexPath.row].modal
         navigationController?.pushViewController(v, animated: true)
-//        searchController.isActive = false
     }
 }
 
@@ -208,7 +208,7 @@ extension NetDiskListViewController: FetchBotDelegate {
                     print("************* Save \(netDisk.title) to cloud Failed: \(e.localizedDescription)")
                     return
                 }
-                
+
                 if let record = rec {
                     print("Save to cloud Ok: \(record.recordID)")
                 }
@@ -224,7 +224,6 @@ extension NetDiskListViewController: FetchBotDelegate {
                 self.tableView.reloadData()
             }
         }
-        
     }
     
     func bot(didStartBot bot: FetchBot) {
@@ -283,7 +282,6 @@ extension NetDiskListViewController: CloudSaver {
                 }
             }, site: self.site.categrory?.site ?? "", keyword: keyword)
         }
-        
     }
 }
 
