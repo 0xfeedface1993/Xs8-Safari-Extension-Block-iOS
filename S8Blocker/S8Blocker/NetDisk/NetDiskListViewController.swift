@@ -41,7 +41,7 @@ class NetDiskListViewController: UIViewController {
     
     var site = Site.netdisk
     var isCloudDataSource = true
-    var cursor : CKQueryCursor?
+    var cursor : CKQueryOperation.Cursor?
     
     let searchController = UISearchController(searchResultsController: nil)
     
@@ -71,16 +71,12 @@ class NetDiskListViewController: UIViewController {
         
         let collect = UIBarButtonItem(image: #imageLiteral(resourceName: "Unlike"), style: .done, target: self, action: #selector(switchDataSource(sender:)))
         navigationItem.rightBarButtonItem = collect
-        
-//        copyPrivateToPublic(cursor: nil)
-//        add(boardType: site.categrory!.site, cursor: nil)
-//        empty(database: CKContainer.default().privateCloudDatabase)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        if isMovingFromParentViewController {
+        if isMovingFromParent {
             FetchBot.shareBot.stop {
                 print("------------ Stop All Download Task -----------")
             }
@@ -208,7 +204,7 @@ extension NetDiskListViewController: FetchBotDelegate {
                     print("************* Save \(netDisk.title) to cloud Failed: \(e.localizedDescription)")
                     return
                 }
-
+                
                 if let record = rec {
                     print("Save to cloud Ok: \(record.recordID)")
                 }
@@ -238,31 +234,32 @@ extension NetDiskListViewController: FetchBotDelegate {
 // MARK: - Cloud Datebase
 extension NetDiskListViewController: CloudSaver {
     func fetch(keyword: String) {
+        func botFetch() {
+            let bot = FetchBot.shareBot
+            bot.delegate = self
+            bot.pageOffset = 1
+            DispatchQueue.global().async {
+                bot.start(withSite: self.site)
+            }
+            
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
         CKContainer.default().accountStatus { (status, err) in
             if let e = err {
                 self.isCloudDataSource = false
-                let bot = FetchBot.shareBot
-                bot.delegate = self
-                bot.pageOffset = 1
-                DispatchQueue.global().async {
-                    bot.start(withSite: self.site)
-                }
-                
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
-                
+                botFetch()
                 print(e)
                 return
             }
-
             if !keyword.isEmpty {
                 self.data.removeAll()
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
             }
-
+            
             self.isCloudDataSource = true
             self.queryAllMovies(fetchBlock: { modal in
                 self.data.append(NetCell(modal: modal))
@@ -282,6 +279,7 @@ extension NetDiskListViewController: CloudSaver {
                 }
             }, site: self.site.categrory?.site ?? "", keyword: keyword)
         }
+        
     }
 }
 
@@ -308,5 +306,6 @@ extension NetDiskListViewController : UISearchControllerDelegate, UISearchResult
             data = backupData.filter({ $0.modal.title.contains(keyword) })
             tableView.reloadData()
         }
+        
     }
 }

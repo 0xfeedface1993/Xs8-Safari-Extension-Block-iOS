@@ -23,7 +23,7 @@ class NetDiskFavoriteViewController: UIViewController {
     
     var site = Site.netdisk
     var isCloudDataSource = true
-    var cursor : CKQueryCursor?
+    var cursor : CKQueryOperation.Cursor?
     
     
     let searchController = UISearchController(searchResultsController: nil)

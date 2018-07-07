@@ -141,7 +141,7 @@ extension NetDiskDetailViewController {
             func layoutMaker(radio: CGFloat) {
                 let constraint = NSLayoutConstraint(item: cell.img, attribute: .height, relatedBy: .equal, toItem: cell.img, attribute: .width, multiplier: radio, constant: 0)
                 constraint.priority = UILayoutPriority(rawValue: 999)
-                if let index = cell.img.constraints.index(where: { $0.firstAttribute == NSLayoutAttribute.height && $0.secondAttribute == NSLayoutAttribute.width }) {
+                if let index = cell.img.constraints.index(where: { $0.firstAttribute == NSLayoutConstraint.Attribute.height && $0.secondAttribute == NSLayoutConstraint.Attribute.width }) {
                     if cell.img.constraints[index] != constraint {
                         cell.img.constraints[index].isActive = false
                         constraint.isActive = true
@@ -355,7 +355,7 @@ extension NetDiskDetailViewController {
         path.addQuadCurve(to: endCenterPoint, control: controlPoint)
         
         animation.path = path
-        animation.rotationMode = kCAAnimationLinear
+        animation.rotationMode = nil
         
         let scale = CABasicAnimation(keyPath: "transform.scale")
         scale.toValue = 1.0
@@ -369,8 +369,8 @@ extension NetDiskDetailViewController {
         group.duration = 0.35
         group.delegate = self
         group.isRemovedOnCompletion = false
-        group.fillMode = kCAFillModeForwards
-        group.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
+        group.fillMode = CAMediaTimingFillMode.forwards
+        group.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeIn)
         self.centerImageView.layer.add(group, forKey: "popAnimate")
         self.view.window?.isUserInteractionEnabled = false
     }
@@ -380,8 +380,8 @@ extension NetDiskDetailViewController {
         coverAlpha.fromValue = 0.2
         coverAlpha.toValue = 0.0
         coverAlpha.duration = 0.35
-        coverAlpha.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
-        coverAlpha.fillMode = kCAFillModeForwards
+        coverAlpha.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeOut)
+        coverAlpha.fillMode = CAMediaTimingFillMode.forwards
         coverAlpha.delegate = self
         coverAlpha.isRemovedOnCompletion = false
         self.cover.layer.add(coverAlpha, forKey: "fadeCover")

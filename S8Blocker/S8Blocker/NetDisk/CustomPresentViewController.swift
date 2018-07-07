@@ -32,15 +32,17 @@ class CustomPresentViewController: UIPresentationController {
         
         _presentationWrappingView = presentationWrappingView
         
-        let presentationRoundedCornerView = UIView(frame: UIEdgeInsetsInsetRect(presentationWrappingView.bounds, UIEdgeInsetsMake(0, 0, -cornerRadius, 0)))
-        presentationRoundedCornerView.autoresizingMask = UIViewAutoresizing.flexibleWidth.union(.flexibleHeight)
+        let presentationRoundedCornerView = UIView(frame: presentationWrappingView.bounds.inset(by: UIEdgeInsets(top: 0, left: 0, bottom: -cornerRadius, right: 0)))
+        
+        presentationRoundedCornerView.autoresizingMask = UIView.AutoresizingMask.flexibleWidth.union(.flexibleHeight)
         presentationRoundedCornerView.layer.cornerRadius = cornerRadius
         presentationRoundedCornerView.layer.masksToBounds = true
         
-        let presentatedViewControllerWrappingView = UIView(frame: UIEdgeInsetsInsetRect(presentationRoundedCornerView.bounds, UIEdgeInsetsMake(0, 0, cornerRadius, 0)))
-        presentatedViewControllerWrappingView.autoresizingMask = UIViewAutoresizing.flexibleWidth.union(.flexibleHeight)
+        let presentatedViewControllerWrappingView = UIView(frame: presentationRoundedCornerView.bounds.inset(by: UIEdgeInsets(top: 0, left: 0, bottom: cornerRadius, right: 0)))
         
-        presentedViewControllerView?.autoresizingMask = UIViewAutoresizing.flexibleWidth.union(.flexibleHeight)
+        presentatedViewControllerWrappingView.autoresizingMask = UIView.AutoresizingMask.flexibleWidth.union(.flexibleHeight)
+        
+        presentedViewControllerView?.autoresizingMask = UIView.AutoresizingMask.flexibleWidth.union(.flexibleHeight)
         presentedViewControllerView?.frame = presentatedViewControllerWrappingView.bounds
         presentatedViewControllerWrappingView.addSubview(presentedViewControllerView!)
         
@@ -52,7 +54,7 @@ class CustomPresentViewController: UIPresentationController {
         dimmingView.backgroundColor = .black
         dimmingView.isOpaque = false
         dimmingView.isUserInteractionEnabled = true
-        dimmingView.autoresizingMask = UIViewAutoresizing.flexibleHeight.union(.flexibleWidth)
+        dimmingView.autoresizingMask = UIView.AutoresizingMask.flexibleHeight.union(.flexibleWidth)
         dimmingView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dimmingView(tap:))))
         _dimmingView = dimmingView
         containerView?.addSubview(dimmingView)

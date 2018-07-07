@@ -15,7 +15,7 @@ enum RecordType : String {
 
 typealias SaveCompletion = (CKRecord?, Error?) -> Void
 typealias ValidateCompletion = (CKAccountStatus, Error?) -> Void
-typealias QueryCompletion = (CKQueryCursor?, Error?) -> Void
+typealias QueryCompletion = (CKQueryOperation.Cursor?, Error?) -> Void
 typealias FetchRecordCompletion = (NetDiskModal) -> Void
 
 protocol CloudSaver {
@@ -26,7 +26,7 @@ extension CloudSaver {
     /// 复制私有区域数据到公共区域
     ///
     /// - Parameter cursor: 若为nil。则说明是开始，否则是获取下一个batch
-    func copyPrivateToPublic(cursor: CKQueryCursor?) {
+    func copyPrivateToPublic(cursor: CKQueryOperation.Cursor?) {
         let container = CKContainer.default()
         let privateDatabase = container.privateCloudDatabase
         let query = CKQuery(recordType: RecordType.ndMovie.rawValue, predicate: NSPredicate(value: true))
@@ -109,7 +109,7 @@ extension CloudSaver {
     ///   - cursor: 上一页的位置指示
     ///   - fetchBlock: 获取一条记录的回调
     ///   - completion: 获取请求完成回调
-    func queryNextPageMovies(cursor: CKQueryCursor, fetchBlock: @escaping FetchRecordCompletion, completion: @escaping QueryCompletion) {
+    func queryNextPageMovies(cursor: CKQueryOperation.Cursor, fetchBlock: @escaping FetchRecordCompletion, completion: @escaping QueryCompletion) {
         let container = CKContainer.default()
         let publicDatabase = container.publicCloudDatabase
         let operation = CKQueryOperation(cursor: cursor)
@@ -127,7 +127,7 @@ extension CloudSaver {
     /// - Parameters:
     ///   - boardType: 指定版块
     ///   - cursor: 上一个batch
-    func add(boardType: String, cursor: CKQueryCursor?) {
+    func add(boardType: String, cursor: CKQueryOperation.Cursor?) {
         let container = CKContainer.default()
         let query = CKQuery(recordType: RecordType.ndMovie.rawValue, predicate: NSPredicate(value: true))
         let operation = cursor == nil ? CKQueryOperation(query: query):CKQueryOperation(cursor: cursor!)
@@ -181,7 +181,7 @@ extension CloudSaver {
     func flep(favoriteModal: NetDiskModal) {
         let container = CKContainer.default()
         let database = container.privateCloudDatabase
-        let queryID = CKRecordID(recordName: favoriteModal.title)
+        let queryID = CKRecord.ID(recordName: favoriteModal.title)
         let record = CKRecord(recordType: RecordType.ndMovie.rawValue, recordID: queryID)
         record.load(netDisk: favoriteModal)
         database.fetch(withRecordID: queryID) { (rec, err) in
@@ -253,7 +253,7 @@ extension CloudSaver {
         privateDatabase.add(operation)
     }
     
-    func next(favoriteCursor: CKQueryCursor, fetchBlock: @escaping FetchRecordCompletion, completion: @escaping QueryCompletion) {
+    func next(favoriteCursor: CKQueryOperation.Cursor, fetchBlock: @escaping FetchRecordCompletion, completion: @escaping QueryCompletion) {
         let container = CKContainer.default()
         let privateDatabase = container.privateCloudDatabase
         let operation = CKQueryOperation(cursor: favoriteCursor)
