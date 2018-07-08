@@ -75,7 +75,7 @@ extension CloudSaver {
     ///   - site: 指定的版块
     func queryAllMovies(fetchBlock: @escaping FetchRecordCompletion, completion: @escaping QueryCompletion, site: String, keyword: String) {
         let container = CKContainer.default()
-        let publicDatabase = container.publicCloudDatabase
+        let privateCloudDatabase = container.privateCloudDatabase
         var predicate: NSPredicate!
         if !keyword.isEmpty {
             let string = "boradType == %@ AND self contains %@"
@@ -100,7 +100,7 @@ extension CloudSaver {
         operation.queryCompletionBlock = { (cursor, err) in
             completion(cursor, err)
         }
-        publicDatabase.add(operation)
+        privateCloudDatabase.add(operation)
     }
     
     /// 获取下一页网盘数据
@@ -111,7 +111,7 @@ extension CloudSaver {
     ///   - completion: 获取请求完成回调
     func queryNextPageMovies(cursor: CKQueryOperation.Cursor, fetchBlock: @escaping FetchRecordCompletion, completion: @escaping QueryCompletion) {
         let container = CKContainer.default()
-        let publicDatabase = container.publicCloudDatabase
+        let privateCloudDatabase = container.privateCloudDatabase
         let operation = CKQueryOperation(cursor: cursor)
         operation.recordFetchedBlock = { rd in
             fetchBlock(rd.convertModal())
@@ -119,7 +119,7 @@ extension CloudSaver {
         operation.queryCompletionBlock = { (csr, err) in
             completion(csr, err)
         }
-        publicDatabase.add(operation)
+        privateCloudDatabase.add(operation)
     }
     
     /// 将公有库中所有记录修改为指定版块
@@ -181,23 +181,6 @@ extension CloudSaver {
     func flep(favoriteModal: NetDiskModal) {
         let container = CKContainer.default()
         let database = container.privateCloudDatabase
-        let queryID = CKRecord.ID(recordName: favoriteModal.title)
-        let record = CKRecord(recordType: RecordType.ndMovie.rawValue, recordID: queryID)
-        record.load(netDisk: favoriteModal)
-        database.fetch(withRecordID: queryID) { (rec, err) in
-            if let e = err {
-                print(e)
-                saveData(rec: record)
-                return
-            }
-            guard let rec = rec else {
-                saveData(rec: record)
-                return
-            }
-            rec["favorite"] = NSNumber(value: favoriteModal.favorite)
-            saveData(rec: rec)
-        }
-        
         func saveData(rec: CKRecord) {
             database.save(rec) { (recc, err) in
                 if let e = err {
@@ -207,19 +190,61 @@ extension CloudSaver {
                 print("Save OK \(String(describing: recc?.recordID))")
             }
         }
+        
+        guard let queryID = favoriteModal.recordID else {
+            let record = CKRecord(recordType: RecordType.ndMovie.rawValue)
+            record.load(netDisk: favoriteModal)
+            record["favorite"] = NSNumber(value: favoriteModal.favorite)
+            saveData(rec: record)
+            return
+        }
+        
+        let record = CKRecord(recordType: RecordType.ndMovie.rawValue, recordID: queryID)
+        database.fetch(withRecordID: queryID) { (rec, err) in
+            if let e = err {
+                print(e)
+                record["favorite"] = NSNumber(value: favoriteModal.favorite)
+                record.load(netDisk: favoriteModal)
+                saveData(rec: record)
+                return
+            }
+            guard let rec = rec else {
+                record["favorite"] = NSNumber(value: favoriteModal.favorite)
+                record.load(netDisk: favoriteModal)
+                saveData(rec: record)
+                return
+            }
+            rec["favorite"] = NSNumber(value: favoriteModal.favorite)
+            saveData(rec: rec)
+        }
     }
     
     func check(favoriteModal: NetDiskModal, fetchBlock: @escaping FetchRecordCompletion, completion: @escaping ()->Void) {
         let container = CKContainer.default()
         let privateDatabase = container.privateCloudDatabase
-        let predict = NSPredicate(format: "title == %@", favoriteModal.title)
-        let query = CKQuery(recordType: RecordType.ndMovie.rawValue, predicate: predict)
-        let operation = CKQueryOperation(query: query)
-        operation.recordFetchedBlock = { rd in
-            fetchBlock(rd.convertModal())
+        
+        if let id = favoriteModal.recordID {
+            privateDatabase.fetch(withRecordID: id) { (rec, err) in
+                if let e = err {
+                    print(e)
+                    return
+                }
+                guard let rec = rec else {
+                    return
+                }
+                fetchBlock(rec.convertModal())
+                completion()
+            }
+        }   else    {
+            let predict = NSPredicate(format: "title == %@", favoriteModal.title)
+            let query = CKQuery(recordType: RecordType.ndMovie.rawValue, predicate: predict)
+            let operation = CKQueryOperation(query: query)
+            operation.recordFetchedBlock = { rd in
+                fetchBlock(rd.convertModal())
+            }
+            operation.completionBlock = completion
+            privateDatabase.add(operation)
         }
-        operation.completionBlock = completion
-        privateDatabase.add(operation)
     }
     
     // 查询收藏的页面
@@ -303,6 +328,7 @@ extension CKRecord {
     /// - Returns: 网盘数据模型
     func convertModal() -> NetDiskModal {
         var modal = NetDiskModal()
+        modal.recordID = self.recordID
         modal.title = self["title"] as! String
         modal.href = self["href"] as! String
         modal.fileSize = self["fileSize"] as! String

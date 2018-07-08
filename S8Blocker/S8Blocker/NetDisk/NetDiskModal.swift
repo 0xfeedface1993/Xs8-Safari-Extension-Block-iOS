@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CloudKit
 
 struct NetDiskModal {
     var title : String
@@ -17,6 +18,7 @@ struct NetDiskModal {
     var fileSize = "-M"
     var boradType : String
     var favorite = 0
+    var recordID : CKRecord.ID?
     
     init() {
         title = ""

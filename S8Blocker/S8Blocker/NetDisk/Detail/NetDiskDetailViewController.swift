@@ -216,8 +216,8 @@ extension NetDiskDetailViewController {
 
 struct LikeImage {
     var image : UIImage
-    static let like = LikeImage(image: #imageLiteral(resourceName: "Like"))
-    static let unlike = LikeImage(image: #imageLiteral(resourceName: "Unlike"))
+    static let like = LikeImage(image: UIImage(named: "Like")!)
+    static let unlike = LikeImage(image: UIImage(named: "Unlike")!)
 }
 
 extension NetDiskDetailViewController: CAAnimationDelegate, CloudSaver {
@@ -299,6 +299,7 @@ extension NetDiskDetailViewController {
     }
     
     @objc func favoriteAction(tap: UITapGestureRecognizer) {
+        let startPoint = tap.location(in: self.cover)
         let destinationImage : UIImage!
         let flag = (self.netdisk?.favorite ?? 0) > 0 ? 0:1
         self.netdisk?.favorite = flag
@@ -328,23 +329,29 @@ extension NetDiskDetailViewController {
             print("like it!")
             destinationImage = LikeImage.like.image
             self.centerImageView.alpha = 0.0
+            
+            self.view.window?.constraints.first(where: { $0.firstAttribute == .centerX && $0.secondAttribute == .centerX && ($0.firstItem as? UIView == self.centerImageView) })?.constant = startPoint.x - self.view.window!.frame.size.width / 2
+            self.view.window?.constraints.first(where: { $0.firstAttribute == .centerY && $0.secondAttribute == .centerY && ($0.firstItem as? UIView == self.centerImageView) })?.constant = startPoint.y - self.view.window!.frame.size.height / 2
+            
+            self.view.window?.layoutIfNeeded()
             self.cover.alpha = 0.0
+            self.centerImageView.alpha = 1.0
             self.centerImageView.transform = CGAffineTransform(scaleX: 0.0, y: 0.0)
             UIView.animate(withDuration: 0.35, animations: {
                 self.centerImageView.alpha = 1.0
+                self.centerImageView.layoutIfNeeded()
                 self.cover.alpha = 0.2
-                self.centerImageView.transform = CGAffineTransform(scaleX: 3.0, y: 3.0)
+                self.centerImageView.transform = CGAffineTransform(scaleX: 4.0, y: 4.0)
             }) { (finished) in
                 if finished {
-                    self.animationGroup()
+                    self.animationGroup(startCenterPoint: startPoint)
                 }
             }
         }
     }
     
-    func animationGroup() {
+    func animationGroup(startCenterPoint: CGPoint) {
         let animation = CAKeyframeAnimation(keyPath: "position")
-        let startCenterPoint = centerImageView.layer.position
         let endCenterPoint = image.layer.position
         let controlPoint = CGPoint(x: endCenterPoint.x, y: startCenterPoint.y)
         
@@ -364,13 +371,13 @@ extension NetDiskDetailViewController {
         alpha.toValue = 0.0
         
         let group = CAAnimationGroup()
-        
         group.animations = [animation, scale, alpha]
-        group.duration = 0.35
+        group.duration = 0.40
         group.delegate = self
         group.isRemovedOnCompletion = false
         group.fillMode = CAMediaTimingFillMode.forwards
         group.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeIn)
+        
         self.centerImageView.layer.add(group, forKey: "popAnimate")
         self.view.window?.isUserInteractionEnabled = false
     }

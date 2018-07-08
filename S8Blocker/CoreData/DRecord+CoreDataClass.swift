@@ -21,7 +21,6 @@ public class DRecord: NSManagedObject {
     }
     
     public func defaultLoad() {
-        uuid = UUID()
         status = DownloadStatus.waitting.rawValue
         hostType = WebHostSite.unknowsite.rawValue
         startTimeStamp = Date()
@@ -34,7 +33,7 @@ public class DRecord: NSManagedObject {
         }   else    {
             hostType = WebHostSite.unknowsite.rawValue
         }
-        
+        uuid = task.request.uuid
         name = task.fileName
         let pros = task.pack.progress
         let guts = Float(task.pack.totalBytes) / 1024.0 / 1024.0
@@ -44,6 +43,7 @@ public class DRecord: NSManagedObject {
     
     func load(riffle: PCWebRiffle) {
         url = riffle.mainURL
+        uuid = riffle.uuid
         status = DownloadStatus.waitting.rawValue
         hostType = riffle.host.rawValue
         name = riffle.mainURL?.absoluteString ?? "no url"

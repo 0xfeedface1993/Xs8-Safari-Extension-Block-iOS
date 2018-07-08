@@ -54,7 +54,7 @@ extension DownloaderController : PCPiplineDelegate {
     func update(task: PCDownloadTask) {
         if let index = datas.firstIndex(where: {
             let status = DownloadStatus(rawValue: $0.record.status)
-            return (status == .downloading || status == .waitting) && $0.riffle?.mainURL == task.request.riffle?.mainURL
+            return (status == .downloading || status == .waitting) && $0.uuid == task.request.uuid
         }) {
             datas[index].record.load(task: task)
             updateBlock?(datas[index].record)
@@ -64,7 +64,7 @@ extension DownloaderController : PCPiplineDelegate {
     func finished(task: PCDownloadTask) {
         if let index = datas.firstIndex(where: {
             let status = DownloadStatus(rawValue: $0.record.status)
-            return (status == .downloading || status == .waitting) && $0.riffle?.mainURL == task.request.riffle?.mainURL
+            return (status == .downloading || status == .waitting) && $0.uuid == task.request.uuid
         }) {
             datas[index].record.load(task: task)
             datas[index].record.endTimeStamp = Date()
@@ -76,7 +76,7 @@ extension DownloaderController : PCPiplineDelegate {
     func finished(riffle: PCWebRiffle) {
         if let index = datas.firstIndex(where: {
             let status = DownloadStatus(rawValue: $0.record.status)
-            return (status == .downloading || status == .waitting) && $0.riffle?.mainURL == riffle.mainURL
+            return (status == .downloading || status == .waitting) && $0.uuid == riffle.uuid
         }) {
             datas[index].record.status = DownloadStatus.errors.rawValue
             updateBlock?(datas[index].record)
