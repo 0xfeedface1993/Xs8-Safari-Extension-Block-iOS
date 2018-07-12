@@ -34,5 +34,6 @@ extension DRecord {
     @NSManaged public var hostType: Int
     @NSManaged public var startTimeStamp: Date
     @NSManaged public var endTimeStamp: Date?
-
+    @NSManaged public var remoteFileURL: URL?
+    @NSManaged public var error: String?
 }

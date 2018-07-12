@@ -36,9 +36,11 @@ public class DRecord: NSManagedObject {
         uuid = task.request.uuid
         name = task.fileName
         let pros = task.pack.progress
-        let guts = Float(task.pack.totalBytes) / 1024.0 / 1024.0
+        let guts = task.pack.totalBytes
         progress = pros
-        totalBytes = guts
+        totalBytes = Float(guts)
+        remoteFileURL = task.request.request.url
+        error = task.pack.error?.localizedDescription
     }
     
     func load(riffle: PCWebRiffle) {

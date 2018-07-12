@@ -65,7 +65,7 @@ class DownloaderTableViewCell: UITableViewCell {
         status.textColor = info.record.stateColor
         restartBtn.isEnabled = info.record.isCanRestart
         let megeSize = info.record.totalBytes
-        newSize.text = String(format: "%.2fM", megeSize)
+        newSize.text = String(format: "%.2fM", megeSize / 1024.0 / 1024.0)
         percent.text = String(format: "%.2f", info.record.progress * 100) + "%"
     }
     
@@ -83,13 +83,11 @@ class DownloaderTableViewCell: UITableViewCell {
 /// 下载状态数据模型，用于视图数据绑定
 struct DownloadStateInfo {
     var originTask: PCDownloadTask?
-    var uuid: UUID!
     weak var riffle: PCWebRiffle?
-    var record : DRecord!
+    var record : DRecord! 
     
     init(record: DRecord) {
         self.record = record
-        uuid = record.uuid
         self.record.update(newSite: WebHostSite(rawValue: record.hostType)!)
         self.record.update(newStatus: DownloadStatus(rawValue: record.status)!)
     }
@@ -97,7 +95,6 @@ struct DownloadStateInfo {
     init(task: PCDownloadTask) {
         record.load(task: task)
         originTask = task
-        uuid = task.request.uuid
     }
     
     init(riffle: PCWebRiffle) {

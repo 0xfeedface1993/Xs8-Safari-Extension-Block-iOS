@@ -329,13 +329,13 @@ extension CKRecord {
     func convertModal() -> NetDiskModal {
         var modal = NetDiskModal()
         modal.recordID = self.recordID
-        modal.title = self["title"] as! String
-        modal.href = self["href"] as! String
-        modal.fileSize = self["fileSize"] as! String
-        modal.password = self["password"] as! String
-        modal.downloads = self["downloads"] as! [String]
-        modal.images = self["images"] as! [String]
-        modal.boradType = self["boradType"] as! String
+        modal.title = self["title"] as? String ?? ""
+        modal.href = self["href"] as? String ?? ""
+        modal.fileSize = self["fileSize"] as? String ?? ""
+        modal.password = self["password"] as? String ?? ""
+        modal.downloads = self["downloads"] as? [String] ?? []
+        modal.images = self["images"] as? [String] ?? []
+        modal.boradType = self["boradType"] as? String ?? ""
         modal.favorite = (self["favorite"] as? NSNumber)?.intValue ?? 0
         return modal
     }

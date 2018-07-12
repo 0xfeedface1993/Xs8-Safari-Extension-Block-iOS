@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import WebShell_iOS
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDelegate {
@@ -116,5 +117,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         }
     }
 
+    func application(_ application: UIApplication, handleEventsForBackgroundURLSession identifier: String, completionHandler: @escaping () -> Void) {
+        let backgroundSession = PCDownloadManager.share.backgroundSession
+        print("Rejoining session with identifier \(identifier) \(backgroundSession)")
+        PCDownloadManager.share.completeHandle[identifier] = completionHandler
+    }
 }
 

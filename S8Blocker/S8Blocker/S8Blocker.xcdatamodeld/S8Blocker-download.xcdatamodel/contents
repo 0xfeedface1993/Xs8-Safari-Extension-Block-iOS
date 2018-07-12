@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14270.11" systemVersion="17F77" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14296.2" systemVersion="17G65" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="DRecord" representedClassName="DRecord" syncable="YES">
         <attribute name="endTimeStamp" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="error" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="hostType" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="isCanCancel" transient="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="isCanRestart" transient="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
@@ -9,6 +10,7 @@
         <attribute name="isHiddenPrograss" transient="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="name" attributeType="String" minValueString="1" syncable="YES"/>
         <attribute name="progress" optional="YES" attributeType="Float" minValueString="0" maxValueString="1" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="remoteFileURL" optional="YES" attributeType="URI" syncable="YES"/>
         <attribute name="siteIcon" transient="YES" attributeType="Transformable" customClassName="UIImage" syncable="YES"/>
         <attribute name="startTimeStamp" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="state" transient="YES" attributeType="String" syncable="YES"/>
@@ -34,7 +36,7 @@
         <relationship name="downloadRecord" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="DRecord" inverseName="movie" inverseEntity="DRecord" syncable="YES"/>
     </entity>
     <elements>
-        <element name="DRecord" positionX="270" positionY="207" width="128" height="300"/>
+        <element name="DRecord" positionX="270" positionY="207" width="128" height="330"/>
         <element name="Event" positionX="135" positionY="324" width="128" height="60"/>
         <element name="Movie" positionX="-0.12890625" positionY="272.76171875" width="128" height="180"/>
     </elements>

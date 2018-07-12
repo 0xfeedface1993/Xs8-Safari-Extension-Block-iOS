@@ -152,7 +152,18 @@ extension DownloaderTableViewController {
             records.sort(by: { $0.startTimeStamp > $1.startTimeStamp })
             firmData.removeAll()
             records.forEach({ firmData.append(DownloadStateInfo(record: $0)) })
-            tableView.reloadData()
+            
+            PCDownloadManager.share.loadBackgroundTask { (tasks) -> [(task: URLSessionDownloadTask, url: URL, remoteURL: URL, uuid: UUID)] in
+                return tasks.map({ task -> (task: URLSessionDownloadTask, url: URL, remoteURL: URL, uuid: UUID)? in
+                    if let t = records.first(where: { $0.remoteFileURL == task.response!.url!  }) {
+                        return (task: task, url: t.url!, remoteURL: t.remoteFileURL!, uuid: t.uuid)
+                    }
+                    return nil
+                }).filter({ $0 != nil }).map({ $0! })
+            }
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
+                self.tableView.reloadData()
+            }
 //            records.forEach({ app.managedObjectContext.delete($0) })
 //            app.saveContext()
         } catch {
