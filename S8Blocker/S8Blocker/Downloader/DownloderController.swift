@@ -64,9 +64,9 @@ extension DownloaderController : PCPiplineDelegate {
             datas[index].record.endTimeStamp = Date()
             if let _ = datas[index].record.error {
                 datas[index].record.status = DownloadStatus.errors.rawValue
-                datas[index].record.progress = 1.0
             }   else    {
                 datas[index].record.status = DownloadStatus.downloaded.rawValue
+                datas[index].record.progress = 1.0
             }
             updateBlock?(datas[index].record)
         }
