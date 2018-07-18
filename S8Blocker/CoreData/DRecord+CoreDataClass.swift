@@ -13,6 +13,23 @@ import WebShell_iOS
 
 @objc(DRecord)
 public class DRecord: NSManagedObject {
+    var saveFileName: String {
+        let parts = name?.split(separator: ".")
+        let last = String(parts?.last ?? "")
+        let prefix = String(parts?.dropLast().joined() ?? "")
+        return "\(prefix)(\(password ?? "")).\(last)"
+    }
+    
+    var localFileURL: URL? {
+        var documentURL = FileManager.default.urls(for: .documentDirectory, in: .allDomainsMask).first!
+        documentURL.appendPathComponent(saveFileName)
+        if FileManager.default.fileExists(atPath: documentURL.path) {
+            return documentURL
+        }   else    {
+            return nil
+        }
+    }
+    
     public static func maker() -> DRecord {
         let app = UIApplication.shared.delegate as! AppDelegate
         let record = NSEntityDescription.insertNewObject(forEntityName: "DRecord", into: app.managedObjectContext) as! DRecord
@@ -51,6 +68,7 @@ public class DRecord: NSManagedObject {
         name = riffle.mainURL?.absoluteString ?? "no url"
         progress = 0.0
         totalBytes = 1.0
+        password = riffle.password
     }
     
     public override func didChangeValue(forKey key: String) {
@@ -76,4 +94,6 @@ public class DRecord: NSManagedObject {
     func update(newSite: WebHostSite) {
         siteIcon = WebHostSite.hostImagePack[newSite]!
     }
+    
+    
 }

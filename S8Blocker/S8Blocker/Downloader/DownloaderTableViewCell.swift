@@ -29,7 +29,8 @@ extension WebHostSite {
                                                         .pan666: UIImage(named: "mofe_666pan")!,
                                                         .cchooo: UIImage(named: "mofe_ccchooo")!,
                                                         .yousuwp: UIImage(named: "mofe_yousu")!,
-                                                        .unknowsite: UIImage(named: "mofe_feemoo")!]
+                                                        .unknowsite: UIImage(named: "mofe_feemoo")!,
+                                                        .v2file:UIImage(named: "mofe_v4")!]
 }
 
 class DownloaderTableViewCell: UITableViewCell {

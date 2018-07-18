@@ -14,7 +14,21 @@ class DownloaderTableViewController: UITableViewController {
     let cellIdenitfier = "com.ascp.downloader.cell"
     var datas : [DownloadStateInfo] { return firmData }
     var dynamicData = [DownloadStateInfo]()
+    private let document = UIDocumentInteractionController()
     private var firmData = [DownloadStateInfo]()
+    var fileList: [String] {
+        guard let url = FileManager.default.urls(for: .documentDirectory, in: .allDomainsMask).first else {
+            print("<<<<<<<<<<<<<<<<<<< DocumentDirectory Not Found! >>>>>>>>>>>>>>>>>>>>")
+            return []
+        }
+        do {
+            let list = try FileManager.default.contentsOfDirectory(atPath: url.path)
+            return list
+        } catch {
+            print(error)
+            return []
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -47,6 +61,9 @@ class DownloaderTableViewController: UITableViewController {
                 }
             }
         }
+        
+        let barItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.trash, target: self, action: #selector(deleteAllFile))
+        navigationItem.rightBarButtonItem = barItem
     }
 
     // MARK: - Table view data source
@@ -91,7 +108,15 @@ class DownloaderTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60.0
     }
- 
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let fileURL = datas[indexPath.row].record.localFileURL else {
+            print("************ file NOT EXSIT! *************")
+            return
+        }
+        document.url = fileURL
+        document.presentOpenInMenu(from: tableView.cellForRow(at: indexPath)!.frame, in: view, animated: true)
+    }
 
     /*
     // Override to support conditional editing of the table view.
@@ -141,17 +166,33 @@ class DownloaderTableViewController: UITableViewController {
 }
 
 extension DownloaderTableViewController {
-    func loadData() {
-        let app = UIApplication.shared.delegate as! AppDelegate
-        
+     func loadData() {
+        DownloaderTableViewController.read { (records, error) in
+            print(fileList)
+            if let e = error {
+                let alert = UIAlertController(title: "数据读取失败", message: e.localizedDescription, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+                let top = navigationController?.viewControllers.first
+                top?.present(alert, animated: true, completion: nil)
+                return
+            }
+            firmData = records.map({ DownloadStateInfo(record: $0) })
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
+                self.tableView.reloadData()
+//                self.deleteAllFile()
+            }
+            
+        }
+    }
+    
+    static func read(completion: ([DRecord], Error?) -> Void) {
         // 获取任务，任务都存储在数据库中，根据开始下载时间排序
         do {
             let request = NSFetchRequest<DRecord>(entityName: "DRecord")
             request.predicate = NSPredicate(value: true)
+            let app = UIApplication.shared.delegate as! AppDelegate
             var records = try app.managedObjectContext.fetch(request)
             records.sort(by: { $0.startTimeStamp > $1.startTimeStamp })
-            firmData.removeAll()
-            records.forEach({ firmData.append(DownloadStateInfo(record: $0)) })
             
             PCDownloadManager.share.loadBackgroundTask { (tasks) -> [(task: URLSessionDownloadTask, url: URL, remoteURL: URL, uuid: UUID)] in
                 return tasks.map({ task -> (task: URLSessionDownloadTask, url: URL, remoteURL: URL, uuid: UUID)? in
@@ -161,17 +202,30 @@ extension DownloaderTableViewController {
                     return nil
                 }).filter({ $0 != nil }).map({ $0! })
             }
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
-                self.tableView.reloadData()
-            }
-//            records.forEach({ app.managedObjectContext.delete($0) })
-//            app.saveContext()
+            completion(records, nil)
         } catch {
             print(error)
-            let alert = UIAlertController(title: "数据读取失败", message: error.localizedDescription, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-            let top = navigationController?.viewControllers.first
-            top?.present(alert, animated: true, completion: nil)
+            completion([], error)
         }
+    }
+    
+    @objc func deleteAllFile() {
+        let alert = UIAlertController(title: "警告", message: "所有已下载文件会被删除", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "确定", style: .cancel, handler: { _ in
+            guard let url = FileManager.default.urls(for: .documentDirectory, in: .allDomainsMask).first else {
+                print("<<<<<<<<<<<<<<<<<<< DocumentDirectory Not Found! >>>>>>>>>>>>>>>>>>>>")
+                return
+            }
+            do {
+                for item in self.fileList {
+                    try FileManager.default.removeItem(atPath: url.appendingPathComponent(item).path)
+                }
+            } catch {
+                print(error)
+            }
+        }))
+        alert.addAction(UIAlertAction(title: "取消", style: .default, handler: nil))
+        let top = navigationController?.viewControllers.first
+        top?.present(alert, animated: true, completion: nil)
     }
 }
