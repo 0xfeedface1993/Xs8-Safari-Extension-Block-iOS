@@ -95,5 +95,16 @@ public class DRecord: NSManagedObject {
         siteIcon = WebHostSite.hostImagePack[newSite]!
     }
     
-    
+    static func deleteAllRecord() {
+        do {
+            let request = NSFetchRequest<DRecord>(entityName: "DRecord")
+            request.predicate = NSPredicate(value: true)
+            let app = UIApplication.shared.delegate as! AppDelegate
+            let records = try app.managedObjectContext.fetch(request)
+            records.forEach({ app.managedObjectContext.delete($0) })
+            app.saveContext()
+        } catch {
+            print(error)
+        }
+    }
 }

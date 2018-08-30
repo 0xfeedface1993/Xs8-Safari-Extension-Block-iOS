@@ -46,6 +46,7 @@ class DownloaderTableViewController: UITableViewController {
         
         tableView.register(UINib(nibName: "DownloaderTableViewCell", bundle: nil), forCellReuseIdentifier: cellIdenitfier)
         loadData()
+//        DRecord.deleteAllRecord()
         
         let controller = DownloaderController.share
         dynamicData = controller.datas
@@ -195,12 +196,14 @@ extension DownloaderTableViewController {
             records.sort(by: { $0.startTimeStamp > $1.startTimeStamp })
             
             PCDownloadManager.share.loadBackgroundTask { (tasks) -> [(task: URLSessionDownloadTask, url: URL, remoteURL: URL, uuid: UUID)] in
-                return tasks.map({ task -> (task: URLSessionDownloadTask, url: URL, remoteURL: URL, uuid: UUID)? in
-                    if let t = records.first(where: { $0.remoteFileURL == task.response!.url!  }) {
+                let backgroundTask = tasks.map({ task -> (task: URLSessionDownloadTask, url: URL, remoteURL: URL, uuid: UUID)? in
+                    if let t = records.first(where: { $0.remoteFileURL?.absoluteString == task.response!.url!.absoluteString  }) {
                         return (task: task, url: t.url!, remoteURL: t.remoteFileURL!, uuid: t.uuid)
                     }
                     return nil
                 }).filter({ $0 != nil }).map({ $0! })
+                print(backgroundTask)
+                return backgroundTask
             }
             completion(records, nil)
         } catch {
