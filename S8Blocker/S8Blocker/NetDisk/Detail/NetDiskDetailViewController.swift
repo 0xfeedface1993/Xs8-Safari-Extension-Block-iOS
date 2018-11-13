@@ -20,6 +20,7 @@ enum DownloadState {
 
 struct ImageItem {
     var url: URL?
+    var image: UIImage?
     var state: DownloadState
     var size: CGSize
     var radio: CGFloat {
@@ -29,6 +30,8 @@ struct ImageItem {
         return radio * fitWidth
     }
 }
+
+let CacheOptions : KingfisherOptionsInfo = [.downloader(ImageDownloader.default)]
 
 class NetDiskDetailViewController: UITableViewController {
     var netdisk : NetDiskModal?
@@ -47,6 +50,7 @@ class NetDiskDetailViewController: UITableViewController {
         tableView.register(UINib(nibName: "NetDiskTitleTableViewCell", bundle: nil), forCellReuseIdentifier: NetDiskTitleTableViewCellIdentitfier)
         tableView.register(UINib(nibName: "NetDiskImageTableViewCell", bundle: nil), forCellReuseIdentifier: NetDiskImageTableViewCellIdentitfier)
         tableView.separatorStyle = .none
+        tableView.prefetchDataSource = self
         
         guard let imageLinks = netdisk?.images else {
             return
@@ -57,7 +61,7 @@ class NetDiskDetailViewController: UITableViewController {
             navigationItem.rightBarButtonItem = collect
         }
         
-        images = imageLinks.map({ ImageItem(url: URL(string: $0), state: .wait, size: #imageLiteral(resourceName: "NetDisk").size) })
+        images = imageLinks.map({ ImageItem(url: URL(string: $0), image: nil, state: .wait, size: #imageLiteral(resourceName: "NetDisk").size) })
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -155,37 +159,43 @@ extension NetDiskDetailViewController {
             
             let linkIndex = indexPath.row - 3
             let item = self.images[linkIndex]
-            let url = item.url
-            
             switch item.state {
             case .wait:
                 self.images[linkIndex].state = .downloading
-                cell.img.kf.setImage(with: url, placeholder: #imageLiteral(resourceName: "NetDisk"), options: nil, progressBlock: nil, completionHandler: { (img, err, cache, urlx) in
-                    if let _ = err {
+                guard let url = item.url else {
+                    cell.img.image = #imageLiteral(resourceName: "Failed")
+                    self.images[linkIndex].state = .error
+                    break
+                }
+                ImageDownloader.default.downloadImage(with: url, completionHandler: { (image, error, urlx, data) in
+                    if let _ = error {
                         DispatchQueue.main.async {
                             self.images[linkIndex].state = .error
                             self.images[linkIndex].size = #imageLiteral(resourceName: "Failed").size
                             if tableView.indexPathsForVisibleRows?.contains(indexPath) ?? false {
+                                cell.img.image = #imageLiteral(resourceName: "Failed")
                                 tableView.reloadData()
                             }
                         }
                         return
                     }
-                    
-                    if let img = img {
+                    if let img = image {
                         DispatchQueue.main.async {
+                            self.images[linkIndex].image = image
                             self.images[linkIndex].state = .downloaded
                             self.images[linkIndex].size = img.size
                             if tableView.indexPathsForVisibleRows?.contains(indexPath) ?? false {
+                                cell.img.image = image
                                 tableView.reloadData()
                             }
                         }
                     }
                 })
+                cell.img.image = #imageLiteral(resourceName: "NetDisk")
             case .downloading:
                 cell.img.image = #imageLiteral(resourceName: "NetDisk")
             case .downloaded:
-                cell.img.kf.setImage(with: url)
+                cell.img.image = self.images[linkIndex].image
             case .error:
                 cell.img.image = #imageLiteral(resourceName: "Failed")
             }
@@ -209,6 +219,54 @@ extension NetDiskDetailViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
+    }
+    
+
+}
+
+extension NetDiskDetailViewController: UITableViewDataSourcePrefetching {
+    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+        indexPaths.forEach { (indexPath) in
+            guard indexPath.row >= 3 else {
+                return
+            }
+            let linkIndex = indexPath.row - 3
+            let item = self.images[linkIndex]
+            guard let url = item.url else {
+                self.images[linkIndex].state = .error
+                return
+            }
+            
+            switch item.state {
+            case .wait:
+                self.images[linkIndex].state = .downloading
+                ImageDownloader.default.downloadImage(with: url, completionHandler: { (image, error, urlx, data) in
+                    if let _ = error {
+                        DispatchQueue.main.async {
+                            self.images[linkIndex].state = .error
+                            self.images[linkIndex].size = #imageLiteral(resourceName: "Failed").size
+                            if tableView.indexPathsForVisibleRows?.contains(indexPath) ?? false {
+                                tableView.reloadData()
+                            }
+                        }
+                        return
+                    }
+                    if let img = image {
+                        DispatchQueue.main.async {
+                            self.images[linkIndex].image = image
+                            self.images[linkIndex].state = .downloaded
+                            self.images[linkIndex].size = img.size
+                            if tableView.indexPathsForVisibleRows?.contains(indexPath) ?? false {
+                                tableView.reloadData()
+                            }
+                        }
+                    }
+                })
+            default:
+                break
+            }
+        }
     }
 }
 

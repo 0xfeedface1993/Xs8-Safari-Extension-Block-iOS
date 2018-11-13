@@ -9,6 +9,7 @@
 import UIKit
 import WebKit
 import CloudKit
+import Kingfisher
 
 enum SitePlace {
     case login
@@ -23,7 +24,14 @@ struct NetCell {
     
     init(modal: NetDiskModal) {
         self.modal = modal
-        self.previewImages = modal.images.map({ ImageItem(url: URL(string: $0), state: .wait, size: #imageLiteral(resourceName: "NetDisk").size) })
+        self.previewImages = [ImageItem]()
+        for i in 0...2 {
+            var url : URL? = nil
+            if i < modal.images.count {
+                url = URL(string: modal.images[i])
+            }
+            self.previewImages.append(ImageItem(url: url, image: nil, state: .wait, size: #imageLiteral(resourceName: "NetDisk").size))
+        }
     }
 }
 
@@ -162,6 +170,7 @@ extension NetDiskListViewController : UITableViewDataSource, UITableViewDelegate
 //        tableView.isHidden = true
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.prefetchDataSource = self
         tableView.register(UINib.init(nibName: "NetDiskTableViewCell", bundle: nil), forCellReuseIdentifier: NetDiskTableViewCellIdentifier)
         fetch(keyword: "")
     }
@@ -176,7 +185,49 @@ extension NetDiskListViewController : UITableViewDataSource, UITableViewDelegate
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: NetDiskTableViewCellIdentifier, for: indexPath) as! NetDiskTableViewCell
-        cell.loadData(data[indexPath.row].modal)
+        let reserveData = data[indexPath.row]
+        cell.loadData(reserveData.modal)
+        for (index, imageView) in cell.previewImages.enumerated() {
+            guard let url = reserveData.previewImages[index].url else {
+                self.data[indexPath.row].previewImages[index].state = .error
+                imageView.image = UIImage(named: "Failed")
+                continue
+            }
+            switch reserveData.previewImages[index].state {
+            case .wait:
+                self.data[indexPath.row].previewImages[index].state = .downloading
+                imageView.image = UIImage(named: "NetDisk")
+                ImageDownloader.default.downloadImage(with: url, completionHandler: { (image, error, urlx, data) in
+                    if let _ = error {
+                        DispatchQueue.main.async {
+                            self.data[indexPath.row].previewImages[index].state = .error
+                            self.data[indexPath.row].previewImages[index].size = #imageLiteral(resourceName: "Failed").size
+                            if tableView.indexPathsForVisibleRows?.contains(indexPath) ?? false {
+                                imageView.image = #imageLiteral(resourceName: "Failed")
+                            }
+                        }
+                        return
+                    }
+                    if let img = image {
+                        DispatchQueue.main.async {
+                            self.data[indexPath.row].previewImages[index].image = img
+                            self.data[indexPath.row].previewImages[index].state = .downloaded
+                            self.data[indexPath.row].previewImages[index].size = img.size
+                            if tableView.indexPathsForVisibleRows?.contains(indexPath) ?? false {
+                                imageView.image = img
+                            }
+                        }
+                    }
+                })
+                
+            case .downloading:
+                imageView.image = UIImage(named: "NetDisk")
+            case .downloaded:
+                imageView.image = self.data[indexPath.row].previewImages[index].image
+            case .error:
+                imageView.image = UIImage(named: "Failed")
+            }
+        }
         return cell
     }
     
@@ -228,6 +279,48 @@ extension NetDiskListViewController: FetchBotDelegate {
     
     func bot(_ bot: FetchBot, didFinishedContents contents: [ContentInfo], failedLink: [FetchURL]) {
         self.isRefreshing = false
+    }
+}
+
+extension NetDiskListViewController: UITableViewDataSourcePrefetching {
+    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+        indexPaths.forEach { (indexPath) in
+            for item in self.data[indexPath.row].previewImages.enumerated() {
+                let linkIndex = item.offset
+                switch item.element.state {
+                case .wait:
+                    guard let url = item.element.url else {
+                        self.data[indexPath.row].previewImages[linkIndex].state = .error
+                        continue
+                    }
+                    self.data[indexPath.row].previewImages[linkIndex].state = .downloading
+                    ImageDownloader.default.downloadImage(with: url, completionHandler: { (image, error, urlx, data) in
+                        if let _ = error {
+                            DispatchQueue.main.async {
+                                self.data[indexPath.row].previewImages[linkIndex].state = .error
+                                self.data[indexPath.row].previewImages[linkIndex].size = #imageLiteral(resourceName: "Failed").size
+                                if tableView.indexPathsForVisibleRows?.contains(indexPath) ?? false {
+                                    tableView.reloadData()
+                                }
+                            }
+                            return
+                        }
+                        if let img = image {
+                            DispatchQueue.main.async {
+                                self.data[indexPath.row].previewImages[linkIndex].image = image
+                                self.data[indexPath.row].previewImages[linkIndex].state = .downloaded
+                                self.data[indexPath.row].previewImages[linkIndex].size = img.size
+                                if tableView.indexPathsForVisibleRows?.contains(indexPath) ?? false {
+                                    tableView.reloadData()
+                                }
+                            }
+                        }
+                    })
+                default:
+                    break
+                }
+            }
+        }
     }
 }
 
