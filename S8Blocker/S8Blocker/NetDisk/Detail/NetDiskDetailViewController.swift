@@ -167,6 +167,16 @@ extension NetDiskDetailViewController {
                     self.images[linkIndex].state = .error
                     break
                 }
+                if let cache = ImageCache.default.retrieveImageInMemoryCache(forKey: url.absoluteString) ?? ImageCache.default.retrieveImageInDiskCache(forKey: url.absoluteString) {
+                    self.images[linkIndex].state = .downloaded
+                    self.images[linkIndex].image = cache
+                    self.images[linkIndex].size = cache.size
+                    if tableView.indexPathsForVisibleRows?.contains(indexPath) ?? false {
+                        cell.img.image = cache
+                        tableView.reloadData()
+                    }
+                    break
+                }
                 ImageDownloader.default.downloadImage(with: url, completionHandler: { (image, error, urlx, data) in
                     if let _ = error {
                         DispatchQueue.main.async {
@@ -181,6 +191,7 @@ extension NetDiskDetailViewController {
                     }
                     if let img = image {
                         DispatchQueue.main.async {
+                            ImageCache.default.store(img, forKey: url.absoluteString)
                             self.images[linkIndex].image = image
                             self.images[linkIndex].state = .downloaded
                             self.images[linkIndex].size = img.size
@@ -241,6 +252,15 @@ extension NetDiskDetailViewController: UITableViewDataSourcePrefetching {
             switch item.state {
             case .wait:
                 self.images[linkIndex].state = .downloading
+                if let cache = ImageCache.default.retrieveImageInMemoryCache(forKey: url.absoluteString) ?? ImageCache.default.retrieveImageInDiskCache(forKey: url.absoluteString) {
+                    self.images[linkIndex].state = .downloaded
+                    self.images[linkIndex].image = cache
+                    self.images[linkIndex].size = cache.size
+                    if tableView.indexPathsForVisibleRows?.contains(indexPath) ?? false {
+                        tableView.reloadData()
+                    }
+                    break
+                }
                 ImageDownloader.default.downloadImage(with: url, completionHandler: { (image, error, urlx, data) in
                     if let _ = error {
                         DispatchQueue.main.async {
@@ -254,6 +274,7 @@ extension NetDiskDetailViewController: UITableViewDataSourcePrefetching {
                     }
                     if let img = image {
                         DispatchQueue.main.async {
+                            ImageCache.default.store(img, forKey: url.absoluteString)
                             self.images[linkIndex].image = image
                             self.images[linkIndex].state = .downloaded
                             self.images[linkIndex].size = img.size
