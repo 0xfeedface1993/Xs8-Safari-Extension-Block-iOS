@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import UserNotifications
 import CoreData
 import WebShell_iOS
 
@@ -65,6 +66,25 @@ class DownloaderTableViewController: UITableViewController {
         
         let barItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.trash, target: self, action: #selector(deleteAllFile))
         navigationItem.rightBarButtonItem = barItem
+        
+        UNUserNotificationCenter.current().requestAuthorization(options: UNAuthorizationOptions.alert.union(.sound)) { (flag, err) in
+            if let e = err {
+                DispatchQueue.main.async {
+                    print(e)
+                    let alert = UIAlertController(title: "推送已关闭", message: "您将需要手动进入app继续下载任务", preferredStyle: .alert)
+                    let cancel = UIAlertAction(title: "确定", style: .cancel, handler: { (_) in
+                        alert.dismiss(animated: true, completion: nil)
+                    })
+                    alert.addAction(cancel)
+                    self.present(alert, animated: true, completion: nil)
+                }
+            }
+            
+            if flag {
+                
+            }
+        }
+
     }
 
     // MARK: - Table view data source
@@ -194,10 +214,9 @@ extension DownloaderTableViewController {
             let app = UIApplication.shared.delegate as! AppDelegate
             var records = try app.managedObjectContext.fetch(request)
             records.sort(by: { $0.startTimeStamp > $1.startTimeStamp })
-            
             PCDownloadManager.share.loadBackgroundTask { (tasks) -> [(task: URLSessionDownloadTask, url: URL, remoteURL: URL, uuid: UUID)] in
                 let backgroundTask = tasks.map({ task -> (task: URLSessionDownloadTask, url: URL, remoteURL: URL, uuid: UUID)? in
-                    if let t = records.first(where: { $0.remoteFileURL?.absoluteString == task.response!.url!.absoluteString  }) {
+                    if let rkr = task.response?.url?.absoluteString, let t = records.first(where: { $0.remoteFileURL?.absoluteString == rkr  }) {
                         return (task: task, url: t.url!, remoteURL: t.remoteFileURL!, uuid: t.uuid)
                     }
                     return nil

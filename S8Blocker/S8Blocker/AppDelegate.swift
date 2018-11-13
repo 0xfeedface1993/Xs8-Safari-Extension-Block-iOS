@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import UserNotifications
 import CoreData
 import WebShell_iOS
 
@@ -94,7 +95,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 
     // MARK: - Core Data Saving support
 
-    func saveContext () {
+    func saveContext (flag: Bool = false) {
         let context = managedObjectContext
         if context.hasChanges {
             do {
@@ -103,8 +104,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
                 let records = try context.fetch(request)
                 records.forEach({
                     let status = DownloadStatus(rawValue: $0.status)!
-                    if status == .downloading || status == .waitting {
-                        $0.status = DownloadStatus.errors.rawValue
+                    if flag {
+                        if status == .downloading || status == .waitting {
+                            $0.status = DownloadStatus.errors.rawValue
+                        }
                     }
                 })
                 try context.save()
@@ -121,6 +124,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         let backgroundSession = PCDownloadManager.share.backgroundSession
         print("Rejoining session with identifier \(identifier) \(backgroundSession)")
         PCDownloadManager.share.completeHandle[identifier] = completionHandler
+        let notification = UNUserNotificationCenter.current()
+        let content = UNMutableNotificationContent()
+        content.title = "有一项下载任务完成"
+        content.body = "点击打开App继续下一个任务"
+        content.sound = UNNotificationSound.default
+        
+        let request = UNNotificationRequest(identifier: "com.ascp.s8.downlaod.finished", content: content, trigger: nil)
+        notification.add(request) { (err) in
+            if let e = err {
+                print(e)
+            }
+        }
+
     }
 }
 

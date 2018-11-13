@@ -34,16 +34,17 @@ extension DownloaderController : PCPiplineDelegate {
     
     func pipline(didUpdateTask task: PCDownloadTask) {
         update(task: task)
+        app.saveContext()
     }
     
     func pipline(didFinishedTask task: PCDownloadTask) {
         finished(task: task)
-        app.saveContext()
+        app.saveContext(flag: true)
     }
     
     func pipline(didFinishedRiffle riffle: PCWebRiffle) {
         finished(riffle: riffle)
-        app.saveContext()
+        app.saveContext(flag: true)
     }
     
     func add(riffle: PCWebRiffle) {
