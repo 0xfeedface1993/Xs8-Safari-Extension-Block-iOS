@@ -294,8 +294,7 @@ extension NetDiskListViewController: UITableViewDataSourcePrefetching {
         indexPaths.forEach { (indexPath) in
             for item in self.data[indexPath.row].previewImages.enumerated() {
                 let linkIndex = item.offset
-                switch item.element.state {
-                case .wait:
+                if item.element.state == .wait {
                     guard let url = item.element.url else {
                         self.data[indexPath.row].previewImages[linkIndex].state = .error
                         continue
@@ -304,9 +303,6 @@ extension NetDiskListViewController: UITableViewDataSourcePrefetching {
                     if let cache = ImageCache.default.retrieveImageInMemoryCache(forKey: url.absoluteString) ?? ImageCache.default.retrieveImageInDiskCache(forKey: url.absoluteString) {
                         self.data[indexPath.row].previewImages[linkIndex].state = .downloaded
                         self.data[indexPath.row].previewImages[linkIndex].image = cache
-                        if tableView.indexPathsForVisibleRows?.contains(indexPath) ?? false {
-                            tableView.reloadData()
-                        }
                         continue
                     }
                     ImageDownloader.default.downloadImage(with: url, completionHandler: { (image, error, urlx, data) in
@@ -315,7 +311,8 @@ extension NetDiskListViewController: UITableViewDataSourcePrefetching {
                                 self.data[indexPath.row].previewImages[linkIndex].state = .error
                                 self.data[indexPath.row].previewImages[linkIndex].size = #imageLiteral(resourceName: "Failed").size
                                 if tableView.indexPathsForVisibleRows?.contains(indexPath) ?? false {
-                                    tableView.reloadData()
+                                    let cell = tableView.cellForRow(at: indexPath) as! NetDiskTableViewCell
+                                    cell.previewImages[item.offset].image = #imageLiteral(resourceName: "Failed")
                                 }
                             }
                             return
@@ -323,17 +320,16 @@ extension NetDiskListViewController: UITableViewDataSourcePrefetching {
                         if let img = image {
                             DispatchQueue.main.async {
                                 ImageCache.default.store(img, forKey: url.absoluteString)
-                                self.data[indexPath.row].previewImages[linkIndex].image = image
+                                self.data[indexPath.row].previewImages[linkIndex].image = img
                                 self.data[indexPath.row].previewImages[linkIndex].state = .downloaded
                                 self.data[indexPath.row].previewImages[linkIndex].size = img.size
                                 if tableView.indexPathsForVisibleRows?.contains(indexPath) ?? false {
-                                    tableView.reloadData()
+                                    let cell = tableView.cellForRow(at: indexPath) as! NetDiskTableViewCell
+                                    cell.previewImages[item.offset].image = img
                                 }
                             }
                         }
                     })
-                default:
-                    break
                 }
             }
         }

@@ -173,7 +173,6 @@ extension NetDiskDetailViewController {
                     self.images[linkIndex].size = cache.size
                     if tableView.indexPathsForVisibleRows?.contains(indexPath) ?? false {
                         cell.img.image = cache
-                        tableView.reloadData()
                     }
                     break
                 }
@@ -197,7 +196,6 @@ extension NetDiskDetailViewController {
                             self.images[linkIndex].size = img.size
                             if tableView.indexPathsForVisibleRows?.contains(indexPath) ?? false {
                                 cell.img.image = image
-                                tableView.reloadData()
                             }
                         }
                     }
@@ -257,7 +255,8 @@ extension NetDiskDetailViewController: UITableViewDataSourcePrefetching {
                     self.images[linkIndex].image = cache
                     self.images[linkIndex].size = cache.size
                     if tableView.indexPathsForVisibleRows?.contains(indexPath) ?? false {
-                        tableView.reloadData()
+                        let cell = tableView.cellForRow(at: indexPath) as! NetDiskImageTableViewCell
+                        cell.img.image = cache
                     }
                     break
                 }
@@ -275,11 +274,12 @@ extension NetDiskDetailViewController: UITableViewDataSourcePrefetching {
                     if let img = image {
                         DispatchQueue.main.async {
                             ImageCache.default.store(img, forKey: url.absoluteString)
-                            self.images[linkIndex].image = image
+                            self.images[linkIndex].image = img
                             self.images[linkIndex].state = .downloaded
                             self.images[linkIndex].size = img.size
                             if tableView.indexPathsForVisibleRows?.contains(indexPath) ?? false {
-                                tableView.reloadData()
+                                let cell = tableView.cellForRow(at: indexPath) as! NetDiskImageTableViewCell
+                                cell.img.image = img
                             }
                         }
                     }
