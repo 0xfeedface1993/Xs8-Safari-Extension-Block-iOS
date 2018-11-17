@@ -56,6 +56,7 @@ class NetDiskListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = site.categrory?.name
+        tableView.separatorStyle = .none
         // Do any additional setup after loading the view.
         
         searchController.delegate = self
@@ -167,7 +168,7 @@ extension NetDiskListViewController : UITableViewDataSource, UITableViewDelegate
         if  tableView == nil {
             return
         }
-//        tableView.isHidden = true
+        tableView.rowHeight = 200 + 24 + 12 + 20
         tableView.delegate = self
         tableView.dataSource = self
         tableView.prefetchDataSource = self
@@ -190,7 +191,7 @@ extension NetDiskListViewController : UITableViewDataSource, UITableViewDelegate
         for (index, imageView) in cell.previewImages.enumerated() {
             guard let url = reserveData.previewImages[index].url else {
                 self.data[indexPath.row].previewImages[index].state = .error
-                imageView.image = UIImage(named: "Failed")
+                imageView.image = UIImage(named: "Bad")
                 continue
             }
             switch reserveData.previewImages[index].state {
@@ -238,9 +239,9 @@ extension NetDiskListViewController : UITableViewDataSource, UITableViewDelegate
         return cell
     }
     
-    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 400
-    }
+//    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return 265
+//    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let storyboard = UIStoryboard(name: "Sex8", bundle: nil)
