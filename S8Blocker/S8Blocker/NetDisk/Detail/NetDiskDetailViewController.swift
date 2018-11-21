@@ -173,6 +173,7 @@ extension NetDiskDetailViewController {
                     self.images[linkIndex].size = cache.size
                     if tableView.indexPathsForVisibleRows?.contains(indexPath) ?? false {
                         cell.img.image = cache
+                        tableView.reloadData()
                     }
                     break
                 }
@@ -196,6 +197,7 @@ extension NetDiskDetailViewController {
                             self.images[linkIndex].size = img.size
                             if tableView.indexPathsForVisibleRows?.contains(indexPath) ?? false {
                                 cell.img.image = image
+                                tableView.reloadData()
                             }
                         }
                     }
@@ -257,6 +259,7 @@ extension NetDiskDetailViewController: UITableViewDataSourcePrefetching {
                     if tableView.indexPathsForVisibleRows?.contains(indexPath) ?? false {
                         let cell = tableView.cellForRow(at: indexPath) as! NetDiskImageTableViewCell
                         cell.img.image = cache
+                        tableView.reloadData()
                     }
                     break
                 }
@@ -280,6 +283,7 @@ extension NetDiskDetailViewController: UITableViewDataSourcePrefetching {
                             if tableView.indexPathsForVisibleRows?.contains(indexPath) ?? false {
                                 let cell = tableView.cellForRow(at: indexPath) as! NetDiskImageTableViewCell
                                 cell.img.image = img
+                                tableView.reloadData()
                             }
                         }
                     }
