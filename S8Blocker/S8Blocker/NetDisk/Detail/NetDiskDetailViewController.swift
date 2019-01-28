@@ -42,6 +42,7 @@ class NetDiskDetailViewController: UITableViewController {
     let cover = UIView()
     
     let downloadButton = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 44))
+    var caching = [IndexPath:CGFloat]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -218,7 +219,11 @@ extension NetDiskDetailViewController {
     }
     
     override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 400
+        return caching[indexPath] ?? 460
+    }
+    
+    override func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        caching[indexPath] = cell.layer.bounds.height
     }
     
 //    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

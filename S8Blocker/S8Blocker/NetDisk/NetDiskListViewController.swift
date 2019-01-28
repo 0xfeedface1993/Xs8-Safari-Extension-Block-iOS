@@ -52,6 +52,7 @@ class NetDiskListViewController: UIViewController {
     var cursor : CKQueryOperation.Cursor?
     
     let searchController = UISearchController(searchResultsController: nil)
+    var caching = [IndexPath:CGFloat]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -239,9 +240,13 @@ extension NetDiskListViewController : UITableViewDataSource, UITableViewDelegate
         return cell
     }
     
-//    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return 265
-//    }
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return caching[indexPath] ?? 265
+    }
+    
+    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        caching[indexPath] = cell.layer.bounds.height
+    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let storyboard = UIStoryboard(name: "Sex8", bundle: nil)
