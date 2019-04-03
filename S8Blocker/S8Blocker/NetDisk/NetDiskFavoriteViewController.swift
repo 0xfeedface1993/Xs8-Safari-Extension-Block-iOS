@@ -123,7 +123,7 @@ class NetDiskFavoriteViewController: UIViewController {
             isRefreshing = true
             if let cursor = self.cursor {
                 self.next(favoriteCursor: cursor, fetchBlock: { modal in
-                    if let _ = self.data.index(where: { $0.modal.href == modal.href }) {
+                    if let _ = self.data.firstIndex(where: { $0.modal.href == modal.href }) {
                         print("Last Page!")
                         return
                     }

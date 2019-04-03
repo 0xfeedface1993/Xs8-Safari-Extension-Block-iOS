@@ -176,6 +176,8 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
             case .move:
                 configureCell(tableView.cellForRow(at: indexPath!)!, withEvent: anObject as! Event)
                 tableView.moveRow(at: indexPath!, to: newIndexPath!)
+            @unknown default:
+                break
         }
     }
 

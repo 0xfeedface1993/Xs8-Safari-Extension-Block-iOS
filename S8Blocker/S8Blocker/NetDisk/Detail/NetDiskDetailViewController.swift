@@ -144,9 +144,9 @@ extension NetDiskDetailViewController {
             let cell = tableView.dequeueReusableCell(withIdentifier: NetDiskImageTableViewCellIdentitfier, for: indexPath) as! NetDiskImageTableViewCell
             
             func layoutMaker(radio: CGFloat) {
-                let constraint = NSLayoutConstraint(item: cell.img, attribute: .height, relatedBy: .equal, toItem: cell.img, attribute: .width, multiplier: radio, constant: 0)
+                let constraint = NSLayoutConstraint(item: cell.img!, attribute: .height, relatedBy: .equal, toItem: cell.img!, attribute: .width, multiplier: radio, constant: 0)
                 constraint.priority = UILayoutPriority(rawValue: 999)
-                if let index = cell.img.constraints.index(where: { $0.firstAttribute == NSLayoutConstraint.Attribute.height && $0.secondAttribute == NSLayoutConstraint.Attribute.width }) {
+                if let index = cell.img.constraints.firstIndex(where: { $0.firstAttribute == NSLayoutConstraint.Attribute.height && $0.secondAttribute == NSLayoutConstraint.Attribute.width }) {
                     if cell.img.constraints[index] != constraint {
                         cell.img.constraints[index].isActive = false
                         constraint.isActive = true

@@ -127,7 +127,7 @@ class NetDiskListViewController: UIViewController {
             }
             if let cursor = self.cursor {
                 self.queryNextPageMovies(cursor: cursor, fetchBlock: { modal in
-                    if let _ = self.data.index(where: { $0.modal.href == modal.href }) {
+                    if let _ = self.data.firstIndex(where: { $0.modal.href == modal.href }) {
                         print("Last Page!")
                         return
                     }
