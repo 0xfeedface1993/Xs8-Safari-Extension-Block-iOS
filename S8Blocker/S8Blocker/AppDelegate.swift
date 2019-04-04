@@ -26,7 +26,54 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 //        let masterNavigationController = splitViewController.viewControllers[0] as! UINavigationController
 //        let controller = masterNavigationController.topViewController as! MasterViewController
 //        controller.managedObjectContext = managedObjectContext
+        if !UIApplication.shared.isRegisteredForRemoteNotifications {
+            UNUserNotificationCenter.current().requestAuthorization(options: UNAuthorizationOptions.alert.union(.sound).union(.badge)) { (isSuccess, err) in
+                if isSuccess {
+                    DispatchQueue.main.async {
+                        UIApplication.shared.registerForRemoteNotifications()
+                    }
+                }   else    {
+                    print(err?.localizedDescription ?? "***************** ****************")
+                }
+            }
+        }
         return true
+    }
+    
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        var tokenStr: String = ""
+        for i in 0 ..< deviceToken.count{
+            tokenStr += String(format: "%02.2hhx", arguments: [deviceToken[i]])
+        }
+        let token = "\(tokenStr.replacingOccurrences(of: "<", with: "").replacingOccurrences(of: ">", with: ""))"
+        print(token)
+        
+        let request = RegisterDeviceRequest(userid: UIDevice.current.identifierForVendor?.uuidString ?? "admin", deviceid: token)
+        let caller = WebserviceCaller<APIResponse<[String:String]>, RegisterDeviceRequest>(url: .debug, way: .post, method: .registerDevice)
+        caller.paras = request
+        caller.execute = { (data, err, res) in
+            if let _ = err {
+                return
+            }
+            
+            guard let json = data else {
+                print(">>>>>>>>>>>> Empty Data <<<<<<<<<<<<<<")
+                return
+            }
+            
+            guard json.code == 200 else {
+                print(">>>>>>>>>>>> Error Code: \(json.code), \(json.msg) <<<<<<<<<<<<<<")
+                return
+            }
+            
+            guard let inner = json.data else {
+                print(">>>>>>>>>>>> Inner Data Empty <<<<<<<<<<<<<<")
+                return
+            }
+            
+            print(inner)
+        }
+        try? Webservice.share.read(caller: caller)
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
@@ -45,6 +92,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        application.applicationIconBadgeNumber = 0
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
