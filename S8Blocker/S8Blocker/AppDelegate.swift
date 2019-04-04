@@ -9,7 +9,6 @@
 import UIKit
 import UserNotifications
 import CoreData
-import WebShell_iOS
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDelegate {
@@ -98,93 +97,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
-        self.saveContext()
-    }
-
-    // MARK: - Split view
-
-    func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController:UIViewController, onto primaryViewController:UIViewController) -> Bool {
-        guard let secondaryAsNavController = secondaryViewController as? UINavigationController else { return false }
-        guard let topAsDetailController = secondaryAsNavController.topViewController as? DetailViewController else { return false }
-        if topAsDetailController.detailItem == nil {
-            // Return true to indicate that we have handled the collapse by doing nothing; the secondary controller will be discarded.
-            return true
-        }
-        return false
-    }
-    // MARK: - Core Data stack
-    
-    lazy var managedObjectContext: NSManagedObjectContext = {
-        /*
-         The persistent container for the application. This implementation
-         creates and returns a container, having loaded the store for the
-         application to it. This property is optional since there are legitimate
-         error conditions that could cause the creation of the store to fail.
-         */
-        guard let modelURL = Bundle.main.url(forResource: "S8Blocker", withExtension: "momd") else {
-            fatalError("failed to find data model")
-        }
         
-        guard let mom = NSManagedObjectModel(contentsOf: modelURL) else {
-            fatalError("failed to load model")
-        }
-        let psc = NSPersistentStoreCoordinator(managedObjectModel: mom)
-        let options = [NSMigratePersistentStoresAutomaticallyOption:true, NSInferMappingModelAutomaticallyOption:true]
-        let dirURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.ascp.sex8block"), fileURL = URL(string: "S8Blocker.sql", relativeTo: dirURL)
-        do {
-            try psc.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: fileURL, options: options)
-            let moc = NSManagedObjectContext(concurrencyType:.privateQueueConcurrencyType)
-            moc.persistentStoreCoordinator = psc
-            return moc
-        } catch {
-            fatalError("Error configuring persistent store: \(error)")
-        }
-    }()
-
-    // MARK: - Core Data Saving support
-
-    func saveContext (flag: Bool = false) {
-        let context = managedObjectContext
-        if context.hasChanges {
-            do {
-                let request = NSFetchRequest<DRecord>(entityName: "DRecord")
-                request.predicate = NSPredicate(value: true)
-                let records = try context.fetch(request)
-                records.forEach({
-                    let status = DownloadStatus(rawValue: $0.status)!
-                    if flag {
-                        if status == .downloading || status == .waitting {
-                            $0.status = DownloadStatus.errors.rawValue
-                        }
-                    }
-                })
-                try context.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nserror = error as NSError
-                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
-            }
-        }
-    }
-
-    func application(_ application: UIApplication, handleEventsForBackgroundURLSession identifier: String, completionHandler: @escaping () -> Void) {
-        let backgroundSession = PCDownloadManager.share.backgroundSession
-        print("Rejoining session with identifier \(identifier) \(backgroundSession)")
-        PCDownloadManager.share.completeHandle[identifier] = completionHandler
-        let notification = UNUserNotificationCenter.current()
-        let content = UNMutableNotificationContent()
-        content.title = "有一项下载任务完成"
-        content.body = "点击打开App继续下一个任务"
-        content.sound = UNNotificationSound.default
-        
-        let request = UNNotificationRequest(identifier: "com.ascp.s8.downlaod.finished", content: content, trigger: nil)
-        notification.add(request) { (err) in
-            if let e = err {
-                print(e)
-            }
-        }
-
     }
 }
 

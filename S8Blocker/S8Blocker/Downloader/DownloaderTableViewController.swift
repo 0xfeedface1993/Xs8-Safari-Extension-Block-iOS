@@ -9,7 +9,6 @@
 import UIKit
 import UserNotifications
 import CoreData
-import WebShell_iOS
 
 class DownloaderTableViewController: UITableViewController {
     let cellIdenitfier = "com.ascp.downloader.cell"

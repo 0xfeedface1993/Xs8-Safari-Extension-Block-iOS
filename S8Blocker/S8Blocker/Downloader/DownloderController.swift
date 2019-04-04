@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import WebShell_iOS
 
 class DownloaderController {
     static let share = DownloaderController()

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import WebShell_iOS
 
 enum DownloadStatus : String {
     case downloading = "下载中"

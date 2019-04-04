@@ -7,17 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		240EB33420DA07CE00945FE2 /* DRecord+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240EB33220DA07CE00945FE2 /* DRecord+CoreDataClass.swift */; };
-		240EB33520DA07CE00945FE2 /* DRecord+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240EB33320DA07CE00945FE2 /* DRecord+CoreDataProperties.swift */; };
-		240EB33C20DA4FD900945FE2 /* URLListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240EB33B20DA4FD900945FE2 /* URLListTableViewController.swift */; };
 		2431DAEA1F45F3320082E928 /* NetDiskTitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2431DAE81F45F3320082E928 /* NetDiskTitleTableViewCell.swift */; };
 		2431DAEB1F45F3320082E928 /* NetDiskTitleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2431DAE91F45F3320082E928 /* NetDiskTitleTableViewCell.xib */; };
 		2431DAEE1F45F6810082E928 /* NetDiskImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2431DAEC1F45F6810082E928 /* NetDiskImageTableViewCell.swift */; };
 		2431DAEF1F45F6810082E928 /* NetDiskImageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2431DAED1F45F6810082E928 /* NetDiskImageTableViewCell.xib */; };
 		2438471C1F00891400027E27 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2438471B1F00891400027E27 /* AppDelegate.swift */; };
-		2438471F1F00891400027E27 /* S8Blocker.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2438471D1F00891400027E27 /* S8Blocker.xcdatamodeld */; };
-		243847211F00891400027E27 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243847201F00891400027E27 /* MasterViewController.swift */; };
-		243847231F00891400027E27 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243847221F00891400027E27 /* DetailViewController.swift */; };
 		243847261F00891400027E27 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 243847241F00891400027E27 /* Main.storyboard */; };
 		243847281F00891400027E27 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 243847271F00891400027E27 /* Assets.xcassets */; };
 		2438472B1F00891400027E27 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 243847291F00891400027E27 /* LaunchScreen.storyboard */; };
@@ -29,7 +23,6 @@
 		243847671F008ABE00027E27 /* ActionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243847661F008ABE00027E27 /* ActionViewController.swift */; };
 		2438476A1F008ABE00027E27 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 243847681F008ABE00027E27 /* MainInterface.storyboard */; };
 		2438476E1F008ABE00027E27 /* Torrilste.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 243847641F008ABE00027E27 /* Torrilste.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		247A235F20DB3C6200666088 /* DownloderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247A235E20DB3C6200666088 /* DownloderController.swift */; };
 		248434E0200FA38B00CAD097 /* HTMLString.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 248434DD200FA37100CAD097 /* HTMLString.framework */; };
 		249AE74A20A6E3B40001EFC5 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 249AE74920A6E3B40001EFC5 /* Kingfisher.framework */; };
 		249D208C20B9A748005F7E7F /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 249D208B20B9A748005F7E7F /* ImageIO.framework */; };
@@ -37,9 +30,7 @@
 		249D209720BAFF0D005F7E7F /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249D209620BAFF0D005F7E7F /* Storage.swift */; };
 		249D209920BAFFC0005F7E7F /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 249D209820BAFFC0005F7E7F /* CloudKit.framework */; };
 		249EF1B920F7470800919D7A /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249EF1B820F7470800919D7A /* Notification.swift */; };
-		24A5FFF520D90725000ABDEA /* DownloaderTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24A5FFF420D90725000ABDEA /* DownloaderTableViewController.swift */; };
-		24A5FFF820D939FA000ABDEA /* DownloaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24A5FFF620D939FA000ABDEA /* DownloaderTableViewCell.swift */; };
-		24A5FFF920D939FA000ABDEA /* DownloaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24A5FFF720D939FA000ABDEA /* DownloaderTableViewCell.xib */; };
+		24AA52542255F01E00C423F5 /* URLListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AA52532255F01E00C423F5 /* URLListTableViewController.swift */; };
 		24D7BBA11F45C8C30094DE28 /* Sex8.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 24D7BBA01F45C8C30094DE28 /* Sex8.storyboard */; };
 		24E480CC1F45E6B3009B6998 /* NetDiskDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E480CB1F45E6B3009B6998 /* NetDiskDetailViewController.swift */; };
 		24E480CF1F45E969009B6998 /* NetDiskDetalModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E480CE1F45E969009B6998 /* NetDiskDetalModal.swift */; };
@@ -125,11 +116,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		240EB32320D9F6FD00945FE2 /* S8Blocker-download.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "S8Blocker-download.xcdatamodel"; sourceTree = "<group>"; };
-		240EB33220DA07CE00945FE2 /* DRecord+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DRecord+CoreDataClass.swift"; sourceTree = "<group>"; };
-		240EB33320DA07CE00945FE2 /* DRecord+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DRecord+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		240EB33720DA277200945FE2 /* ADBlock-iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "ADBlock-iOS.entitlements"; sourceTree = "<group>"; };
-		240EB33B20DA4FD900945FE2 /* URLListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLListTableViewController.swift; sourceTree = "<group>"; };
 		2431DAE81F45F3320082E928 /* NetDiskTitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetDiskTitleTableViewCell.swift; sourceTree = "<group>"; };
 		2431DAE91F45F3320082E928 /* NetDiskTitleTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NetDiskTitleTableViewCell.xib; sourceTree = "<group>"; };
 		2431DAEC1F45F6810082E928 /* NetDiskImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetDiskImageTableViewCell.swift; sourceTree = "<group>"; };
@@ -140,9 +127,6 @@
 		243537B71F45C71400D6C1DF /* NetDiskTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetDiskTableViewCell.swift; sourceTree = "<group>"; };
 		243847181F00891400027E27 /* S8Blocker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = S8Blocker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2438471B1F00891400027E27 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		2438471E1F00891400027E27 /* S8Blocker.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = S8Blocker.xcdatamodel; sourceTree = "<group>"; };
-		243847201F00891400027E27 /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
-		243847221F00891400027E27 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		243847251F00891400027E27 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		243847271F00891400027E27 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2438472A1F00891400027E27 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -163,19 +147,14 @@
 		2438476B1F008ABE00027E27 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		243847721F008BA500027E27 /* S8Blocker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = S8Blocker.entitlements; sourceTree = "<group>"; };
 		243847731F008C3000027E27 /* Torrilste.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Torrilste.entitlements; sourceTree = "<group>"; };
-		2468BB381F00D5BA00AAB573 /* S8Blocker 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "S8Blocker 2.xcdatamodel"; sourceTree = "<group>"; };
-		247A235E20DB3C6200666088 /* DownloderController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloderController.swift; sourceTree = "<group>"; };
 		248434DD200FA37100CAD097 /* HTMLString.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HTMLString.framework; path = Carthage/Build/iOS/HTMLString.framework; sourceTree = "<group>"; };
-		249602E220A189E800C9613D /* WebShell_iOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebShell_iOS.framework; path = Carthage/Build/iOS/WebShell_iOS.framework; sourceTree = "<group>"; };
 		249AE74920A6E3B40001EFC5 /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = "<group>"; };
 		249D208B20B9A748005F7E7F /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		249D208D20B9A77E005F7E7F /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		249D209620BAFF0D005F7E7F /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		249D209820BAFFC0005F7E7F /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		249EF1B820F7470800919D7A /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
-		24A5FFF420D90725000ABDEA /* DownloaderTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloaderTableViewController.swift; sourceTree = "<group>"; };
-		24A5FFF620D939FA000ABDEA /* DownloaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloaderTableViewCell.swift; sourceTree = "<group>"; };
-		24A5FFF720D939FA000ABDEA /* DownloaderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DownloaderTableViewCell.xib; sourceTree = "<group>"; };
+		24AA52532255F01E00C423F5 /* URLListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = URLListTableViewController.swift; path = S8Blocker/Downloader/URLListTableViewController.swift; sourceTree = SOURCE_ROOT; };
 		24D7BBA01F45C8C30094DE28 /* Sex8.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Sex8.storyboard; sourceTree = "<group>"; };
 		24E480CB1F45E6B3009B6998 /* NetDiskDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetDiskDetailViewController.swift; sourceTree = "<group>"; };
 		24E480CE1F45E969009B6998 /* NetDiskDetalModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetDiskDetalModal.swift; sourceTree = "<group>"; };
@@ -185,7 +164,6 @@
 		273B412A1F8B7B38001A6CA9 /* NewMovieTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMovieTableViewController.swift; sourceTree = "<group>"; };
 		273B412C1F8B7B53001A6CA9 /* NewMovieTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMovieTableViewCell.swift; sourceTree = "<group>"; };
 		273B412D1F8B7B53001A6CA9 /* NewMovieTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewMovieTableViewCell.xib; sourceTree = "<group>"; };
-		273B41301F8B7F66001A6CA9 /* S8Blocker 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "S8Blocker 3.xcdatamodel"; sourceTree = "<group>"; };
 		276BC26B1F8F68F1006B9B92 /* Webservice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Webservice.swift; sourceTree = "<group>"; };
 		276BC26D1F8F6987006B9B92 /* ErrorStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorStruct.swift; sourceTree = "<group>"; };
 		276BC26F1F8F69CE006B9B92 /* DictionaryExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryExtension.swift; sourceTree = "<group>"; };
@@ -245,18 +223,10 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		240EB33120DA07CE00945FE2 /* CoreData */ = {
-			isa = PBXGroup;
-			children = (
-				240EB33220DA07CE00945FE2 /* DRecord+CoreDataClass.swift */,
-				240EB33320DA07CE00945FE2 /* DRecord+CoreDataProperties.swift */,
-			);
-			path = CoreData;
-			sourceTree = "<group>";
-		};
 		243537B21F45C6E000D6C1DF /* NetDisk */ = {
 			isa = PBXGroup;
 			children = (
+				24AA52532255F01E00C423F5 /* URLListTableViewController.swift */,
 				24EEF2C720CD20E5002DDA8C /* CustomPresentViewController.swift */,
 				243847241F00891400027E27 /* Main.storyboard */,
 				24E480CA1F45E666009B6998 /* Detail */,
@@ -268,8 +238,6 @@
 		2438470F1F00891400027E27 = {
 			isa = PBXGroup;
 			children = (
-				240EB33120DA07CE00945FE2 /* CoreData */,
-				249D202620B9A6B7005F7E7F /* AXPhotoViewer */,
 				248434DB200FA15300CAD097 /* GithubFramework */,
 				2438471A1F00891400027E27 /* S8Blocker */,
 				243847341F00891400027E27 /* S8BlockerTests */,
@@ -296,7 +264,6 @@
 		2438471A1F00891400027E27 /* S8Blocker */ = {
 			isa = PBXGroup;
 			children = (
-				24A5FFF320D906DA000ABDEA /* Downloader */,
 				249D209520BAFEF6005F7E7F /* iCloudStorage */,
 				278B1EEB200CB26B004F9760 /* FetchBot */,
 				278B1EE0200CA198004F9760 /* Categrory */,
@@ -306,14 +273,11 @@
 				243847721F008BA500027E27 /* S8Blocker.entitlements */,
 				2438471B1F00891400027E27 /* AppDelegate.swift */,
 				249EF1B820F7470800919D7A /* Notification.swift */,
-				243847201F00891400027E27 /* MasterViewController.swift */,
-				243847221F00891400027E27 /* DetailViewController.swift */,
 				24D7BBA01F45C8C30094DE28 /* Sex8.storyboard */,
 				24F3467C1F45CA5B001930ED /* ViewController.swift */,
 				243847271F00891400027E27 /* Assets.xcassets */,
 				243847291F00891400027E27 /* LaunchScreen.storyboard */,
 				2438472C1F00891400027E27 /* Info.plist */,
-				2438471D1F00891400027E27 /* S8Blocker.xcdatamodeld */,
 			);
 			path = S8Blocker;
 			sourceTree = "<group>";
@@ -362,17 +326,9 @@
 			isa = PBXGroup;
 			children = (
 				249AE74920A6E3B40001EFC5 /* Kingfisher.framework */,
-				249602E220A189E800C9613D /* WebShell_iOS.framework */,
 				248434DD200FA37100CAD097 /* HTMLString.framework */,
 			);
 			name = GithubFramework;
-			sourceTree = "<group>";
-		};
-		249D202620B9A6B7005F7E7F /* AXPhotoViewer */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = AXPhotoViewer;
 			sourceTree = "<group>";
 		};
 		249D209520BAFEF6005F7E7F /* iCloudStorage */ = {
@@ -381,18 +337,6 @@
 				249D209620BAFF0D005F7E7F /* Storage.swift */,
 			);
 			path = iCloudStorage;
-			sourceTree = "<group>";
-		};
-		24A5FFF320D906DA000ABDEA /* Downloader */ = {
-			isa = PBXGroup;
-			children = (
-				24A5FFF420D90725000ABDEA /* DownloaderTableViewController.swift */,
-				24A5FFF620D939FA000ABDEA /* DownloaderTableViewCell.swift */,
-				24A5FFF720D939FA000ABDEA /* DownloaderTableViewCell.xib */,
-				240EB33B20DA4FD900945FE2 /* URLListTableViewController.swift */,
-				247A235E20DB3C6200666088 /* DownloderController.swift */,
-			);
-			path = Downloader;
 			sourceTree = "<group>";
 		};
 		24E480C81F45E627009B6998 /* List */ = {
@@ -674,7 +618,6 @@
 				243847281F00891400027E27 /* Assets.xcassets in Resources */,
 				243847261F00891400027E27 /* Main.storyboard in Resources */,
 				278B1EE6200CA341004F9760 /* categrory.plist in Resources */,
-				24A5FFF920D939FA000ABDEA /* DownloaderTableViewCell.xib in Resources */,
 				2431DAEF1F45F6810082E928 /* NetDiskImageTableViewCell.xib in Resources */,
 				2431DAEB1F45F3320082E928 /* NetDiskTitleTableViewCell.xib in Resources */,
 				278B1F03200EF0B6004F9760 /* MovieBrowerTableViewCell.xib in Resources */,
@@ -722,7 +665,6 @@
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/Kingfisher.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/HTMLString.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/WebShell_iOS.framework",
 			);
 			outputPaths = (
 			);
@@ -741,10 +683,7 @@
 				249D209720BAFF0D005F7E7F /* Storage.swift in Sources */,
 				24F4C26F1F45D122008412AF /* NetDiskListViewController.swift in Sources */,
 				278B1EEA200CB1C7004F9760 /* Movie-Modal.swift in Sources */,
-				24A5FFF520D90725000ABDEA /* DownloaderTableViewController.swift in Sources */,
 				276BC26E1F8F6987006B9B92 /* ErrorStruct.swift in Sources */,
-				240EB33C20DA4FD900945FE2 /* URLListTableViewController.swift in Sources */,
-				24A5FFF820D939FA000ABDEA /* DownloaderTableViewCell.swift in Sources */,
 				273B412E1F8B7B53001A6CA9 /* NewMovieTableViewCell.swift in Sources */,
 				24EEF2C820CD20E5002DDA8C /* CustomPresentViewController.swift in Sources */,
 				24F4C2701F45D122008412AF /* NetDiskModal.swift in Sources */,
@@ -755,22 +694,17 @@
 				278B1EFD200EECD8004F9760 /* MovieBrowerTableViewController.swift in Sources */,
 				278B1EE2200CA1E5004F9760 /* Categrory-Modal.swift in Sources */,
 				2438471C1F00891400027E27 /* AppDelegate.swift in Sources */,
-				2438471F1F00891400027E27 /* S8Blocker.xcdatamodeld in Sources */,
-				247A235F20DB3C6200666088 /* DownloderController.swift in Sources */,
 				249EF1B920F7470800919D7A /* Notification.swift in Sources */,
 				278B1EE8200CA530004F9760 /* CategroryCollectionViewCell.swift in Sources */,
 				24E480CF1F45E969009B6998 /* NetDiskDetalModal.swift in Sources */,
 				278B1EED200CB284004F9760 /* FetchBot.swift in Sources */,
 				278B1EEF200D9485004F9760 /* Parser.swift in Sources */,
-				240EB33520DA07CE00945FE2 /* DRecord+CoreDataProperties.swift in Sources */,
 				24EEF2C620CCD578002DDA8C /* NetDiskFavoriteViewController.swift in Sources */,
 				276BC2721F8F6A0F006B9B92 /* JsonModal.swift in Sources */,
+				24AA52542255F01E00C423F5 /* URLListTableViewController.swift in Sources */,
 				2431DAEA1F45F3320082E928 /* NetDiskTitleTableViewCell.swift in Sources */,
-				243847211F00891400027E27 /* MasterViewController.swift in Sources */,
 				276BC2701F8F69CE006B9B92 /* DictionaryExtension.swift in Sources */,
 				24E480CC1F45E6B3009B6998 /* NetDiskDetailViewController.swift in Sources */,
-				243847231F00891400027E27 /* DetailViewController.swift in Sources */,
-				240EB33420DA07CE00945FE2 /* DRecord+CoreDataClass.swift in Sources */,
 				278B1F01200EEE10004F9760 /* MovieBrowerTableViewCell.swift in Sources */,
 				276BC26C1F8F68F1006B9B92 /* Webservice.swift in Sources */,
 			);
@@ -1214,22 +1148,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		2438471D1F00891400027E27 /* S8Blocker.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				240EB32320D9F6FD00945FE2 /* S8Blocker-download.xcdatamodel */,
-				273B41301F8B7F66001A6CA9 /* S8Blocker 3.xcdatamodel */,
-				2468BB381F00D5BA00AAB573 /* S8Blocker 2.xcdatamodel */,
-				2438471E1F00891400027E27 /* S8Blocker.xcdatamodel */,
-			);
-			currentVersion = 240EB32320D9F6FD00945FE2 /* S8Blocker-download.xcdatamodel */;
-			path = S8Blocker.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 243847101F00891400027E27 /* Project object */;
 }

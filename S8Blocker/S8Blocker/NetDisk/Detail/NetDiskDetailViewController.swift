@@ -9,7 +9,6 @@
 import UIKit
 import WebKit
 import Kingfisher
-import WebShell_iOS
 
 enum DownloadState {
     case wait
@@ -101,10 +100,7 @@ class NetDiskDetailViewController: UITableViewController {
         let defaultDelegate = popver.popoverPresentationController?.delegate
         popver.popoverPresentationController?.delegate = self
         popver.downloadAction = { [unowned self] url in
-            if let riffle = PCPipeline.share.add(url: url.absoluteString, password: self.netdisk?.password ?? "") {
-                DownloaderController.share.add(riffle: riffle)
-            }
-            
+            // more work
             popver.dismiss(animated: true, completion: {
                 popver.popoverPresentationController?.delegate = defaultDelegate
                 self.performSegue(withIdentifier: "com.ascp.downloader.push", sender: nil)
