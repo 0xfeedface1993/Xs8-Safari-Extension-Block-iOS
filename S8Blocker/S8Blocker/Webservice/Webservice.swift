@@ -23,7 +23,7 @@ enum WebServiceMethod : String {
 enum WebserviceBaseURL : String {
     case main = "http://127.0.0.1:8181/api"
     case aliyun = "http://120.78.89.159/api"
-    case debug = "http://172.20.10.2    "
+    case debug = "http://14d8856q96.imwork.net:13649"
     func url(method: WebserviceMethodPath) -> URL {
         return URL(string: self.rawValue + method.rawValue)!
     }
@@ -32,6 +32,7 @@ enum WebserviceBaseURL : String {
 enum WebserviceMethodPath : String {
     case registerDevice = "/api/v1/addDevice"
     case findDevice = "/api/v1/findDevice"
+    case addDownload = "/api/v1/notifyTest"
 }
 
 class WebserviceCaller<T: Codable, X: Codable> {

@@ -58,5 +58,18 @@ struct RegisterDeviceRequest: Codable {
     let _jsonobjid = "request-device-add"
 }
 
+struct NotifyAddRequest: Codable {
+    let _jsonobjid = "request-notify-add"
+    var format : String
+    var title : String
+    var msk : String
+    var pageurl : String
+    var passwod : String
+    var size : String
+    var time : String
+    var downloadLink : String
+    var links : [String]
+    var pics : [String]
+}
 
 

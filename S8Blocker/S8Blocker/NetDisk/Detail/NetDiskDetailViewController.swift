@@ -32,7 +32,7 @@ struct ImageItem {
 
 let CacheOptions : KingfisherOptionsInfo = [.downloader(ImageDownloader.default)]
 
-class NetDiskDetailViewController: UITableViewController {
+class NetDiskDetailViewController: UITableViewController, RemoteDownloader {
     var netdisk : NetDiskModal?
     var images = [ImageItem]()
     
@@ -97,13 +97,14 @@ class NetDiskDetailViewController: UITableViewController {
         popver.modalPresentationStyle = .popover
         popver.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
         popver.popoverPresentationController?.permittedArrowDirections = .up
-        let defaultDelegate = popver.popoverPresentationController?.delegate
         popver.popoverPresentationController?.delegate = self
         popver.downloadAction = { [unowned self] url in
             // more work
+            if let model = self.netdisk {
+                self.download(file: model, downloadLink: url.absoluteString)
+            }
             popver.dismiss(animated: true, completion: {
-                popver.popoverPresentationController?.delegate = defaultDelegate
-                self.performSegue(withIdentifier: "com.ascp.downloader.push", sender: nil)
+                
             })
         }
         present(popver, animated: true, completion: nil)

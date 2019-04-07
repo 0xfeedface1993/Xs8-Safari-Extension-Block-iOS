@@ -31,6 +31,7 @@
 		249D209920BAFFC0005F7E7F /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 249D209820BAFFC0005F7E7F /* CloudKit.framework */; };
 		249EF1B920F7470800919D7A /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249EF1B820F7470800919D7A /* Notification.swift */; };
 		24AA52542255F01E00C423F5 /* URLListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AA52532255F01E00C423F5 /* URLListTableViewController.swift */; };
+		24AA52572255F3CB00C423F5 /* RemoteDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AA52562255F3CB00C423F5 /* RemoteDownloader.swift */; };
 		24D7BBA11F45C8C30094DE28 /* Sex8.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 24D7BBA01F45C8C30094DE28 /* Sex8.storyboard */; };
 		24E480CC1F45E6B3009B6998 /* NetDiskDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E480CB1F45E6B3009B6998 /* NetDiskDetailViewController.swift */; };
 		24E480CF1F45E969009B6998 /* NetDiskDetalModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E480CE1F45E969009B6998 /* NetDiskDetalModal.swift */; };
@@ -155,6 +156,7 @@
 		249D209820BAFFC0005F7E7F /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		249EF1B820F7470800919D7A /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		24AA52532255F01E00C423F5 /* URLListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = URLListTableViewController.swift; path = S8Blocker/Downloader/URLListTableViewController.swift; sourceTree = SOURCE_ROOT; };
+		24AA52562255F3CB00C423F5 /* RemoteDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteDownloader.swift; sourceTree = "<group>"; };
 		24D7BBA01F45C8C30094DE28 /* Sex8.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Sex8.storyboard; sourceTree = "<group>"; };
 		24E480CB1F45E6B3009B6998 /* NetDiskDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetDiskDetailViewController.swift; sourceTree = "<group>"; };
 		24E480CE1F45E969009B6998 /* NetDiskDetalModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetDiskDetalModal.swift; sourceTree = "<group>"; };
@@ -264,6 +266,7 @@
 		2438471A1F00891400027E27 /* S8Blocker */ = {
 			isa = PBXGroup;
 			children = (
+				24AA52552255F39D00C423F5 /* RemoteDownloder */,
 				249D209520BAFEF6005F7E7F /* iCloudStorage */,
 				278B1EEB200CB26B004F9760 /* FetchBot */,
 				278B1EE0200CA198004F9760 /* Categrory */,
@@ -337,6 +340,14 @@
 				249D209620BAFF0D005F7E7F /* Storage.swift */,
 			);
 			path = iCloudStorage;
+			sourceTree = "<group>";
+		};
+		24AA52552255F39D00C423F5 /* RemoteDownloder */ = {
+			isa = PBXGroup;
+			children = (
+				24AA52562255F3CB00C423F5 /* RemoteDownloader.swift */,
+			);
+			path = RemoteDownloder;
 			sourceTree = "<group>";
 		};
 		24E480C81F45E627009B6998 /* List */ = {
@@ -707,6 +718,7 @@
 				24E480CC1F45E6B3009B6998 /* NetDiskDetailViewController.swift in Sources */,
 				278B1F01200EEE10004F9760 /* MovieBrowerTableViewCell.swift in Sources */,
 				276BC26C1F8F68F1006B9B92 /* Webservice.swift in Sources */,
+				24AA52572255F3CB00C423F5 /* RemoteDownloader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
