@@ -19,7 +19,6 @@ enum DownloadState {
 
 struct ImageItem {
     var url: URL?
-    var image: UIImage?
     var state: DownloadState
     var size: CGSize
     var radio: CGFloat {
@@ -61,7 +60,7 @@ class NetDiskDetailViewController: UITableViewController, RemoteDownloader {
             navigationItem.rightBarButtonItem = collect
         }
         
-        images = imageLinks.map({ ImageItem(url: URL(string: $0), image: nil, state: .wait, size: #imageLiteral(resourceName: "NetDisk").size) })
+        images = imageLinks.map({ ImageItem(url: URL(string: $0), state: .wait, size: #imageLiteral(resourceName: "NetDisk").size) })
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -165,9 +164,8 @@ extension NetDiskDetailViewController {
                     self.images[linkIndex].state = .error
                     break
                 }
-                if let cache = ImageCache.default.retrieveImageInMemoryCache(forKey: url.absoluteString) ?? ImageCache.default.retrieveImageInDiskCache(forKey: url.absoluteString) {
+                if let cache = ImageCache.default.cacheImage(forUrl: url) {
                     self.images[linkIndex].state = .downloaded
-                    self.images[linkIndex].image = cache
                     self.images[linkIndex].size = cache.size
                     if tableView.indexPathsForVisibleRows?.contains(indexPath) ?? false {
                         cell.img.image = cache
@@ -190,7 +188,6 @@ extension NetDiskDetailViewController {
                     if let img = image {
                         DispatchQueue.main.async {
                             ImageCache.default.store(img, forKey: url.absoluteString)
-                            self.images[linkIndex].image = image
                             self.images[linkIndex].state = .downloaded
                             self.images[linkIndex].size = img.size
                             if tableView.indexPathsForVisibleRows?.contains(indexPath) ?? false {
@@ -204,7 +201,11 @@ extension NetDiskDetailViewController {
             case .downloading:
                 cell.img.image = #imageLiteral(resourceName: "NetDisk")
             case .downloaded:
-                cell.img.image = self.images[linkIndex].image
+                if let url = item.url {
+                    cell.img.image = ImageCache.default.cacheImage(forUrl: url)
+                }   else    {
+                    cell.img.image = #imageLiteral(resourceName: "Failed")
+                }
             case .error:
                 cell.img.image = #imageLiteral(resourceName: "Failed")
             }
@@ -254,9 +255,8 @@ extension NetDiskDetailViewController: UITableViewDataSourcePrefetching {
             switch item.state {
             case .wait:
                 self.images[linkIndex].state = .downloading
-                if let cache = ImageCache.default.retrieveImageInMemoryCache(forKey: url.absoluteString) ?? ImageCache.default.retrieveImageInDiskCache(forKey: url.absoluteString) {
+                if let cache = ImageCache.default.cacheImage(forUrl: url) {
                     self.images[linkIndex].state = .downloaded
-                    self.images[linkIndex].image = cache
                     self.images[linkIndex].size = cache.size
                     if tableView.indexPathsForVisibleRows?.contains(indexPath) ?? false {
                         let cell = tableView.cellForRow(at: indexPath) as! NetDiskImageTableViewCell
@@ -279,7 +279,6 @@ extension NetDiskDetailViewController: UITableViewDataSourcePrefetching {
                     if let img = image {
                         DispatchQueue.main.async {
                             ImageCache.default.store(img, forKey: url.absoluteString)
-                            self.images[linkIndex].image = img
                             self.images[linkIndex].state = .downloaded
                             self.images[linkIndex].size = img.size
                             if tableView.indexPathsForVisibleRows?.contains(indexPath) ?? false {

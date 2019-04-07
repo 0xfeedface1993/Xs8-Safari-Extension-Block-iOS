@@ -59,12 +59,18 @@ extension CloudSaver {
     /// - Parameters:
     ///   - netDisk: 网盘数据模型
     ///   - completion: 执行回调
-    func save(netDisk: NetDiskModal, completion: @escaping SaveCompletion) {
+    func save(netDisk: NetDiskModal, completion: SaveCompletion?) {
         let container = CKContainer.default()
         let privateDatabase = container.privateCloudDatabase
         let record = CKRecord(recordType: RecordType.ndMovie.rawValue)
         record.load(netDisk: netDisk)
-        privateDatabase.save(record, completionHandler: completion)
+        if let completion = completion {
+            privateDatabase.save(record, completionHandler: completion)
+        }   else    {
+            privateDatabase.save(record) { (_, _) in
+                
+            }
+        }
     }
     
     /// 查询所有网盘数据
@@ -73,7 +79,7 @@ extension CloudSaver {
     ///   - fetchBlock: 获取到一条记录回调
     ///   - completion: 获取请求完成回调
     ///   - site: 指定的版块
-    func queryAllMovies(fetchBlock: @escaping FetchRecordCompletion, completion: @escaping QueryCompletion, site: String, keyword: String) {
+    func queryAllMovies(fetchBlock: FetchRecordCompletion?, completion: QueryCompletion?, site: String, keyword: String) {
         let container = CKContainer.default()
         let privateCloudDatabase = container.privateCloudDatabase
         var predicate: NSPredicate!
@@ -95,10 +101,10 @@ extension CloudSaver {
         }
         
         operation.recordFetchedBlock = { rd in
-            fetchBlock(rd.convertModal())
+            fetchBlock?(rd.convertModal())
         }
         operation.queryCompletionBlock = { (cursor, err) in
-            completion(cursor, err)
+            completion?(cursor, err)
         }
         privateCloudDatabase.add(operation)
     }
@@ -109,15 +115,15 @@ extension CloudSaver {
     ///   - cursor: 上一页的位置指示
     ///   - fetchBlock: 获取一条记录的回调
     ///   - completion: 获取请求完成回调
-    func queryNextPageMovies(cursor: CKQueryOperation.Cursor, fetchBlock: @escaping FetchRecordCompletion, completion: @escaping QueryCompletion) {
+    func queryNextPageMovies(cursor: CKQueryOperation.Cursor, fetchBlock: FetchRecordCompletion?, completion: QueryCompletion?) {
         let container = CKContainer.default()
         let privateCloudDatabase = container.privateCloudDatabase
         let operation = CKQueryOperation(cursor: cursor)
         operation.recordFetchedBlock = { rd in
-            fetchBlock(rd.convertModal())
+            fetchBlock?(rd.convertModal())
         }
         operation.queryCompletionBlock = { (csr, err) in
-            completion(csr, err)
+            completion?(csr, err)
         }
         privateCloudDatabase.add(operation)
     }
@@ -219,7 +225,7 @@ extension CloudSaver {
         }
     }
     
-    func check(favoriteModal: NetDiskModal, fetchBlock: @escaping FetchRecordCompletion, completion: @escaping ()->Void) {
+    func check(favoriteModal: NetDiskModal, fetchBlock: FetchRecordCompletion?, completion: (()->Void)?) {
         let container = CKContainer.default()
         let privateDatabase = container.privateCloudDatabase
         
@@ -232,15 +238,15 @@ extension CloudSaver {
                 guard let rec = rec else {
                     return
                 }
-                fetchBlock(rec.convertModal())
-                completion()
+                fetchBlock?(rec.convertModal())
+                completion?()
             }
         }   else    {
             let predict = NSPredicate(format: "title == %@", favoriteModal.title)
             let query = CKQuery(recordType: RecordType.ndMovie.rawValue, predicate: predict)
             let operation = CKQueryOperation(query: query)
             operation.recordFetchedBlock = { rd in
-                fetchBlock(rd.convertModal())
+                fetchBlock?(rd.convertModal())
             }
             operation.completionBlock = completion
             privateDatabase.add(operation)
@@ -248,7 +254,7 @@ extension CloudSaver {
     }
     
     // 查询收藏的页面
-    func query(favoriteSite: String, keyword: String, fetchBlock: @escaping FetchRecordCompletion, completion: @escaping QueryCompletion) {
+    func query(favoriteSite: String, keyword: String, fetchBlock: FetchRecordCompletion?, completion: QueryCompletion?) {
         let container = CKContainer.default()
         let privateDatabase = container.privateCloudDatabase
         var predicate: NSPredicate!
@@ -270,23 +276,23 @@ extension CloudSaver {
         }
         
         operation.recordFetchedBlock = { rd in
-            fetchBlock(rd.convertModal())
+            fetchBlock?(rd.convertModal())
         }
         operation.queryCompletionBlock = { (cursor, err) in
-            completion(cursor, err)
+            completion?(cursor, err)
         }
         privateDatabase.add(operation)
     }
     
-    func next(favoriteCursor: CKQueryOperation.Cursor, fetchBlock: @escaping FetchRecordCompletion, completion: @escaping QueryCompletion) {
+    func next(favoriteCursor: CKQueryOperation.Cursor, fetchBlock: FetchRecordCompletion?, completion: QueryCompletion?) {
         let container = CKContainer.default()
         let privateDatabase = container.privateCloudDatabase
         let operation = CKQueryOperation(cursor: favoriteCursor)
         operation.recordFetchedBlock = { rd in
-            fetchBlock(rd.convertModal())
+            fetchBlock?(rd.convertModal())
         }
         operation.queryCompletionBlock = { (csr, err) in
-            completion(csr, err)
+            completion?(csr, err)
         }
         privateDatabase.add(operation)
     }
