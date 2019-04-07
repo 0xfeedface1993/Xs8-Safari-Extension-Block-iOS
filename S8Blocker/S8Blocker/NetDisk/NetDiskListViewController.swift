@@ -192,7 +192,7 @@ extension NetDiskListViewController : UITableViewDataSource, UITableViewDelegate
         for (index, imageView) in cell.previewImages.enumerated() {
             guard let url = reserveData.previewImages[index].url else {
                 self.data[indexPath.row].previewImages[index].state = .error
-                imageView.image = UIImage(named: "Bad")
+                imageView.loadSizeFit(image: UIImage(named: "Bad")!)
                 continue
             }
             switch reserveData.previewImages[index].state {
@@ -201,7 +201,7 @@ extension NetDiskListViewController : UITableViewDataSource, UITableViewDelegate
                 if let cache = ImageCache.default.retrieveImageInMemoryCache(forKey: url.absoluteString) ?? ImageCache.default.retrieveImageInDiskCache(forKey: url.absoluteString) {
                     self.data[indexPath.row].previewImages[index].state = .downloaded
                     self.data[indexPath.row].previewImages[index].image = cache
-                    imageView.image = cache
+                    imageView.loadSizeFit(image: cache)
                     continue
                 }
                 imageView.image = UIImage(named: "NetDisk")
@@ -211,7 +211,7 @@ extension NetDiskListViewController : UITableViewDataSource, UITableViewDelegate
                             self.data[indexPath.row].previewImages[index].state = .error
                             self.data[indexPath.row].previewImages[index].size = #imageLiteral(resourceName: "Failed").size
                             if tableView.indexPathsForVisibleRows?.contains(indexPath) ?? false {
-                                imageView.image = #imageLiteral(resourceName: "Failed")
+                                imageView.loadSizeFit(image: #imageLiteral(resourceName: "Failed"))
                             }
                         }
                         return
@@ -223,18 +223,18 @@ extension NetDiskListViewController : UITableViewDataSource, UITableViewDelegate
                             self.data[indexPath.row].previewImages[index].state = .downloaded
                             self.data[indexPath.row].previewImages[index].size = img.size
                             if tableView.indexPathsForVisibleRows?.contains(indexPath) ?? false {
-                                imageView.image = img
+                                imageView.loadSizeFit(image: img)
                             }
                         }
                     }
                 })
                 
             case .downloading:
-                imageView.image = UIImage(named: "NetDisk")
+                imageView.loadSizeFit(image: UIImage(named: "NetDisk")!)
             case .downloaded:
-                imageView.image = self.data[indexPath.row].previewImages[index].image
+                imageView.loadSizeFit(image: self.data[indexPath.row].previewImages[index].image!)
             case .error:
-                imageView.image = UIImage(named: "Failed")
+                imageView.loadSizeFit(image: UIImage(named: "Failed")!)
             }
         }
         return cell
@@ -319,7 +319,7 @@ extension NetDiskListViewController: UITableViewDataSourcePrefetching {
                                     self.data[indexPath.row].previewImages[linkIndex].size = #imageLiteral(resourceName: "Failed").size
                                     if tableView.indexPathsForVisibleRows?.contains(indexPath) ?? false {
                                         let cell = tableView.cellForRow(at: indexPath) as! NetDiskTableViewCell
-                                        cell.previewImages[item.offset].image = #imageLiteral(resourceName: "Failed")
+                                        cell.previewImages[item.offset].loadSizeFit(image: #imageLiteral(resourceName: "Failed"))
                                     }
                                 }
                                 return
@@ -332,7 +332,7 @@ extension NetDiskListViewController: UITableViewDataSourcePrefetching {
                                     self.data[indexPath.row].previewImages[linkIndex].size = img.size
                                     if tableView.indexPathsForVisibleRows?.contains(indexPath) ?? false {
                                         let cell = tableView.cellForRow(at: indexPath) as! NetDiskTableViewCell
-                                        cell.previewImages[item.offset].image = img
+                                        cell.previewImages[item.offset].loadSizeFit(image: img)
                                     }
                                 }
                             }
@@ -420,5 +420,12 @@ extension NetDiskListViewController : UISearchControllerDelegate, UISearchResult
             tableView.reloadData()
         }
         
+    }
+}
+
+extension UIImageView {
+    func loadSizeFit(image: UIImage) {
+        self.image = image
+        self.contentMode = image.size.width <= image.size.height ? .scaleAspectFit:.scaleAspectFill
     }
 }
