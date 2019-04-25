@@ -205,6 +205,10 @@ extension NetDiskListViewController : UITableViewDataSource, UITableViewDelegate
                 }
                 imageView.image = UIImage(named: "NetDisk")
                 ImageDownloader.default.downloadImage(with: url, completionHandler: { (image, error, urlx, data) in
+                    guard self.data.count > indexPath.row else {
+                        print("****** Data being change ******")
+                        return
+                    }
                     if let _ = error {
                         self.data[indexPath.row].previewImages[index].state = .error
                         self.data[indexPath.row].previewImages[index].size = #imageLiteral(resourceName: "Failed").size
@@ -300,6 +304,10 @@ extension NetDiskListViewController: FetchBotDelegate {
 extension NetDiskListViewController: UITableViewDataSourcePrefetching {
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
         indexPaths.forEach { (indexPath) in
+            guard self.data.count > indexPath.row else {
+                print("****** Data being change ******")
+                return
+            }
             for item in self.data[indexPath.row].previewImages.enumerated() {
                 let linkIndex = item.offset
                 if item.element.state == .wait {
@@ -317,6 +325,10 @@ extension NetDiskListViewController: UITableViewDataSourcePrefetching {
                         continue
                     }
                     ImageDownloader.default.downloadImage(with: url, completionHandler: { (image, error, urlx, data) in
+                        guard self.data.count > indexPath.row else {
+                            print("****** Data being change ******")
+                            return
+                        }
                         if let _ = error {
                             self.data[indexPath.row].previewImages[linkIndex].state = .error
                             self.data[indexPath.row].previewImages[linkIndex].size = #imageLiteral(resourceName: "Failed").size
@@ -377,6 +389,7 @@ extension NetDiskListViewController: CloudSaver {
             
             self.isCloudDataSource = true
             self.queryAllMovies(fetchBlock: { modal in
+                guard modal.title.contains(keyword) else { return }
                 self.data.append(NetCell(modal: modal))
                 DispatchQueue.main.async {
                     self.tableView.reloadData()

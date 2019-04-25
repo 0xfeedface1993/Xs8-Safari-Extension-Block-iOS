@@ -186,6 +186,10 @@ extension NetDiskFavoriteViewController : UITableViewDataSource, UITableViewDele
                 }
                 imageView.image = UIImage(named: "NetDisk")
                 ImageDownloader.default.downloadImage(with: url, completionHandler: { (image, error, urlx, data) in
+                    guard self.data.count > indexPath.row else {
+                        print("****** Data being change ******")
+                        return
+                    }
                     if let _ = error {
                         DispatchQueue.main.async {
                             self.data[indexPath.row].previewImages[index].state = .error
@@ -197,8 +201,8 @@ extension NetDiskFavoriteViewController : UITableViewDataSource, UITableViewDele
                         return
                     }
                     if let img = image {
+                        ImageCache.default.store(img, forKey: url.absoluteString)
                         DispatchQueue.main.async {
-                            ImageCache.default.store(img, forKey: url.absoluteString)
                             self.data[indexPath.row].previewImages[index].state = .downloaded
                             self.data[indexPath.row].previewImages[index].size = img.size
                             if tableView.indexPathsForVisibleRows?.contains(indexPath) ?? false {
@@ -234,6 +238,10 @@ extension NetDiskFavoriteViewController : UITableViewDataSource, UITableViewDele
 extension NetDiskFavoriteViewController: UITableViewDataSourcePrefetching {
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
         indexPaths.forEach { (indexPath) in
+            guard self.data.count > indexPath.row else {
+                print("****** Data being change ******")
+                return
+            }
             for item in self.data[indexPath.row].previewImages.enumerated() {
                 let linkIndex = item.offset
                 if item.element.state == .wait {
@@ -253,6 +261,10 @@ extension NetDiskFavoriteViewController: UITableViewDataSourcePrefetching {
                         continue
                     }
                     ImageDownloader.default.downloadImage(with: url, completionHandler: { (image, error, urlx, data) in
+                        guard self.data.count > indexPath.row else {
+                            print("****** Data being change ******")
+                            return
+                        }
                         if let _ = error {
                             self.data[indexPath.row].previewImages[linkIndex].state = .error
                             self.data[indexPath.row].previewImages[linkIndex].size = #imageLiteral(resourceName: "Failed").size
@@ -301,6 +313,9 @@ extension NetDiskFavoriteViewController: CloudSaver {
             
             self.isCloudDataSource = true
             self.query(favoriteSite: self.site.categrory?.site ?? "", keyword: keyword, fetchBlock: { modal in
+                guard modal.title.contains(keyword) else {
+                    return
+                }
                 self.data.append(NetCell(modal: modal))
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
