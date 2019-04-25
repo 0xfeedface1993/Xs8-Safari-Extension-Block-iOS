@@ -23,7 +23,6 @@
 		243847671F008ABE00027E27 /* ActionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243847661F008ABE00027E27 /* ActionViewController.swift */; };
 		2438476A1F008ABE00027E27 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 243847681F008ABE00027E27 /* MainInterface.storyboard */; };
 		2438476E1F008ABE00027E27 /* Torrilste.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 243847641F008ABE00027E27 /* Torrilste.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		248434E0200FA38B00CAD097 /* HTMLString.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 248434DD200FA37100CAD097 /* HTMLString.framework */; };
 		249AE74A20A6E3B40001EFC5 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 249AE74920A6E3B40001EFC5 /* Kingfisher.framework */; };
 		249D208C20B9A748005F7E7F /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 249D208B20B9A748005F7E7F /* ImageIO.framework */; };
 		249D208E20B9A77E005F7E7F /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 249D208D20B9A77E005F7E7F /* MobileCoreServices.framework */; };
@@ -37,6 +36,7 @@
 		24E480CF1F45E969009B6998 /* NetDiskDetalModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E480CE1F45E969009B6998 /* NetDiskDetalModal.swift */; };
 		24EEF2C620CCD578002DDA8C /* NetDiskFavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24EEF2C520CCD578002DDA8C /* NetDiskFavoriteViewController.swift */; };
 		24EEF2C820CD20E5002DDA8C /* CustomPresentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24EEF2C720CD20E5002DDA8C /* CustomPresentViewController.swift */; };
+		24F29F4E227192580037A281 /* ToastSwiftFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24F29F4D227192580037A281 /* ToastSwiftFramework.framework */; };
 		24F3467D1F45CA5B001930ED /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F3467C1F45CA5B001930ED /* ViewController.swift */; };
 		24F4C26F1F45D122008412AF /* NetDiskListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243537B61F45C71400D6C1DF /* NetDiskListViewController.swift */; };
 		24F4C2701F45D122008412AF /* NetDiskModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243537B41F45C71400D6C1DF /* NetDiskModal.swift */; };
@@ -148,7 +148,6 @@
 		2438476B1F008ABE00027E27 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		243847721F008BA500027E27 /* S8Blocker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = S8Blocker.entitlements; sourceTree = "<group>"; };
 		243847731F008C3000027E27 /* Torrilste.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Torrilste.entitlements; sourceTree = "<group>"; };
-		248434DD200FA37100CAD097 /* HTMLString.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HTMLString.framework; path = Carthage/Build/iOS/HTMLString.framework; sourceTree = "<group>"; };
 		249AE74920A6E3B40001EFC5 /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = "<group>"; };
 		249D208B20B9A748005F7E7F /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		249D208D20B9A77E005F7E7F /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
@@ -162,6 +161,7 @@
 		24E480CE1F45E969009B6998 /* NetDiskDetalModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetDiskDetalModal.swift; sourceTree = "<group>"; };
 		24EEF2C520CCD578002DDA8C /* NetDiskFavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetDiskFavoriteViewController.swift; sourceTree = "<group>"; };
 		24EEF2C720CD20E5002DDA8C /* CustomPresentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPresentViewController.swift; sourceTree = "<group>"; };
+		24F29F4D227192580037A281 /* ToastSwiftFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ToastSwiftFramework.framework; path = Carthage/Build/iOS/ToastSwiftFramework.framework; sourceTree = "<group>"; };
 		24F3467C1F45CA5B001930ED /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		273B412A1F8B7B38001A6CA9 /* NewMovieTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMovieTableViewController.swift; sourceTree = "<group>"; };
 		273B412C1F8B7B53001A6CA9 /* NewMovieTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMovieTableViewCell.swift; sourceTree = "<group>"; };
@@ -187,10 +187,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				249D208E20B9A77E005F7E7F /* MobileCoreServices.framework in Frameworks */,
+				24F29F4E227192580037A281 /* ToastSwiftFramework.framework in Frameworks */,
 				249D208C20B9A748005F7E7F /* ImageIO.framework in Frameworks */,
 				249D209920BAFFC0005F7E7F /* CloudKit.framework in Frameworks */,
 				249AE74A20A6E3B40001EFC5 /* Kingfisher.framework in Frameworks */,
-				248434E0200FA38B00CAD097 /* HTMLString.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -328,8 +328,8 @@
 		248434DB200FA15300CAD097 /* GithubFramework */ = {
 			isa = PBXGroup;
 			children = (
+				24F29F4D227192580037A281 /* ToastSwiftFramework.framework */,
 				249AE74920A6E3B40001EFC5 /* Kingfisher.framework */,
-				248434DD200FA37100CAD097 /* HTMLString.framework */,
 			);
 			name = GithubFramework;
 			sourceTree = "<group>";
@@ -675,7 +675,7 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/Kingfisher.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/HTMLString.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/ToastSwiftFramework.framework",
 			);
 			outputPaths = (
 			);

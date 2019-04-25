@@ -88,7 +88,7 @@ struct ContentInfo : Equatable {
     var _note : String
     var note : String {
         set {
-            _note = newValue.replacingOccurrences(of: "</p>", with: "").replacingOccurrences(of: "<p>", with: "").replacingOccurrences(of: "<br /><br />", with: "\n").replacingOccurrences(of: "<br />", with: "\n").replacingOccurrences(of: "<br", with: "").removingHTMLEntities
+            _note = newValue.replacingOccurrences(of: "</p>", with: "").replacingOccurrences(of: "<p>", with: "").replacingOccurrences(of: "<br /><br />", with: "\n").replacingOccurrences(of: "<br />", with: "\n").replacingOccurrences(of: "<br", with: "")
         }
         get {
             return _note
