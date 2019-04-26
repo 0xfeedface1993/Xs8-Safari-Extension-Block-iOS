@@ -389,7 +389,9 @@ extension NetDiskListViewController: CloudSaver {
             
             self.isCloudDataSource = true
             self.queryAllMovies(fetchBlock: { modal in
-                guard modal.title.contains(keyword) else { return }
+                if !keyword.isEmpty {                
+                    guard modal.title.contains(keyword) else { return }
+                }
                 self.data.append(NetCell(modal: modal))
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
