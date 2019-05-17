@@ -106,12 +106,15 @@ class NetDiskListViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+        ImageCache.default.clearMemoryCache()
+        print("<<<<<< Clear memory cache")
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if self.searchController.isActive {
             return
         }
+//        ImageCache.default.clearMemoryCache()
         let height = scrollView.frame.size.height
         let contentOffset = scrollView.contentOffset.y
         let distance = scrollView.contentSize.height - contentOffset
@@ -192,18 +195,28 @@ extension NetDiskListViewController : UITableViewDataSource, UITableViewDelegate
         for (index, imageView) in cell.previewImages.enumerated() {
             guard let url = reserveData.previewImages[index].url else {
                 self.data[indexPath.row].previewImages[index].state = .error
-                imageView.loadSizeFit(image: UIImage(named: "Bad")!)
+                imageView.loadSizeFit(image: UIImage(named: "Bad")!, completion: { _ in
+                    
+                })
                 continue
+            }
+            
+            let updateImageThumbView: (UIImage) -> () = { thumb in
+                DispatchQueue.main.async {
+                    if tableView.indexPathsForVisibleRows?.contains(indexPath) ?? false {
+                        imageView.image = thumb
+                    }
+                }
             }
             switch reserveData.previewImages[index].state {
             case .wait:
                 self.data[indexPath.row].previewImages[index].state = .downloading
                 if let cache = ImageCache.default.cacheImage(forUrl: url) {
                     self.data[indexPath.row].previewImages[index].state = .downloaded
-                    imageView.loadSizeFit(image: cache)
+                    imageView.loadSizeFit(url: url, image: cache, completion: updateImageThumbView)
                     continue
                 }
-                imageView.image = UIImage(named: "NetDisk")
+                imageView.loadSizeFit(image: UIImage(named: "NetDisk")!, completion: { _ in })
                 ImageDownloader.default.downloadImage(with: url, completionHandler: { (image, error, urlx, data) in
                     guard self.data.count > indexPath.row else {
                         print("****** Data being change ******")
@@ -214,7 +227,7 @@ extension NetDiskListViewController : UITableViewDataSource, UITableViewDelegate
                         self.data[indexPath.row].previewImages[index].size = #imageLiteral(resourceName: "Failed").size
                         DispatchQueue.main.async {
                             if tableView.indexPathsForVisibleRows?.contains(indexPath) ?? false {
-                                imageView.loadSizeFit(image: #imageLiteral(resourceName: "Failed"))
+                                imageView.image = UIImage(named: "Failed")
                             }
                         }
                         return
@@ -223,24 +236,20 @@ extension NetDiskListViewController : UITableViewDataSource, UITableViewDelegate
                         ImageCache.default.store(img, forKey: url.absoluteString)
                         self.data[indexPath.row].previewImages[index].state = .downloaded
                         self.data[indexPath.row].previewImages[index].size = img.size
-                        DispatchQueue.main.async {
-                            if tableView.indexPathsForVisibleRows?.contains(indexPath) ?? false {
-                                imageView.loadSizeFit(image: img)
-                            }
-                        }
+                        imageView.loadSizeFit(url: url, image: img, completion: updateImageThumbView)
                     }
                 })
                 
             case .downloading:
-                imageView.loadSizeFit(image: UIImage(named: "NetDisk")!)
+                imageView.loadSizeFit(image: UIImage(named: "NetDisk")!, completion: { _ in })
             case .downloaded:
                 if let img = ImageCache.default.cacheImage(forUrl: url) {
-                    imageView.loadSizeFit(image: img)
+                    imageView.loadSizeFit(url: url, image: img, completion: updateImageThumbView)
                 }   else    {
-                    imageView.loadSizeFit(image: UIImage(named: "Failed")!)
+                    imageView.loadSizeFit(image: UIImage(named: "Failed")!, completion: { _ in })
                 }
             case .error:
-                imageView.loadSizeFit(image: UIImage(named: "Failed")!)
+                imageView.loadSizeFit(image: UIImage(named: "Failed")!, completion: { _ in })
             }
         }
         return cell
@@ -320,7 +329,13 @@ extension NetDiskListViewController: UITableViewDataSourcePrefetching {
                         self.data[indexPath.row].previewImages[linkIndex].state = .downloaded
                         if tableView.indexPathsForVisibleRows?.contains(indexPath) ?? false {
                             let cell = tableView.cellForRow(at: indexPath) as! NetDiskTableViewCell
-                            cell.previewImages[item.offset].loadSizeFit(image: cache)
+                            cell.previewImages[item.offset].loadSizeFit(url: url, image: cache, completion: { thumb in
+                                DispatchQueue.main.async {
+                                    if tableView.indexPathsForVisibleRows?.contains(indexPath) ?? false {
+                                        cell.previewImages[item.offset].image = thumb
+                                    }
+                                }
+                            })
                         }
                         continue
                     }
@@ -335,7 +350,7 @@ extension NetDiskListViewController: UITableViewDataSourcePrefetching {
                             DispatchQueue.main.async {
                                 if tableView.indexPathsForVisibleRows?.contains(indexPath) ?? false {
                                     let cell = tableView.cellForRow(at: indexPath) as! NetDiskTableViewCell
-                                    cell.previewImages[item.offset].loadSizeFit(image: #imageLiteral(resourceName: "Failed"))
+                                    cell.previewImages[item.offset].loadSizeFit(image: #imageLiteral(resourceName: "Failed"), completion: { _ in })
                                 }
                             }
                             return
@@ -347,7 +362,13 @@ extension NetDiskListViewController: UITableViewDataSourcePrefetching {
                             DispatchQueue.main.async {
                                 if tableView.indexPathsForVisibleRows?.contains(indexPath) ?? false {
                                     let cell = tableView.cellForRow(at: indexPath) as! NetDiskTableViewCell
-                                    cell.previewImages[item.offset].loadSizeFit(image: img)
+                                    cell.previewImages[item.offset].loadSizeFit(url: url, image: img, completion: { thumb in
+                                        DispatchQueue.main.async {
+                                            if tableView.indexPathsForVisibleRows?.contains(indexPath) ?? false {
+                                                cell.previewImages[item.offset].image = thumb
+                                            }
+                                        }
+                                    })
                                 }
                             }
                         }
@@ -440,15 +461,50 @@ extension NetDiskListViewController : UISearchControllerDelegate, UISearchResult
     }
 }
 
+let compressQueue = DispatchQueue(label: "com.ascp.image.compress")
+
 extension UIImageView {
-    func loadSizeFit(image: UIImage) {
-        self.image = image
+    func loadSizeFit(url: URL? = nil, image: UIImage, completion: @escaping (UIImage) -> ()) {
         self.contentMode = image.size.width <= image.size.height ? .scaleAspectFit:.scaleAspectFill
+        guard let u = url else {
+            self.image = image
+            return
+        }
+        ImageCache.default.cacheThumbImage(url: u, image: image, completion: completion)
     }
 }
 
 extension ImageCache {
+    func thumbName(url: URL) -> String {
+        return "ascp_thumb_" + url.absoluteString
+    }
+    
     func cacheImage(forUrl url: URL) -> UIImage? {
         return ImageCache.default.retrieveImageInMemoryCache(forKey: url.absoluteString) ?? ImageCache.default.retrieveImageInDiskCache(forKey: url.absoluteString)
+    }
+    
+    func cacheImage(forName name: String) -> UIImage? {
+        return ImageCache.default.retrieveImageInMemoryCache(forKey: name) ?? ImageCache.default.retrieveImageInDiskCache(forKey: name)
+    }
+    
+    func cacheThumbImage(url: URL, image: UIImage, completion: @escaping (UIImage) -> ()) {
+        let name = thumbName(url: url)
+        guard let originImage = cacheImage(forName: name) else {
+            var data : Data!
+            var ratio : CGFloat = 0.5
+            let maxBytes = 512 * 1024
+            compressQueue.async {
+                repeat {
+                    data = image.jpegData(compressionQuality: ratio)
+                    ratio *= 0.5
+                } while (data.count > maxBytes)
+                let thumb = UIImage(data: data)!
+                ImageCache.default.store(image, forKey: name)
+                completion(thumb)
+            }
+            return
+        }
+        
+        completion(originImage)
     }
 }
