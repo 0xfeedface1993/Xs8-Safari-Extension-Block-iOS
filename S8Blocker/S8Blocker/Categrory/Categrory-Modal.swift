@@ -13,4 +13,19 @@ struct ListCategrory : Codable {
     var segue : String
     var image : String
     var site : String
+    static var menus : [ListCategrory] = {
+        guard let fileURL = Bundle.main.url(forResource: "categrory", withExtension: "plist") else {
+            return [ListCategrory]()
+        }
+        
+        do {
+            let file = try Data(contentsOf: fileURL)
+            let decoder = PropertyListDecoder()
+            let plist = try decoder.decode([ListCategrory].self, from: file)
+            return plist
+        }   catch {
+            print(error)
+            return [ListCategrory]()
+        }
+    }()
 }

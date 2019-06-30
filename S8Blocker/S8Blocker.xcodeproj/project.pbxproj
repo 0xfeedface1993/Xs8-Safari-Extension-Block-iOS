@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 48;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -19,7 +19,7 @@
 		243847411F00891400027E27 /* S8BlockerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243847401F00891400027E27 /* S8BlockerUITests.swift */; };
 		243847551F00897A00027E27 /* blockerList.json in Resources */ = {isa = PBXBuildFile; fileRef = 243847541F00897A00027E27 /* blockerList.json */; };
 		243847571F00897A00027E27 /* ContentBlockerRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243847561F00897A00027E27 /* ContentBlockerRequestHandler.swift */; };
-		2438475B1F00897A00027E27 /* ADBlock-iOS.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 243847521F00897A00027E27 /* ADBlock-iOS.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		2438475B1F00897A00027E27 /* ADBlock-iOS.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 243847521F00897A00027E27 /* ADBlock-iOS.appex */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		243847671F008ABE00027E27 /* ActionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243847661F008ABE00027E27 /* ActionViewController.swift */; };
 		2438476A1F008ABE00027E27 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 243847681F008ABE00027E27 /* MainInterface.storyboard */; };
 		2438476E1F008ABE00027E27 /* Torrilste.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 243847641F008ABE00027E27 /* Torrilste.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -58,6 +58,14 @@
 		278B1EFD200EECD8004F9760 /* MovieBrowerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278B1EFC200EECD8004F9760 /* MovieBrowerTableViewController.swift */; };
 		278B1F01200EEE10004F9760 /* MovieBrowerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278B1F00200EEE10004F9760 /* MovieBrowerTableViewCell.swift */; };
 		278B1F03200EF0B6004F9760 /* MovieBrowerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 278B1F02200EF0B6004F9760 /* MovieBrowerTableViewCell.xib */; };
+		CB4EE6D422C1FA2E001B22E5 /* SUNetDiskListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4EE6D322C1FA2E001B22E5 /* SUNetDiskListView.swift */; };
+		CB4EE6F722C1FF0E001B22E5 /* SUNetDiskData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4EE6F622C1FF0E001B22E5 /* SUNetDiskData.swift */; };
+		CB4EE6F922C2066F001B22E5 /* SUContentPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4EE6F822C2066F001B22E5 /* SUContentPreview.swift */; };
+		CB7CC8B622C303A2006E11B0 /* SUNetDiskDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB7CC8B522C303A2006E11B0 /* SUNetDiskDetailView.swift */; };
+		CB7CC8B922C31C81006E11B0 /* SUHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB7CC8B822C31C81006E11B0 /* SUHomeView.swift */; };
+		CB7CC8BB22C31CB2006E11B0 /* SUHomeItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB7CC8BA22C31CB2006E11B0 /* SUHomeItem.swift */; };
+		CB7CC8BD22C32205006E11B0 /* SUCategroryRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB7CC8BC22C32205006E11B0 /* SUCategroryRow.swift */; };
+		CB7CC8BF22C324E5006E11B0 /* SUCategroryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB7CC8BE22C324E5006E11B0 /* SUCategroryItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -179,6 +187,14 @@
 		278B1EFC200EECD8004F9760 /* MovieBrowerTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieBrowerTableViewController.swift; sourceTree = "<group>"; };
 		278B1F00200EEE10004F9760 /* MovieBrowerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieBrowerTableViewCell.swift; sourceTree = "<group>"; };
 		278B1F02200EF0B6004F9760 /* MovieBrowerTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MovieBrowerTableViewCell.xib; sourceTree = "<group>"; };
+		CB4EE6D322C1FA2E001B22E5 /* SUNetDiskListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUNetDiskListView.swift; sourceTree = "<group>"; };
+		CB4EE6F622C1FF0E001B22E5 /* SUNetDiskData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUNetDiskData.swift; sourceTree = "<group>"; };
+		CB4EE6F822C2066F001B22E5 /* SUContentPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUContentPreview.swift; sourceTree = "<group>"; };
+		CB7CC8B522C303A2006E11B0 /* SUNetDiskDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUNetDiskDetailView.swift; sourceTree = "<group>"; };
+		CB7CC8B822C31C81006E11B0 /* SUHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUHomeView.swift; sourceTree = "<group>"; };
+		CB7CC8BA22C31CB2006E11B0 /* SUHomeItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUHomeItem.swift; sourceTree = "<group>"; };
+		CB7CC8BC22C32205006E11B0 /* SUCategroryRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUCategroryRow.swift; sourceTree = "<group>"; };
+		CB7CC8BE22C324E5006E11B0 /* SUCategroryItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUCategroryItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -228,6 +244,7 @@
 		243537B21F45C6E000D6C1DF /* NetDisk */ = {
 			isa = PBXGroup;
 			children = (
+				CB4EE6D222C1FA07001B22E5 /* SwiftUI */,
 				24AA52532255F01E00C423F5 /* URLListTableViewController.swift */,
 				24EEF2C720CD20E5002DDA8C /* CustomPresentViewController.swift */,
 				243847241F00891400027E27 /* Main.storyboard */,
@@ -435,6 +452,29 @@
 				278B1EEE200D9485004F9760 /* Parser.swift */,
 			);
 			path = FetchBot;
+			sourceTree = "<group>";
+		};
+		CB4EE6D222C1FA07001B22E5 /* SwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				CB7CC8B722C31C72006E11B0 /* Home */,
+				CB4EE6D322C1FA2E001B22E5 /* SUNetDiskListView.swift */,
+				CB7CC8B522C303A2006E11B0 /* SUNetDiskDetailView.swift */,
+				CB4EE6F822C2066F001B22E5 /* SUContentPreview.swift */,
+				CB4EE6F622C1FF0E001B22E5 /* SUNetDiskData.swift */,
+			);
+			path = SwiftUI;
+			sourceTree = "<group>";
+		};
+		CB7CC8B722C31C72006E11B0 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				CB7CC8B822C31C81006E11B0 /* SUHomeView.swift */,
+				CB7CC8BA22C31CB2006E11B0 /* SUHomeItem.swift */,
+				CB7CC8BC22C32205006E11B0 /* SUCategroryRow.swift */,
+				CB7CC8BE22C324E5006E11B0 /* SUCategroryItem.swift */,
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -691,12 +731,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				2431DAEE1F45F6810082E928 /* NetDiskImageTableViewCell.swift in Sources */,
+				CB7CC8BF22C324E5006E11B0 /* SUCategroryItem.swift in Sources */,
+				CB7CC8B922C31C81006E11B0 /* SUHomeView.swift in Sources */,
 				249D209720BAFF0D005F7E7F /* Storage.swift in Sources */,
 				24F4C26F1F45D122008412AF /* NetDiskListViewController.swift in Sources */,
 				278B1EEA200CB1C7004F9760 /* Movie-Modal.swift in Sources */,
 				276BC26E1F8F6987006B9B92 /* ErrorStruct.swift in Sources */,
+				CB4EE6F722C1FF0E001B22E5 /* SUNetDiskData.swift in Sources */,
+				CB7CC8BD22C32205006E11B0 /* SUCategroryRow.swift in Sources */,
 				273B412E1F8B7B53001A6CA9 /* NewMovieTableViewCell.swift in Sources */,
 				24EEF2C820CD20E5002DDA8C /* CustomPresentViewController.swift in Sources */,
+				CB7CC8BB22C31CB2006E11B0 /* SUHomeItem.swift in Sources */,
 				24F4C2701F45D122008412AF /* NetDiskModal.swift in Sources */,
 				273B412B1F8B7B38001A6CA9 /* NewMovieTableViewController.swift in Sources */,
 				24F4C2711F45D122008412AF /* NetDiskTableViewCell.swift in Sources */,
@@ -711,6 +756,7 @@
 				278B1EED200CB284004F9760 /* FetchBot.swift in Sources */,
 				278B1EEF200D9485004F9760 /* Parser.swift in Sources */,
 				24EEF2C620CCD578002DDA8C /* NetDiskFavoriteViewController.swift in Sources */,
+				CB4EE6F922C2066F001B22E5 /* SUContentPreview.swift in Sources */,
 				276BC2721F8F6A0F006B9B92 /* JsonModal.swift in Sources */,
 				24AA52542255F01E00C423F5 /* URLListTableViewController.swift in Sources */,
 				2431DAEA1F45F3320082E928 /* NetDiskTitleTableViewCell.swift in Sources */,
@@ -719,6 +765,8 @@
 				278B1F01200EEE10004F9760 /* MovieBrowerTableViewCell.swift in Sources */,
 				276BC26C1F8F68F1006B9B92 /* Webservice.swift in Sources */,
 				24AA52572255F3CB00C423F5 /* RemoteDownloader.swift in Sources */,
+				CB7CC8B622C303A2006E11B0 /* SUNetDiskDetailView.swift in Sources */,
+				CB4EE6D422C1FA2E001B22E5 /* SUNetDiskListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -769,6 +817,7 @@
 		};
 		2438475A1F00897A00027E27 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
+			platformFilter = ios;
 			target = 243847511F00897A00027E27 /* ADBlock-iOS */;
 			targetProxy = 243847591F00897A00027E27 /* PBXContainerItemProxy */;
 		};
@@ -863,6 +912,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				VALID_ARCHS = arm64;
 			};
 			name = Debug;
@@ -914,7 +964,9 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
 				VALIDATE_PRODUCT = YES;
 				VALID_ARCHS = arm64;
 			};
@@ -936,12 +988,19 @@
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
 				);
 				INFOPLIST_FILE = S8Blocker/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ascp.S8Blocker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				SUPPORTS_UIKITFORMAC = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = arm64;
 			};
 			name = Debug;
 		};
@@ -961,12 +1020,18 @@
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
 				);
 				INFOPLIST_FILE = S8Blocker/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ascp.S8Blocker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTS_UIKITFORMAC = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = arm64;
 			};
 			name = Release;
 		};
@@ -977,7 +1042,12 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = A272626J38;
 				INFOPLIST_FILE = S8BlockerTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ascp.S8BlockerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -993,7 +1063,12 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = A272626J38;
 				INFOPLIST_FILE = S8BlockerTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ascp.S8BlockerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1008,7 +1083,12 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = A272626J38;
 				INFOPLIST_FILE = S8BlockerUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ascp.S8BlockerUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1023,7 +1103,12 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = A272626J38;
 				INFOPLIST_FILE = S8BlockerUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ascp.S8BlockerUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1039,11 +1124,17 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = E6NP67H473;
 				INFOPLIST_FILE = "ADBlock-iOS/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ascp.S8Blocker.ADBlockiOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
+				SUPPORTS_UIKITFORMAC = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1056,11 +1147,17 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = E6NP67H473;
 				INFOPLIST_FILE = "ADBlock-iOS/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ascp.S8Blocker.ADBlockiOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
+				SUPPORTS_UIKITFORMAC = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1074,11 +1171,17 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = E6NP67H473;
 				INFOPLIST_FILE = Torrilste/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ascp.S8Blocker.Torrilste;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
+				SUPPORTS_UIKITFORMAC = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1092,11 +1195,17 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = E6NP67H473;
 				INFOPLIST_FILE = Torrilste/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ascp.S8Blocker.Torrilste;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
+				SUPPORTS_UIKITFORMAC = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
