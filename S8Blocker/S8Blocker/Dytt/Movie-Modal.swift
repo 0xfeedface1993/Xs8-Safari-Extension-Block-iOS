@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import HTMLString
 
 struct ListItem : Equatable {
     var title : String
