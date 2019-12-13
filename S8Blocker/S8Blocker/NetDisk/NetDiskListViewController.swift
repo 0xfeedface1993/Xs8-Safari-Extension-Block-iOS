@@ -111,10 +111,10 @@ class NetDiskListViewController: UIViewController {
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        print(">>>>>>>>> scrollView did scroll: \(scrollView.contentOffset)")
         if self.searchController.isActive {
             return
         }
-//        ImageCache.default.clearMemoryCache()
         let height = scrollView.frame.size.height
         let contentOffset = scrollView.contentOffset.y
         let distance = scrollView.contentSize.height - contentOffset
@@ -153,6 +153,10 @@ class NetDiskListViewController: UIViewController {
             }
             print("++++++ end of bottom ********")
         }
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        print(">>>>>>>>> scrollView did end Decelerating: \(scrollView.contentOffset)")
     }
     
     @objc func switchDataSource(sender: UIBarButtonItem) {
@@ -234,6 +238,7 @@ extension NetDiskListViewController : UITableViewDataSource, UITableViewDelegate
                     }
                     if let img = image {
                         ImageCache.default.store(img, forKey: url.absoluteString)
+                        ImageCache.default.saveThumb(url: url, image: img)
                         self.data[indexPath.row].previewImages[index].state = .downloaded
                         self.data[indexPath.row].previewImages[index].size = img.size
                         imageView.loadSizeFit(url: url, image: img, completion: updateImageThumbView)
@@ -357,6 +362,7 @@ extension NetDiskListViewController: UITableViewDataSourcePrefetching {
                         }
                         if let img = image {
                             ImageCache.default.store(img, forKey: url.absoluteString)
+                            ImageCache.default.saveThumb(url: url, image: img)
                             self.data[indexPath.row].previewImages[linkIndex].state = .downloaded
                             self.data[indexPath.row].previewImages[linkIndex].size = img.size
                             DispatchQueue.main.async {
@@ -499,12 +505,25 @@ extension ImageCache {
                     ratio *= 0.5
                 } while (data.count > maxBytes)
                 let thumb = UIImage(data: data)!
-                ImageCache.default.store(image, forKey: name)
+                ImageCache.default.store(thumb, forKey: name)
                 completion(thumb)
             }
             return
         }
         
         completion(originImage)
+    }
+    
+    func saveThumb(url: URL, image: UIImage) {
+        let name = thumbName(url: url)
+        var data : Data!
+        var ratio : CGFloat = 0.5
+        let maxBytes = 512 * 1024
+        repeat {
+            data = image.jpegData(compressionQuality: ratio)
+            ratio *= 0.5
+        } while (data.count > maxBytes)
+        let thumb = UIImage(data: data)!
+        ImageCache.default.store(thumb, forKey: name)
     }
 }
