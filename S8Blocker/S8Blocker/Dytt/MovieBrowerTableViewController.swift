@@ -51,8 +51,7 @@ class MovieBrowerTableViewController: UITableViewController {
         // Configure the cell...
         
         if let url = URL(string: content?.imageLink[indexPath.row] ?? "") {
-            cell.movieImage?.kf.setImage(with: url, placeholder: #imageLiteral(resourceName: "Movie"), options: nil, progressBlock: nil, completionHandler: {
-                (_, _, _, _) in
+            cell.movieImage?.kf.setImage(with: url, placeholder: #imageLiteral(resourceName: "Movie"), completionHandler: { result in
                 self.tableView.reloadRows(at: [indexPath], with: .fade)
             })
         }

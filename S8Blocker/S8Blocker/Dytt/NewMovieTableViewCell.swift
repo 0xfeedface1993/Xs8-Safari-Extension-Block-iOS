@@ -28,7 +28,7 @@ class NewMovieTableViewCell: UITableViewCell {
     }
     
     func loadData(image: String, title: String, dsc: String) {
-        cover.kf.setImage(with: URL(string: image), placeholder: #imageLiteral(resourceName: "Movie"), options: nil, progressBlock: nil, completionHandler: nil)
+        cover.kf.setImage(with: URL(string: image), placeholder: #imageLiteral(resourceName: "Movie"))
         bigTitle.text = title
         discription.text = dsc
     }

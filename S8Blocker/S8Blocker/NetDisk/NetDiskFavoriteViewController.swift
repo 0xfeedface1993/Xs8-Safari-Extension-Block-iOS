@@ -179,43 +179,47 @@ extension NetDiskFavoriteViewController : UITableViewDataSource, UITableViewDele
             switch data[indexPath.row].previewImages[index].state {
             case .wait:
                 self.data[indexPath.row].previewImages[index].state = .downloading
-                if let cache = ImageCache.default.cacheImage(forUrl: url) {
-                    self.data[indexPath.row].previewImages[index].state = .downloaded
-                    imageView.image = cache
-                    continue
+                ImageCache.default.cacheImage(forUrl: url) { [unowned self] cache in
+                    if let cache = cache {
+                        self.data[indexPath.row].previewImages[index].state = .downloaded
+                        imageView.image = cache
+                        return
+                    }
+                    imageView.image = UIImage(named: "NetDisk")
+                    ImageDownloader.default.downloadImage(with: url, completionHandler: { result in
+                        guard self.data.count > indexPath.row else {
+                            print("****** Data being change ******")
+                            return
+                        }
+                        
+                        switch result {
+                        case .success(let value):
+                            ImageCache.default.store(value.image, forKey: url.absoluteString)
+                            DispatchQueue.main.async {
+                                self.data[indexPath.row].previewImages[index].state = .downloaded
+                                self.data[indexPath.row].previewImages[index].size = value.image.size
+                                if tableView.indexPathsForVisibleRows?.contains(indexPath) ?? false {
+                                    imageView.image = value.image
+                                }
+                            }
+                        case .failure(let error):
+                            print("Job failed: \(error.localizedDescription)")
+                            DispatchQueue.main.async {
+                                self.data[indexPath.row].previewImages[index].state = .error
+                                self.data[indexPath.row].previewImages[index].size = #imageLiteral(resourceName: "Failed").size
+                                if tableView.indexPathsForVisibleRows?.contains(indexPath) ?? false {
+                                    imageView.image = #imageLiteral(resourceName: "Failed")
+                                }
+                            }
+                        }
+                    })
                 }
-                imageView.image = UIImage(named: "NetDisk")
-                ImageDownloader.default.downloadImage(with: url, completionHandler: { (image, error, urlx, data) in
-                    guard self.data.count > indexPath.row else {
-                        print("****** Data being change ******")
-                        return
-                    }
-                    if let _ = error {
-                        DispatchQueue.main.async {
-                            self.data[indexPath.row].previewImages[index].state = .error
-                            self.data[indexPath.row].previewImages[index].size = #imageLiteral(resourceName: "Failed").size
-                            if tableView.indexPathsForVisibleRows?.contains(indexPath) ?? false {
-                                imageView.image = #imageLiteral(resourceName: "Failed")
-                            }
-                        }
-                        return
-                    }
-                    if let img = image {
-                        ImageCache.default.store(img, forKey: url.absoluteString)
-                        DispatchQueue.main.async {
-                            self.data[indexPath.row].previewImages[index].state = .downloaded
-                            self.data[indexPath.row].previewImages[index].size = img.size
-                            if tableView.indexPathsForVisibleRows?.contains(indexPath) ?? false {
-                                imageView.image = img
-                            }
-                        }
-                    }
-                })
-                
             case .downloading:
                 imageView.image = UIImage(named: "NetDisk")
             case .downloaded:
-                imageView.image = ImageCache.default.cacheImage(forUrl: url)
+                ImageCache.default.cacheImage(forUrl: url) { cache in
+                    imageView.image = cache
+                }
             case .error:
                 imageView.image = UIImage(named: "Failed")
             }
@@ -250,44 +254,47 @@ extension NetDiskFavoriteViewController: UITableViewDataSourcePrefetching {
                         continue
                     }
                     self.data[indexPath.row].previewImages[linkIndex].state = .downloading
-                    if let cache = ImageCache.default.cacheImage(forUrl: url) {
-                        self.data[indexPath.row].previewImages[linkIndex].state = .downloaded
-                        DispatchQueue.main.async {
-                            if tableView.indexPathsForVisibleRows?.contains(indexPath) ?? false {
-                                let cell = tableView.cellForRow(at: indexPath) as! NetDiskTableViewCell
-                                cell.previewImages[item.offset].image = cache
-                            }
-                        }
-                        continue
-                    }
-                    ImageDownloader.default.downloadImage(with: url, completionHandler: { (image, error, urlx, data) in
-                        guard self.data.count > indexPath.row else {
-                            print("****** Data being change ******")
-                            return
-                        }
-                        if let _ = error {
-                            self.data[indexPath.row].previewImages[linkIndex].state = .error
-                            self.data[indexPath.row].previewImages[linkIndex].size = #imageLiteral(resourceName: "Failed").size
-                            DispatchQueue.main.async {
-                                if tableView.indexPathsForVisibleRows?.contains(indexPath) ?? false {
-                                    let cell = tableView.cellForRow(at: indexPath) as! NetDiskTableViewCell
-                                    cell.previewImages[item.offset].image = #imageLiteral(resourceName: "Failed")
-                                }
-                            }
-                            return
-                        }
-                        if let img = image {
-                            ImageCache.default.store(img, forKey: url.absoluteString)
+                    ImageCache.default.cacheImage(forUrl: url) { [unowned self] cache in
+                        if let cache = cache {
                             self.data[indexPath.row].previewImages[linkIndex].state = .downloaded
-                            self.data[indexPath.row].previewImages[linkIndex].size = img.size
                             DispatchQueue.main.async {
                                 if tableView.indexPathsForVisibleRows?.contains(indexPath) ?? false {
                                     let cell = tableView.cellForRow(at: indexPath) as! NetDiskTableViewCell
-                                    cell.previewImages[item.offset].image = img
+                                    cell.previewImages[item.offset].image = cache
                                 }
                             }
+                            return
                         }
-                    })
+                        ImageDownloader.default.downloadImage(with: url, completionHandler: { result in
+                            guard self.data.count > indexPath.row else {
+                                print("****** Data being change ******")
+                                return
+                            }
+                            
+                            switch result {
+                            case .success(let value):
+                                ImageCache.default.store(value.image, forKey: url.absoluteString)
+                                self.data[indexPath.row].previewImages[linkIndex].state = .downloaded
+                                self.data[indexPath.row].previewImages[linkIndex].size = value.image.size
+                                DispatchQueue.main.async {
+                                    if tableView.indexPathsForVisibleRows?.contains(indexPath) ?? false {
+                                        let cell = tableView.cellForRow(at: indexPath) as! NetDiskTableViewCell
+                                        cell.previewImages[item.offset].image = value.image
+                                    }
+                                }
+                            case .failure(let error):
+                                print("Job failed: \(error.localizedDescription)")
+                                self.data[indexPath.row].previewImages[linkIndex].state = .error
+                                self.data[indexPath.row].previewImages[linkIndex].size = #imageLiteral(resourceName: "Failed").size
+                                DispatchQueue.main.async {
+                                    if tableView.indexPathsForVisibleRows?.contains(indexPath) ?? false {
+                                        let cell = tableView.cellForRow(at: indexPath) as! NetDiskTableViewCell
+                                        cell.previewImages[item.offset].image = #imageLiteral(resourceName: "Failed")
+                                    }
+                                }
+                            }
+                        })
+                    }
                 }
             }
         }

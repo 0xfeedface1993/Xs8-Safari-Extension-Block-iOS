@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 48;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -23,7 +23,9 @@
 		243847671F008ABE00027E27 /* ActionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243847661F008ABE00027E27 /* ActionViewController.swift */; };
 		2438476A1F008ABE00027E27 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 243847681F008ABE00027E27 /* MainInterface.storyboard */; };
 		2438476E1F008ABE00027E27 /* Torrilste.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 243847641F008ABE00027E27 /* Torrilste.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		249AE74A20A6E3B40001EFC5 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 249AE74920A6E3B40001EFC5 /* Kingfisher.framework */; };
+		2479A0F023A3800D00505157 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = 2479A0EF23A3800D00505157 /* Toast */; };
+		2479A0F623A6634000505157 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 2479A0F523A6634000505157 /* Kingfisher */; };
+		2479A0F823A6634000505157 /* KingfisherSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 2479A0F723A6634000505157 /* KingfisherSwiftUI */; };
 		249D208C20B9A748005F7E7F /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 249D208B20B9A748005F7E7F /* ImageIO.framework */; };
 		249D208E20B9A77E005F7E7F /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 249D208D20B9A77E005F7E7F /* MobileCoreServices.framework */; };
 		249D209720BAFF0D005F7E7F /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249D209620BAFF0D005F7E7F /* Storage.swift */; };
@@ -36,7 +38,6 @@
 		24E480CF1F45E969009B6998 /* NetDiskDetalModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E480CE1F45E969009B6998 /* NetDiskDetalModal.swift */; };
 		24EEF2C620CCD578002DDA8C /* NetDiskFavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24EEF2C520CCD578002DDA8C /* NetDiskFavoriteViewController.swift */; };
 		24EEF2C820CD20E5002DDA8C /* CustomPresentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24EEF2C720CD20E5002DDA8C /* CustomPresentViewController.swift */; };
-		24F29F4E227192580037A281 /* ToastSwiftFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24F29F4D227192580037A281 /* ToastSwiftFramework.framework */; };
 		24F3467D1F45CA5B001930ED /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F3467C1F45CA5B001930ED /* ViewController.swift */; };
 		24F4C26F1F45D122008412AF /* NetDiskListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243537B61F45C71400D6C1DF /* NetDiskListViewController.swift */; };
 		24F4C2701F45D122008412AF /* NetDiskModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243537B41F45C71400D6C1DF /* NetDiskModal.swift */; };
@@ -148,7 +149,6 @@
 		2438476B1F008ABE00027E27 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		243847721F008BA500027E27 /* S8Blocker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = S8Blocker.entitlements; sourceTree = "<group>"; };
 		243847731F008C3000027E27 /* Torrilste.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Torrilste.entitlements; sourceTree = "<group>"; };
-		249AE74920A6E3B40001EFC5 /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = "<group>"; };
 		249D208B20B9A748005F7E7F /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		249D208D20B9A77E005F7E7F /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		249D209620BAFF0D005F7E7F /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
@@ -161,7 +161,6 @@
 		24E480CE1F45E969009B6998 /* NetDiskDetalModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetDiskDetalModal.swift; sourceTree = "<group>"; };
 		24EEF2C520CCD578002DDA8C /* NetDiskFavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetDiskFavoriteViewController.swift; sourceTree = "<group>"; };
 		24EEF2C720CD20E5002DDA8C /* CustomPresentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPresentViewController.swift; sourceTree = "<group>"; };
-		24F29F4D227192580037A281 /* ToastSwiftFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ToastSwiftFramework.framework; path = Carthage/Build/iOS/ToastSwiftFramework.framework; sourceTree = "<group>"; };
 		24F3467C1F45CA5B001930ED /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		273B412A1F8B7B38001A6CA9 /* NewMovieTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMovieTableViewController.swift; sourceTree = "<group>"; };
 		273B412C1F8B7B53001A6CA9 /* NewMovieTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMovieTableViewCell.swift; sourceTree = "<group>"; };
@@ -186,11 +185,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2479A0F823A6634000505157 /* KingfisherSwiftUI in Frameworks */,
+				2479A0F023A3800D00505157 /* Toast in Frameworks */,
 				249D208E20B9A77E005F7E7F /* MobileCoreServices.framework in Frameworks */,
-				24F29F4E227192580037A281 /* ToastSwiftFramework.framework in Frameworks */,
 				249D208C20B9A748005F7E7F /* ImageIO.framework in Frameworks */,
 				249D209920BAFFC0005F7E7F /* CloudKit.framework in Frameworks */,
-				249AE74A20A6E3B40001EFC5 /* Kingfisher.framework in Frameworks */,
+				2479A0F623A6634000505157 /* Kingfisher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -240,7 +240,6 @@
 		2438470F1F00891400027E27 = {
 			isa = PBXGroup;
 			children = (
-				248434DB200FA15300CAD097 /* GithubFramework */,
 				2438471A1F00891400027E27 /* S8Blocker */,
 				243847341F00891400027E27 /* S8BlockerTests */,
 				2438473F1F00891400027E27 /* S8BlockerUITests */,
@@ -323,15 +322,6 @@
 				2438476B1F008ABE00027E27 /* Info.plist */,
 			);
 			path = Torrilste;
-			sourceTree = "<group>";
-		};
-		248434DB200FA15300CAD097 /* GithubFramework */ = {
-			isa = PBXGroup;
-			children = (
-				24F29F4D227192580037A281 /* ToastSwiftFramework.framework */,
-				249AE74920A6E3B40001EFC5 /* Kingfisher.framework */,
-			);
-			name = GithubFramework;
 			sourceTree = "<group>";
 		};
 		249D209520BAFEF6005F7E7F /* iCloudStorage */ = {
@@ -449,7 +439,6 @@
 				243847161F00891400027E27 /* Resources */,
 				2438475F1F00897A00027E27 /* Embed App Extensions */,
 				24F346821F45CD0B001930ED /* Embed Frameworks */,
-				276BC2731F905790006B9B92 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -458,6 +447,11 @@
 				2438476D1F008ABE00027E27 /* PBXTargetDependency */,
 			);
 			name = S8Blocker;
+			packageProductDependencies = (
+				2479A0EF23A3800D00505157 /* Toast */,
+				2479A0F523A6634000505157 /* Kingfisher */,
+				2479A0F723A6634000505157 /* KingfisherSwiftUI */,
+			);
 			productName = S8Blocker;
 			productReference = 243847181F00891400027E27 /* S8Blocker.app */;
 			productType = "com.apple.product-type.application";
@@ -605,6 +599,10 @@
 				Base,
 			);
 			mainGroup = 2438470F1F00891400027E27;
+			packageReferences = (
+				2479A0EE23A3800D00505157 /* XCRemoteSwiftPackageReference "Toast-Swift" */,
+				2479A0F423A6634000505157 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+			);
 			productRefGroup = 243847191F00891400027E27 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -666,24 +664,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		276BC2731F905790006B9B92 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/Kingfisher.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/ToastSwiftFramework.framework",
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		243847141F00891400027E27 /* Sources */ = {
@@ -914,7 +894,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
 				VALID_ARCHS = arm64;
 			};
@@ -936,7 +917,10 @@
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
 				);
 				INFOPLIST_FILE = S8Blocker/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ascp.S8Blocker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -961,7 +945,10 @@
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
 				);
 				INFOPLIST_FILE = S8Blocker/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ascp.S8Blocker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -977,7 +964,11 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = A272626J38;
 				INFOPLIST_FILE = S8BlockerTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ascp.S8BlockerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -993,7 +984,11 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = A272626J38;
 				INFOPLIST_FILE = S8BlockerTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ascp.S8BlockerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1008,7 +1003,11 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = A272626J38;
 				INFOPLIST_FILE = S8BlockerUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ascp.S8BlockerUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1023,7 +1022,11 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = A272626J38;
 				INFOPLIST_FILE = S8BlockerUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ascp.S8BlockerUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1039,7 +1042,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = E6NP67H473;
 				INFOPLIST_FILE = "ADBlock-iOS/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ascp.S8Blocker.ADBlockiOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1056,7 +1063,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = E6NP67H473;
 				INFOPLIST_FILE = "ADBlock-iOS/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ascp.S8Blocker.ADBlockiOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1074,7 +1085,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = E6NP67H473;
 				INFOPLIST_FILE = Torrilste/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ascp.S8Blocker.Torrilste;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1092,7 +1107,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = E6NP67H473;
 				INFOPLIST_FILE = Torrilste/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ascp.S8Blocker.Torrilste;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1160,6 +1179,43 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		2479A0EE23A3800D00505157 /* XCRemoteSwiftPackageReference "Toast-Swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/scalessec/Toast-Swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.1;
+			};
+		};
+		2479A0F423A6634000505157 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.11.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		2479A0EF23A3800D00505157 /* Toast */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2479A0EE23A3800D00505157 /* XCRemoteSwiftPackageReference "Toast-Swift" */;
+			productName = Toast;
+		};
+		2479A0F523A6634000505157 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2479A0F423A6634000505157 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+		2479A0F723A6634000505157 /* KingfisherSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2479A0F423A6634000505157 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = KingfisherSwiftUI;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 243847101F00891400027E27 /* Project object */;
 }
