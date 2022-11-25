@@ -24,8 +24,6 @@
 		2438476A1F008ABE00027E27 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 243847681F008ABE00027E27 /* MainInterface.storyboard */; };
 		2438476E1F008ABE00027E27 /* Torrilste.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 243847641F008ABE00027E27 /* Torrilste.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		2479A0F023A3800D00505157 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = 2479A0EF23A3800D00505157 /* Toast */; };
-		2479A0F623A6634000505157 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 2479A0F523A6634000505157 /* Kingfisher */; };
-		2479A0F823A6634000505157 /* KingfisherSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 2479A0F723A6634000505157 /* KingfisherSwiftUI */; };
 		249D208C20B9A748005F7E7F /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 249D208B20B9A748005F7E7F /* ImageIO.framework */; };
 		249D208E20B9A77E005F7E7F /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 249D208D20B9A77E005F7E7F /* MobileCoreServices.framework */; };
 		249D209720BAFF0D005F7E7F /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249D209620BAFF0D005F7E7F /* Storage.swift */; };
@@ -59,6 +57,7 @@
 		278B1EFD200EECD8004F9760 /* MovieBrowerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278B1EFC200EECD8004F9760 /* MovieBrowerTableViewController.swift */; };
 		278B1F01200EEE10004F9760 /* MovieBrowerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278B1F00200EEE10004F9760 /* MovieBrowerTableViewCell.swift */; };
 		278B1F03200EF0B6004F9760 /* MovieBrowerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 278B1F02200EF0B6004F9760 /* MovieBrowerTableViewCell.xib */; };
+		D02CF7E1293086380002A50C /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = D02CF7E0293086380002A50C /* Kingfisher */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,16 +102,6 @@
 				2438476E1F008ABE00027E27 /* Torrilste.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		24F346821F45CD0B001930ED /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-			);
-			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -185,12 +174,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2479A0F823A6634000505157 /* KingfisherSwiftUI in Frameworks */,
 				2479A0F023A3800D00505157 /* Toast in Frameworks */,
 				249D208E20B9A77E005F7E7F /* MobileCoreServices.framework in Frameworks */,
 				249D208C20B9A748005F7E7F /* ImageIO.framework in Frameworks */,
 				249D209920BAFFC0005F7E7F /* CloudKit.framework in Frameworks */,
-				2479A0F623A6634000505157 /* Kingfisher in Frameworks */,
+				D02CF7E1293086380002A50C /* Kingfisher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -438,7 +426,6 @@
 				243847151F00891400027E27 /* Frameworks */,
 				243847161F00891400027E27 /* Resources */,
 				2438475F1F00897A00027E27 /* Embed App Extensions */,
-				24F346821F45CD0B001930ED /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -449,8 +436,7 @@
 			name = S8Blocker;
 			packageProductDependencies = (
 				2479A0EF23A3800D00505157 /* Toast */,
-				2479A0F523A6634000505157 /* Kingfisher */,
-				2479A0F723A6634000505157 /* KingfisherSwiftUI */,
+				D02CF7E0293086380002A50C /* Kingfisher */,
 			);
 			productName = S8Blocker;
 			productReference = 243847181F00891400027E27 /* S8Blocker.app */;
@@ -601,7 +587,7 @@
 			mainGroup = 2438470F1F00891400027E27;
 			packageReferences = (
 				2479A0EE23A3800D00505157 /* XCRemoteSwiftPackageReference "Toast-Swift" */,
-				2479A0F423A6634000505157 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				D02CF7DF293086380002A50C /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = 243847191F00891400027E27 /* Products */;
 			projectDirPath = "";
@@ -794,7 +780,6 @@
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
@@ -837,13 +822,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				MTL_ENABLE_DEBUG_INFO = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				VALID_ARCHS = arm64;
 			};
 			name = Debug;
 		};
@@ -854,7 +837,6 @@
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
@@ -891,13 +873,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				MTL_ENABLE_DEBUG_INFO = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
-				VALID_ARCHS = arm64;
 			};
 			name = Release;
 		};
@@ -909,18 +889,15 @@
 				CODE_SIGN_ENTITLEMENTS = S8Blocker/S8Blocker.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = E6NP67H473;
-				ENABLE_BITCODE = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-					"$(PROJECT_DIR)/Carthage/Build/Mac",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = S8Blocker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ascp.S8Blocker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -937,18 +914,15 @@
 				CODE_SIGN_ENTITLEMENTS = S8Blocker/S8Blocker.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = E6NP67H473;
-				ENABLE_BITCODE = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-					"$(PROJECT_DIR)/Carthage/Build/Mac",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = S8Blocker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ascp.S8Blocker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1040,6 +1014,7 @@
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = E6NP67H473;
 				INFOPLIST_FILE = "ADBlock-iOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1047,6 +1022,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
+				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ascp.S8Blocker.ADBlockiOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1061,6 +1037,7 @@
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = E6NP67H473;
 				INFOPLIST_FILE = "ADBlock-iOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1068,6 +1045,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
+				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ascp.S8Blocker.ADBlockiOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1083,6 +1061,7 @@
 				CODE_SIGN_ENTITLEMENTS = Torrilste/Torrilste.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = E6NP67H473;
 				INFOPLIST_FILE = Torrilste/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1090,6 +1069,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
+				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ascp.S8Blocker.Torrilste;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1105,6 +1085,7 @@
 				CODE_SIGN_ENTITLEMENTS = Torrilste/Torrilste.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = E6NP67H473;
 				INFOPLIST_FILE = Torrilste/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1112,6 +1093,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
+				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ascp.S8Blocker.Torrilste;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1189,12 +1171,12 @@
 				minimumVersion = 5.0.1;
 			};
 		};
-		2479A0F423A6634000505157 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+		D02CF7DF293086380002A50C /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 5.11.0;
+				minimumVersion = 7.0.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -1205,15 +1187,10 @@
 			package = 2479A0EE23A3800D00505157 /* XCRemoteSwiftPackageReference "Toast-Swift" */;
 			productName = Toast;
 		};
-		2479A0F523A6634000505157 /* Kingfisher */ = {
+		D02CF7E0293086380002A50C /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 2479A0F423A6634000505157 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			package = D02CF7DF293086380002A50C /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
-		};
-		2479A0F723A6634000505157 /* KingfisherSwiftUI */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 2479A0F423A6634000505157 /* XCRemoteSwiftPackageReference "Kingfisher" */;
-			productName = KingfisherSwiftUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
